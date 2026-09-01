@@ -1,0 +1,9 @@
+# The live POESESSID. Never commit.
+secrets.json
+
+# The SQLite archive, the stats cache and the generated mod table. All of it is
+# regenerable, and the database does not live here anyway — see README.
+data/
+dist/
+
+node_modules/

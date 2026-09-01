@@ -1,0 +1,114 @@
+{
+  "result": [
+    {
+      "id": "explicit",
+      "label": "Explicit",
+      "entries": [
+        {
+          "id": "explicit.stat_3793155082",
+          "text": "Map has #% increased number of Rare Monsters",
+          "type": "explicit"
+        },
+        {
+          "id": "explicit.stat_2065500219",
+          "text": "Monsters have #% increased Effectiveness",
+          "type": "explicit"
+        },
+        {
+          "id": "explicit.stat_1468737867",
+          "text": "Area contains an additional Shrine",
+          "type": "explicit"
+        },
+        {
+          "id": "explicit.stat_1468737867",
+          "text": "Map contains an additional Shrine",
+          "type": "explicit"
+        },
+        {
+          "id": "explicit.stat_3762913035",
+          "text": "Unstable Breaches in Map spawn an additional Rare Monster when Stabilised",
+          "type": "explicit"
+        },
+        {
+          "id": "explicit.stat_2778285247",
+          "text": "#% increased Quantity of Hiveblood found in Map",
+          "type": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "added",
+      "label": "Added",
+      "entries": [
+        {
+          "id": "explicit.stat_1276056105",
+          "text": "#% increased Gold found in this Area (Gold Piles)"
+        },
+        {
+          "id": "explicit.stat_1276056105",
+          "text": "#% increased Gold found in Map (Gold Piles)"
+        },
+        {
+          "id": "explicit.stat_2777224821",
+          "text": "#% increased Quantity of Waystones found in Map"
+        },
+        {
+          "id": "explicit.stat_3873704640",
+          "text": "Map has #% increased Magic Monsters"
+        },
+        {
+          "id": "explicit.stat_231864447",
+          "text": "Area contains an additional Rare Chest"
+        },
+        {
+          "id": "explicit.stat_231864447",
+          "text": "Map contains an additional Rare Chest"
+        },
+        {
+          "id": "explicit.stat_3350944114",
+          "text": "Delirium Fog in Area dissipates #% faster"
+        },
+        {
+          "id": "explicit.stat_3350944114",
+          "text": "Delirium Fog in Map dissipates #% faster"
+        },
+        {
+          "id": "explicit.stat_1133965702",
+          "text": "#% increased Gold found in this Area"
+        },
+        {
+          "id": "implicit.stat_4041853756",
+          "text": "Adds Irradiated to a Map \n# use remaining"
+        },
+        {
+          "id": "explicit.stat_4142653832",
+          "text": "Map has #% increased Monster Rarity"
+        },
+        {
+          "id": "explicit.stat_3591307827",
+          "text": "#% chance to add a Vaal Beacon Unique Monster to the Map"
+        },
+        {
+          "id": "explicit.stat_57434274",
+          "text": "#% increased Experience gain"
+        },
+        {
+          "id": "explicit.stat_57434274",
+          "text": "#% increased Experience gain in Map"
+        },
+        {
+          "id": "explicit.stat_267210597",
+          "text": "Area has #% increased chance to contain a Summoning Circle"
+        },
+        {
+          "id": "explicit.stat_267210597",
+          "text": "Map has #% increased chance to contain a Summoning Circle"
+        },
+        {
+          "id": "explicit.stat_3666934677",
+          "text": "#% increased Experience gain"
+        }
+      ]
+    }
+  ]
+}

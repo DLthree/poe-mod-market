@@ -1,0 +1,76 @@
+{
+  "league": "Runes of Aldur",
+  "tradeWindow": "3days",
+  "lookbackHours": 72,
+  "perCell": 20,
+  "_floor": "Which rule decides a pool's floor price. Swap `strategy` freely; see lib/floor.mjs for the list. Nothing else in the code changes.",
+  "floor": {
+    "strategy": "nth-cheapest-seller",
+    "n": 3,
+    "windowHours": 24
+  },
+  "walk": {
+    "minListings": 12,
+    "minSellers": 5,
+    "minLift": 1.3,
+    "midVsBlank": 1.5,
+    "highVsBlank": 2.1
+  },
+  "ageCheck": {
+    "factor": 10
+  },
+  "_testSet": "One tablet type and ten modifiers, so the walk can be iterated without spending a day's rate allowance. Run with `--test-set`. High-value, mid and filler modifiers are all present on purpose: a walk that cannot separate them is not working.",
+  "testSet": {
+    "types": [
+      "Breach Tablet"
+    ],
+    "rarities": [
+      "normal",
+      "magic",
+      "rare"
+    ],
+    "affixes": [
+      {
+        "hash": "explicit.stat_3762913035",
+        "note": "of the Invasion — extra rare monsters on stabilise; the guide calls this the Breach-specific premium"
+      },
+      {
+        "hash": "explicit.stat_2065500219",
+        "note": "Monster Effectiveness — premium multiplier on any tablet"
+      },
+      {
+        "hash": "explicit.stat_2306002879",
+        "note": "increased Rarity of Items found — premium multiplier"
+      },
+      {
+        "hash": "explicit.stat_4142653832",
+        "note": "increased Monster Rarity — good multiplier"
+      },
+      {
+        "hash": "explicit.stat_3793155082",
+        "note": "increased number of Rare Monsters — good multiplier"
+      },
+      {
+        "hash": "explicit.stat_2777224821",
+        "note": "increased Quantity of Waystones found"
+      },
+      {
+        "hash": "explicit.stat_472809816",
+        "note": "Wombgift quantity — Breach currency"
+      },
+      {
+        "hash": "explicit.stat_2778285247",
+        "note": "Hiveblood quantity — Breach currency"
+      },
+      {
+        "hash": "explicit.stat_1276056105",
+        "note": "increased Gold found — expected filler"
+      },
+      {
+        "hash": "explicit.stat_57434274",
+        "note": "increased Experience gain — expected filler"
+      }
+    ]
+  },
+  "_walk": "minLift is a ratio against the blank-tablet floor. Note the baseline is the cheapest tablet of ANY kind, while each modifier cell is sampled at the cheapest tablet CARRYING that modifier — constraining a search at all raises its floor, so a low threshold admits modifiers that are not really worth anything."
+}

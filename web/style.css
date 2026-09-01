@@ -1,0 +1,204 @@
+/* Dark, because the thing beside it on screen is the game. Warm neutrals and a
+   copper accent: exalted orbs are the unit every number here is in. */
+:root {
+  --bg: #14161a;
+  --panel: #1c1f25;
+  --panel-2: #23272f;
+  --line: #2e333c;
+  --ink: #e8eaee;
+  --ink-2: #a8b0bd;
+  --ink-3: #737c8b;
+  --accent: #d0873f;
+  --accent-soft: #3a2a17;
+  --good: #7fbf9a;
+  --bad: #d2707c;
+}
+
+* { box-sizing: border-box; }
+
+/* The browser hides a [hidden] element with a rule of its own, and ANY author
+   rule that sets display beats it: an author sheet wins over the user-agent
+   sheet whatever the specificity. `.card` sets display:flex, so the modifier
+   card kept rendering with the attribute set on it — on a normal tablet, and
+   before anything was selected at all. Nothing in the page's own logic showed
+   it, because the logic was right. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.5 "Segoe UI", system-ui, sans-serif;
+}
+
+.bar {
+  padding: 18px 22px 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+h1 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: .2px; }
+h2 { font-size: 14px; font-weight: 600; margin: 0; }
+.sub { margin: 0; color: var(--ink-3); font-size: 13px; }
+/* Which market every number on the page came from. It sits beside the title
+   because it names the page as much as the title does. */
+.league {
+  font: inherit;
+  font-size: 13px;
+  padding: 4px 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+}
+.hint { margin: 0; color: var(--ink-3); font-size: 13px; }
+
+/* ---- the output, pinned above everything ---- */
+.result {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 22px;
+}
+.result-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.regex {
+  flex: 1 1 340px;
+  min-height: 38px;
+  padding: 9px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  word-break: break-all;
+}
+/* A prompt, not a search string. Copper is reserved for something to paste. */
+.regex.placeholder { color: var(--ink-3); }
+.result-side { display: flex; gap: 8px; align-items: center; }
+.count {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.count.over { color: var(--bad); font-weight: 600; }
+
+button, .btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #16120c;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+button.ghost, a.ghost {
+  background: transparent;
+  color: var(--ink-2);
+  border-color: var(--line);
+}
+button:hover, .btn:hover { filter: brightness(1.12); }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Smaller and lighter than the label: a mark on the button, not a second word. */
+.ext { font-size: 11px; opacity: .8; }
+.warn { margin: 9px 0 0; color: var(--bad); font-size: 13px; }
+
+/* ---- cards ---- */
+main { padding: 20px 22px 60px; display: flex; flex-direction: column; gap: 18px; }
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.modes { display: flex; gap: 14px; font-size: 13px; color: var(--ink-2); }
+.modes label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+/* ---- the overview grid ---- */
+.grid { display: flex; flex-direction: column; gap: 6px; overflow-x: auto; }
+.grid-row { display: grid; grid-template-columns: 110px repeat(3, minmax(96px, 1fr)); gap: 6px; }
+.grid-label { color: var(--ink-2); font-size: 13px; align-self: center; }
+.grid-head { color: var(--ink-3); font-size: 11px; text-transform: uppercase; letter-spacing: .09em; }
+.square {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 4px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.square .price { font-size: 14px; font-variant-numeric: tabular-nums; }
+.square .sub { font-size: 11px; color: var(--ink-3); }
+.square.on { border-color: var(--accent); background: var(--accent-soft); }
+.square.thin { opacity: .55; }
+.square.empty { opacity: .3; cursor: default; }
+
+/* ---- the modifier list ---- */
+input[type=search] {
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 11px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+}
+.mods { display: flex; flex-direction: column; max-height: 62vh; overflow-y: auto; }
+.mod {
+  display: grid;
+  grid-template-columns: 20px 74px 52px 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  cursor: pointer;
+}
+.mod:last-child { border-bottom: 0; }
+.mod:hover { background: var(--panel-2); }
+.mod-price, .mod-adds, .mod-n { font-variant-numeric: tabular-nums; }
+.mod-adds { color: var(--ink-3); text-align: right; }
+.mod-n { color: var(--ink-3); font-size: 11px; }
+
+/* Three weights, one per band. Colour is spent only where it says something:
+   copper marks the tablets worth listing, and everything else steps down from
+   plain white rather than competing with it.
+
+   under 1.5x a blank tablet   dim grey
+   1.5x to 2.1x                plain white
+   2.1x and over               copper, bold */
+.mod .mod-price { color: var(--ink-3); }
+.mod .mod-label { color: var(--ink-3); }
+.mod.mid .mod-price { color: var(--ink); }
+.mod.mid .mod-label { color: var(--ink-2); }
+.mod.high .mod-price { color: var(--accent); font-weight: 600; }
+.mod.high .mod-label { color: var(--ink); }
+.mod.unpriced { opacity: .5; }
+.tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--bad);
+  border: 1px solid var(--bad);
+  border-radius: 3px;
+  padding: 1px 5px;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "poe-mod-market",
+  "version": "0.1.0",
+  "description": "Prices Path of Exile 2 Precursor Tablets from the official trade API, and builds a stash search from what is worth keeping.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DLthree/poe-mod-market.git"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "update": "node cli.mjs update",
+    "serve": "node cli.mjs serve",
+    "audit": "node cli.mjs audit"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablet prices</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="bar">
+  <h1>Tablet prices</h1>
+  <select id="league" class="league" aria-label="League"></select>
+  <p class="sub" id="meta">loading…</p>
+</header>
+
+<!-- The output sits above everything, because it is the thing you leave with
+     and you should always be able to see what you are about to copy. -->
+<section class="result" aria-label="Stash search">
+  <div class="result-row">
+    <output id="regex" class="regex placeholder" aria-live="polite">pick a tablet type below</output>
+    <div class="result-side">
+      <span id="count" class="count">0 / 250</span>
+      <button id="copy" type="button">Copy</button>
+      <button id="clear" type="button" class="ghost">Clear</button>
+      <!-- The arrow is the convention for a link that leaves the page, and this
+           one opens the trade site in a new tab. aria-hidden because a screen
+           reader is already told by the label that follows it. -->
+      <a id="trade" class="ghost btn" href="#" target="_blank" rel="noreferrer noopener"
+         aria-label="Open this search on the trade site in a new tab"
+        >Trade <span aria-hidden="true" class="ext">↗</span></a>
+    </div>
+  </div>
+  <p id="warn" class="warn" hidden></p>
+</section>
+
+<main>
+  <section class="card">
+    <h2>Where the money is</h2>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section class="card" id="mods-card" hidden>
+    <div class="card-head">
+      <h2 id="mods-title">Modifiers</h2>
+      <div class="modes" role="radiogroup" aria-label="How the modifiers combine">
+        <label><input type="radio" name="mode" value="any" checked> Match <b>any</b></label>
+        <label><input type="radio" name="mode" value="all"> Match <b>all</b></label>
+      </div>
+    </div>
+    <input id="search" type="search" placeholder="Filter modifiers…" autocomplete="off">
+    <div id="mods" class="mods"></div>
+  </section>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 import { dbPath, cacheDir } from '../lib/paths.mjs'
 import { createProgress } from '../lib/progress.mjs'
 import { TradeClient } from '../lib/trade-client.mjs'
-import { API_BASE, REALM, TABLET_TYPES, RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
+import { API_BASE, REALM, TABLET_TYPES, RARITIES, MODIFIED_RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
 import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
@@ -40,11 +40,24 @@ if (full && !has('i-mean-it')) {
 
 const testSet = config.testSet
 const types = full ? TABLET_TYPES : testSet.types
-const rarities = full ? RARITIES : testSet.rarities
 const affixes = full ? null : testSet.affixes.map(a => a.hash)
 
+// `--rarities magic` narrows a pass to one rarity. It exists because a sweep
+// costs an hour of allowance that cannot be bought back: when the rare data is
+// hours old and only magic is missing, re-asking about rares spends 200
+// searches to learn what we already know.
+const asked = flag('rarities', null)
+const rarities = asked ? asked.split(',').map(r => r.trim()).filter(Boolean)
+  : (full ? RARITIES : testSet.rarities)
+const unknown = rarities.filter(r => !RARITIES.includes(r))
+if (unknown.length) {
+  console.error(`Unknown rarity ${unknown.map(r => JSON.stringify(r)).join(', ')}. ` +
+    `Known: ${RARITIES.join(', ')}. Nothing has run.`)
+  process.exit(2)
+}
+
 console.log(full
-  ? `FULL PASS: ${types.length} types x ${rarities.length} rarities`
+  ? `FULL PASS: ${types.length} types x ${rarities.join('/')}`
   : `test set: ${types.join(', ')} x ${rarities.join('/')}, ${affixes.length} modifiers`)
 
 const secrets = JSON.parse(readFileSync(here('../secrets.json'), 'utf8'))
@@ -96,15 +109,23 @@ if (only !== 'affixes') {
 }
 
 if (only !== 'pools') {
-  console.log('\nloop 2 — one search per modifier, on rares')
+  // Every rarity loop 1 collected, not just rare. A modifier can only be priced
+  // on the rarity it was asked about, and until 2026-09-01 nothing asked about
+  // magic at all, so 91 of 297 modifier lines carried no floor. Normal is
+  // skipped: a normal tablet carries no modifier, so there is no question.
+  console.log(`\nloop 2 — one search per modifier, on ${rarities.join('/')}`)
   let affixTotal = 0
   for (const type of types) {
-    const hashes = affixes || affixesFor(db, type)
-    console.log(`  ${type}: ${hashes.length} modifiers`)
-    affixTotal += hashes.length
+    // The same rarity rule sweepAffixes applies, or the plan and the progress
+    // bar promise searches that will never run.
+    for (const rarity of rarities.filter(r => MODIFIED_RARITIES.includes(r))) {
+      const hashes = affixes || affixesFor(db, type, rarity)
+      if (hashes.length) console.log(`  ${type} ${rarity}: ${hashes.length} modifiers`)
+      affixTotal += hashes.length
+    }
   }
   activeBar = useBar ? createProgress({ label: 'collecting', total: affixTotal }) : null
-  add(await sweepAffixes({ client, db, index, league, types, perCell, affixes,
+  add(await sweepAffixes({ client, db, index, league, types, rarities, perCell, affixes,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }

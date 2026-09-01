@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { cacheDir } from '../lib/paths.mjs'
 import { openDb } from '../lib/db.mjs'
+import { PATHS } from '../lib/site.mjs'
 
 const cli = fileURLToPath(new URL('../cli.mjs', import.meta.url))
 
@@ -102,6 +103,38 @@ test('a malformed percent-encoded path is a 404, not a 500', async (t) => {
   try {
     const res = await fetch(`http://127.0.0.1:${port}/%`)
     assert.equal(res.status, 404)
+  } finally {
+    await stopServer(child)
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+// THE LOCAL PAGE IS THE PUBLISHED PAGE. The server answers the same three
+// paths steps/build-site.mjs writes as files, so nothing the page does can work
+// here and 404 on GitHub Pages. lib/site.mjs owns the names; if they drift,
+// this fails on one side or the other.
+test('the server answers the static paths the build writes', async (t) => {
+  const dir = mkdtempSync(join(tmpdir(), 'tablet-serve-'))
+  if (!seedStatsCache(dir, t)) { rmSync(dir, { recursive: true, force: true }); return }
+  seedLeague(dir, 'M')
+  const { child, port } = await startServer(dir)
+  try {
+    const get = (p) => fetch(`http://127.0.0.1:${port}/${p}`)
+    const index = await get(PATHS.leagues)
+    assert.equal(index.status, 200)
+    assert.deepEqual([...(await index.json()).leagues].sort(), ['L', 'M'])
+
+    const eco = await get(PATHS.economy('M'))
+    assert.equal(eco.status, 200, PATHS.economy('M'))
+    assert.equal((await eco.json()).league, 'M')
+
+    const frags = await get(PATHS.fragments('M'))
+    assert.equal(frags.status, 200, PATHS.fragments('M'))
+    assert.equal(typeof await frags.json(), 'object')
+
+    // A league we do not hold has no file, and inventing one would publish a
+    // page about a market we never collected.
+    assert.equal((await get(PATHS.economy('Other'))).status, 404)
   } finally {
     await stopServer(child)
     rmSync(dir, { recursive: true, force: true })

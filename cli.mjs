@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// The one front door for the tablet-price skill. Three subcommands: update,
-// serve, audit.
+// The one front door. Four subcommands: update, serve, audit, build.
 //
 // `update` shells out to steps/*.mjs with spawnSync, on purpose: each step is
 // the same script a human would run, so this orchestrator cannot drift from
@@ -12,6 +11,7 @@ import { fileURLToPath } from 'node:url'
 import { readFileSync } from 'node:fs'
 import { runServe } from './web/serve.mjs'
 import { runAudit } from './audit-db.mjs'
+import { runBuild } from './steps/build-site.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 const config = JSON.parse(readFileSync(here('./config.json'), 'utf8'))
@@ -21,6 +21,7 @@ const OVERALL_USAGE = `Tablet price CLI for PoE2 Precursor Tablets.
   node cli.mjs update [flags]   collect and rebuild the price data
   node cli.mjs serve  [flags]   the read-only web view and economy file
   node cli.mjs audit  [flags]   check stored rows against what GGG sent
+  node cli.mjs build  [flags]   write the static site into site/
 
 Run \`node cli.mjs <command> --help\` for a command's own flags.`
 
@@ -122,7 +123,7 @@ function cmdUpdate (argv) {
   runSteps(steps, common)
 }
 
-const COMMANDS = { update: cmdUpdate, serve: runServe, audit: runAudit }
+const COMMANDS = { update: cmdUpdate, serve: runServe, audit: runAudit, build: runBuild }
 
 function main () {
   const argv = process.argv.slice(2)

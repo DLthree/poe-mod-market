@@ -69,6 +69,37 @@ Bands, against the floor of a blank tablet of the same kind:
 Both need at least 12 listings from 5 distinct sellers. Set them in `config.json` under
 `walk`.
 
+## Publishing it
+
+The page is static. It fetches three JSON files and no API at all, so it can be
+served from anywhere that serves files:
+
+```
+data/leagues.json              which leagues exist, and which to open
+data/eco-<league>.json         every cell and every modifier, summarised
+data/fragments-<league>.json   one regex fragment per modifier
+```
+
+`node cli.mjs build` writes those, the page, and the three modules the page
+imports, into `site/`. Every path in the page is relative, so the same files work
+at a domain root and under `/poe-mod-market/`.
+
+```
+node cli.mjs update --full     collect (needs the session cookie)
+node cli.mjs build             write site/
+git add site && git commit && git push
+```
+
+`.github/workflows/pages.yml` uploads `site/` to GitHub Pages on push. **It does
+not build.** The build reads the SQLite archive, which is not in this repo and
+cannot be, so the build runs on the machine that holds the archive and `site/`
+is committed. Nothing in CI can reach GGG, and no secret is configured there.
+
+`node cli.mjs serve` answers those same three paths, computed live from the
+database, so the local page is the published page rather than something that
+resembles it. `tests/site.test.mjs` holds that line: it fails if the page asks
+for a file the build does not write, or if any path is rooted at `/`.
+
 ## What the query asks for, and why
 
 Each setting cost a measurement:

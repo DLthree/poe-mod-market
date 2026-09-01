@@ -1,0 +1,44 @@
+# Publishes the site/ directory to GitHub Pages.
+#
+# It does NOT build anything. The build reads the SQLite archive, which is not
+# in this repo and cannot be — it is hundreds of megabytes of archived trade
+# responses. So `node cli.mjs build` runs on the machine that holds the archive,
+# after a sweep, and site/ is committed. This workflow only uploads it.
+#
+# The consequence worth knowing: nothing in CI can call GGG, and no secret is
+# needed here at all.
+name: Deploy site to Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and a newer push wins. A half-finished deploy of an
+# older sweep is worth nothing.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v5

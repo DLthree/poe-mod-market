@@ -20,6 +20,7 @@ import { listLeagues } from '../lib/leagues.mjs'
 import { meta, mods, price } from '../lib/api.mjs'
 import { buildFragments } from '../lib/regex-keys.mjs'
 import { economyFile, economyPath } from '../lib/economy.mjs'
+import { PATHS, leaguesFile, leagueFiles } from '../lib/site.mjs'
 import { validateTradeWindow } from '../lib/poe2.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
@@ -71,8 +72,13 @@ function makeLeagues (dataOverride, startupLeague) {
     // server was running appears without a restart. The league the server was
     // started with is always offered, even before that first sweep: --league is
     // what the operator asked for, not something a visitor typed.
+    // What the scan found, with its counts. `known` is the same list reduced to
+    // names, plus the league this server was started with.
+    held () {
+      return listLeagues(dataOverride)
+    },
     known () {
-      const found = listLeagues(dataOverride).map(l => l.league)
+      const found = this.held().map(l => l.league)
       return found.includes(startupLeague) ? found : [startupLeague, ...found]
     },
     db (name) {
@@ -165,6 +171,33 @@ const BROWSER_MODULES = new Set([
   '/lib/regex-keys.mjs', '/lib/poe2.mjs', '/lib/trade-url.mjs'
 ])
 
+// THE STATIC SURFACE. Exactly the files `steps/build-site.mjs` writes, at
+// exactly the paths the page fetches, computed live so a sweep shows up without
+// a rebuild. Serving them here is what keeps the local page and the published
+// one the same page: if the page can only reach data through these three names,
+// it cannot come to depend on a server being there.
+function makeHandleSite ({ leagues, config, defaultLeague, text }) {
+  return function handleSite (url, res) {
+    const path = url.pathname.replace(/^\//, '')
+    const known = leagues.known()
+
+    if (path === PATHS.leagues) {
+      json(res, leaguesFile(leagues.held(), defaultLeague))
+      return true
+    }
+    for (const league of known) {
+      const wantsEconomy = path === PATHS.economy(league)
+      if (!wantsEconomy && path !== PATHS.fragments(league)) continue
+      const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
+      const built = leagueFiles(leagues.db(league),
+        { league, lookbackHours, config, textFor: text })
+      json(res, wantsEconomy ? built.economy : built.fragments)
+      return true
+    }
+    return false
+  }
+}
+
 function handleModule (url, res) {
   if (!BROWSER_MODULES.has(url.pathname)) return false
   send(res, 200, readFileSync(here('..' + url.pathname)), 'text/javascript; charset=utf-8')
@@ -215,11 +248,13 @@ export function runServe (argv) {
   const text = (hash) => textFor(index, hash)
   const handleApi = makeHandleApi({ leagues, config, defaultLeague: league, text })
   const handleEconomy = makeHandleEconomy({ leagues, config, text })
+  const handleSite = makeHandleSite({ leagues, config, defaultLeague: league, text })
 
   return createServer((req, res) => {
     const url = new URL(req.url, `http://localhost:${port}`)
     try {
       if (url.pathname.startsWith('/api/')) handleApi(url, res)
+      else if (handleSite(url, res)) { /* served */ }
       else if (handleEconomy(url, res)) { /* served */ }
       else if (handleModule(url, res)) { /* served */ }
       else handleStatic(url, res)

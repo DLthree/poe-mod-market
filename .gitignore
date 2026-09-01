@@ -3,7 +3,11 @@ secrets.json
 
 # The SQLite archive, the stats cache and the generated mod table. All of it is
 # regenerable, and the database does not live here anyway — see README.
-data/
-dist/
+#
+# ANCHORED with a leading slash, and that matters: an unanchored "data/" also
+# matches site/data/, which is where the published JSON lives. It did, and the
+# three files the page cannot work without were silently left out of the first
+# commit of site/. tests/gitignore.test.mjs now guards it.
+/data/
 
 node_modules/

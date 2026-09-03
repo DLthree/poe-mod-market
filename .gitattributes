@@ -1,0 +1,19 @@
+# LF everywhere, in the repository AND in the working tree.
+#
+# Without this, a machine with core.autocrlf=true — the Git for Windows default,
+# and what this one has — checks every text file out as CRLF while the files
+# committed here are LF. Nothing breaks, but git announces the mismatch on every
+# file at every `add`, which buried real output under fifty lines of warning.
+#
+# eol=lf rather than `text=auto` alone: this repo is Node and its output is a
+# static site, both of which are LF by convention, and pinning it means the
+# checkout is identical on Windows, WSL and the Linux runner that deploys it.
+* text=auto eol=lf
+
+# Data, not source: diffing a 110 KB generated economy file line by line helps
+# nobody. Marked -diff only. NOT -text: excluding a file from normalisation
+# while the index already holds it normalised leaves the working copy and the
+# index disagreeing about the same bytes, which surfaces later as a file that
+# is modified without anyone touching it.
+site/data/*.json -diff
+vendor/ee2-stats.ndjson -diff

@@ -27,16 +27,31 @@ question from those rows alone. Merging pools priced things wrongly in both dire
 ## Running it
 
 ```
-node cli.mjs update                collect the test set, then rebuild   (under a minute)
-node cli.mjs update --pools-only   only the type x rarity baselines     (~2 min)
-node cli.mjs update --full         every cell                           (~1 hour)
+node cli.mjs update                EVERY cell, then rebuild   (~1 hour, ~390 searches)
+node cli.mjs update --pools-only   only the type x rarity baselines        (~2 min)
 node cli.mjs serve                 the read-only web view, port 8787
 node cli.mjs audit                 check stored rows against what GGG sent
+node cli.mjs build                 write the static site into site/
 node --test "tests/*.test.mjs"
 ```
 
-`node cli.mjs update` defaults to a ten-modifier test set so the pipeline can be exercised
-without spending a day's rate allowance. A full pass is roughly 330 searches.
+**`node cli.mjs update` is the full pass.** It passes `--full --i-mean-it` to the collect
+step for you, so there is no confirmation to type and no cheap default hiding behind it:
+it spends about an hour and most of a day's rate allowance. `update` takes no `--full`
+flag and exits 2 if given one.
+
+The cheap run is the collect step directly — one tablet type and ten modifiers, about 13
+searches and under a minute:
+
+```
+node steps/collect.mjs                                        the test set
+node steps/collect.mjs --full --i-mean-it                     every cell
+node steps/collect.mjs --full --i-mean-it --rarities magic    one rarity  (181 searches)
+```
+
+Use `--rarities` when only part of the data is stale: re-asking about rares that are a few
+hours old spends 200 searches to learn what you already know. After collecting this way,
+rebuild the derived table with `node steps/build-mod-table.mjs`.
 
 **The database is not in this repo.** It goes to `%LOCALAPPDATA%\poe2-tablet-price\` on
 Windows, or the equivalent under `XDG_DATA_HOME`. Override with `--data` or
@@ -96,17 +111,11 @@ at a domain root and under `/poe-mod-market/`.
 Live at **https://dlthree.github.io/poe-mod-market/**. The whole deploy loop:
 
 ```
-node cli.mjs update --full --i-mean-it     collect everything    (~1 hour)
+node cli.mjs update                        collect everything    (~1 hour)
+node cli.mjs audit                         check it against what GGG sent
 node cli.mjs build                         write site/
 git add site && git commit && git push     deploys itself
 ```
-
-`--i-mean-it` is not optional and not decoration: a full pass spends most of a
-day's rate allowance, so it has to be typed on purpose.
-
-To refresh one rarity rather than all three — the rare data is hours old and only
-magic is missing, say — `node steps/collect.mjs --full --i-mean-it --rarities magic`.
-That is 181 searches against 388.
 
 `.github/workflows/pages.yml` uploads `site/` to GitHub Pages on any push that
 touches it. **It does not build.** The build reads the SQLite archive, which is

@@ -1452,7 +1452,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1464,7 +1464,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Unstable Breaches in Map have 20-50% increased chance to contain Vruun, Marshal of Xesht"
   },
   {
@@ -1476,7 +1476,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1620,7 +1620,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "high",
+   "quality": null,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -1632,7 +1632,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1644,7 +1644,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1656,7 +1656,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -1668,7 +1668,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -1680,7 +1680,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Essence"
   },
   {
@@ -1692,7 +1692,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -1704,7 +1704,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -1716,7 +1716,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": "mid",
+   "quality": null,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -1728,7 +1728,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
   },
   {
@@ -1740,7 +1740,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1752,7 +1752,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -1764,7 +1764,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -1776,7 +1776,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": "mid",
+   "quality": null,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1788,7 +1788,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -1800,7 +1800,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "mid",
+   "quality": null,
    "label": "Delirium Fog in Area lasts 6-12 additional seconds before dissipating"
   },
   {
@@ -1812,7 +1812,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1824,7 +1824,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "mid",
+   "quality": null,
    "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
   },
   {
@@ -1836,7 +1836,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -1848,7 +1848,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": "mid",
+   "quality": null,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -1860,7 +1860,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": "mid",
+   "quality": null,
    "label": "Delirium Fog in Area dissipates -30--20% faster"
   },
   {
@@ -1872,7 +1872,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -1884,7 +1884,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "mid",
+   "quality": null,
    "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
@@ -1896,7 +1896,7 @@
    "currency": "exalted",
    "listings": 19,
    "sellers": 12,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -2400,7 +2400,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2412,7 +2412,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2424,7 +2424,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -2436,7 +2436,7 @@
    "currency": "exalted",
    "listings": 19,
    "sellers": 16,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -2448,7 +2448,7 @@
    "currency": "exalted",
    "listings": 19,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -2460,7 +2460,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2472,7 +2472,7 @@
    "currency": "exalted",
    "listings": 19,
    "sellers": 16,
-   "quality": "mid",
+   "quality": null,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2592,7 +2592,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "high",
+   "quality": null,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
@@ -2604,7 +2604,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "high",
+   "quality": null,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2616,7 +2616,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "high",
+   "quality": null,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -2628,7 +2628,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "high",
+   "quality": null,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -2640,7 +2640,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2652,7 +2652,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -2664,7 +2664,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -2676,7 +2676,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2970,13 +2970,25 @@
   {
    "type": "Overseer Tablet",
    "rarity": "magic",
+   "statId": "explicit.stat_3550168289",
+   "floor": 70,
+   "adds": 67,
+   "currency": "exalted",
+   "listings": 4,
+   "sellers": 4,
+   "quality": null,
+   "label": "Area is inhabited by 1 additional Rogue Exile"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "magic",
    "statId": "explicit.stat_1352729973",
    "floor": 10,
    "adds": 7,
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2988,7 +3000,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "high",
+   "quality": null,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -3000,7 +3012,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
@@ -3012,7 +3024,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "high",
+   "quality": null,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3024,7 +3036,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": "high",
+   "quality": null,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -3036,7 +3048,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -3048,7 +3060,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3060,7 +3072,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3072,7 +3084,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "high",
+   "quality": null,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -3084,7 +3096,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": "high",
+   "quality": null,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -3096,7 +3108,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "high",
+   "quality": null,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -3108,7 +3120,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "high",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3120,7 +3132,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "high",
+   "quality": null,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -3132,7 +3144,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "high",
+   "quality": null,
    "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
@@ -3144,7 +3156,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -3156,20 +3168,8 @@
    "currency": "exalted",
    "listings": 19,
    "sellers": 16,
-   "quality": "mid",
-   "label": "13-20% increased Quantity of Items dropped by Map Bosses"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_3550168289",
-   "floor": 70,
-   "adds": 67,
-   "currency": "exalted",
-   "listings": 4,
-   "sellers": 4,
    "quality": null,
-   "label": "Area is inhabited by 1 additional Rogue Exile"
+   "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
    "type": "Overseer Tablet",
@@ -3240,7 +3240,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "high",
+   "quality": null,
    "label": "18-30% increased Quantity of Waystones dropped by Map Bosses"
   },
   {
@@ -3252,7 +3252,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -3264,7 +3264,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Areas with Powerful Map Bosses contain an additional Essence (1-2)"
   },
   {
@@ -3276,7 +3276,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -3288,7 +3288,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Essence"
   },
   {
@@ -3300,7 +3300,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Areas with Map Powerful Map Bosses contain an additional Shrine (1-2)"
   },
   {
@@ -3312,7 +3312,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3324,7 +3324,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -3336,7 +3336,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -3348,7 +3348,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3360,7 +3360,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -3372,7 +3372,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "quality": null,
    "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
@@ -3384,7 +3384,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -3396,7 +3396,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -3408,7 +3408,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3420,7 +3420,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -3432,7 +3432,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3444,7 +3444,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -3456,7 +3456,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
@@ -3468,7 +3468,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -3480,7 +3480,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -3492,7 +3492,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3504,7 +3504,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": "mid",
+   "quality": null,
    "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
@@ -3516,7 +3516,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": "mid",
+   "quality": null,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -3528,7 +3528,7 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "quality": null,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {

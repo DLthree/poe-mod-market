@@ -6,7 +6,7 @@ import { withDb, seedCell } from './helpers.mjs'
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
 }
 const opts = { league: 'L', lookbackHours: 48, config, now: NOW }
 

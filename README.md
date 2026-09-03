@@ -66,8 +66,17 @@ Bands, against the floor of a blank tablet of the same kind:
 | high | at least 2.1x the blank floor | copper, bold, ticked by default |
 | mid | at least 1.5x | plain white |
 
-Both need at least 12 listings from 5 distinct sellers. Set them in `config.json` under
-`walk`.
+Both need at least 12 listings from 5 distinct sellers, **and** the modifier must add at
+least 10 exalted over a blank tablet. Set all of it in `config.json` under `walk`.
+
+That last one is the absolute companion, and it exists because a ratio against a junk
+floor is trivially cleared: where a blank tablet costs 1 exalted, 2.1x it is 2.1 exalted,
+and a modifier "worth twice the tablet" is worth about nothing. It only bites where the
+blank is cheap — it took Irradiated rare from 6 high modifiers to 0 and Overseer magic
+from 24 to 10, and changed nothing on Abyss, Breach, Ritual or Temple.
+
+2.1 rather than a round 2.0 because prices cluster on round multiples of the blank floor:
+34 modifiers floored at exactly 2.00x, two dozen of them on one cell.
 
 ## Publishing it
 
@@ -84,16 +93,31 @@ data/fragments-<league>.json   one regex fragment per modifier
 imports, into `site/`. Every path in the page is relative, so the same files work
 at a domain root and under `/poe-mod-market/`.
 
+Live at **https://dlthree.github.io/poe-mod-market/**. The whole deploy loop:
+
 ```
-node cli.mjs update --full     collect (needs the session cookie)
-node cli.mjs build             write site/
-git add site && git commit && git push
+node cli.mjs update --full --i-mean-it     collect everything    (~1 hour)
+node cli.mjs build                         write site/
+git add site && git commit && git push     deploys itself
 ```
 
-`.github/workflows/pages.yml` uploads `site/` to GitHub Pages on push. **It does
-not build.** The build reads the SQLite archive, which is not in this repo and
-cannot be, so the build runs on the machine that holds the archive and `site/`
-is committed. Nothing in CI can reach GGG, and no secret is configured there.
+`--i-mean-it` is not optional and not decoration: a full pass spends most of a
+day's rate allowance, so it has to be typed on purpose.
+
+To refresh one rarity rather than all three — the rare data is hours old and only
+magic is missing, say — `node steps/collect.mjs --full --i-mean-it --rarities magic`.
+That is 181 searches against 388.
+
+`.github/workflows/pages.yml` uploads `site/` to GitHub Pages on any push that
+touches it. **It does not build.** The build reads the SQLite archive, which is
+not in this repo and cannot be, so the build runs on the machine that holds the
+archive and `site/` is committed. Nothing in CI can reach GGG, and no secret is
+configured there.
+
+Pages is already enabled with **GitHub Actions** as the source. If it is ever
+reset, `configure-pages` fails with "Please verify that the repository has Pages
+enabled" — that is what it means, and the fix is the repository's Settings →
+Pages, not the workflow.
 
 `node cli.mjs serve` answers those same three paths, computed live from the
 database, so the local page is the published page rather than something that

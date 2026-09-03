@@ -13,6 +13,7 @@
     "minListings": 12,
     "minSellers": 5,
     "minLift": 1.3,
+    "minAdds": 10,
     "midVsBlank": 1.5,
     "highVsBlank": 2.1
   },

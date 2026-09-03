@@ -8,7 +8,7 @@ const NOW = Date.parse('2026-08-29T13:00:00Z')
 
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
 }
 const common = { league: 'L', lookbackHours: 48, config, now: NOW }
 
@@ -119,6 +119,17 @@ test('on a cell with a worthless blank tablet, ordinary modifiers band high',
     assert.equal(filler.delta, 29, 'it really does cost 29 more than a blank tablet')
     assert.equal(filler.quality, 'high', '30 times a blank tablet that costs 1')
     assert.equal(out.typical, 30, 'and that is what every modifier here costs')
+
+    // ...and this is the setting that answers it. The fixture above runs with
+    // minAdds 0, which is the ratio alone. Raising it above what the modifier
+    // actually adds withdraws the band, without touching any cell whose blank
+    // is dear enough that the ratio was already the harder test.
+    const strict = mods(db, {
+      ...common, type: 'Breach Tablet', rarity: 'Rare',
+      config: { ...config, walk: { ...config.walk, minAdds: 50 } }
+    })
+    assert.equal(strict.mods.find(m => m.hash === 'FILLER').quality, null,
+      'it adds 29, and 29 is not 50')
   }))
 
 test('banded modifiers sort above thin high-value ones', () => withDb(db => {

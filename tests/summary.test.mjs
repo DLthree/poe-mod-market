@@ -6,7 +6,7 @@ import { withDb, seedCell, seedQuestion } from './helpers.mjs'
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
 }
 const cell = { league: 'L', type: 'Breach Tablet', rarity: 'Rare' }
 const common = { ...cell, lookbackHours: 48, config, now: NOW }
@@ -173,6 +173,56 @@ test('a modifier with too thin a sample gets no band', () => withDb(db => {
   const thin = cellSummary(db, common).mods.find(m => m.hash === 'THIN')
   assert.ok(thin.floor >= 50, 'it really is dear')
   assert.equal(thin.quality, null, 'two listings from one seller say nothing')
+}))
+
+// THE ABSOLUTE COMPANION. A ratio against a junk floor is trivially cleared:
+// on a cell whose blank tablet costs 1 exalted, 2.1x it is 2.1 exalted, and a
+// modifier "worth twice the tablet" is worth about nothing.
+//
+// The blank here is 5, so UNDER adds 2, MID adds 3 and HIGH adds 7 — all of
+// them clear their ratio, and a companion of 5 keeps only the one that also
+// brings real money.
+test('a modifier must add real money, not only clear a ratio', () => withDb(db => {
+  seedCell(db, { rows: BANDS })
+  const withCompanion = (minAdds) => {
+    const out = cellSummary(db, {
+      ...common, config: { ...config, walk: { ...config.walk, minAdds } }
+    })
+    return Object.fromEntries(out.mods.map(m => [m.hash, m.quality]))
+  }
+  const off = withCompanion(0)
+  assert.equal(off.MID, 'mid', '8 against a blank of 5 is 1.6x')
+  assert.equal(off.HIGH, 'high', '12 is 2.4x')
+
+  const on = withCompanion(5)
+  assert.equal(on.HIGH, 'high', 'it adds 7, which is real money')
+  assert.equal(on.MID, null, 'it adds 3, whatever the ratio says')
+  assert.equal(on.ON_MID, null, 'exactly 1.5x, but only 2.5 exalted')
+}))
+
+test('the companion is measured against the blank tablet, not against zero',
+  () => withDb(db => {
+    // A dear cell: the blank is 100 and the modifier 210, so it clears 2.1x
+    // and adds 110. A companion of 10 must not touch it.
+    seedCell(db, {
+      rows: [
+        row(90, [], 'a'), row(95, [], 'b'), row(100, [], 'c'),
+        row(200, ['DEAR'], 'd'), row(205, ['DEAR'], 'e'), row(210, ['DEAR'], 'f')
+      ]
+    })
+    const out = cellSummary(db, {
+      ...common, config: { ...config, walk: { ...config.walk, minAdds: 10 } }
+    })
+    assert.equal(out.baseline.value, 100)
+    assert.equal(out.mods.find(m => m.hash === 'DEAR').quality, 'high')
+  }))
+
+test('a missing companion is a fault, not a silently grey page', () => withDb(db => {
+  seedCell(db, { rows: BANDS })
+  const walk = { ...config.walk }
+  delete walk.minAdds
+  assert.throws(() => cellSummary(db, { ...common, config: { ...config, walk } }),
+    /minAdds must be a number of zero or more/)
 }))
 
 // A missing band would compare against NaN and quietly call everything

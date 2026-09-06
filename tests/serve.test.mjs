@@ -8,6 +8,7 @@ import { join } from 'node:path'
 import { cacheDir } from '../lib/paths.mjs'
 import { openDb } from '../lib/db.mjs'
 import { PATHS } from '../lib/site.mjs'
+import { TABLET_TYPES, RARITIES } from '../lib/poe2.mjs'
 
 const cli = fileURLToPath(new URL('../cli.mjs', import.meta.url))
 
@@ -73,7 +74,7 @@ test('the economy file is served at the path poe.re asks for', async (t) => {
     assert.equal(res.headers.get('access-control-allow-origin'), '*')
     const body = await res.json()
     assert.equal(body.league, 'L')
-    assert.equal(body.cells.length, 21)
+    assert.equal(body.cells.length, TABLET_TYPES.length * RARITIES.length)
     assert.ok(Array.isArray(body.mods))
   } finally {
     await stopServer(child)

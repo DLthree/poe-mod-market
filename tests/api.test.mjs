@@ -2,7 +2,12 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { meta, mods, price } from '../lib/api.mjs'
 import { tradeUrl } from '../lib/trade-url.mjs'
+import { bandOf } from '../lib/bands.mjs'
 import { withDb, seedCell, seedQuestion } from './helpers.mjs'
+
+// The band is derived, not stored. `delta` is what the published file calls
+// `adds`; see the same note in tests/summary.test.mjs.
+const bandFor = (m, walk) => bandOf({ affixRatio: m.affixRatio, adds: m.delta }, walk)
 
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 
@@ -49,16 +54,18 @@ test('mods gives a floor per modifier against the blank baseline',
     assert.equal(good.matches, 4)
     assert.equal(good.floor, 50, 'third cheapest of 40/45/50/60')
     assert.ok(good.delta > 40, `delta ${good.delta}`)
-    assert.equal(good.quality, 'high')
+    assert.equal(bandFor(good, config.walk), 'high')
   }))
 
-test('a modifier on cheap listings gets no band', () => withDb(db => {
-  seed(db, SAMPLE)
-  const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
-  assert.equal(out.mods.find(m => m.hash === 'JUNK').quality, null)
-  assert.equal(out.mods.find(m => m.hash === 'MID').quality, null,
-    'MID sits on cheap rows too, so its own floor stays near the blank one')
-}))
+test('a modifier on cheap listings bands low, which is a measurement',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
+    const by = (h) => bandFor(out.mods.find(m => m.hash === h), config.walk)
+    assert.equal(by('JUNK'), 'low')
+    assert.equal(by('MID'), 'low',
+      'MID sits on cheap rows too, so its own floor stays near the blank one')
+  }))
 
 // Measured on the live sample: a filler modifier riding on dear tablets scored a
 // 6.8x lift and read as valuable. The verdict must come from the walk, which
@@ -84,10 +91,10 @@ test('a modifier that only ever rides a stronger one prices the same as it',
     const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
     const by = (h) => out.mods.find(m => m.hash === h)
     assert.equal(by('RIDER').floor, by('GOOD').floor, 'the same search, the same tablets')
-    assert.equal(by('RIDER').quality, 'high')
-    assert.equal(by('GOOD').quality, 'high')
-    assert.equal(by('MID').quality, 'high', '30 against a blank tablet at 5')
-    assert.equal(by('JUNK').quality, null)
+    assert.equal(bandFor(by('RIDER'), config.walk), 'high')
+    assert.equal(bandFor(by('GOOD'), config.walk), 'high')
+    assert.equal(bandFor(by('MID'), config.walk), 'high', '30 against a blank tablet at 5')
+    assert.equal(bandFor(by('JUNK'), config.walk), 'low')
   }))
 
 // THE KNOWN COST OF MEASURING AGAINST THE BLANK TABLET, pinned so nobody meets
@@ -97,7 +104,7 @@ test('a modifier that only ever rides a stronger one prices the same as it',
 // both floor at 1 exalted.
 //
 // `typical` is published beside every cell for this reason — here it is 30, the
-// same as the modifier said to be high quality — so a reader can see that the
+// same as the modifier banded high — so a reader can see that the
 // band is a statement about the blank tablet, not about the modifier.
 test('on a cell with a worthless blank tablet, ordinary modifiers band high',
   () => withDb(db => {
@@ -117,7 +124,7 @@ test('on a cell with a worthless blank tablet, ordinary modifiers band high',
     assert.equal(out.baseline.value, 1, 'the cheap end of the cell is junk')
     assert.equal(filler.floor, 30)
     assert.equal(filler.delta, 29, 'it really does cost 29 more than a blank tablet')
-    assert.equal(filler.quality, 'high', '30 times a blank tablet that costs 1')
+    assert.equal(bandFor(filler, config.walk), 'high', '30 times a blank tablet that costs 1')
     assert.equal(out.typical, 30, 'and that is what every modifier here costs')
 
     // ...and this is the setting that answers it. The fixture above runs with
@@ -128,16 +135,17 @@ test('on a cell with a worthless blank tablet, ordinary modifiers band high',
       ...common, type: 'Breach Tablet', rarity: 'Rare',
       config: { ...config, walk: { ...config.walk, minAdds: 50 } }
     })
-    assert.equal(strict.mods.find(m => m.hash === 'FILLER').quality, null,
-      'it adds 29, and 29 is not 50')
+    assert.equal(
+      bandFor(strict.mods.find(m => m.hash === 'FILLER'), { ...config.walk, minAdds: 50 }),
+      'low', 'it adds 29, and 29 is not 50')
   }))
 
-test('banded modifiers sort above thin high-value ones', () => withDb(db => {
+// Price alone decides the order. The band decides the colour and nothing else.
+test('modifiers sort by price, dearest first', () => withDb(db => {
   seed(db, SAMPLE)
   const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
-  const firstUnbanded = out.mods.findIndex(m => !m.quality)
-  const lastBanded = out.mods.map(m => Boolean(m.quality)).lastIndexOf(true)
-  if (firstUnbanded !== -1 && lastBanded !== -1) assert.ok(lastBanded < firstUnbanded)
+  const floors = out.mods.filter(m => m.floor !== null).map(m => m.floor)
+  assert.deepEqual(floors, [...floors].sort((a, b) => b - a), floors.join(','))
 }))
 
 test('a modifier priced in another currency gets no verdict, rather than a guess',
@@ -155,7 +163,9 @@ test('a modifier priced in another currency gets no verdict, rather than a guess
     const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
     const dear = out.mods.find(m => m.hash === 'DEAR')
     assert.equal(dear.currency, 'divine')
-    assert.equal(dear.quality, null, 'incomparable is not the same as worthless')
+    assert.equal(dear.affixRatio, null, 'no rate exists to divide one by the other')
+    assert.equal(bandFor(dear, config.walk), null,
+      'incomparable is not the same as worthless')
   }))
 
 test('price narrows as modifiers are added', () => withDb(db => {
@@ -260,12 +270,25 @@ test('a difference across two currencies is null, never a converted number',
     assert.equal(dear.delta, null)
   }))
 
-test('modifiers sort by how much currency they add', () => withDb(db => {
-  seed(db, SAMPLE)
-  const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
-  const withDelta = out.mods.filter(m => m.quality && m.delta !== null).map(m => m.delta)
-  assert.deepEqual(withDelta, [...withDelta].sort((a, b) => b - a))
-}))
+// A price we cannot compare to the blank tablet cannot be placed among the ones
+// we can, so it sorts after them rather than being ranked on a raw number that
+// means something else. Unpriced modifiers come last of all.
+test('incomparable and unpriced modifiers sort after the comparable ones',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    seedQuestion(db, {
+      statId: 'DEAR',
+      idFor: (i) => `dear${i}`,
+      rows: [
+        { amount: 2, account: 'x', mods: ['DEAR'], currency: 'divine' },
+        { amount: 3, account: 'y', mods: ['DEAR'], currency: 'divine' },
+        { amount: 4, account: 'z', mods: ['DEAR'], currency: 'divine' }
+      ]
+    })
+    const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
+    const rank = out.mods.map(m => (m.affixRatio !== null ? 0 : m.priced ? 1 : 2))
+    assert.deepEqual(rank, [...rank].sort((a, b) => a - b), rank.join(','))
+  }))
 
 // "#% increased number of Rare Monsters" tells a reader nothing about what the
 // modifier is worth rolling. The band comes from GGG's own magnitudes, widened

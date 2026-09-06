@@ -1,7 +1,17 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { cellSummary } from '../lib/summary.mjs'
+import { bandOf } from '../lib/bands.mjs'
 import { withDb, seedCell, seedQuestion } from './helpers.mjs'
+
+// cellSummary reports measurements now, not verdicts. The verdict is one pure
+// function away, and the tests apply it exactly as the page does.
+//
+// bandOf takes the PUBLISHED shape, where the difference against a blank tablet
+// is called `adds`. cellSummary calls that same number `delta` and always has;
+// lib/economy.mjs renames it on the way out. Adapt here rather than teach
+// bandOf two spellings of one field.
+const bandFor = (m, walk) => bandOf({ affixRatio: m.affixRatio, adds: m.delta }, walk)
 
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
@@ -29,7 +39,9 @@ test('cellSummary gives a baseline and a floor per modifier', () => withDb(db =>
   assert.equal(good.sellers, 4)
   assert.equal(good.floor, 50, 'third cheapest of 40/45/50/60')
   assert.equal(good.delta, 45, '50 minus the baseline 5')
-  assert.equal(good.quality, 'high')
+  assert.equal(good.affixRatio, 10, '50 over the baseline 5')
+  assert.equal(good.fewSamples, false, 'four listings from four sellers')
+  assert.equal(bandFor(good, config.walk), 'high')
 }))
 
 // The whole point of the change: a modifier's floor comes from the search that
@@ -41,7 +53,9 @@ test('a modifier is priced from its own question, not from the cell', () => with
   const junk = out.mods.find(m => m.hash === 'JUNK')
   assert.equal(junk.floor, 5)
   assert.equal(junk.delta, 0)
-  assert.equal(junk.quality, null, 'it adds nothing over a blank tablet')
+  assert.equal(junk.affixRatio, 1, 'it floors exactly where the blank tablet does')
+  assert.equal(bandFor(junk, config.walk), 'low',
+    'measured and found worthless, which is not the same as unmeasurable')
 }))
 
 // The cheap end of this cell is exalted, so the baseline is. DEAR sits on
@@ -63,7 +77,9 @@ test('cellSummary gives no delta across two currencies', () => withDb(db => {
   const dear = out.mods.find(m => m.hash === 'DEAR')
   assert.equal(dear.currency, 'divine')
   assert.equal(dear.delta, null, 'divine floor against an exalted baseline')
-  assert.equal(dear.quality, null, 'incomparable is not the same as worthless')
+  assert.equal(dear.affixRatio, null, 'no rate exists to divide one by the other')
+  assert.equal(bandFor(dear, config.walk), null,
+    'incomparable is not the same as worthless')
 }))
 
 test('cellSummary puts the observed roll band into the label', () => withDb(db => {
@@ -95,7 +111,8 @@ test('a modifier seen but never asked about is reported without a price',
     assert.equal(seen.floor, null)
     assert.equal(seen.delta, null)
     assert.equal(seen.priced, false)
-    assert.equal(seen.quality, null)
+    assert.equal(seen.affixRatio, null)
+    assert.equal(bandFor(seen, config.walk), null)
   }))
 
 // Window B, the lookback. taken_at is our own clock, the same axis as
@@ -136,9 +153,9 @@ const BANDS = [
 test('a modifier is banded by what it costs against a blank tablet', () => withDb(db => {
   seedCell(db, { rows: BANDS })
   const out = cellSummary(db, common)
-  const band = (h) => out.mods.find(m => m.hash === h).quality
+  const band = (h) => bandFor(out.mods.find(m => m.hash === h), config.walk)
   assert.equal(out.baseline.value, 5, 'third cheapest of the whole cell')
-  assert.equal(band('UNDER'), null, '7 is 1.4x the blank')
+  assert.equal(band('UNDER'), 'low', '7 is 1.4x the blank')
   assert.equal(band('MID'), 'mid', '8 is 1.6x')
   assert.equal(band('HIGH'), 'high', '12 is 2.4x')
 }))
@@ -148,32 +165,53 @@ test('a modifier is banded by what it costs against a blank tablet', () => withD
 test('a modifier exactly on a band is in it', () => withDb(db => {
   seedCell(db, { rows: BANDS })
   const out = cellSummary(db, common)
-  const band = (h) => out.mods.find(m => m.hash === h).quality
+  const band = (h) => bandFor(out.mods.find(m => m.hash === h), config.walk)
   assert.equal(band('ON_MID'), 'mid', 'exactly 1.5x')
   assert.equal(band('ON_HIGH'), 'high', 'exactly 2.0x')
 }))
 
-test('high sorts above mid, and mid above the unbanded', () => withDb(db => {
+// The band is not a sort key any more. Ordering by it once put a modifier at
+// 18x the blank tablet below one at 3x, because the dear one rested on four
+// sellers, and the list then read as though it had been sorted as text.
+test('modifiers sort by price, dearest first', () => withDb(db => {
   seedCell(db, { rows: BANDS })
-  const order = cellSummary(db, common).mods.map(m => m.quality)
-  const rank = { high: 2, mid: 1 }
-  const ranks = order.map(q => rank[q] ?? 0)
-  assert.deepEqual(ranks, [...ranks].sort((a, b) => b - a), order.join(','))
+  const floors = cellSummary(db, common).mods.map(m => m.floor)
+  assert.deepEqual(floors, [...floors].sort((a, b) => b - a), floors.join(','))
 }))
 
-// Two listings from one seller at ten times the blank is not a market price,
-// whatever the ratio says.
-test('a modifier with too thin a sample gets no band', () => withDb(db => {
+// A dear modifier on a thin sample must sort where its PRICE puts it, at the
+// top, not where its evidence would once have buried it.
+test('a thinly evidenced modifier still sorts on its price', () => withDb(db => {
   seedCell(db, {
     rows: [
       row(3, [], 'a'), row(4, [], 'b'), row(5, [], 'c'),
+      row(20, ['SOLID'], 'd'), row(20, ['SOLID'], 'e'), row(20, ['SOLID'], 'f'),
       row(50, ['THIN'], 'z'), row(60, ['THIN'], 'z')
     ]
   })
-  const thin = cellSummary(db, common).mods.find(m => m.hash === 'THIN')
-  assert.ok(thin.floor >= 50, 'it really is dear')
-  assert.equal(thin.quality, null, 'two listings from one seller say nothing')
+  const mods = cellSummary(db, common).mods
+  assert.equal(mods[0].hash, 'THIN', 'dearest first, whatever it rests on')
+  assert.ok(mods.findIndex(m => m.hash === 'SOLID') > 0)
 }))
+
+// THE SPLIT, stated as one test. Two listings from one seller at ten times the
+// blank tablet is thin evidence AND a high price. Those are two facts, and the
+// summary now reports both instead of collapsing them into one null.
+test('thin evidence is reported beside the price, never folded into it',
+  () => withDb(db => {
+    seedCell(db, {
+      rows: [
+        row(3, [], 'a'), row(4, [], 'b'), row(5, [], 'c'),
+        row(50, ['THIN'], 'z'), row(60, ['THIN'], 'z')
+      ]
+    })
+    const thin = cellSummary(db, common).mods.find(m => m.hash === 'THIN')
+    assert.ok(thin.floor >= 50, 'it really is dear')
+    assert.equal(thin.fewSamples, true, 'two listings from one seller')
+    assert.ok(thin.affixRatio >= 10, 'and it really is ten times the blank')
+    assert.equal(bandFor(thin, config.walk), 'high',
+      'the sample size must not reach the band at all')
+  }))
 
 // THE ABSOLUTE COMPANION. A ratio against a junk floor is trivially cleared:
 // on a cell whose blank tablet costs 1 exalted, 2.1x it is 2.1 exalted, and a
@@ -188,7 +226,8 @@ test('a modifier must add real money, not only clear a ratio', () => withDb(db =
     const out = cellSummary(db, {
       ...common, config: { ...config, walk: { ...config.walk, minAdds } }
     })
-    return Object.fromEntries(out.mods.map(m => [m.hash, m.quality]))
+    const walk = { ...config.walk, minAdds }
+    return Object.fromEntries(out.mods.map(m => [m.hash, bandFor(m, walk)]))
   }
   const off = withCompanion(0)
   assert.equal(off.MID, 'mid', '8 against a blank of 5 is 1.6x')
@@ -196,8 +235,8 @@ test('a modifier must add real money, not only clear a ratio', () => withDb(db =
 
   const on = withCompanion(5)
   assert.equal(on.HIGH, 'high', 'it adds 7, which is real money')
-  assert.equal(on.MID, null, 'it adds 3, whatever the ratio says')
-  assert.equal(on.ON_MID, null, 'exactly 1.5x, but only 2.5 exalted')
+  assert.equal(on.MID, 'low', 'it adds 3, whatever the ratio says')
+  assert.equal(on.ON_MID, 'low', 'exactly 1.5x, but only 2.5 exalted')
 }))
 
 test('the companion is measured against the blank tablet, not against zero',
@@ -214,7 +253,9 @@ test('the companion is measured against the blank tablet, not against zero',
       ...common, config: { ...config, walk: { ...config.walk, minAdds: 10 } }
     })
     assert.equal(out.baseline.value, 100)
-    assert.equal(out.mods.find(m => m.hash === 'DEAR').quality, 'high')
+    assert.equal(
+      bandFor(out.mods.find(m => m.hash === 'DEAR'), { ...config.walk, minAdds: 10 }),
+      'high')
   }))
 
 test('a missing companion is a fault, not a silently grey page', () => withDb(db => {

@@ -179,20 +179,37 @@ input[type=search] {
 .mod-adds { color: var(--ink-3); text-align: right; }
 .mod-n { color: var(--ink-3); font-size: 11px; }
 
-/* Three weights, one per band. Colour is spent only where it says something:
-   copper marks the tablets worth listing, and everything else steps down from
-   plain white rather than competing with it.
+/* Four looks, and only three of them are a band. Colour is spent only where it
+   says something: copper marks the tablets worth listing, and everything else
+   steps down from plain white rather than competing with it.
 
-   under 1.5x a blank tablet   dim grey
-   1.5x to 2.1x                plain white
-   2.1x and over               copper, bold */
+   low       under 1.5x a blank tablet   dim grey
+   mid       1.5x to 2.1x                plain white
+   high      2.1x and over               copper, bold
+   unknown   no comparable price at all  dim grey, italic
+
+   `unknown` is NOT the bottom of that scale. It means the modifier is unpriced,
+   or priced in a currency the blank tablet is not, so no ratio exists. It reads
+   differently from `low` on purpose: those two shared one appearance once, and
+   a modifier worth eighteen times a blank tablet was indistinguishable from
+   filler because both came out unbanded. */
 .mod .mod-price { color: var(--ink-3); }
 .mod .mod-label { color: var(--ink-3); }
+.mod.unknown .mod-label { font-style: italic; }
 .mod.mid .mod-price { color: var(--ink); }
 .mod.mid .mod-label { color: var(--ink-2); }
 .mod.high .mod-price { color: var(--accent); font-weight: 600; }
 .mod.high .mod-label { color: var(--ink); }
 .mod.unpriced { opacity: .5; }
+
+/* Evidence, never value. A dotted count says "hover me" without restyling the
+   price, because how many sellers stand behind a number must not be mistaken
+   for a statement about the number. */
+.mod.few-samples .mod-n {
+  color: var(--ink-2);
+  border-bottom: 1px dotted var(--ink-3);
+  cursor: help;
+}
 .tag {
   font-size: 10px;
   text-transform: uppercase;

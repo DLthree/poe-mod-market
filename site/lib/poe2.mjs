@@ -1,12 +1,16 @@
 export const API_BASE = 'https://www.pathofexile.com/api/trade2'
 export const REALM = 'poe2'
-export const LEAGUE_DEFAULT = 'Runes of Aldur'
 
-// Expedition Tablet returned 0 listings on 2026-08-28; it is gone in 0.5.0.
+// Expedition Tablet returned 0 listings on 2026-08-28 and was dropped as gone
+// in 0.5.0. It is back and trading in Forbidden Rites, measured 2026-09-06.
+// Presence in GGG's stat table is NOT the test — implicit.stat_1714888636 was
+// in the cached table the whole time it was untradeable, because that table is
+// historical. Ask the market.
+//
 // Unique tablets price by name, not by modifier, and are out of scope.
 export const TABLET_TYPES = [
-  'Abyss Tablet', 'Breach Tablet', 'Delirium Tablet', 'Irradiated Tablet',
-  'Overseer Tablet', 'Ritual Tablet', 'Temple Tablet'
+  'Abyss Tablet', 'Breach Tablet', 'Delirium Tablet', 'Expedition Tablet',
+  'Irradiated Tablet', 'Overseer Tablet', 'Ritual Tablet', 'Temple Tablet'
 ]
 
 export const RARITIES = ['normal', 'magic', 'rare']
@@ -19,7 +23,8 @@ export const MODIFIED_RARITIES = RARITIES.filter(r => r !== 'normal')
 
 // Every tablet carries one implicit — "Adds Abysses to a Map", and under it the
 // uses it has left. The stat id is per tablet type and does not change with the
-// prefix or suffix: all 340 distinct names in the archive reduce to these seven.
+// prefix or suffix: all 340 distinct names in the pre-0.5.0 archive reduced to
+// seven of these, before Expedition Tablet came back.
 //
 // This is the filter the trade site itself uses for uses remaining, so a `min`
 // on it is how a search says "not part-used". It has to be asked of GGG,
@@ -31,6 +36,7 @@ export const USES_IMPLICIT = {
   'Abyss Tablet': 'implicit.stat_2369421690',
   'Breach Tablet': 'implicit.stat_2219129443',
   'Delirium Tablet': 'implicit.stat_3879011313',
+  'Expedition Tablet': 'implicit.stat_1714888636',
   'Irradiated Tablet': 'implicit.stat_4041853756',
   'Overseer Tablet': 'implicit.stat_3376302538',
   'Ritual Tablet': 'implicit.stat_3166002380',

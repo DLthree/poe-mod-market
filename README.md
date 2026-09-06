@@ -74,21 +74,48 @@ economy file and one regex fragment per modifier. Pick a tablet type, and the mo
 worth money are already ticked; the box at the top is the stash search, under the game's
 250-character limit.
 
-Bands, against the floor of a blank tablet of the same kind:
+### Two measurements, kept apart
+
+Every modifier carries two numbers that answer two different questions, and the whole
+point is that neither one is allowed to speak for the other.
+
+`affixRatio` is what it is **worth**: its floor over the floor of a blank tablet of the
+same type and rarity. `fewSamples` is how much **evidence** stands behind that price:
+true below 12 listings or 5 distinct sellers.
+
+Bands come from `affixRatio` alone, in `lib/bands.mjs`, which the page imports and
+applies itself:
 
 | band | rule | on the page |
 |---|---|---|
 | high | at least 2.1x the blank floor | copper, bold, ticked by default |
 | mid | at least 1.5x | plain white |
+| low | below that, or adds under 10 exalted | dim grey |
+| none | no comparable price at all | dim grey, italic |
 
-Both need at least 12 listings from 5 distinct sellers, **and** the modifier must add at
-least 10 exalted over a blank tablet. Set all of it in `config.json` under `walk`.
+`low` and `none` are different answers. `low` means we measured it and it is not worth
+much. `none` means we cannot say: the modifier is unpriced, or priced in a currency the
+blank tablet is not, so no ratio exists. Set the thresholds in `config.json` under
+`walk`; they are published in the economy file so the page and the build cannot disagree.
 
-That last one is the absolute companion, and it exists because a ratio against a junk
-floor is trivially cleared: where a blank tablet costs 1 exalted, 2.1x it is 2.1 exalted,
-and a modifier "worth twice the tablet" is worth about nothing. It only bites where the
-blank is cheap — it took Irradiated rare from 6 high modifiers to 0 and Overseer magic
-from 24 to 10, and changed nothing on Abyss, Breach, Ritual or Temple.
+**A thin sample never changes a band.** It once did, and that was a real bug: a Delirium
+rare modifier at 18x the blank tablet on four sellers came out identical to filler at
+1.1x on ninety, because both were called unbanded. Early in a league the genuinely rare
+modifiers are precisely the ones with thin evidence, so suppressing them hid the rows
+worth finding. The evidence is now reported beside the price, as a dotted listing count
+with the numbers on hover, and it is yours to judge.
+
+The modifier list sorts by **price, dearest first** — never by band. Prices that cannot
+be compared to the blank tablet sort after the ones that can, and unpriced modifiers last,
+because ranking them on a raw number that means something else is how the list came to
+look alphabetically sorted.
+
+The 10 exalted minimum is the absolute companion, and it exists because a ratio against a
+junk floor is trivially cleared: where a blank tablet costs 1 exalted, 2.1x it is 2.1
+exalted, and a modifier "worth twice the tablet" is worth about nothing. It only bites
+where the blank is cheap — it took Irradiated rare from 6 high modifiers to 0 and Overseer
+magic from 24 to 10, and changed nothing on Abyss, Breach, Ritual or Temple. Falling short
+of it lands a modifier in `low`, because that is a measurement, not an absence of one.
 
 2.1 rather than a round 2.0 because prices cluster on round multiples of the blank floor:
 34 modifiers floored at exactly 2.00x, two dozen of them on one cell.

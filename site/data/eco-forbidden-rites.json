@@ -1,7 +1,13 @@
 {
  "league": "Forbidden Rites",
  "syncedAt": "2026-09-06T07:40:16.209Z",
- "minListings": 12,
+ "walk": {
+  "minListings": 12,
+  "minSellers": 5,
+  "minAdds": 10,
+  "midVsBlank": 1.5,
+  "highVsBlank": 2.1
+ },
  "tradeWindow": "3days",
  "cells": [
   {
@@ -84,6 +90,33 @@
    "typical": 15,
    "listings": 20,
    "sellers": 14
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
   },
   {
    "type": "Irradiated Tablet",
@@ -204,7 +237,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "mid",
+   "affixRatio": 1.5789473684210527,
+   "fewSamples": false,
    "label": "Area contains an additional Abyss"
   },
   {
@@ -216,7 +250,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.105263157894737,
+   "fewSamples": false,
    "label": "Abyss Pits in Area are twice as likely to have Rewards"
   },
   {
@@ -228,7 +263,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -240,7 +276,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -252,7 +289,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -264,7 +302,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -276,7 +315,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Abyssal Monsters have 8-12% increased Effectiveness for each closed Pit, up to 100%"
   },
   {
@@ -288,20 +328,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Abysses spawn 20-30% increased Monsters"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_2306002879",
-   "floor": 20,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Abyss Tablet",
@@ -312,7 +341,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "20-30% increased chance for Desecrated Currency from Abysses in Map"
   },
   {
@@ -324,20 +354,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_243380454",
-   "floor": 20,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 19,
-   "quality": null,
-   "label": "2-3 additional Rare Monsters are spawned from Abysses"
   },
   {
    "type": "Abyss Tablet",
@@ -348,8 +367,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_243380454",
+   "floor": 20,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 19,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
+   "label": "2-3 additional Rare Monsters are spawned from Abysses"
   },
   {
    "type": "Abyss Tablet",
@@ -360,8 +393,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_2306002879",
+   "floor": 20,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Abyss Tablet",
@@ -372,7 +419,8 @@
    "currency": "exalted",
    "listings": 16,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -384,7 +432,8 @@
    "currency": "exalted",
    "listings": 12,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -396,7 +445,8 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1.0526315789473684,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -408,7 +458,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": "mid",
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -420,7 +471,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": "mid",
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -432,8 +484,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "Abysses in Area have 10-20% increased chance to lead to an Abyssal Depths"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3815617979",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 19,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1825943485",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
    "type": "Abyss Tablet",
@@ -444,7 +523,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.25,
+   "fewSamples": false,
    "label": "Abyssal Monsters have 8-12% increased Effectiveness for each closed Pit, up to 100%"
   },
   {
@@ -456,104 +536,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.25,
+   "fewSamples": false,
    "label": "2-3 additional Rare Monsters are spawned from Abysses"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_944630113",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 8,
-   "quality": null,
-   "label": "Abysses spawn 20-30% increased Monsters"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3793155082",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "Map has 25-35% increased number of Rare Monsters"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "5-7% increased Pack Size in Map"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1825943485",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_689816330",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 7,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_57434274",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 7,
-   "quality": null,
-   "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3815617979",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 19,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2789248444",
-   "floor": 25,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 8,
-   "quality": null,
-   "label": "20-30% increased chance for Abyssal monsters in Map to have Abyssal Modifiers"
   },
   {
    "type": "Abyss Tablet",
@@ -564,7 +549,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.25,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -576,8 +562,87 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 11,
-   "quality": null,
+   "affixRatio": 1.25,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3793155082",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "Map has 25-35% increased number of Rare Monsters"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_944630113",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 8,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "Abysses spawn 20-30% increased Monsters"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2789248444",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 8,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "20-30% increased chance for Abyssal monsters in Map to have Abyssal Modifiers"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_689816330",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 7,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_57434274",
+   "floor": 25,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 7,
+   "affixRatio": 1.25,
+   "fewSamples": false,
+   "label": "12-18% increased Experience gain"
   },
   {
    "type": "Abyss Tablet",
@@ -588,20 +653,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1.2,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3873704640",
-   "floor": 23,
-   "adds": 3,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 11,
-   "quality": null,
-   "label": "Map has 30-40% increased Magic Monsters"
   },
   {
    "type": "Abyss Tablet",
@@ -612,8 +666,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.15,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3873704640",
+   "floor": 23,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 11,
+   "affixRatio": 1.15,
+   "fewSamples": false,
+   "label": "Map has 30-40% increased Magic Monsters"
   },
   {
    "type": "Abyss Tablet",
@@ -624,20 +692,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.05,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Abyss Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2777224821",
-   "floor": 20,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 7,
-   "quality": null,
-   "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
    "type": "Abyss Tablet",
@@ -648,7 +705,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "20-30% increased chance for Desecrated Currency from Abysses in Map"
   },
   {
@@ -660,20 +718,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
-   "type": "Breach Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_2017682521",
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2777224821",
    "floor": 20,
-   "adds": 10,
+   "adds": 0,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 20,
-   "quality": "mid",
-   "label": "5-7% increased Pack Size in Map"
+   "sellers": 7,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
    "type": "Breach Tablet",
@@ -684,7 +744,8 @@
    "currency": "exalted",
    "listings": 5,
    "sellers": 5,
-   "quality": null,
+   "affixRatio": 5,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -696,8 +757,22 @@
    "currency": "exalted",
    "listings": 8,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 3,
+   "fewSamples": true,
    "label": "Breaches have 5-15% increased Monster density"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_2017682521",
+   "floor": 20,
+   "adds": 10,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 20,
+   "affixRatio": 2,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Breach Tablet",
@@ -708,7 +783,8 @@
    "currency": "exalted",
    "listings": 6,
    "sellers": 6,
-   "quality": null,
+   "affixRatio": 1.7,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -720,7 +796,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -732,7 +809,8 @@
    "currency": "exalted",
    "listings": 13,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.4,
+   "fewSamples": false,
    "label": "Wombgifts have 10-30% chance to drop one Level higher in Map"
   },
   {
@@ -744,7 +822,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "5-20% increased Effectiveness of Rare Breach Monsters in Map"
   },
   {
@@ -756,7 +835,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.2,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -768,7 +848,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.2,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -780,7 +861,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -792,7 +874,8 @@
    "currency": "exalted",
    "listings": 16,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -804,7 +887,8 @@
    "currency": "exalted",
    "listings": 18,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Unstable Breaches in Map have 20-50% increased chance to contain Vruun, Marshal of Xesht"
   },
   {
@@ -816,7 +900,8 @@
    "currency": "exalted",
    "listings": 12,
    "sellers": 9,
-   "quality": "high",
+   "affixRatio": 6,
+   "fewSamples": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -828,7 +913,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 7,
-   "quality": "mid",
+   "affixRatio": 2,
+   "fewSamples": false,
    "label": "30-60% increased Quantity of Wombgifts found in Map"
   },
   {
@@ -840,7 +926,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.9,
+   "fewSamples": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -852,7 +939,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.8,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -864,92 +952,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.8,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_57434274",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3873704640",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 11,
-   "quality": null,
-   "label": "Map has 30-40% increased Magic Monsters"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2306002879",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 6,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 9,
-   "quality": null,
-   "label": "5-7% increased Pack Size in Map"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_231864447",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 13,
-   "quality": null,
-   "label": "Area contains an additional Rare Chest (2-3)"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1276056105",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "25-35% increased Gold found in this Area (Gold Piles)"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1210760818",
-   "floor": 15,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 9,
-   "quality": null,
-   "label": "Breaches have 5-15% increased Monster density"
   },
   {
    "type": "Breach Tablet",
@@ -960,7 +965,8 @@
    "currency": "exalted",
    "listings": 17,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -972,8 +978,87 @@
    "currency": "exalted",
    "listings": 16,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_231864447",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "Area contains an additional Rare Chest (2-3)"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3873704640",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 11,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "Map has 30-40% increased Magic Monsters"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_57434274",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "12-18% increased Experience gain"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1276056105",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 9,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1210760818",
+   "floor": 15,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 9,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "Breaches have 5-15% increased Monster density"
   },
   {
    "type": "Breach Tablet",
@@ -984,20 +1069,22 @@
    "currency": "exalted",
    "listings": 14,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.5,
+   "fewSamples": false,
    "label": "Area contains an additional Shrine"
   },
   {
    "type": "Breach Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_689816330",
-   "floor": 13,
-   "adds": 3,
+   "statId": "explicit.stat_2306002879",
+   "floor": 15,
+   "adds": 5,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
+   "sellers": 6,
+   "affixRatio": 1.5,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Breach Tablet",
@@ -1008,7 +1095,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "Wombgifts have 10-30% chance to drop one Level higher in Map"
   },
   {
@@ -1020,8 +1108,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Essences"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_689816330",
+   "floor": 13,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.3,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
    "type": "Breach Tablet",
@@ -1032,7 +1134,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -1044,7 +1147,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.3,
+   "fewSamples": false,
    "label": "Unstable Breaches in Map have 20-50% increased chance to contain Vruun, Marshal of Xesht"
   },
   {
@@ -1056,7 +1160,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.1,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -1068,7 +1173,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 1.1,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -1080,7 +1186,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 1.1,
+   "fewSamples": false,
    "label": "5-20% increased Effectiveness of Rare Breach Monsters in Map"
   },
   {
@@ -1092,7 +1199,8 @@
    "currency": "exalted",
    "listings": 3,
    "sellers": 3,
-   "quality": null,
+   "affixRatio": 20,
+   "fewSamples": true,
    "label": "Delirium Fog in Map spawns 12-26% increased MirrorShards"
   },
   {
@@ -1104,20 +1212,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 2.6666666666666665,
+   "fewSamples": false,
    "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_2306002879",
-   "floor": 5,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Delirium Tablet",
@@ -1128,8 +1225,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "Delirium Fog in Area dissipates -30--20% faster"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_2306002879",
+   "floor": 5,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Delirium Tablet",
@@ -1140,7 +1251,8 @@
    "currency": "exalted",
    "listings": 14,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1152,7 +1264,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1164,20 +1277,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_3465791711",
-   "floor": 4,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
    "type": "Delirium Tablet",
@@ -1188,7 +1290,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -1200,7 +1303,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Delirium Fog in Area lasts 6-12 additional seconds before dissipating"
   },
   {
@@ -1212,7 +1316,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
   },
   {
@@ -1224,8 +1329,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_3465791711",
+   "floor": 4,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
+   "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
    "type": "Delirium Tablet",
@@ -1236,7 +1355,8 @@
    "currency": "exalted",
    "listings": 16,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1248,7 +1368,8 @@
    "currency": "exalted",
    "listings": 15,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1260,7 +1381,8 @@
    "currency": "exalted",
    "listings": 13,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
   },
   {
@@ -1272,104 +1394,9 @@
    "currency": null,
    "listings": 0,
    "sellers": 0,
-   "quality": null,
+   "affixRatio": null,
+   "fewSamples": true,
    "label": "Area contains a Summoning Circle"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_358129101",
-   "floor": 30,
-   "adds": 24,
-   "currency": "exalted",
-   "listings": 15,
-   "sellers": 6,
-   "quality": "high",
-   "label": "Area contains 1 additional Azmeri Spirit"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2323782229",
-   "floor": 23,
-   "adds": 17,
-   "currency": "exalted",
-   "listings": 19,
-   "sellers": 11,
-   "quality": "high",
-   "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1825943485",
-   "floor": 22,
-   "adds": 16,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": "high",
-   "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2777224821",
-   "floor": 20,
-   "adds": 14,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 20,
-   "quality": "high",
-   "label": "30-40% increased Quantity of Waystones found in Map"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_4279535856",
-   "floor": 20,
-   "adds": 14,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 14,
-   "quality": "high",
-   "label": "Area has 70-100% increased chance to contain Strongboxes"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3793155082",
-   "floor": 20,
-   "adds": 14,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": "high",
-   "label": "Map has 25-35% increased number of Rare Monsters"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3350944114",
-   "floor": 20,
-   "adds": 14,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": "high",
-   "label": "Delirium Fog in Area dissipates -30--20% faster"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 18,
-   "adds": 12,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": "high",
-   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Delirium Tablet",
@@ -1380,7 +1407,8 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 4,
-   "quality": null,
+   "affixRatio": 18.333333333333332,
+   "fewSamples": true,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -1392,44 +1420,113 @@
    "currency": "exalted",
    "listings": 6,
    "sellers": 2,
-   "quality": null,
+   "affixRatio": 18.333333333333332,
+   "fewSamples": true,
    "label": "Area contains an additional Shrine"
   },
   {
    "type": "Delirium Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_1769611692",
-   "floor": 15,
-   "adds": 9,
+   "statId": "explicit.stat_358129101",
+   "floor": 30,
+   "adds": 24,
    "currency": "exalted",
-   "listings": 20,
-   "sellers": 15,
-   "quality": null,
-   "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
+   "listings": 15,
+   "sellers": 6,
+   "affixRatio": 5,
+   "fewSamples": false,
+   "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Delirium Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_3962960008",
-   "floor": 15,
-   "adds": 9,
+   "statId": "explicit.stat_2323782229",
+   "floor": 23,
+   "adds": 17,
+   "currency": "exalted",
+   "listings": 19,
+   "sellers": 11,
+   "affixRatio": 3.8333333333333335,
+   "fewSamples": false,
+   "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1825943485",
+   "floor": 22,
+   "adds": 16,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 3.6666666666666665,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Essences"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2777224821",
+   "floor": 20,
+   "adds": 14,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 20,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
+   "label": "30-40% increased Quantity of Waystones found in Map"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3793155082",
+   "floor": 20,
+   "adds": 14,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
+   "label": "Map has 25-35% increased number of Rare Monsters"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3350944114",
+   "floor": 20,
+   "adds": 14,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
+   "label": "Delirium Fog in Area dissipates -30--20% faster"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_4279535856",
+   "floor": 20,
+   "adds": 14,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 14,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Strongboxes"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 18,
+   "adds": 12,
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": null,
-   "label": "Delirium Encounters in Area are 15-30% more likely to spawn Unique Bosses"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3873704640",
-   "floor": 15,
-   "adds": 9,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Map has 30-40% increased Magic Monsters"
+   "affixRatio": 3,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Delirium Tablet",
@@ -1440,20 +1537,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 2.5,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_689816330",
-   "floor": 15,
-   "adds": 9,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
    "type": "Delirium Tablet",
@@ -1464,8 +1550,61 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 2.5,
+   "fewSamples": false,
    "label": "15-30% increased Stack size of Simulacrum Splinters found in Area"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3873704640",
+   "floor": 15,
+   "adds": 9,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 2.5,
+   "fewSamples": false,
+   "label": "Map has 30-40% increased Magic Monsters"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_689816330",
+   "floor": 15,
+   "adds": 9,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 2.5,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3962960008",
+   "floor": 15,
+   "adds": 9,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 2.5,
+   "fewSamples": false,
+   "label": "Delirium Encounters in Area are 15-30% more likely to spawn Unique Bosses"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1769611692",
+   "floor": 15,
+   "adds": 9,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 15,
+   "affixRatio": 2.5,
+   "fewSamples": false,
+   "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
   },
   {
    "type": "Delirium Tablet",
@@ -1476,7 +1615,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 2.5,
+   "fewSamples": false,
    "label": "Delirium Fog in Area lasts 6-12 additional seconds before dissipating"
   },
   {
@@ -1488,20 +1628,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 2.5,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_231864447",
-   "floor": 12,
-   "adds": 6,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Delirium Tablet",
@@ -1512,8 +1641,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 2,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_231864447",
+   "floor": 12,
+   "adds": 6,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 2,
+   "fewSamples": false,
+   "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Delirium Tablet",
@@ -1524,20 +1667,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1.8333333333333333,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3815617979",
-   "floor": 10,
-   "adds": 4,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
    "type": "Delirium Tablet",
@@ -1548,7 +1680,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
@@ -1560,7 +1693,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -1572,8 +1706,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "12-18% increased Experience gain"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3815617979",
+   "floor": 10,
+   "adds": 4,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
    "type": "Irradiated Tablet",
@@ -1584,7 +1732,8 @@
    "currency": "exalted",
    "listings": 8,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 2.7777777777777777,
+   "fewSamples": true,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -1596,20 +1745,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_57434274",
-   "floor": 20,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "12-18% increased Experience gain"
   },
   {
    "type": "Irradiated Tablet",
@@ -1620,7 +1758,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1632,7 +1771,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1644,8 +1784,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_57434274",
+   "floor": 20,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "12-18% increased Experience gain"
   },
   {
    "type": "Irradiated Tablet",
@@ -1656,7 +1810,8 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": true,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -1668,7 +1823,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.0555555555555556,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1680,7 +1836,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.0555555555555556,
+   "fewSamples": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1692,7 +1849,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1704,20 +1862,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 0.9444444444444444,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_395808938",
-   "floor": 40,
-   "adds": 17,
-   "currency": "exalted",
-   "listings": 16,
-   "sellers": 14,
-   "quality": "mid",
-   "label": "Area contains an additional Essence"
   },
   {
    "type": "Irradiated Tablet",
@@ -1728,8 +1875,22 @@
    "currency": "exalted",
    "listings": 15,
    "sellers": 15,
-   "quality": "mid",
+   "affixRatio": 1.7391304347826086,
+   "fewSamples": false,
    "label": "Area contains a Summoning Circle"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_395808938",
+   "floor": 40,
+   "adds": 17,
+   "currency": "exalted",
+   "listings": 16,
+   "sellers": 14,
+   "affixRatio": 1.7391304347826086,
+   "fewSamples": false,
+   "label": "Area contains an additional Essence"
   },
   {
    "type": "Irradiated Tablet",
@@ -1740,7 +1901,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.4782608695652173,
+   "fewSamples": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -1752,8 +1914,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.3043478260869565,
+   "fewSamples": false,
    "label": "Map has 1-2 additional random Modifier"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1352729973",
+   "floor": 30,
+   "adds": 7,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.3043478260869565,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
    "type": "Irradiated Tablet",
@@ -1764,7 +1940,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1.3043478260869565,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -1776,20 +1953,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.3043478260869565,
+   "fewSamples": false,
    "label": "Area contains an additional Shrine"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1352729973",
-   "floor": 30,
-   "adds": 7,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
    "type": "Irradiated Tablet",
@@ -1800,7 +1966,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1.2173913043478262,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -1812,32 +1979,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.2173913043478262,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2306002879",
-   "floor": 25,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 25,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Irradiated Tablet",
@@ -1848,20 +1992,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1825943485",
-   "floor": 25,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 10,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
    "type": "Irradiated Tablet",
@@ -1872,8 +2005,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 25,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Irradiated Tablet",
@@ -1884,8 +2031,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 11,
-   "quality": null,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2306002879",
+   "floor": 25,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1825943485",
+   "floor": 25,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 1.0869565217391304,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
    "type": "Irradiated Tablet",
@@ -1896,7 +2070,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.0434782608695652,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -1908,7 +2083,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 0.9565217391304348,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1920,7 +2096,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 0.782608695652174,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -1932,7 +2109,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 0.782608695652174,
+   "fewSamples": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -1944,7 +2122,8 @@
    "currency": "divine",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": null,
+   "fewSamples": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -1956,7 +2135,8 @@
    "currency": "exalted",
    "listings": 15,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.2,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -1968,7 +2148,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
@@ -1980,32 +2161,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_689816330",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_4142653832",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "Map has 15-20% increased Monster Rarity"
   },
   {
    "type": "Overseer Tablet",
@@ -2016,7 +2174,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2028,7 +2187,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
@@ -2040,7 +2200,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2052,7 +2213,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
@@ -2064,7 +2226,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -2076,7 +2239,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -2088,8 +2252,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_689816330",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_4142653832",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Map has 15-20% increased Monster Rarity"
   },
   {
    "type": "Overseer Tablet",
@@ -2100,7 +2291,8 @@
    "currency": "exalted",
    "listings": 17,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -2112,20 +2304,9 @@
    "currency": "exalted",
    "listings": 5,
    "sellers": 5,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": true,
    "label": "Areas with Map Powerful Map Bosses contain an additional Shrine (1-2)"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_358129101",
-   "floor": 20,
-   "adds": 11,
-   "currency": "exalted",
-   "listings": 16,
-   "sellers": 13,
-   "quality": "high",
-   "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Overseer Tablet",
@@ -2136,8 +2317,22 @@
    "currency": "exalted",
    "listings": 9,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 2.7777777777777777,
+   "fewSamples": true,
    "label": "Area contains an additional Shrine"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_358129101",
+   "floor": 20,
+   "adds": 11,
+   "currency": "exalted",
+   "listings": 16,
+   "sellers": 13,
+   "affixRatio": 2.2222222222222223,
+   "fewSamples": false,
+   "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Overseer Tablet",
@@ -2148,7 +2343,8 @@
    "currency": "exalted",
    "listings": 15,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
    "label": "Areas with Powerful Map Bosses contain an additional Essence (1-2)"
   },
   {
@@ -2160,7 +2356,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -2172,7 +2369,8 @@
    "currency": "exalted",
    "listings": 14,
    "sellers": 13,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -2184,7 +2382,8 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": true,
    "label": "Areas with Map Powerful Map Bosses contain an additional Shrine (1-2)"
   },
   {
@@ -2196,44 +2395,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
    "type": "Overseer Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_57434274",
+   "statId": "explicit.stat_267210597",
    "floor": 10,
    "adds": 1,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_4142653832",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "Map has 15-20% increased Monster Rarity"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3873704640",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 11,
-   "quality": null,
-   "label": "Map has 30-40% increased Magic Monsters"
+   "sellers": 16,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
    "type": "Overseer Tablet",
@@ -2244,7 +2421,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -2256,8 +2434,113 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1825943485",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 14,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Essences"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_689816330",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_4255069232",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "35-60% increased Rarity of Items dropped by Map Bosses"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_57434274",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "12-18% increased Experience gain"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_4142653832",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Map has 15-20% increased Monster Rarity"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2306002879",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 12,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3873704640",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 11,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Map has 30-40% increased Magic Monsters"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_231864447",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 11,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Overseer Tablet",
@@ -2268,7 +2551,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
@@ -2280,92 +2564,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1825943485",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 14,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3860150265",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 7,
-   "quality": null,
-   "label": "Map Bosses grant 40-80% increased Experience"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_267210597",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_689816330",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 13,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_231864447",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 11,
-   "quality": null,
-   "label": "Area contains an additional Rare Chest (2-3)"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2306002879",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 12,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_4255069232",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 13,
-   "quality": null,
-   "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
    "type": "Overseer Tablet",
@@ -2376,8 +2577,22 @@
    "currency": "exalted",
    "listings": 14,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area contains an additional Strongbox"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3860150265",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 7,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
    "type": "Overseer Tablet",
@@ -2388,7 +2603,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -2400,7 +2616,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.2,
+   "fewSamples": false,
    "label": "Rerolling Favours at Ritual Altars in Area costs -30--20% increased Tribute"
   },
   {
@@ -2412,7 +2629,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -2424,20 +2642,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Ritual Tablet",
    "rarity": "magic",
-   "statId": "explicit.stat_28208665",
+   "statId": "explicit.stat_231864447",
    "floor": 5,
    "adds": 0,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 14,
-   "quality": null,
-   "label": "Favours Deferred at Ritual Altars in Area reappear 25-40% sooner"
+   "sellers": 19,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Ritual Tablet",
@@ -2448,7 +2668,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -2460,20 +2681,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_1031644647",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Revived Monsters from Ritual Altars in Area have 35-70% increased chance to be Magic"
   },
   {
    "type": "Ritual Tablet",
@@ -2484,32 +2694,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Favours Rerolled at Ritual Altars in Area have 3-6% chance to cost no Tribute"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_4142653832",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Map has 15-20% increased Monster Rarity"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_231864447",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 19,
-   "quality": null,
-   "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Ritual Tablet",
@@ -2520,7 +2707,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2532,20 +2720,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_1276056105",
-   "floor": 5,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
    "type": "Ritual Tablet",
@@ -2556,8 +2733,61 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_1031644647",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Revived Monsters from Ritual Altars in Area have 35-70% increased chance to be Magic"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_4142653832",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Map has 15-20% increased Monster Rarity"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_1276056105",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_28208665",
+   "floor": 5,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 14,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "Favours Deferred at Ritual Altars in Area reappear 25-40% sooner"
   },
   {
    "type": "Ritual Tablet",
@@ -2568,31 +2798,8 @@
    "currency": "exalted",
    "listings": 11,
    "sellers": 11,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3240183538",
-   "floor": 10,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Area contains an additional Strongbox"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1352729973",
-   "floor": 10,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2604,8 +2811,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 2,
+   "fewSamples": false,
    "label": "Area contains an additional Essence"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3240183538",
+   "floor": 10,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 2,
+   "fewSamples": false,
+   "label": "Area contains an additional Strongbox"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1352729973",
+   "floor": 10,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 2,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
    "type": "Ritual Tablet",
@@ -2616,8 +2850,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 2,
+   "fewSamples": false,
    "label": "Area contains an additional Shrine"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_267210597",
+   "floor": 9,
+   "adds": 4,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.8,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 9,
+   "adds": 4,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.8,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Ritual Tablet",
@@ -2628,7 +2889,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 17,
-   "quality": null,
+   "affixRatio": 1.8,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2640,44 +2902,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 12,
-   "quality": null,
+   "affixRatio": 1.8,
+   "fewSamples": false,
    "label": "Favours Rerolled at Ritual Altars in Area have 3-6% chance to cost no Tribute"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_267210597",
-   "floor": 9,
-   "adds": 4,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 9,
-   "adds": 4,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "5-7% increased Pack Size in Map"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2065500219",
-   "floor": 8,
-   "adds": 3,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
    "type": "Ritual Tablet",
@@ -2688,32 +2915,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Revived Monsters from Ritual Altars in Area have 35-70% increased chance to be Magic"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_57434274",
-   "floor": 8,
-   "adds": 3,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3815617979",
-   "floor": 8,
-   "adds": 3,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
    "type": "Ritual Tablet",
@@ -2724,20 +2928,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
    "type": "Ritual Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_1825943485",
+   "statId": "explicit.stat_2065500219",
    "floor": 8,
    "adds": 3,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Essences"
+   "sellers": 18,
+   "affixRatio": 1.6,
+   "fewSamples": false,
+   "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
    "type": "Ritual Tablet",
@@ -2748,7 +2954,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -2760,20 +2967,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Rerolling Favours at Ritual Altars in Area costs -30--20% increased Tribute"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_4142653832",
-   "floor": 8,
-   "adds": 3,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "Map has 15-20% increased Monster Rarity"
   },
   {
    "type": "Ritual Tablet",
@@ -2784,8 +2980,61 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Revived Monsters from Ritual Altars in Area have 25-40% increased chance to be Rare"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_57434274",
+   "floor": 8,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 1.6,
+   "fewSamples": false,
+   "label": "12-18% increased Experience gain"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3815617979",
+   "floor": 8,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1.6,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1825943485",
+   "floor": 8,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1.6,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Essences"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_4142653832",
+   "floor": 8,
+   "adds": 3,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1.6,
+   "fewSamples": false,
+   "label": "Map has 15-20% increased Monster Rarity"
   },
   {
    "type": "Ritual Tablet",
@@ -2796,8 +3045,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.6,
+   "fewSamples": false,
    "label": "Favours Deferred at Ritual Altars in Area reappear 25-40% sooner"
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2306002879",
+   "floor": 7,
+   "adds": 2,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 20,
+   "affixRatio": 1.4,
+   "fewSamples": false,
+   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Ritual Tablet",
@@ -2808,7 +3071,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.4,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -2820,20 +3084,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.4,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
-  },
-  {
-   "type": "Ritual Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2306002879",
-   "floor": 7,
-   "adds": 2,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 20,
-   "quality": null,
-   "label": "8-12% increased Rarity of Items found in Map"
   },
   {
    "type": "Temple Tablet",
@@ -2844,20 +3097,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": "high",
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_3873704640",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 19,
-   "quality": null,
-   "label": "Map has 30-40% increased Magic Monsters"
   },
   {
    "type": "Temple Tablet",
@@ -2868,7 +3110,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -2880,7 +3123,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "10-30% increased Pack Size for Monsters around Vaal Beacons in Map"
   },
   {
@@ -2892,7 +3136,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "25-50% increased chance Vaal Beacons summon additional Monsters in Map"
   },
   {
@@ -2904,8 +3149,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
-   "label": "explicit.stat_3937291366 (10-25)"
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "10-25% chance to add a Vaal Beacon Unique Monster to the Map"
   },
   {
    "type": "Temple Tablet",
@@ -2916,7 +3162,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -2928,7 +3175,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -2940,20 +3188,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_1359775981",
-   "floor": 10,
-   "adds": 1,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 18,
-   "quality": null,
-   "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
   },
   {
    "type": "Temple Tablet",
@@ -2964,8 +3201,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 20,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_3873704640",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 19,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "Map has 30-40% increased Magic Monsters"
   },
   {
    "type": "Temple Tablet",
@@ -2976,8 +3227,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_1359775981",
+   "floor": 10,
+   "adds": 1,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 18,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
+   "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
   },
   {
    "type": "Temple Tablet",
@@ -2988,7 +3253,8 @@
    "currency": "exalted",
    "listings": 18,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "1 extra pack of Monsters around Vaal Beacons in Map"
   },
   {
@@ -3000,7 +3266,8 @@
    "currency": "exalted",
    "listings": 15,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3012,7 +3279,8 @@
    "currency": "exalted",
    "listings": 14,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3024,7 +3292,8 @@
    "currency": "exalted",
    "listings": 11,
    "sellers": 11,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3036,92 +3305,9 @@
    "currency": "exalted",
    "listings": 11,
    "sellers": 11,
-   "quality": null,
+   "affixRatio": 1.1111111111111112,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2514439422",
-   "floor": 50,
-   "adds": 35,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 14,
-   "quality": "high",
-   "label": "30-60% increased chance Vaal Beacon Chests are Rare in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3937291366",
-   "floor": 40,
-   "adds": 25,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": "high",
-   "label": "explicit.stat_3937291366 (10-25)"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2777224821",
-   "floor": 35,
-   "adds": 20,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 13,
-   "quality": "high",
-   "label": "30-40% increased Quantity of Waystones found in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_231864447",
-   "floor": 35,
-   "adds": 20,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": "high",
-   "label": "Area contains an additional Rare Chest (2-3)"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3294218801",
-   "floor": 25,
-   "adds": 10,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 19,
-   "quality": "mid",
-   "label": "1 extra pack of Monsters around Vaal Beacons in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1359775981",
-   "floor": 25,
-   "adds": 10,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": "mid",
-   "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_2017682521",
-   "floor": 25,
-   "adds": 10,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 13,
-   "quality": "mid",
-   "label": "5-7% increased Pack Size in Map"
   },
   {
    "type": "Temple Tablet",
@@ -3132,8 +3318,22 @@
    "currency": "exalted",
    "listings": 9,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 8,
+   "fewSamples": true,
    "label": "Area contains a Summoning Circle"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2514439422",
+   "floor": 50,
+   "adds": 35,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 14,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": false,
+   "label": "30-60% increased chance Vaal Beacon Chests are Rare in Map"
   },
   {
    "type": "Temple Tablet",
@@ -3144,8 +3344,22 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 3.3333333333333335,
+   "fewSamples": true,
    "label": "Area contains 1 additional Azmeri Spirit"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3937291366",
+   "floor": 40,
+   "adds": 25,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 2.6666666666666665,
+   "fewSamples": false,
+   "label": "10-25% chance to add a Vaal Beacon Unique Monster to the Map"
   },
   {
    "type": "Temple Tablet",
@@ -3156,7 +3370,8 @@
    "currency": "exalted",
    "listings": 11,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 2.6666666666666665,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -3168,7 +3383,8 @@
    "currency": "exalted",
    "listings": 8,
    "sellers": 8,
-   "quality": null,
+   "affixRatio": 2.6666666666666665,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3180,8 +3396,35 @@
    "currency": "exalted",
    "listings": 4,
    "sellers": 4,
-   "quality": null,
+   "affixRatio": 2.6666666666666665,
+   "fewSamples": true,
    "label": "Area contains an additional Strongbox"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_231864447",
+   "floor": 35,
+   "adds": 20,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 2.3333333333333335,
+   "fewSamples": false,
+   "label": "Area contains an additional Rare Chest (2-3)"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2777224821",
+   "floor": 35,
+   "adds": 20,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 2.3333333333333335,
+   "fewSamples": false,
+   "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
    "type": "Temple Tablet",
@@ -3192,20 +3435,61 @@
    "currency": "exalted",
    "listings": 7,
    "sellers": 7,
-   "quality": null,
+   "affixRatio": 2,
+   "fewSamples": true,
    "label": "Area contains an additional Essence"
   },
   {
    "type": "Temple Tablet",
    "rarity": "rare",
-   "statId": "explicit.stat_689816330",
+   "statId": "explicit.stat_3294218801",
+   "floor": 25,
+   "adds": 10,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 19,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
+   "label": "1 extra pack of Monsters around Vaal Beacons in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1359775981",
+   "floor": 25,
+   "adds": 10,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
+   "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_2017682521",
+   "floor": 25,
+   "adds": 10,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 1.6666666666666667,
+   "fewSamples": false,
+   "label": "5-7% increased Pack Size in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1276056105",
    "floor": 20,
    "adds": 5,
    "currency": "exalted",
    "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Area has 70-100% increased chance to contain Shrines"
+   "sellers": 20,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
+   "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
    "type": "Temple Tablet",
@@ -3216,8 +3500,35 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 18,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Map has 30-40% increased Magic Monsters"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_689816330",
+   "floor": 20,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
+   "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_4142653832",
+   "floor": 20,
+   "adds": 5,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 17,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
+   "label": "Map has 15-20% increased Monster Rarity"
   },
   {
    "type": "Temple Tablet",
@@ -3228,7 +3539,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 16,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3240,32 +3552,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 15,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": false,
    "label": "12-18% increased Experience gain"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_4142653832",
-   "floor": 20,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 17,
-   "quality": null,
-   "label": "Map has 15-20% increased Monster Rarity"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1276056105",
-   "floor": 20,
-   "adds": 5,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 20,
-   "quality": null,
-   "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
    "type": "Temple Tablet",
@@ -3276,7 +3565,8 @@
    "currency": "exalted",
    "listings": 10,
    "sellers": 9,
-   "quality": null,
+   "affixRatio": 1.3333333333333333,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3288,20 +3578,9 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "Monsters have 10-15% increased Effectiveness"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_890040946",
-   "floor": 15,
-   "adds": 0,
-   "currency": "exalted",
-   "listings": 20,
-   "sellers": 16,
-   "quality": null,
-   "label": "10-30% increased Pack Size for Monsters around Vaal Beacons in Map"
   },
   {
    "type": "Temple Tablet",
@@ -3312,8 +3591,22 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 19,
-   "quality": null,
+   "affixRatio": 1,
+   "fewSamples": false,
    "label": "25-50% increased chance Vaal Beacons summon additional Monsters in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_890040946",
+   "floor": 15,
+   "adds": 0,
+   "currency": "exalted",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 1,
+   "fewSamples": false,
+   "label": "10-30% increased Pack Size for Monsters around Vaal Beacons in Map"
   },
   {
    "type": "Temple Tablet",
@@ -3324,7 +3617,8 @@
    "currency": "exalted",
    "listings": 20,
    "sellers": 14,
-   "quality": null,
+   "affixRatio": 0.8,
+   "fewSamples": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -3336,7 +3630,8 @@
    "currency": "divine",
    "listings": 12,
    "sellers": 10,
-   "quality": null,
+   "affixRatio": null,
+   "fewSamples": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -3348,20 +3643,9 @@
    "currency": "divine",
    "listings": 5,
    "sellers": 4,
-   "quality": null,
+   "affixRatio": null,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1468737867",
-   "floor": 2,
-   "adds": null,
-   "currency": "divine",
-   "listings": 3,
-   "sellers": 2,
-   "quality": null,
-   "label": "Area contains an additional Shrine"
   },
   {
    "type": "Temple Tablet",
@@ -3372,8 +3656,22 @@
    "currency": "divine",
    "listings": 3,
    "sellers": 3,
-   "quality": null,
+   "affixRatio": null,
+   "fewSamples": true,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1468737867",
+   "floor": 2,
+   "adds": null,
+   "currency": "divine",
+   "listings": 3,
+   "sellers": 2,
+   "affixRatio": null,
+   "fewSamples": true,
+   "label": "Area contains an additional Shrine"
   }
  ]
 }

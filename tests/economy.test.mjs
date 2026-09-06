@@ -1,7 +1,14 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { economyFile, economyPath } from '../lib/economy.mjs'
+import { TABLET_TYPES, RARITIES } from '../lib/poe2.mjs'
+import { bandOf } from '../lib/bands.mjs'
 import { withDb, seedCell } from './helpers.mjs'
+
+// Derived, never a literal: the claim is "one line per type per rarity", which
+// is a relationship. Writing the product as a number made this test fail for
+// the right reason but the wrong cause the day Expedition Tablet came back.
+const EVERY_CELL = TABLET_TYPES.length * RARITIES.length
 
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
@@ -48,7 +55,7 @@ test('rarity is emitted lower case even though the database stores it capitalise
 test('every type and rarity gets a line, so a gap reads as a gap', () => withDb(db => {
   seed(db, SAMPLE)
   const out = economyFile(db, { ...opts })
-  assert.equal(out.cells.length, 21, 'seven types times three rarities')
+  assert.equal(out.cells.length, EVERY_CELL, 'every tablet type times every rarity')
   const empty = out.cells.find(c => c.type === 'Abyss Tablet' && c.rarity === 'normal')
   assert.equal(empty.floor, null)
   assert.equal(empty.listings, 0)
@@ -66,7 +73,10 @@ test('a modifier line carries its own floor and what it adds', () => withDb(db =
   assert.equal(good.currency, 'exalted')
   assert.equal(good.listings, 4)
   assert.equal(good.sellers, 4)
-  assert.equal(good.quality, 'high')
+  assert.equal(good.affixRatio, 10, '50 over a blank tablet at 5')
+  assert.equal(good.fewSamples, false)
+  // The published shape is exactly what bandOf takes, with no adapting.
+  assert.equal(bandOf(good, out.walk), 'high')
 }))
 
 test('syncedAt is the newest of several seeded observations', () => withDb(db => {
@@ -76,11 +86,17 @@ test('syncedAt is the newest of several seeded observations', () => withDb(db =>
   assert.equal(out.syncedAt, '2026-08-29T12:30:00Z')
 }))
 
-test('minListings is carried so the page need not hold our config', () => withDb(db => {
-  seed(db, SAMPLE)
-  const out = economyFile(db, { ...opts })
-  assert.equal(out.minListings, 3)
-}))
+// The page paints the colours now, so it needs every number the rule uses. A
+// missing one would not throw in the browser, it would compare against
+// undefined, come out false, and quietly paint the whole list one colour.
+test('the walk thresholds are carried so the page need not hold our config',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    const out = economyFile(db, { ...opts })
+    assert.deepEqual(out.walk, {
+      minListings: 3, minSellers: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2
+    })
+  }))
 
 test('tradeWindow is carried, from config, so a trade link matches our slice', () => withDb(db => {
   seed(db, SAMPLE)
@@ -139,7 +155,8 @@ test('every cell line carries the numbers its bands can be read against',
     assert.ok(out.cells.every(c => 'typical' in c), 'including the empty ones')
     const cell = out.cells.find(c => c.type === 'Breach Tablet' && c.rarity === 'rare')
     assert.equal(typeof cell.typical, 'number')
-    const banded = out.mods.filter(m => m.rarity === 'rare' && m.quality)
+    const banded = out.mods.filter(m =>
+      m.rarity === 'rare' && ['mid', 'high'].includes(bandOf(m, out.walk)))
     assert.ok(banded.every(m => m.floor >= 1.5 * cell.floor),
       'nothing is banded below the blank tablet it was judged against')
   }))

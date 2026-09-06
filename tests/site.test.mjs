@@ -6,6 +6,7 @@ import { join } from 'node:path'
 import { openDb } from '../lib/db.mjs'
 import { cacheDir } from '../lib/paths.mjs'
 import { slug, PATHS, leaguesFile } from '../lib/site.mjs'
+import { bandOf } from '../lib/bands.mjs'
 import { buildSite } from '../steps/build-site.mjs'
 import { seedCell } from './helpers.mjs'
 
@@ -81,7 +82,7 @@ const withBuild = async (t, fn) => {
 // published page 404s while the local server still works.
 test('the build writes every file the page asks for', (t) => withBuild(t, ({ out }) => {
   for (const f of ['index.html', 'app.js', 'style.css', '.nojekyll',
-                   'lib/regex-keys.mjs', 'lib/poe2.mjs', 'lib/trade-url.mjs',
+                   'lib/regex-keys.mjs', 'lib/poe2.mjs', 'lib/trade-url.mjs', 'lib/bands.mjs',
                    PATHS.leagues, PATHS.economy('L'), PATHS.fragments('L')]) {
     assert.ok(existsSync(join(out, f)), `missing ${f}`)
   }
@@ -118,7 +119,7 @@ test('the built economy file carries the bands the page paints', (t) =>
     const eco = JSON.parse(readFileSync(join(out, PATHS.economy('L')), 'utf8'))
     assert.equal(eco.league, 'L')
     const good = eco.mods.find(m => m.statId === 'GOOD')
-    assert.equal(good.quality, 'high', '50 against a blank tablet at 5')
+    assert.equal(bandOf(good, eco.walk), 'high', '50 against a blank tablet at 5')
     const frags = JSON.parse(readFileSync(join(out, PATHS.fragments('L')), 'utf8'))
     assert.ok(Object.keys(frags).length > 0, 'a fragment per modifier')
   }))

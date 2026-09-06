@@ -33,7 +33,7 @@ No network call. The data comes from the archive a sweep already collected.`
 // The page loads these three from /lib/ and nothing else from it. A whitelist
 // rather than a copy of the directory: everything else in lib/ reads a database
 // and has no business in a browser.
-const BROWSER_MODULES = ['regex-keys.mjs', 'poe2.mjs', 'trade-url.mjs']
+const BROWSER_MODULES = ['regex-keys.mjs', 'poe2.mjs', 'trade-url.mjs', 'bands.mjs']
 
 const write = (dir, path, body) => {
   const full = join(dir, path)

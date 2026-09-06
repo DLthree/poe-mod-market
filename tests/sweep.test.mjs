@@ -95,9 +95,14 @@ test('the uses filter does not take the slot the modifier search uses', () => {
   assert.equal(q.stats.length, 2)
 })
 
+// The unknown type must be one the game cannot supply. This test named
+// Expedition Tablet while that tablet was untradeable, and quietly stopped
+// testing anything the day it came back and was added to USES_IMPLICIT.
 test('a tablet type with no known uses implicit fails loudly', () => {
-  assert.throws(() => poolQuery('Expedition Tablet', 'rare'),
-    /No uses implicit known for "Expedition Tablet"/)
+  const unknown = 'Nonexistent Tablet'
+  assert.equal(USES_IMPLICIT[unknown], undefined, 'the fixture must stay unknown')
+  assert.throws(() => poolQuery(unknown, 'rare'),
+    /No uses implicit known for "Nonexistent Tablet"/)
 })
 
 test('every search sorts cheapest first, because the statistic is a floor',

@@ -13,6 +13,13 @@
 import { tabletRegex } from './lib/regex-keys.mjs'
 import { TABLET_TYPES, RARITIES } from './lib/poe2.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
+import { bandOf } from './lib/bands.mjs'
+
+// The colour rule, applied here rather than baked into the file, so the same
+// module decides it for the page and for the tests. `null` back from bandOf
+// means the modifier could not be compared at all, which is a different row
+// from one that simply is not worth much.
+const bandFor = (m) => bandOf(m, state.eco.walk)
 
 const $ = (s) => document.querySelector(s)
 const el = (tag, cls, text) => {
@@ -150,7 +157,7 @@ function renderGrid () {
     row.append(el('span', 'grid-label', type.replace(' Tablet', '')))
     for (const rarity of COLUMNS) {
       const cell = cellOf(type, rarity)
-      const thin = cell && cell.listings > 0 && cell.listings < state.eco.minListings
+      const thin = cell && cell.listings > 0 && cell.listings < state.eco.walk.minListings
       const btn = el('button', 'square')
       btn.type = 'button'
       if (!cell || cell.floor === null) {
@@ -173,15 +180,20 @@ function renderGrid () {
   }
 }
 
-// Choosing a kind ticks the high quality modifiers on it, so you land on a
-// working search and untick what you disagree with, rather than starting from
-// nothing. Mid quality is shown but not ticked: on the dear cells it is most of
-// the list, and a filter that keeps most of the list is not a filter.
+// Choosing a kind ticks the high band on it, so you land on a working search
+// and untick what you disagree with, rather than starting from nothing. Mid is
+// shown but not ticked: on the dear cells it is most of the list, and a filter
+// that keeps most of the list is not a filter.
+//
+// Thin evidence does NOT hold a modifier back from being ticked. Early in a
+// league the genuinely rare modifiers are the dear ones AND the ones few people
+// are selling, and those are the rows worth putting in a stash search. The row
+// still shows what it is standing on, so an unconvincing one can be unticked.
 function select (type, rarity) {
   state.type = type
   state.rarity = rarity
   state.ticked = new Set(
-    modsOf(type, rarity).filter(m => m.quality === 'high').map(m => m.statId))
+    modsOf(type, rarity).filter(m => bandFor(m) === 'high').map(m => m.statId))
   state.search = ''
   $('#search').value = ''
   renderGrid()
@@ -213,7 +225,12 @@ function render () {
   const rows = all.filter(m => !needle || m.label.toLowerCase().includes(needle))
 
   for (const m of rows) {
-    const cls = 'mod' + (m.quality ? ` ${m.quality}` : '') + (m.floor === null ? ' unpriced' : '')
+    // `unknown` is a class of its own rather than the absence of one. A row we
+    // cannot price and a row that is merely cheap used to look identical, which
+    // is the confusion this whole split exists to remove.
+    const band = bandFor(m)
+    const cls = 'mod ' + (band ?? 'unknown') +
+      (m.fewSamples ? ' few-samples' : '') + (m.floor === null ? ' unpriced' : '')
     const row = el('label', cls)
     const box = el('input')
     box.type = 'checkbox'
@@ -229,9 +246,18 @@ function render () {
     row.append(el('span', 'mod-adds', m.adds === null || m.adds === undefined
       ? '—'
       : `${m.adds > 0 ? '+' : ''}${Math.round(m.adds)}`))
-    // Why the row is coloured, in the one place that does not add a line to the
-    // page: what it costs against a blank tablet of this kind.
-    if (m.quality) row.title = `${(m.floor / cell.floor).toFixed(2)}x a blank tablet`
+    // Why the row is coloured, and separately what it is standing on, in the
+    // one place that does not add a line to the page. The two are stated apart
+    // because they are different facts: a modifier can be worth a great deal on
+    // very little evidence, and reading the price without the sample behind it
+    // is how a two-seller asking price gets mistaken for a market.
+    const why = []
+    if (m.affixRatio !== null) why.push(`${m.affixRatio.toFixed(2)}x a blank tablet`)
+    if (m.fewSamples) {
+      why.push(`only ${m.listings} listings from ${m.sellers} sellers — ` +
+        `under ${state.eco.walk.minListings}/${state.eco.walk.minSellers}, so the price is thinly evidenced`)
+    }
+    if (why.length) row.title = why.join('\n')
     row.append(el('span', 'mod-label', m.label))
     row.append(el('span', 'mod-n', `${m.listings}/${m.sellers}`))
     if (!state.fragments[m.statId]) row.append(el('span', 'tag', 'no fragment'))

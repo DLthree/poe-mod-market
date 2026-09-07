@@ -74,6 +74,10 @@ economy file and one regex fragment per modifier. Pick a tablet type, and the mo
 worth money are already ticked; the box at the top is the stash search, under the game's
 250-character limit.
 
+The trade link asks for **any one** of the ticked modifiers, not all of them. A tablet
+carrying every modifier you ticked usually does not exist, and it is not what any price
+here measured: each price is a single-modifier search, so the link is their union.
+
 ### Two measurements, kept apart
 
 Every modifier carries two numbers that answer two different questions, and the whole

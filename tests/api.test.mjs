@@ -238,8 +238,9 @@ test('the trade link pins uses remaining, as the sweep does', () => {
 })
 
 // The real assertion is not the shape above but the agreement: the link has to
-// ask GGG the question the price answers. Comparing against the sweep's own
-// query is what keeps them together when either side changes.
+// ask GGG for the same ITEM the price answers for. Comparing against the
+// sweep's own query is what keeps them together when either side changes. The
+// modifier group is excluded on purpose and has its own test below.
 test('the link asks for the same item the sweep priced', () => {
   const { url } = tradeUrl({
     league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
@@ -247,11 +248,36 @@ test('the link asks for the same item the sweep priced', () => {
   })
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
   const swept = affixQuery('Breach Tablet', 'a', '3days', 'Rare')
-  assert.deepEqual(q.query.stats, swept.stats)
+  assert.deepEqual(q.query.stats.slice(1), swept.stats.slice(1))
   assert.equal(q.query.status.option, swept.status.option)
+  assert.equal(q.query.type, swept.type)
   assert.equal(
     q.query.filters.trade_filters.filters.price.option,
     swept.filters.trade_filters.filters.price.option)
+})
+
+// Ticking three modifiers means "show me the tablets worth picking up", not
+// "show me one tablet carrying all three". The second search is usually empty,
+// and it is not what any price on the page measured: each price is a
+// single-modifier search, so the link is their union.
+test('several ticked modifiers make a 1-of search, not an all-of one', () => {
+  const { url } = tradeUrl({
+    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a', 'b', 'c']
+  })
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  assert.deepEqual(q.query.stats[0], {
+    type: 'count',
+    filters: [{ id: 'a' }, { id: 'b' }, { id: 'c' }],
+    value: { min: 1 }
+  })
+})
+
+// A group with no filters and a minimum of one asks for a modifier that is not
+// there. The link with nothing ticked has to stay the whole cell.
+test('nothing ticked leaves the modifier group empty and unconstrained', () => {
+  const { url } = tradeUrl({ league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare' })
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  assert.deepEqual(q.query.stats[0], { type: 'and', filters: [] })
 })
 
 // A tablet type nobody has recorded a uses implicit for still deserves a link,

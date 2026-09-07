@@ -3,6 +3,8 @@ import assert from 'node:assert/strict'
 import { meta, mods, price } from '../lib/api.mjs'
 import { tradeUrl } from '../lib/trade-url.mjs'
 import { bandOf } from '../lib/bands.mjs'
+import { affixQuery } from '../lib/sweep.mjs'
+import { USES_IMPLICIT, MIN_USES } from '../lib/poe2.mjs'
 import { withDb, seedCell, seedQuestion } from './helpers.mjs'
 
 // The band is derived, not stored. `delta` is what the published file calls
@@ -215,6 +217,55 @@ test('the trade link carries the market, currency and modifiers', () => {
   assert.deepEqual(q.query.stats[0].filters, [{ id: 'a' }, { id: 'b' }])
   assert.deepEqual(q.sort, { price: 'asc' })
   assert.ok(url.startsWith('https://www.pathofexile.com/trade2/search/poe2/Runes%20of%20Aldur?q='))
+})
+
+// The prices on the page are prices of FULL tablets, because every collection
+// search pins the uses implicit. A link without that filter opens a search
+// whose cheap end is part-used tablets, and it shipped that way: the first
+// listing a person saw was not the listing the floor came from.
+test('the trade link pins uses remaining, as the sweep does', () => {
+  const { url, exact } = tradeUrl({
+    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a']
+  })
+  assert.equal(exact, true)
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  assert.deepEqual(q.query.stats[1], {
+    type: 'and',
+    filters: [{
+      id: USES_IMPLICIT['Breach Tablet'], value: { min: MIN_USES }, disabled: false
+    }]
+  })
+})
+
+// The real assertion is not the shape above but the agreement: the link has to
+// ask GGG the question the price answers. Comparing against the sweep's own
+// query is what keeps them together when either side changes.
+test('the link asks for the same item the sweep priced', () => {
+  const { url } = tradeUrl({
+    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
+    tradeWindow: '3days'
+  })
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  const swept = affixQuery('Breach Tablet', 'a', '3days', 'Rare')
+  assert.deepEqual(q.query.stats, swept.stats)
+  assert.equal(q.query.status.option, swept.status.option)
+  assert.equal(
+    q.query.filters.trade_filters.filters.price.option,
+    swept.filters.trade_filters.filters.price.option)
+})
+
+// A tablet type nobody has recorded a uses implicit for still deserves a link,
+// but it must not claim to be the search the prices came from.
+test('a type with no known uses implicit gives a link that admits it is not exact', () => {
+  const { url, exact, reason } = tradeUrl({
+    league: 'Runes of Aldur', type: 'Nonexistent Tablet', rarity: 'Rare', mods: ['a']
+  })
+  assert.equal(USES_IMPLICIT['Nonexistent Tablet'], undefined, 'the fixture must stay unknown')
+  assert.ok(url, 'a search at the wrong depth still beats no search')
+  assert.equal(exact, false)
+  assert.match(reason, /part-used/)
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  assert.equal(q.query.stats.length, 1, 'no half-built uses group carrying an undefined id')
 })
 
 // A link to the wrong league is worse than no link; the merc tool says so too.

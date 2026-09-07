@@ -170,7 +170,8 @@ Each setting cost a measurement:
   below one divine, and thousands of tablets sit at exactly one divine.
 - **A full tablet only.** Every tablet carries an implicit — "Adds Abysses to a Map" —
   with its uses remaining underneath. The stat id is per tablet type (`USES_IMPLICIT` in
-  `lib/poe2.mjs`) and every search pins it at `min: 10`. It has to be asked of GGG: a
+  `lib/poe2.mjs`) and every search pins it at `min: 10` — as does the trade link the page
+  hands you, so it opens the same market the price came from. It has to be asked of GGG: a
   fetched item reports `magnitudes: {min: 10, max: 10}` whatever it has left, and the real
   count is only in the printed line.
 - **No `collapse`.** It folds a seller's duplicate listings server-side, discarding data

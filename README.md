@@ -27,7 +27,9 @@ question from those rows alone. Merging pools priced things wrongly in both dire
 ## Running it
 
 ```
-node cli.mjs update                EVERY cell, then rebuild   (~1 hour, ~390 searches)
+node cli.mjs update                EVERY cell, then rebuild  (~2 hours, ~460 searches)
+node cli.mjs update --quick        baselines + the modifiers already worth 1.5x
+                                                             (~35 min, ~135 searches)
 node cli.mjs update --pools-only   only the type x rarity baselines        (~2 min)
 node cli.mjs serve                 the read-only web view, port 8787
 node cli.mjs audit                 check stored rows against what GGG sent
@@ -52,6 +54,25 @@ node steps/collect.mjs --full --i-mean-it --rarities magic    one rarity  (181 s
 Use `--rarities` when only part of the data is stale: re-asking about rares that are a few
 hours old spends 200 searches to learn what you already know. After collecting this way,
 rebuild the derived table with `node steps/build-mod-table.mjs`.
+
+### The quick pass
+
+`node cli.mjs update --quick` re-asks every baseline and only those modifiers the last
+pass already measured at `quick.minRatio` or better. On Forbidden Rites that is 24 pool
+searches plus 111 modifier searches, about a sixth of a full pass.
+
+**It refreshes; it cannot discover.** A modifier that was cheap yesterday and is dear
+today is not in the selection, so it keeps its old floor until a full pass. One nobody has
+ever asked about is invisible to it, because it has no ratio to compare. That is the whole
+trade, and `tests/refresh.test.mjs` pins it as a test rather than a footnote.
+
+What keeps the published numbers honest is that **every baseline is re-asked in full**.
+The floors above them are then at most `lookbackHours` old, which is the same bound that
+already applies after `--rarities` or any other partial pass — phase 2 reads the newest
+snapshot of each question inside that window and nothing older.
+
+The threshold is 1.5 rather than the 2.1 high band on purpose. The modifiers worth
+watching are the ones near the line, not the ones already over it.
 
 **The database is not in this repo.** It goes to `%LOCALAPPDATA%\poe2-tablet-price\` on
 Windows, or the equivalent under `XDG_DATA_HOME`. Override with `--data` or

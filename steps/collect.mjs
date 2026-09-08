@@ -14,6 +14,7 @@ import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
 import { sweepPools, sweepAffixes, affixesFor } from '../lib/sweep.mjs'
+import { quickAffixes } from '../lib/refresh.mjs'
 import { checkAge, medianAgeHours } from '../lib/agecheck.mjs'
 import { readListings } from '../lib/pools.mjs'
 
@@ -40,7 +41,21 @@ if (full && !has('i-mean-it')) {
 
 const testSet = config.testSet
 const types = full ? TABLET_TYPES : testSet.types
-const affixes = full ? null : testSet.affixes.map(a => a.hash)
+
+// A quick pass re-asks only the modifiers the LAST pass measured at this ratio
+// or better. It refreshes; it cannot discover. See lib/refresh.mjs.
+const minRatio = flag('min-ratio', null)
+if (minRatio !== null && !full) {
+  console.error(
+    '--min-ratio narrows a full pass and means nothing without --full: the test ' +
+    'set is ten named modifiers, not a measured one. Nothing has run.')
+  process.exit(2)
+}
+if (minRatio !== null && !(Number(minRatio) > 0)) {
+  console.error(`--min-ratio must be a positive number, got ${JSON.stringify(minRatio)}. ` +
+    'Nothing has run.')
+  process.exit(2)
+}
 
 // `--rarities magic` narrows a pass to one rarity. It exists because a sweep
 // costs an hour of allowance that cannot be bought back: when the rare data is
@@ -57,8 +72,11 @@ if (unknown.length) {
 }
 
 console.log(full
-  ? `FULL PASS: ${types.length} types x ${rarities.join('/')}`
-  : `test set: ${types.join(', ')} x ${rarities.join('/')}, ${affixes.length} modifiers`)
+  ? (minRatio === null
+      ? `FULL PASS: ${types.length} types x ${rarities.join('/')}`
+      : `QUICK PASS: every baseline, plus the modifiers last measured at ${minRatio}x or better`)
+  : `test set: ${types.join(', ')} x ${rarities.join('/')}, ` +
+    `${testSet.affixes.length} modifiers`)
 
 const secrets = JSON.parse(readFileSync(here('../secrets.json'), 'utf8'))
 const db = openDb(dbPath(league, dataOverride))
@@ -88,6 +106,31 @@ const client = new TradeClient({
 const onCell = (c) => { cell = c; if (activeBar) activeBar.tick(c) }
 
 const index = await loadIndex({ client, cacheDir: cacheDir(dataOverride) })
+
+// The quick plan is built BEFORE loop 1, from the ratios the last pass left
+// behind. Building it after would measure against baselines this pass has just
+// refreshed, which is a different question, and it would already have spent the
+// pool searches by the time it discovered it had nothing to ask about.
+const quickPlan = minRatio === null ? null : new Map()
+if (quickPlan) {
+  for (const type of types) {
+    for (const rarity of rarities.filter(r => MODIFIED_RARITIES.includes(r))) {
+      quickPlan.set(`${type}|${rarity}`, quickAffixes(db, {
+        league, type, rarity, minRatio, lookbackHours: config.lookbackHours, config
+      }))
+    }
+  }
+  const total = [...quickPlan.values()].reduce((n, h) => n + h.length, 0)
+  if (total === 0) {
+    console.error(
+      `No modifier in this league has ever been measured at ${minRatio}x or better, ` +
+      'so a quick pass would collect baselines and nothing else.\n' +
+      'Run a full pass first: node cli.mjs update. Nothing has run.')
+    db.close()
+    process.exit(2)
+  }
+}
+
 const started = Date.now()
 let out = { searches: 0, fetches: 0, listings: 0 }
 const add = (r) => {
@@ -114,18 +157,25 @@ if (only !== 'pools') {
   // magic at all, so 91 of 297 modifier lines carried no floor. Normal is
   // skipped: a normal tablet carries no modifier, so there is no question.
   console.log(`\nloop 2 — one search per modifier, on ${rarities.join('/')}`)
+
+  // One decision, made once. The plan below is printed, counted for the bar and
+  // then swept, so what the run promises and what it spends cannot disagree.
+  const testSetHashes = full ? null : testSet.affixes.map(a => a.hash)
+  const chooseAffixes = (type, rarity) =>
+    quickPlan?.get(`${type}|${rarity}`) ?? testSetHashes ?? affixesFor(db, type, rarity)
+
   let affixTotal = 0
   for (const type of types) {
     // The same rarity rule sweepAffixes applies, or the plan and the progress
     // bar promise searches that will never run.
     for (const rarity of rarities.filter(r => MODIFIED_RARITIES.includes(r))) {
-      const hashes = affixes || affixesFor(db, type, rarity)
+      const hashes = chooseAffixes(type, rarity)
       if (hashes.length) console.log(`  ${type} ${rarity}: ${hashes.length} modifiers`)
       affixTotal += hashes.length
     }
   }
   activeBar = useBar ? createProgress({ label: 'collecting', total: affixTotal }) : null
-  add(await sweepAffixes({ client, db, index, league, types, rarities, perCell, affixes,
+  add(await sweepAffixes({ client, db, index, league, types, rarities, perCell, chooseAffixes,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }

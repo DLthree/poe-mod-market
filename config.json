@@ -20,6 +20,10 @@
   "ageCheck": {
     "factor": 10
   },
+  "_quick": "`node cli.mjs update --quick` re-asks only the modifiers the LAST pass already measured at minRatio or better, plus every baseline. It cannot discover a modifier that has become valuable since, so it is a refresh and never a replacement for a full pass. 1.5 rather than the 2.1 high band on purpose: the modifiers worth watching are the ones near the line, not the ones already over it.",
+  "quick": {
+    "minRatio": 1.5
+  },
   "_testSet": "One tablet type and ten modifiers, so the walk can be iterated without spending a day's rate allowance. Run with `--test-set`. High-value, mid and filler modifiers are all present on purpose: a walk that cannot separate them is not working.",
   "testSet": {
     "types": [

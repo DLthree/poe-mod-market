@@ -161,9 +161,21 @@ test('an explicit affix list overrides what was collected', async () => withDb(a
   const client = archivingClient(db)
   const seen = []
   await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'], perCell: 3,
-    rarities: ['rare'], affixes: ['explicit.stat_9'], onCell: (c) => seen.push(c) })
+    rarities: ['rare'], chooseAffixes: () => ['explicit.stat_9'],
+    onCell: (c) => seen.push(c) })
   assert.deepEqual(seen, ['Breach Tablet|rare|explicit.stat_9'])
 }))
+
+// How many searches a pass costs used to be decidable by forgetting: leave the
+// list off and it swept the entire vocabulary. The caller says, or nothing runs.
+test('a sweep with no chooser refuses to guess how much to spend',
+  async () => withDb(async db => {
+    const client = archivingClient(db)
+    await assert.rejects(
+      () => sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'],
+        rarities: ['rare'], perCell: 3 }),
+      /chooseAffixes/)
+  }))
 
 // THE VOCABULARY BUG THIS SET OF TESTS EXISTS FOR.
 //
@@ -235,7 +247,8 @@ test('a magic affix sweep records magic snapshots', async () => withDb(async db 
   const client = await seedByRarity(db)
   const seen = []
   await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'], perCell: 3,
-    rarities: ['magic', 'rare'], onCell: (c) => seen.push(c) })
+    rarities: ['magic', 'rare'], chooseAffixes: (t, r) => affixesFor(db, t, r),
+    onCell: (c) => seen.push(c) })
 
   // node:sqlite returns null-prototype rows, and deepEqual compares prototypes.
   const rows = db.prepare(
@@ -258,12 +271,13 @@ test('a normal tablet costs no searches, even with an explicit affix list',
   async () => withDb(async db => {
     const client = await seedByRarity(db)
     const fromVocabulary = await sweepAffixes({ client, db, index, league: 'L',
-      types: ['Breach Tablet'], perCell: 3, rarities: ['normal'] })
+      types: ['Breach Tablet'], perCell: 3, rarities: ['normal'],
+      chooseAffixes: (t, r) => affixesFor(db, t, r) })
     assert.equal(fromVocabulary.searches, 0)
 
     const explicit = await sweepAffixes({ client, db, index, league: 'L',
       types: ['Breach Tablet'], perCell: 3, rarities: ['normal'],
-      affixes: ['explicit.stat_1', 'explicit.stat_2'] })
+      chooseAffixes: () => ['explicit.stat_1', 'explicit.stat_2'] })
     assert.equal(explicit.searches, 0)
   }))
 
@@ -326,7 +340,7 @@ test('a baseline snapshot asks about no modifier', async () => withDb(async db =
 test('an affix snapshot records the modifier it asked about', async () => withDb(async db => {
   const client = archivingClient(db)
   await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'],
-    rarities: ['rare'], perCell: 3, affixes: ['explicit.stat_9'] })
+    rarities: ['rare'], perCell: 3, chooseAffixes: () => ['explicit.stat_9'] })
   const [row] = snapshots(db)
   assert.equal(row.stat_id, 'explicit.stat_9')
   assert.equal(row.rarity, 'Rare')

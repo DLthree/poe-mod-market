@@ -25,12 +25,14 @@ const OVERALL_USAGE = `Tablet price CLI for PoE2 Precursor Tablets.
 
 Run \`node cli.mjs <command> --help\` for a command's own flags.`
 
-const UPDATE_BOOLEAN = ['help', 'offline', 'pools-only', 'dry-run', 'replay']
+const UPDATE_BOOLEAN = ['help', 'offline', 'pools-only', 'dry-run', 'replay', 'quick']
 const UPDATE_VALUED = ['league', 'data']
 
 const UPDATE_USAGE = `Refresh everything for one league.
 
-  node cli.mjs update                collect every cell, rebuild the table  (~30 min)
+  node cli.mjs update                collect every cell, rebuild the table  (~2 hours)
+  node cli.mjs update --quick        baselines, plus the modifiers already
+                                     worth ${config.quick?.minRatio ?? '?'}x or more                  (~35 min)
   node cli.mjs update --pools-only   only the type x rarity baselines       (~2 min)
   node cli.mjs update --offline      no collection: replay and rebuild
   node cli.mjs update --dry-run      print the plan and stop
@@ -38,6 +40,13 @@ const UPDATE_USAGE = `Refresh everything for one league.
 
   --league <name>   default ${config.league}
   --data <dir>      override the data directory
+
+--quick REFRESHES, it does not discover. It re-asks the modifiers the last pass
+already measured at ${config.quick?.minRatio ?? '?'}x the blank tablet or better, so a modifier that has
+become valuable since keeps its old floor until a full pass. Every baseline is
+re-asked in full, which is what keeps the published ratios honest: the floors
+above them are then at most lookbackHours old, exactly as after --rarities.
+Set the threshold in config.json under "quick".
 
 Replay is NOT part of a normal update. steps/collect.mjs stores the rank the
 server's own price ordering gave each listing; a replay cannot restore it, and
@@ -71,10 +80,15 @@ function parseUpdateFlags (argv) {
 function planUpdateSteps (opts) {
   const steps = []
   if (!opts.offline) {
+    const quick = opts.quick ? ['--min-ratio', String(config.quick.minRatio)] : []
     steps.push({
-      name: opts['pools-only'] ? 'collect the baselines' : 'collect every cell',
+      name: opts['pools-only']
+        ? 'collect the baselines'
+        : (opts.quick ? 'collect the baselines and the modifiers worth watching'
+                      : 'collect every cell'),
       script: 'steps/collect.mjs',
-      args: ['--full', '--i-mean-it', ...(opts['pools-only'] ? ['--only', 'pools'] : [])]
+      args: ['--full', '--i-mean-it',
+        ...(opts['pools-only'] ? ['--only', 'pools'] : quick)]
     })
   }
   if (opts.offline || opts.replay) {
@@ -107,6 +121,22 @@ function cmdUpdate (argv) {
   if (opts.help) {
     console.log(UPDATE_USAGE)
     return
+  }
+  // A flag that is quietly ignored is worse than one that is refused: --quick
+  // asks for a narrower collection, and both of these mean no collection at
+  // all or a different one, so accepting the pair would spend the wrong hour.
+  if (opts.quick && opts['pools-only']) {
+    console.error('--quick and --pools-only ask for different collections. Nothing has run.')
+    process.exit(2)
+  }
+  if (opts.quick && opts.offline) {
+    console.error('--quick narrows a collection and --offline makes none. Nothing has run.')
+    process.exit(2)
+  }
+  if (opts.quick && !(Number(config.quick?.minRatio) > 0)) {
+    console.error('config.json needs `quick.minRatio` as a positive number for --quick. ' +
+      'Nothing has run.')
+    process.exit(2)
   }
   const league = opts.league ?? config.league
   const common = ['--league', league, ...(opts.data ? ['--data', opts.data] : [])]

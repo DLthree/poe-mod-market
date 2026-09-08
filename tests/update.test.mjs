@@ -130,6 +130,35 @@ test('a normal refresh collects and rebuilds, and does not replay', () => {
   }
 })
 
+// The threshold reaches the collector or the pass is a full one wearing a quick
+// one's name, and the difference is about ninety minutes of rate allowance.
+test('a quick refresh passes the configured ratio down to the collector', () => {
+  const dir = seeded()
+  try {
+    const config = JSON.parse(readFileSync(new URL('../config.json', import.meta.url)))
+    const out = run(dir, ['--dry-run', '--quick'])
+    assert.match(out, new RegExp(`--min-ratio ${config.quick.minRatio}`))
+    assert.match(out, /collect\.mjs/)
+    assert.doesNotMatch(run(dir, ['--dry-run']), /--min-ratio/,
+      'a normal update must not narrow itself')
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+// Both of these mean a different collection or none, so silently preferring one
+// would spend the wrong hour.
+test('a quick refresh refuses to combine with pools-only or offline', () => {
+  const dir = seeded()
+  try {
+    for (const other of ['--pools-only', '--offline']) {
+      assert.throws(() => run(dir, ['--dry-run', '--quick', other]), /status 2|Command failed/)
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
 test('replaying is available on purpose, for after a parser change', () => {
   const dir = seeded()
   try {

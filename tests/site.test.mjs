@@ -14,7 +14,8 @@ const config = {
   lookbackHours: 48,
   tradeWindow: '3days',
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2.1 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2.1 },
+  exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
 
 // A league name is put into a file name AND into a URL. Both have to survive it.

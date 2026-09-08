@@ -13,7 +13,8 @@ const EVERY_CELL = TABLET_TYPES.length * RARITIES.length
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 },
+  exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
 const opts = { league: 'L', lookbackHours: 48, config, now: NOW }
 
@@ -96,6 +97,28 @@ test('the walk thresholds are carried so the page need not hold our config',
     assert.deepEqual(out.walk, {
       minListings: 3, minSellers: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2
     })
+  }))
+
+// The page orders the tablet grid by what a blank one costs and those prices
+// are not all in one currency, so it applies the rate itself. Two copies of the
+// number would be two numbers.
+test('the rate table is carried so the page and the build cannot disagree',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    const out = economyFile(db, { ...opts })
+    assert.deepEqual(out.exchange, config.exchange)
+  }))
+
+// A price is exactly what the market said; a comparison may rest on a guess.
+// The file has to keep those apart or a reader cannot tell which is which.
+test('a modifier says whether its comparison leaned on the rate table',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    const mods = economyFile(db, { ...opts }).mods
+    assert.ok(mods.length)
+    for (const m of mods) assert.equal(typeof m.assumedRate, 'boolean')
+    assert.ok(mods.every(m => m.assumedRate === false),
+      'this fixture is priced in exalted throughout')
   }))
 
 test('tradeWindow is carried, from config, so a trade link matches our slice', () => withDb(db => {

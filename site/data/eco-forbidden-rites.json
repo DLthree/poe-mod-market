@@ -8,6 +8,11 @@
   "midVsBlank": 1.5,
   "highVsBlank": 2.1
  },
+ "exchange": {
+  "exalted": 1,
+  "divine": 100,
+  "chaos": 5
+ },
  "tradeWindow": "3days",
  "cells": [
   {
@@ -239,6 +244,7 @@
    "sellers": 20,
    "affixRatio": 1.8421052631578947,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -252,6 +258,7 @@
    "sellers": 19,
    "affixRatio": 1.7105263157894737,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 20-40% chance to contain four additional Abysses"
   },
   {
@@ -265,6 +272,7 @@
    "sellers": 16,
    "affixRatio": 1.4473684210526316,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abysses in Area have 10-20% increased chance to lead to an Abyssal Depths"
   },
   {
@@ -278,6 +286,7 @@
    "sellers": 11,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -291,6 +300,7 @@
    "sellers": 10,
    "affixRatio": 1.3157894736842106,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -304,6 +314,7 @@
    "sellers": 8,
    "affixRatio": 1.3157894736842106,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -317,6 +328,7 @@
    "sellers": 13,
    "affixRatio": 1.2894736842105263,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -330,6 +342,7 @@
    "sellers": 19,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "2-3 additional Rare Monsters are spawned from Abysses"
   },
   {
@@ -343,6 +356,7 @@
    "sellers": 15,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -356,6 +370,7 @@
    "sellers": 20,
    "affixRatio": 1.105263157894737,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -369,6 +384,7 @@
    "sellers": 20,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abyss Pits in Area are twice as likely to have Rewards"
   },
   {
@@ -382,6 +398,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -395,6 +412,7 @@
    "sellers": 18,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -408,6 +426,7 @@
    "sellers": 17,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -421,6 +440,7 @@
    "sellers": 17,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -434,6 +454,7 @@
    "sellers": 15,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abyssal Monsters have 8-12% increased Effectiveness for each closed Pit, up to 100%"
   },
   {
@@ -447,6 +468,7 @@
    "sellers": 20,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Abyss"
   },
   {
@@ -460,6 +482,7 @@
    "sellers": 18,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "20-30% increased chance for Abyssal monsters in Map to have Abyssal Modifiers"
   },
   {
@@ -473,6 +496,7 @@
    "sellers": 16,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -486,6 +510,7 @@
    "sellers": 14,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -499,6 +524,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -512,6 +538,7 @@
    "sellers": 18,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -525,6 +552,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -538,6 +566,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -551,6 +580,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -564,6 +594,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "20-30% increased chance for Desecrated Currency from Abysses in Map"
   },
   {
@@ -577,6 +608,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abysses spawn 20-30% increased Monsters"
   },
   {
@@ -590,6 +622,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -603,6 +636,7 @@
    "sellers": 16,
    "affixRatio": 0.9736842105263158,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -616,6 +650,7 @@
    "sellers": 19,
    "affixRatio": 0.9473684210526315,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -629,6 +664,7 @@
    "sellers": 18,
    "affixRatio": 1.8421052631578947,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -642,6 +678,7 @@
    "sellers": 14,
    "affixRatio": 1.8421052631578947,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 20-40% chance to contain four additional Abysses"
   },
   {
@@ -655,6 +692,7 @@
    "sellers": 13,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -668,6 +706,7 @@
    "sellers": 10,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abysses in Area have 10-20% increased chance to lead to an Abyssal Depths"
   },
   {
@@ -681,6 +720,7 @@
    "sellers": 18,
    "affixRatio": 1.263157894736842,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Abyss"
   },
   {
@@ -694,6 +734,7 @@
    "sellers": 17,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "2-3 additional Rare Monsters are spawned from Abysses"
   },
   {
@@ -707,6 +748,7 @@
    "sellers": 14,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -720,6 +762,7 @@
    "sellers": 18,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -733,6 +776,7 @@
    "sellers": 17,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -746,6 +790,7 @@
    "sellers": 16,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abyssal Monsters have 8-12% increased Effectiveness for each closed Pit, up to 100%"
   },
   {
@@ -759,6 +804,7 @@
    "sellers": 15,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -772,6 +818,7 @@
    "sellers": 14,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -785,6 +832,7 @@
    "sellers": 14,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -798,6 +846,7 @@
    "sellers": 14,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -811,6 +860,7 @@
    "sellers": 12,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -824,6 +874,7 @@
    "sellers": 12,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abyss Pits in Area are twice as likely to have Rewards"
   },
   {
@@ -837,6 +888,7 @@
    "sellers": 18,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -850,6 +902,7 @@
    "sellers": 15,
    "affixRatio": 1.0263157894736843,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "20-30% increased chance for Desecrated Currency from Abysses in Map"
   },
   {
@@ -863,6 +916,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -876,6 +930,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -889,6 +944,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Abysses spawn 20-30% increased Monsters"
   },
   {
@@ -902,6 +958,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -915,6 +972,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -928,6 +986,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -941,6 +1000,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -954,6 +1014,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -967,6 +1028,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -980,6 +1042,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -993,6 +1056,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "20-30% increased chance for Abyssal monsters in Map to have Abyssal Modifiers"
   },
   {
@@ -1006,6 +1070,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1019,7 +1084,36 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_1352729973",
+   "floor": 1,
+   "adds": 62,
+   "currency": "divine",
+   "listings": 7,
+   "sellers": 7,
+   "affixRatio": 2.6315789473684212,
+   "fewSamples": true,
+   "assumedRate": true,
+   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_267210597",
+   "floor": 1,
+   "adds": 62,
+   "currency": "divine",
+   "listings": 5,
+   "sellers": 5,
+   "affixRatio": 2.6315789473684212,
+   "fewSamples": true,
+   "assumedRate": true,
+   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
    "type": "Breach Tablet",
@@ -1032,6 +1126,7 @@
    "sellers": 20,
    "affixRatio": 1.8421052631578947,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased Quantity of Hiveblood found in Map"
   },
   {
@@ -1045,6 +1140,7 @@
    "sellers": 20,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unstable Breaches in Map spawn an additional Rare Monster when Stabilised (1-2)"
   },
   {
@@ -1058,6 +1154,7 @@
    "sellers": 20,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -1071,6 +1168,7 @@
    "sellers": 17,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased Quantity of Wombgifts found in Map"
   },
   {
@@ -1084,6 +1182,7 @@
    "sellers": 15,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -1097,6 +1196,7 @@
    "sellers": 14,
    "affixRatio": 1.3157894736842106,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1110,6 +1210,7 @@
    "sellers": 19,
    "affixRatio": 1.1842105263157894,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -1123,6 +1224,7 @@
    "sellers": 19,
    "affixRatio": 1.1842105263157894,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -1136,6 +1238,7 @@
    "sellers": 20,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -1149,6 +1252,7 @@
    "sellers": 16,
    "affixRatio": 1.1578947368421053,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -1162,6 +1266,7 @@
    "sellers": 20,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Wombgifts have 10-30% chance to drop one Level higher in Map"
   },
   {
@@ -1175,6 +1280,7 @@
    "sellers": 20,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1188,6 +1294,7 @@
    "sellers": 20,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -1201,6 +1308,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1214,6 +1322,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -1227,6 +1336,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unstable Breaches in Map have 20-50% increased chance to contain Vruun, Marshal of Xesht"
   },
   {
@@ -1240,6 +1350,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-20% increased Effectiveness of Rare Breach Monsters in Map"
   },
   {
@@ -1253,6 +1364,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Breaches have 5-15% increased Monster density"
   },
   {
@@ -1266,6 +1378,7 @@
    "sellers": 19,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1279,6 +1392,7 @@
    "sellers": 18,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -1292,6 +1406,7 @@
    "sellers": 18,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -1305,33 +1420,8 @@
    "sellers": 16,
    "affixRatio": 1.0526315789473684,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_1352729973",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 7,
-   "sellers": 7,
-   "affixRatio": null,
-   "fewSamples": true,
-   "label": "Area has 70-100% increased chance to contain Rogue Exiles"
-  },
-  {
-   "type": "Breach Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_267210597",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 5,
-   "sellers": 5,
-   "affixRatio": null,
-   "fewSamples": true,
-   "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
    "type": "Breach Tablet",
@@ -1344,6 +1434,7 @@
    "sellers": 2,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -1357,6 +1448,7 @@
    "sellers": 2,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1370,6 +1462,7 @@
    "sellers": 20,
    "affixRatio": 4.318181818181818,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unstable Breaches in Map spawn an additional Rare Monster when Stabilised (1-2)"
   },
   {
@@ -1383,6 +1476,7 @@
    "sellers": 20,
    "affixRatio": 2.272727272727273,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -1396,6 +1490,7 @@
    "sellers": 10,
    "affixRatio": 2.272727272727273,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased Quantity of Hiveblood found in Map"
   },
   {
@@ -1409,6 +1504,7 @@
    "sellers": 18,
    "affixRatio": 2.0454545454545454,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
@@ -1422,6 +1518,7 @@
    "sellers": 14,
    "affixRatio": 1.5909090909090908,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased Quantity of Wombgifts found in Map"
   },
   {
@@ -1435,6 +1532,7 @@
    "sellers": 15,
    "affixRatio": 1.3636363636363635,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -1448,6 +1546,7 @@
    "sellers": 20,
    "affixRatio": 1.1363636363636365,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -1461,6 +1560,7 @@
    "sellers": 19,
    "affixRatio": 1.1363636363636365,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -1474,6 +1574,7 @@
    "sellers": 17,
    "affixRatio": 1.1363636363636365,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -1487,6 +1588,7 @@
    "sellers": 19,
    "affixRatio": 1.0909090909090908,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -1500,6 +1602,7 @@
    "sellers": 17,
    "affixRatio": 1.0909090909090908,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -1513,6 +1616,7 @@
    "sellers": 19,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -1526,6 +1630,7 @@
    "sellers": 19,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -1539,6 +1644,7 @@
    "sellers": 18,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1552,6 +1658,7 @@
    "sellers": 18,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -1565,6 +1672,7 @@
    "sellers": 18,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Breaches have 5-15% increased Monster density"
   },
   {
@@ -1578,6 +1686,7 @@
    "sellers": 18,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1591,6 +1700,7 @@
    "sellers": 17,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -1604,6 +1714,7 @@
    "sellers": 17,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -1617,6 +1728,7 @@
    "sellers": 17,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Wombgifts have 10-30% chance to drop one Level higher in Map"
   },
   {
@@ -1630,6 +1742,7 @@
    "sellers": 17,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -1643,6 +1756,7 @@
    "sellers": 16,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1656,6 +1770,7 @@
    "sellers": 15,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -1669,6 +1784,7 @@
    "sellers": 15,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unstable Breaches in Map have 20-50% increased chance to contain Vruun, Marshal of Xesht"
   },
   {
@@ -1682,6 +1798,7 @@
    "sellers": 15,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -1695,6 +1812,7 @@
    "sellers": 14,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -1708,6 +1826,7 @@
    "sellers": 14,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-20% increased Effectiveness of Rare Breach Monsters in Map"
   },
   {
@@ -1721,6 +1840,7 @@
    "sellers": 13,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -1734,6 +1854,7 @@
    "sellers": 13,
    "affixRatio": 0.9090909090909091,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -1747,7 +1868,22 @@
    "sellers": 11,
    "affixRatio": 0.8636363636363636,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_358129101",
+   "floor": 1,
+   "adds": 94,
+   "currency": "divine",
+   "listings": 4,
+   "sellers": 4,
+   "affixRatio": 16.666666666666668,
+   "fewSamples": true,
+   "assumedRate": true,
+   "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Delirium Tablet",
@@ -1760,6 +1896,7 @@
    "sellers": 20,
    "affixRatio": 8.333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Map spawns 12-26% increased MirrorShards"
   },
   {
@@ -1773,6 +1910,7 @@
    "sellers": 16,
    "affixRatio": 3.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "15-30% increased Stack size of Simulacrum Splinters found in Area"
   },
   {
@@ -1786,6 +1924,7 @@
    "sellers": 18,
    "affixRatio": 3.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area spawns 15-30% increased Fracturing Mirrors"
   },
   {
@@ -1799,6 +1938,7 @@
    "sellers": 11,
    "affixRatio": 2.8333333333333335,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -1812,6 +1952,7 @@
    "sellers": 15,
    "affixRatio": 2.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -1825,6 +1966,7 @@
    "sellers": 11,
    "affixRatio": 2.5,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -1838,6 +1980,7 @@
    "sellers": 9,
    "affixRatio": 2.5,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -1851,6 +1994,7 @@
    "sellers": 8,
    "affixRatio": 2.5,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -1864,6 +2008,7 @@
    "sellers": 20,
    "affixRatio": 2.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
   },
   {
@@ -1877,6 +2022,7 @@
    "sellers": 18,
    "affixRatio": 2.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Encounters in Area are 15-30% more likely to spawn Unique Bosses"
   },
   {
@@ -1890,6 +2036,7 @@
    "sellers": 18,
    "affixRatio": 2.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -1903,6 +2050,7 @@
    "sellers": 18,
    "affixRatio": 2.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -1916,6 +2064,7 @@
    "sellers": 15,
    "affixRatio": 2.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -1929,6 +2078,7 @@
    "sellers": 8,
    "affixRatio": 2.3333333333333335,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -1942,6 +2092,7 @@
    "sellers": 20,
    "affixRatio": 2.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -1955,6 +2106,7 @@
    "sellers": 20,
    "affixRatio": 2.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area dissipates -30--20% faster"
   },
   {
@@ -1968,6 +2120,7 @@
    "sellers": 20,
    "affixRatio": 2.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area lasts 6-12 additional seconds before dissipating"
   },
   {
@@ -1981,6 +2134,7 @@
    "sellers": 19,
    "affixRatio": 2.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
   },
   {
@@ -1994,6 +2148,7 @@
    "sellers": 18,
    "affixRatio": 2.1666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2007,6 +2162,7 @@
    "sellers": 19,
    "affixRatio": 2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2020,6 +2176,7 @@
    "sellers": 16,
    "affixRatio": 2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2033,6 +2190,7 @@
    "sellers": 17,
    "affixRatio": 1.8333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -2046,6 +2204,7 @@
    "sellers": 20,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -2059,6 +2218,7 @@
    "sellers": 19,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -2072,6 +2232,7 @@
    "sellers": 19,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -2085,6 +2246,7 @@
    "sellers": 18,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -2098,6 +2260,7 @@
    "sellers": 18,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -2111,6 +2274,7 @@
    "sellers": 16,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
@@ -2124,20 +2288,8 @@
    "sellers": 16,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
-  },
-  {
-   "type": "Delirium Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_358129101",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 4,
-   "sellers": 4,
-   "affixRatio": null,
-   "fewSamples": true,
-   "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
    "type": "Delirium Tablet",
@@ -2150,6 +2302,7 @@
    "sellers": 16,
    "affixRatio": 5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -2163,6 +2316,7 @@
    "sellers": 6,
    "affixRatio": 4.1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Map spawns 12-26% increased MirrorShards"
   },
   {
@@ -2176,6 +2330,7 @@
    "sellers": 17,
    "affixRatio": 2.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area spawns 15-30% increased Fracturing Mirrors"
   },
   {
@@ -2189,6 +2344,7 @@
    "sellers": 10,
    "affixRatio": 2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
@@ -2202,6 +2358,7 @@
    "sellers": 15,
    "affixRatio": 1.8,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "15-30% increased Stack size of Simulacrum Splinters found in Area"
   },
   {
@@ -2215,6 +2372,7 @@
    "sellers": 12,
    "affixRatio": 1.4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Encounters in Area are 15-30% more likely to spawn Unique Bosses"
   },
   {
@@ -2228,6 +2386,7 @@
    "sellers": 8,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -2241,6 +2400,7 @@
    "sellers": 15,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -2254,6 +2414,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -2267,6 +2428,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -2280,6 +2442,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -2293,6 +2456,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2306,6 +2470,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -2319,6 +2484,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2332,6 +2498,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -2345,6 +2512,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area applies 15-30% increased Deliriousness to Players"
   },
   {
@@ -2358,6 +2526,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area dissipates -30--20% faster"
   },
   {
@@ -2371,6 +2540,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -2384,6 +2554,7 @@
    "sellers": 10,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -2397,6 +2568,7 @@
    "sellers": 10,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -2410,6 +2582,7 @@
    "sellers": 10,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -2423,6 +2596,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -2436,6 +2610,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Slaying Rare Monsters in Area pauses the Delirium Mirror Timer for 1 second (3-5)"
   },
   {
@@ -2449,6 +2624,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -2462,6 +2638,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Delirium Fog in Area lasts 6-12 additional seconds before dissipating"
   },
   {
@@ -2475,6 +2652,7 @@
    "sellers": 8,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -2488,6 +2666,7 @@
    "sellers": 7,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -2501,6 +2680,7 @@
    "sellers": 7,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2514,6 +2694,7 @@
    "sellers": 5,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -2527,6 +2708,7 @@
    "sellers": 4,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Delirium Monsters in Area have 15-30% increased Pack Size"
   },
   {
@@ -2540,6 +2722,7 @@
    "sellers": 14,
    "affixRatio": 0.9,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -2553,6 +2736,7 @@
    "sellers": 12,
    "affixRatio": 0.9,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2560,12 +2744,13 @@
    "rarity": "magic",
    "statId": "explicit.stat_231864447",
    "floor": 3,
-   "adds": 1,
+   "adds": 100,
    "currency": "divine",
    "listings": 12,
    "sellers": 12,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -2579,6 +2764,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "5-10% increased Expedition Explosive Area of Effect in Map"
   },
   {
@@ -2592,6 +2778,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains 15-25% increased number of Runic Monster Markers"
   },
   {
@@ -2605,6 +2792,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -2618,6 +2806,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2631,6 +2820,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Monsters from Verisium Remnants drop 15-25% increased Verisium"
   },
   {
@@ -2644,6 +2834,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -2657,6 +2848,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -2670,6 +2862,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -2683,6 +2876,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -2696,6 +2890,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2709,6 +2904,7 @@
    "sellers": 7,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2722,6 +2918,7 @@
    "sellers": 7,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -2735,6 +2932,7 @@
    "sellers": 1,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -2748,6 +2946,7 @@
    "sellers": 2,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Expeditions contain 1 buried Strongbox in Map (1-2)"
   },
   {
@@ -2761,6 +2960,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -2774,6 +2974,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Expeditions contain 1 Additional Boss encased in ice in Map (1-2)"
   },
   {
@@ -2787,6 +2988,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Expeditions contain 1 Vaal Relic in Map (1-2)"
   },
   {
@@ -2800,6 +3002,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -2813,6 +3016,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "15-25% increased Expedition Monster Rarity in Map"
   },
   {
@@ -2826,6 +3030,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -2839,6 +3044,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Expeditions contain 1 Vaal Relic in Map (1-2)"
   },
   {
@@ -2852,6 +3058,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Expeditions contain 1 buried Strongbox in Map (1-2)"
   },
   {
@@ -2865,6 +3072,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -2878,6 +3086,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains an additional Essence"
   },
   {
@@ -2891,6 +3100,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Expeditions contain 1 Additional Boss encased in ice in Map (1-2)"
   },
   {
@@ -2904,6 +3114,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -2917,6 +3128,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Monsters from Verisium Remnants drop 15-25% increased Verisium"
   },
   {
@@ -2930,6 +3142,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "15-25% increased Expedition Monster Rarity in Map"
   },
   {
@@ -2943,6 +3156,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -2956,6 +3170,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -2969,6 +3184,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -2982,6 +3198,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -2995,6 +3212,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3008,6 +3226,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains 15-25% increased number of Runic Monster Markers"
   },
   {
@@ -3021,6 +3240,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -3034,6 +3254,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3047,6 +3268,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -3060,6 +3282,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "5-10% increased Expedition Explosive Area of Effect in Map"
   },
   {
@@ -3073,6 +3296,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -3086,6 +3310,7 @@
    "sellers": 18,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -3099,6 +3324,7 @@
    "sellers": 16,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3112,6 +3338,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": true,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -3125,6 +3352,7 @@
    "sellers": 8,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3138,6 +3366,7 @@
    "sellers": 2,
    "affixRatio": 1,
    "fewSamples": true,
+   "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -3151,6 +3380,7 @@
    "sellers": 5,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -3164,6 +3394,7 @@
    "sellers": 3,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -3177,6 +3408,7 @@
    "sellers": 2,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -3190,6 +3422,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Unique Monsters have 1 additional Rare Modifier"
   },
   {
@@ -3203,6 +3436,21 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
+   "label": "Area is inhabited by 1 additional Rogue Exile"
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_3550168289",
+   "floor": 1,
+   "adds": 80,
+   "currency": "divine",
+   "listings": 17,
+   "sellers": 17,
+   "affixRatio": 5,
+   "fewSamples": false,
+   "assumedRate": true,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
@@ -3216,6 +3464,7 @@
    "sellers": 19,
    "affixRatio": 4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unique Monsters have 1 additional Rare Modifier"
   },
   {
@@ -3229,6 +3478,7 @@
    "sellers": 19,
    "affixRatio": 2.1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -3242,6 +3492,7 @@
    "sellers": 18,
    "affixRatio": 1.8,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3255,6 +3506,7 @@
    "sellers": 16,
    "affixRatio": 1.6,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -3268,6 +3520,7 @@
    "sellers": 19,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -3281,6 +3534,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -3294,6 +3548,7 @@
    "sellers": 19,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -3307,6 +3562,7 @@
    "sellers": 20,
    "affixRatio": 1.05,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3320,6 +3576,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -3333,6 +3590,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -3346,6 +3604,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -3359,6 +3618,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3372,6 +3632,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -3385,6 +3646,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -3398,6 +3660,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -3411,6 +3674,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -3424,6 +3688,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -3437,6 +3702,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -3450,6 +3716,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3463,6 +3730,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -3476,6 +3744,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3489,6 +3758,7 @@
    "sellers": 18,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -3502,20 +3772,8 @@
    "sellers": 19,
    "affixRatio": 0.95,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
-  },
-  {
-   "type": "Irradiated Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_3550168289",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 17,
-   "sellers": 17,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
    "type": "Irradiated Tablet",
@@ -3528,6 +3786,7 @@
    "sellers": 18,
    "affixRatio": 3.125,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unique Monsters have 1 additional Rare Modifier"
   },
   {
@@ -3541,6 +3800,7 @@
    "sellers": 19,
    "affixRatio": 2.0833333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -3554,6 +3814,7 @@
    "sellers": 15,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -3567,6 +3828,7 @@
    "sellers": 14,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -3580,6 +3842,7 @@
    "sellers": 13,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3593,6 +3856,7 @@
    "sellers": 18,
    "affixRatio": 1.0833333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -3606,6 +3870,7 @@
    "sellers": 17,
    "affixRatio": 1.0416666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -3619,6 +3884,7 @@
    "sellers": 15,
    "affixRatio": 1.0416666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -3632,6 +3898,7 @@
    "sellers": 15,
    "affixRatio": 1.0416666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -3645,6 +3912,7 @@
    "sellers": 15,
    "affixRatio": 1.0416666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3658,6 +3926,7 @@
    "sellers": 12,
    "affixRatio": 1.0416666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -3671,6 +3940,7 @@
    "sellers": 10,
    "affixRatio": 0.875,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -3684,6 +3954,7 @@
    "sellers": 18,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -3697,6 +3968,7 @@
    "sellers": 15,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -3710,6 +3982,7 @@
    "sellers": 15,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -3723,6 +3996,7 @@
    "sellers": 15,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -3736,6 +4010,7 @@
    "sellers": 15,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3749,6 +4024,7 @@
    "sellers": 14,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -3762,6 +4038,7 @@
    "sellers": 14,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -3775,6 +4052,7 @@
    "sellers": 14,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -3788,6 +4066,7 @@
    "sellers": 14,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3801,6 +4080,7 @@
    "sellers": 14,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -3814,7 +4094,22 @@
    "sellers": 13,
    "affixRatio": 0.8333333333333334,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_775597083",
+   "floor": 4,
+   "adds": 392,
+   "currency": "divine",
+   "listings": 13,
+   "sellers": 11,
+   "affixRatio": 50,
+   "fewSamples": false,
+   "assumedRate": true,
+   "label": "Areas with Powerful Map Bosses contain an additional Azmeri Spirit (1-2)"
   },
   {
    "type": "Overseer Tablet",
@@ -3827,6 +4122,7 @@
    "sellers": 20,
    "affixRatio": 6.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -3840,6 +4136,7 @@
    "sellers": 20,
    "affixRatio": 2.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Areas with Powerful Map Bosses contain an additional Essence (1-2)"
   },
   {
@@ -3853,6 +4150,7 @@
    "sellers": 16,
    "affixRatio": 1.875,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -3866,6 +4164,7 @@
    "sellers": 19,
    "affixRatio": 1.625,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -3879,6 +4178,7 @@
    "sellers": 20,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -3892,6 +4192,7 @@
    "sellers": 20,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -3905,6 +4206,7 @@
    "sellers": 20,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -3918,6 +4220,7 @@
    "sellers": 19,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -3931,6 +4234,7 @@
    "sellers": 19,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -3944,6 +4248,7 @@
    "sellers": 19,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
@@ -3957,6 +4262,7 @@
    "sellers": 18,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -3970,6 +4276,7 @@
    "sellers": 18,
    "affixRatio": 1.5,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -3983,6 +4290,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -3996,6 +4304,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "18-30% increased Quantity of Waystones dropped by Map Bosses"
   },
   {
@@ -4009,6 +4318,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -4022,6 +4332,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -4035,6 +4346,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -4048,6 +4360,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -4061,6 +4374,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -4074,6 +4388,7 @@
    "sellers": 20,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
@@ -4087,6 +4402,7 @@
    "sellers": 19,
    "affixRatio": 1.25,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
@@ -4100,6 +4416,7 @@
    "sellers": 20,
    "affixRatio": 1.125,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Areas with Map Powerful Map Bosses contain an additional Shrine (1-2)"
   },
   {
@@ -4113,6 +4430,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -4126,19 +4444,49 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
    "type": "Overseer Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_775597083",
-   "floor": 4,
-   "adds": null,
+   "rarity": "rare",
+   "statId": "explicit.stat_3040603554",
+   "floor": 5,
+   "adds": 491,
    "currency": "divine",
-   "listings": 13,
-   "sellers": 11,
-   "affixRatio": null,
+   "listings": 20,
+   "sellers": 7,
+   "affixRatio": 55.55555555555556,
    "fewSamples": false,
+   "assumedRate": true,
+   "label": "Areas with Powerful Map Bosses contain an additional Strongbox (1-2)"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3550168289",
+   "floor": 3,
+   "adds": 291,
+   "currency": "divine",
+   "listings": 20,
+   "sellers": 16,
+   "affixRatio": 33.333333333333336,
+   "fewSamples": false,
+   "assumedRate": true,
+   "label": "Area is inhabited by 1 additional Rogue Exile"
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_775597083",
+   "floor": 3,
+   "adds": 291,
+   "currency": "divine",
+   "listings": 20,
+   "sellers": 13,
+   "affixRatio": 33.333333333333336,
+   "fewSamples": false,
+   "assumedRate": true,
    "label": "Areas with Powerful Map Bosses contain an additional Azmeri Spirit (1-2)"
   },
   {
@@ -4152,6 +4500,7 @@
    "sellers": 15,
    "affixRatio": 8.88888888888889,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Unique Monsters have 1 additional Rare Modifier"
   },
   {
@@ -4165,6 +4514,7 @@
    "sellers": 18,
    "affixRatio": 6.111111111111111,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -4178,6 +4528,7 @@
    "sellers": 18,
    "affixRatio": 3.3333333333333335,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -4191,6 +4542,7 @@
    "sellers": 17,
    "affixRatio": 2.2222222222222223,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -4204,6 +4556,7 @@
    "sellers": 10,
    "affixRatio": 2.2222222222222223,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -4217,6 +4570,7 @@
    "sellers": 18,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -4230,6 +4584,7 @@
    "sellers": 18,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -4243,6 +4598,7 @@
    "sellers": 17,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -4256,6 +4612,7 @@
    "sellers": 16,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -4269,6 +4626,7 @@
    "sellers": 17,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Areas with Powerful Map Bosses contain an additional Essence (1-2)"
   },
   {
@@ -4282,6 +4640,7 @@
    "sellers": 11,
    "affixRatio": 1.2222222222222223,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "35-60% increased Rarity of Items dropped by Map Bosses"
   },
   {
@@ -4295,6 +4654,7 @@
    "sellers": 19,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -4308,6 +4668,7 @@
    "sellers": 15,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -4321,6 +4682,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -4334,6 +4696,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -4347,6 +4710,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -4360,6 +4724,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -4373,6 +4738,7 @@
    "sellers": 13,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -4386,6 +4752,7 @@
    "sellers": 13,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -4399,6 +4766,7 @@
    "sellers": 12,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -4412,6 +4780,7 @@
    "sellers": 12,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -4425,6 +4794,7 @@
    "sellers": 11,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "18-30% increased Quantity of Waystones dropped by Map Bosses"
   },
   {
@@ -4438,6 +4808,7 @@
    "sellers": 11,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map Bosses grant 40-80% increased Experience"
   },
   {
@@ -4451,6 +4822,7 @@
    "sellers": 10,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "13-20% increased Quantity of Items dropped by Map Bosses"
   },
   {
@@ -4464,6 +4836,7 @@
    "sellers": 17,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Areas with Map Powerful Map Bosses contain an additional Shrine (1-2)"
   },
   {
@@ -4477,6 +4850,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -4490,6 +4864,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -4503,6 +4878,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -4516,46 +4892,8 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3550168289",
-   "floor": 3,
-   "adds": null,
-   "currency": "divine",
-   "listings": 20,
-   "sellers": 16,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Area is inhabited by 1 additional Rogue Exile"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_775597083",
-   "floor": 3,
-   "adds": null,
-   "currency": "divine",
-   "listings": 20,
-   "sellers": 13,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Areas with Powerful Map Bosses contain an additional Azmeri Spirit (1-2)"
-  },
-  {
-   "type": "Overseer Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3040603554",
-   "floor": 5,
-   "adds": null,
-   "currency": "divine",
-   "listings": 20,
-   "sellers": 7,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Areas with Powerful Map Bosses contain an additional Strongbox (1-2)"
   },
   {
    "type": "Ritual Tablet",
@@ -4568,6 +4906,7 @@
    "sellers": 20,
    "affixRatio": 2.142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Ritual Favours in Area have 35-70% increased chance to be Omens"
   },
   {
@@ -4581,6 +4920,7 @@
    "sellers": 18,
    "affixRatio": 1.4285714285714286,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -4594,6 +4934,7 @@
    "sellers": 20,
    "affixRatio": 1.2857142857142858,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -4607,6 +4948,7 @@
    "sellers": 20,
    "affixRatio": 1.1428571428571428,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters Sacrificed at Ritual Altars in Area grant 18-30% increased Tribute"
   },
   {
@@ -4620,6 +4962,7 @@
    "sellers": 20,
    "affixRatio": 1.1428571428571428,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -4633,6 +4976,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -4646,6 +4990,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -4659,6 +5004,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -4672,6 +5018,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -4685,6 +5032,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -4698,6 +5046,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -4711,6 +5060,7 @@
    "sellers": 20,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Favours Rerolled at Ritual Altars in Area have 3-6% chance to cost no Tribute"
   },
   {
@@ -4724,6 +5074,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -4737,6 +5088,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -4750,6 +5102,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -4763,6 +5116,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -4776,6 +5130,7 @@
    "sellers": 19,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -4789,6 +5144,7 @@
    "sellers": 20,
    "affixRatio": 0.8571428571428571,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -4802,6 +5158,7 @@
    "sellers": 20,
    "affixRatio": 0.8571428571428571,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Revived Monsters from Ritual Altars in Area have 25-40% increased chance to be Rare"
   },
   {
@@ -4815,6 +5172,7 @@
    "sellers": 19,
    "affixRatio": 0.8571428571428571,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -4828,6 +5186,7 @@
    "sellers": 20,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Rerolling Favours at Ritual Altars in Area costs -30--20% increased Tribute"
   },
   {
@@ -4841,6 +5200,7 @@
    "sellers": 20,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Favours Deferred at Ritual Altars in Area reappear 25-40% sooner"
   },
   {
@@ -4854,6 +5214,7 @@
    "sellers": 20,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -4867,6 +5228,7 @@
    "sellers": 20,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -4880,6 +5242,7 @@
    "sellers": 19,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Revived Monsters from Ritual Altars in Area have 35-70% increased chance to be Magic"
   },
   {
@@ -4893,6 +5256,7 @@
    "sellers": 19,
    "affixRatio": 0.7142857142857143,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -4906,6 +5270,7 @@
    "sellers": 2,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -4919,6 +5284,7 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Deferring Favours at Ritual Altars in Area costs -30--20% increased Tribute"
   },
   {
@@ -4932,6 +5298,7 @@
    "sellers": 19,
    "affixRatio": 4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Ritual Favours in Area have 35-70% increased chance to be Omens"
   },
   {
@@ -4945,6 +5312,7 @@
    "sellers": 20,
    "affixRatio": 2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -4958,6 +5326,7 @@
    "sellers": 15,
    "affixRatio": 1.8,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Deferring Favours at Ritual Altars in Area costs -30--20% increased Tribute"
   },
   {
@@ -4971,6 +5340,7 @@
    "sellers": 15,
    "affixRatio": 1.4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -4984,6 +5354,7 @@
    "sellers": 10,
    "affixRatio": 1.4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -4997,6 +5368,7 @@
    "sellers": 9,
    "affixRatio": 1.4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -5010,6 +5382,7 @@
    "sellers": 7,
    "affixRatio": 1.4,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -5023,6 +5396,7 @@
    "sellers": 13,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Favours Rerolled at Ritual Altars in Area have 3-6% chance to cost no Tribute"
   },
   {
@@ -5036,6 +5410,7 @@
    "sellers": 12,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -5049,6 +5424,7 @@
    "sellers": 12,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -5062,6 +5438,7 @@
    "sellers": 10,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Revived Monsters from Ritual Altars in Area have 35-70% increased chance to be Magic"
   },
   {
@@ -5075,6 +5452,7 @@
    "sellers": 6,
    "affixRatio": 1.2,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters Sacrificed at Ritual Altars in Area grant 18-30% increased Tribute"
   },
   {
@@ -5088,6 +5466,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -5101,6 +5480,7 @@
    "sellers": 14,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -5114,6 +5494,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -5127,6 +5508,7 @@
    "sellers": 13,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -5140,6 +5522,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -5153,6 +5536,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -5166,6 +5550,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -5179,6 +5564,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -5192,6 +5578,7 @@
    "sellers": 12,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -5205,6 +5592,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Favours Deferred at Ritual Altars in Area reappear 25-40% sooner"
   },
   {
@@ -5218,6 +5606,7 @@
    "sellers": 11,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -5231,6 +5620,7 @@
    "sellers": 10,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -5244,6 +5634,7 @@
    "sellers": 10,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Rerolling Favours at Ritual Altars in Area costs -30--20% increased Tribute"
   },
   {
@@ -5257,6 +5648,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -5270,6 +5662,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -5283,6 +5676,7 @@
    "sellers": 9,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -5296,6 +5690,7 @@
    "sellers": 8,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Revived Monsters from Ritual Altars in Area have 25-40% increased chance to be Rare"
   },
   {
@@ -5309,7 +5704,22 @@
    "sellers": 8,
    "affixRatio": 1,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "magic",
+   "statId": "explicit.stat_3550168289",
+   "floor": 1,
+   "adds": 85,
+   "currency": "divine",
+   "listings": 13,
+   "sellers": 13,
+   "affixRatio": 6.666666666666667,
+   "fewSamples": false,
+   "assumedRate": true,
+   "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
    "type": "Temple Tablet",
@@ -5322,6 +5732,7 @@
    "sellers": 14,
    "affixRatio": 2.6666666666666665,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -5335,6 +5746,7 @@
    "sellers": 14,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -5348,6 +5760,7 @@
    "sellers": 13,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -5361,6 +5774,7 @@
    "sellers": 11,
    "affixRatio": 1.6666666666666667,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -5374,6 +5788,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -5387,6 +5802,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -5400,6 +5816,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
   },
   {
@@ -5413,6 +5830,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -5426,6 +5844,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -5439,6 +5858,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased chance Vaal Beacon Chests are Rare in Map"
   },
   {
@@ -5452,6 +5872,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -5465,6 +5886,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -5478,6 +5900,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -5491,6 +5914,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-50% increased chance Vaal Beacons summon additional Monsters in Map"
   },
   {
@@ -5504,6 +5928,7 @@
    "sellers": 20,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -5517,6 +5942,7 @@
    "sellers": 19,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "10-25% chance to add a Vaal Beacon Unique Monster to the Map"
   },
   {
@@ -5530,6 +5956,7 @@
    "sellers": 19,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -5543,6 +5970,7 @@
    "sellers": 19,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -5556,6 +5984,7 @@
    "sellers": 18,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -5569,6 +5998,7 @@
    "sellers": 18,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -5582,6 +6012,7 @@
    "sellers": 18,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
   },
   {
@@ -5595,6 +6026,7 @@
    "sellers": 17,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "1 extra pack of Monsters around Vaal Beacons in Map"
   },
   {
@@ -5608,6 +6040,7 @@
    "sellers": 17,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "10-30% increased Pack Size for Monsters around Vaal Beacons in Map"
   },
   {
@@ -5621,6 +6054,7 @@
    "sellers": 17,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -5634,6 +6068,7 @@
    "sellers": 17,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -5647,20 +6082,8 @@
    "sellers": 11,
    "affixRatio": 1.3333333333333333,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "magic",
-   "statId": "explicit.stat_3550168289",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 13,
-   "sellers": 13,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
    "type": "Temple Tablet",
@@ -5673,7 +6096,36 @@
    "sellers": 1,
    "affixRatio": null,
    "fewSamples": true,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_1940774881",
+   "floor": 1,
+   "adds": 82,
+   "currency": "divine",
+   "listings": 20,
+   "sellers": 19,
+   "affixRatio": 5.555555555555555,
+   "fewSamples": false,
+   "assumedRate": true,
+   "label": "5-10% chance to gain an additional Crystal from Vaal Beacons in Map"
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "statId": "explicit.stat_3371085671",
+   "floor": 1,
+   "adds": 82,
+   "currency": "divine",
+   "listings": 20,
+   "sellers": 10,
+   "affixRatio": 5.555555555555555,
+   "fewSamples": false,
+   "assumedRate": true,
+   "label": "Unique Monsters have 1 additional Rare Modifier"
   },
   {
    "type": "Temple Tablet",
@@ -5686,6 +6138,7 @@
    "sellers": 18,
    "affixRatio": 1.8333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
   {
@@ -5699,6 +6152,7 @@
    "sellers": 20,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Essence"
   },
   {
@@ -5712,6 +6166,7 @@
    "sellers": 18,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 1-2 additional random Modifier"
   },
   {
@@ -5725,6 +6180,7 @@
    "sellers": 17,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
   {
@@ -5738,6 +6194,7 @@
    "sellers": 12,
    "affixRatio": 1.5555555555555556,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 30-40% increased Magic Monsters"
   },
   {
@@ -5751,6 +6208,7 @@
    "sellers": 20,
    "affixRatio": 1.4444444444444444,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains 1 additional Azmeri Spirit"
   },
   {
@@ -5764,6 +6222,7 @@
    "sellers": 19,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Shrine"
   },
   {
@@ -5777,6 +6236,7 @@
    "sellers": 18,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains a Summoning Circle"
   },
   {
@@ -5790,6 +6250,7 @@
    "sellers": 17,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain a Summoning Circle"
   },
   {
@@ -5803,6 +6264,7 @@
    "sellers": 17,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "1 extra pack of Monsters around Vaal Beacons in Map"
   },
   {
@@ -5816,6 +6278,7 @@
    "sellers": 16,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
   {
@@ -5829,6 +6292,7 @@
    "sellers": 15,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 25-35% increased number of Rare Monsters"
   },
   {
@@ -5842,6 +6306,7 @@
    "sellers": 14,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
   {
@@ -5855,6 +6320,7 @@
    "sellers": 13,
    "affixRatio": 1.3888888888888888,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% increased chance Vaal Beacon Chests are Rare in Map"
   },
   {
@@ -5868,6 +6334,7 @@
    "sellers": 14,
    "affixRatio": 1.3333333333333333,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area contains an additional Rare Chest (2-3)"
   },
   {
@@ -5881,6 +6348,7 @@
    "sellers": 10,
    "affixRatio": 1.2222222222222223,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "8-12% increased Rarity of Items found in Map"
   },
   {
@@ -5894,6 +6362,7 @@
    "sellers": 18,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-35% increased Gold found in this Area (Gold Piles)"
   },
   {
@@ -5907,6 +6376,7 @@
    "sellers": 15,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
   {
@@ -5920,6 +6390,7 @@
    "sellers": 15,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
   {
@@ -5933,6 +6404,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-60% chance for an extra packs of Monsters around Vaal Beacons in Map"
   },
   {
@@ -5946,6 +6418,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Map has 15-20% increased Monster Rarity"
   },
   {
@@ -5959,6 +6432,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "10-30% increased Pack Size for Monsters around Vaal Beacons in Map"
   },
   {
@@ -5972,6 +6446,7 @@
    "sellers": 14,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "12-18% increased Experience gain"
   },
   {
@@ -5985,6 +6460,7 @@
    "sellers": 13,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Shrines"
   },
   {
@@ -5998,6 +6474,7 @@
    "sellers": 12,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "5-7% increased Pack Size in Map"
   },
   {
@@ -6011,6 +6488,7 @@
    "sellers": 11,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "10-25% chance to add a Vaal Beacon Unique Monster to the Map"
   },
   {
@@ -6024,6 +6502,7 @@
    "sellers": 11,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "25-50% increased chance Vaal Beacons summon additional Monsters in Map"
   },
   {
@@ -6037,6 +6516,7 @@
    "sellers": 9,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "Monsters have 10-15% increased Effectiveness"
   },
   {
@@ -6050,33 +6530,8 @@
    "sellers": 6,
    "affixRatio": 1.1111111111111112,
    "fewSamples": false,
+   "assumedRate": false,
    "label": "30-40% increased Quantity of Waystones found in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_1940774881",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 20,
-   "sellers": 19,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "5-10% chance to gain an additional Crystal from Vaal Beacons in Map"
-  },
-  {
-   "type": "Temple Tablet",
-   "rarity": "rare",
-   "statId": "explicit.stat_3371085671",
-   "floor": 1,
-   "adds": null,
-   "currency": "divine",
-   "listings": 20,
-   "sellers": 10,
-   "affixRatio": null,
-   "fewSamples": false,
-   "label": "Unique Monsters have 1 additional Rare Modifier"
   }
  ]
 }

@@ -15,7 +15,8 @@ const NOW = Date.parse('2026-08-29T13:00:00Z')
 
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 },
+  exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
 const common = { league: 'L', lookbackHours: 48, config, now: NOW }
 
@@ -150,7 +151,10 @@ test('modifiers sort by price, dearest first', () => withDb(db => {
   assert.deepEqual(floors, [...floors].sort((a, b) => b - a), floors.join(','))
 }))
 
-test('a modifier priced in another currency gets no verdict, rather than a guess',
+// A divine floor against an exalted baseline used to get no verdict at all, and
+// on the live file that hid the eleven dearest modifiers in the league. The
+// rate table compares them now, and the row says it leaned on the table.
+test('a modifier in a currency the rate table knows is compared, and says so',
   () => withDb(db => {
     seed(db, SAMPLE)
     seedQuestion(db, {
@@ -164,9 +168,33 @@ test('a modifier priced in another currency gets no verdict, rather than a guess
     })
     const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
     const dear = out.mods.find(m => m.hash === 'DEAR')
-    assert.equal(dear.currency, 'divine')
-    assert.equal(dear.affixRatio, null, 'no rate exists to divide one by the other')
-    assert.equal(bandFor(dear, config.walk), null,
+    assert.equal(dear.floor, 4, 'the price itself is untouched')
+    assert.equal(dear.currency, 'divine', 'and so is the currency it was quoted in')
+    assert.equal(dear.affixRatio, 400 / out.baseline.value, '4 divine is 400 exalted')
+    assert.equal(dear.assumedRate, true)
+    assert.equal(bandFor(dear, config.walk), 'high')
+  }))
+
+// The refusal is still there, it just moved: an unknown currency has no rate,
+// and inventing one would put a mirror-priced listing at the cheap end.
+test('a modifier in a currency the rate table has no entry for gets no verdict',
+  () => withDb(db => {
+    seed(db, SAMPLE)
+    seedQuestion(db, {
+      statId: 'ODD',
+      idFor: (i) => `odd${i}`,
+      rows: [
+        { amount: 2, account: 'x', currency: 'mirror', mods: ['ODD'] },
+        { amount: 3, account: 'y', currency: 'mirror', mods: ['ODD'] },
+        { amount: 4, account: 'z', currency: 'mirror', mods: ['ODD'] }
+      ]
+    })
+    const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
+    const odd = out.mods.find(m => m.hash === 'ODD')
+    assert.equal(odd.currency, 'mirror')
+    assert.equal(odd.affixRatio, null, 'the table holds no rate for it')
+    assert.equal(odd.delta, null)
+    assert.equal(bandFor(odd, config.walk), null,
       'incomparable is not the same as worthless')
   }))
 
@@ -326,26 +354,26 @@ test('mods gives the raw currency difference from the baseline', () => withDb(db
 
 // The cheap end of this cell is exalted, so the baseline is exalted. DEAR sits
 // on tablets dear enough to be priced in divine, and its own search returns
-// only those. The two floors cannot be compared without an exchange rate we
-// refuse to hold, so the difference is null rather than invented.
-test('a difference across two currencies is null, never a converted number',
-  () => withDb(db => {
-    seed(db, SAMPLE)
-    seedQuestion(db, {
-      statId: 'DEAR',
-      idFor: (i) => `dear${i}`,
-      rows: [
-        { amount: 2, account: 'x', currency: 'divine', mods: ['DEAR'] },
-        { amount: 3, account: 'y', currency: 'divine', mods: ['DEAR'] },
-        { amount: 4, account: 'z', currency: 'divine', mods: ['DEAR'] }
-      ]
-    })
-    const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
-    const dear = out.mods.find(m => m.hash === 'DEAR')
-    assert.equal(out.baseline.currency, 'exalted')
-    assert.equal(dear.currency, 'divine')
-    assert.equal(dear.delta, null)
-  }))
+// only those. The difference is denominated in exalted whatever the two sides
+// were quoted in, because walk.minAdds is a threshold in exalted and a number
+// that changes unit per cell cannot be compared to it.
+test('a difference across two currencies is stated in exalted', () => withDb(db => {
+  seed(db, SAMPLE)
+  seedQuestion(db, {
+    statId: 'DEAR',
+    idFor: (i) => `dear${i}`,
+    rows: [
+      { amount: 2, account: 'x', currency: 'divine', mods: ['DEAR'] },
+      { amount: 3, account: 'y', currency: 'divine', mods: ['DEAR'] },
+      { amount: 4, account: 'z', currency: 'divine', mods: ['DEAR'] }
+    ]
+  })
+  const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })
+  const dear = out.mods.find(m => m.hash === 'DEAR')
+  assert.equal(out.baseline.currency, 'exalted')
+  assert.equal(dear.currency, 'divine')
+  assert.equal(dear.delta, 400 - out.baseline.value)
+}))
 
 // A price we cannot compare to the blank tablet cannot be placed among the ones
 // we can, so it sorts after them rather than being ranked on a raw number that
@@ -353,13 +381,15 @@ test('a difference across two currencies is null, never a converted number',
 test('incomparable and unpriced modifiers sort after the comparable ones',
   () => withDb(db => {
     seed(db, SAMPLE)
+    // A currency with no rate, so it is genuinely incomparable. Divine would
+    // not do: the rate table places that one among the rest now.
     seedQuestion(db, {
       statId: 'DEAR',
       idFor: (i) => `dear${i}`,
       rows: [
-        { amount: 2, account: 'x', mods: ['DEAR'], currency: 'divine' },
-        { amount: 3, account: 'y', mods: ['DEAR'], currency: 'divine' },
-        { amount: 4, account: 'z', mods: ['DEAR'], currency: 'divine' }
+        { amount: 2, account: 'x', mods: ['DEAR'], currency: 'mirror' },
+        { amount: 3, account: 'y', mods: ['DEAR'], currency: 'mirror' },
+        { amount: 4, account: 'z', mods: ['DEAR'], currency: 'mirror' }
       ]
     })
     const out = mods(db, { ...common, type: 'Breach Tablet', rarity: 'Rare' })

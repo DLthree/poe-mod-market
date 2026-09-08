@@ -119,9 +119,15 @@ applies itself:
 | none | no comparable price at all | dim grey, italic |
 
 `low` and `none` are different answers. `low` means we measured it and it is not worth
-much. `none` means we cannot say: the modifier is unpriced, or priced in a currency the
-blank tablet is not, so no ratio exists. Set the thresholds in `config.json` under
-`walk`; they are published in the economy file so the page and the build cannot disagree.
+much. `none` means we cannot say: the modifier is unpriced, or priced in a currency
+`config.exchange` holds no rate for, so no ratio exists. Set the thresholds in
+`config.json` under `walk`; they are published in the economy file so the page and the
+build cannot disagree.
+
+`adds` is stated in exalted whatever the two sides were quoted in, because the 10 exalted
+minimum below is a threshold in exalted and a number that changed unit per cell could not
+be compared to it. On the divine-priced Expedition cells it used to be a divine number, so
+a modifier adding one divine failed a ten-exalted test it clears a hundred times over.
 
 **A thin sample never changes a band.** It once did, and that was a real bug: a Delirium
 rare modifier at 18x the blank tablet on four sellers came out identical to filler at
@@ -130,10 +136,11 @@ modifiers are precisely the ones with thin evidence, so suppressing them hid the
 worth finding. The evidence is now reported beside the price, as a dotted listing count
 with the numbers on hover, and it is yours to judge.
 
-The modifier list sorts by **price, dearest first** — never by band. Prices that cannot
-be compared to the blank tablet sort after the ones that can, and unpriced modifiers last,
-because ranking them on a raw number that means something else is how the list came to
-look alphabetically sorted.
+The modifier list sorts by **price in exalted, dearest first** — never by band. Prices in
+a currency with no rate sort after the ones that can be placed, and unpriced modifiers
+last, because ranking them on a raw number that means something else is how the list came
+to look alphabetically sorted. Exalted rather than the raw amount for the same reason: on
+the amount alone a one-divine modifier read as cheaper than a thirty-eight-exalted one.
 
 The 10 exalted minimum is the absolute companion, and it exists because a ratio against a
 junk floor is trivially cleared: where a blank tablet costs 1 exalted, 2.1x it is 2.1
@@ -205,8 +212,18 @@ Each setting cost a measurement:
   return it. Not the same axis as `lookbackHours`, which bounds how far back through our
   own archive we read — `docs/two-windows.md` before touching either.
 
-Nothing here converts a currency or holds an exchange rate. The server ranks exalted
-against divine itself when it sorts by price, and that ordering is stored as `rank`.
+**No stored price is ever converted.** A listing keeps the amount and currency GGG sent,
+and a floor comes from the `rank` the server's own price ordering gave it — GGG compares
+exalted against divine with a rate we do not hold, and that ordering is exact.
+
+`config.json` does hold one approximate table, under `exchange`, and it buys back exactly
+one thing: comparing a modifier to a baseline quoted in a different currency. Before it,
+the eleven dearest modifiers in Forbidden Rites published as "cannot say" and went
+uncoloured, which is the failure the band split exists to prevent. `affixRatio`, `adds`
+and the order of the list use it; nothing else does, and every row that leaned on it
+carries `assumedRate` so a number resting on a standing guess does not read the same as
+one resting on GGG's ordering. A currency the table has no entry for is still refused
+rather than assumed to be worth one exalted.
 
 ## Rate limits
 

@@ -16,7 +16,8 @@ const bandFor = (m, walk) => bandOf({ affixRatio: m.affixRatio, adds: m.delta },
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 },
+  exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
 const cell = { league: 'L', type: 'Breach Tablet', rarity: 'Rare' }
 const common = { ...cell, lookbackHours: 48, config, now: NOW }
@@ -60,8 +61,8 @@ test('a modifier is priced from its own question, not from the cell', () => with
 
 // The cheap end of this cell is exalted, so the baseline is. DEAR sits on
 // tablets dear enough to be priced in divine, and its own search returns only
-// those. Two currencies cannot be compared without a rate we refuse to hold.
-test('cellSummary gives no delta across two currencies', () => withDb(db => {
+// those. config.exchange compares them; the stored price is left alone.
+test('cellSummary compares two currencies through the rate table', () => withDb(db => {
   seedCell(db, { rows: SAMPLE })
   seedQuestion(db, {
     statId: 'DEAR',
@@ -75,11 +76,55 @@ test('cellSummary gives no delta across two currencies', () => withDb(db => {
   const out = cellSummary(db, common)
   assert.equal(out.baseline.currency, 'exalted')
   const dear = out.mods.find(m => m.hash === 'DEAR')
+  assert.equal(dear.floor, 4, 'the stored price is not converted')
   assert.equal(dear.currency, 'divine')
-  assert.equal(dear.delta, null, 'divine floor against an exalted baseline')
-  assert.equal(dear.affixRatio, null, 'no rate exists to divide one by the other')
-  assert.equal(bandFor(dear, config.walk), null,
+  assert.equal(dear.delta, 400 - out.baseline.value, 'the comparison is in exalted')
+  assert.equal(dear.affixRatio, 400 / out.baseline.value)
+  assert.equal(dear.assumedRate, true, 'the row admits the rate moved a number')
+  assert.equal(bandFor(dear, config.walk), 'high')
+}))
+
+// The refusal did not go away, it moved to currencies the table has no entry
+// for. A rate of 1 assumed for an unknown one would put a mirror at the cheap
+// end of a cell.
+test('cellSummary still refuses a currency it holds no rate for', () => withDb(db => {
+  seedCell(db, { rows: SAMPLE })
+  seedQuestion(db, {
+    statId: 'ODD',
+    idFor: (i) => `odd${i}`,
+    rows: [
+      row(2, ['ODD'], 'x', { currency: 'mirror' }),
+      row(3, ['ODD'], 'y', { currency: 'mirror' }),
+      row(4, ['ODD'], 'z', { currency: 'mirror' })
+    ]
+  })
+  const odd = cellSummary(db, common).mods.find(m => m.hash === 'ODD')
+  assert.equal(odd.delta, null)
+  assert.equal(odd.affixRatio, null)
+  assert.equal(bandFor(odd, config.walk), null,
     'incomparable is not the same as worthless')
+}))
+
+// The whole reason `adds` is denominated in exalted. On a divine-priced cell it
+// used to be a divine number compared against walk.minAdds, a threshold written
+// in exalted, so a modifier adding one divine failed a ten-exalted test.
+test('a divine-priced cell states what a modifier adds in exalted', () => withDb(db => {
+  seedCell(db, {
+    rows: [
+      row(2, [], 'a', { currency: 'divine' }),
+      row(2, [], 'b', { currency: 'divine' }),
+      row(2, [], 'c', { currency: 'divine' }),
+      row(3, ['DEAR'], 'x', { currency: 'divine' }),
+      row(3, ['DEAR'], 'y', { currency: 'divine' }),
+      row(3, ['DEAR'], 'z', { currency: 'divine' })
+    ]
+  })
+  const out = cellSummary(db, common)
+  assert.equal(out.baseline.currency, 'divine')
+  const dear = out.mods.find(m => m.hash === 'DEAR')
+  assert.equal(dear.delta, 100, 'one divine over the baseline, said as 100 exalted')
+  assert.equal(dear.affixRatio, 1.5, 'and the ratio is unchanged, the rate cancels')
+  assert.equal(dear.assumedRate, true)
 }))
 
 test('cellSummary puts the observed roll band into the label', () => withDb(db => {

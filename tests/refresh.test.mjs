@@ -9,7 +9,8 @@ import { withDb, seedCell } from './helpers.mjs'
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
   floor: { strategy: 'nth-cheapest', n: 3 },
-  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 }
+  walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 },
+  exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
 const common = { league: 'L', type: 'Breach Tablet', rarity: 'rare',
   lookbackHours: 48, config, now: NOW }
@@ -49,23 +50,35 @@ test('a modifier sitting exactly on the threshold is kept', () => withDb(db => {
 
 // THE LIMIT THIS FUNCTION HAS, WRITTEN DOWN AS A TEST.
 //
-// A modifier priced in a currency the blank tablet is not has no ratio at all,
-// so a quick pass cannot see it and will not re-ask about it. It keeps its old
-// floor until a full pass. That is the trade, and it is why --quick is a
-// refresh and not a cheaper full pass.
+// A modifier with no ratio at all is invisible to a quick pass and will not be
+// re-asked; it keeps its old floor until a full pass. Since config.exchange
+// arrived that means a currency the rate table has no entry for, not merely a
+// different one from the baseline's.
 test('a modifier with no comparable ratio is invisible to a quick pass', () => withDb(db => {
   seedCell(db, {
     rows: [
       ...['A', 'B', 'C', 'D'].map(a => ({ account: a, amount: 10 })),
-      // Dearer than the blank rows by raw amount, so the baseline stays
-      // exalted: the baseline is the cheapest tablet of any kind, and a cheap
-      // divine number would take it over and make the currencies agree again.
+      ...['E', 'F', 'G', 'H'].map(a => ({
+        account: a, amount: 40, currency: 'mirror', mods: ['explicit.odd']
+      }))
+    ]
+  })
+  assert.deepEqual(quickAffixes(db, { ...common, minRatio: 1 }), [])
+}))
+
+// And the counterpart: a divine modifier on an exalted cell IS selected now,
+// which is most of the point. Before the rate table these were the dearest
+// modifiers in the league and no pass re-asked about any of them.
+test('a modifier priced in divine on an exalted cell is selected', () => withDb(db => {
+  seedCell(db, {
+    rows: [
+      ...['A', 'B', 'C', 'D'].map(a => ({ account: a, amount: 10 })),
       ...['E', 'F', 'G', 'H'].map(a => ({
         account: a, amount: 40, currency: 'divine', mods: ['explicit.divine']
       }))
     ]
   })
-  assert.deepEqual(quickAffixes(db, { ...common, minRatio: 1 }), [])
+  assert.deepEqual(quickAffixes(db, { ...common, minRatio: 1.5 }), ['explicit.divine'])
 }))
 
 // Zero or missing would quietly select everything, which is a full pass wearing

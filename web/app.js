@@ -14,6 +14,7 @@ import { tabletRegex } from './lib/regex-keys.mjs'
 import { TABLET_TYPES, RARITIES } from './lib/poe2.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
+import { inExalted } from './lib/exchange.mjs'
 
 // The colour rule, applied here rather than baked into the file, so the same
 // module decides it for the page and for the tests. `null` back from bandOf
@@ -32,6 +33,12 @@ const short = { exalted: 'ex', divine: 'div', chaos: 'ch' }
 const money = (n, cur) => (n === null || n === undefined
   ? '—'
   : `${Number(n) < 10 ? Number(n).toFixed(1) : Math.round(n)} ${short[cur] || cur || '?'}`)
+
+// "1 div = 100 ex", for the tooltip on any row whose comparison used the table.
+const rateLine = () => Object.entries(state.eco.exchange)
+  .filter(([name]) => name !== 'exalted')
+  .map(([name, worth]) => `1 ${short[name] || name} = ${worth} ex`)
+  .join(', ')
 
 const state = {
   eco: null,
@@ -133,8 +140,14 @@ function renderMeta () {
 // dear is the kind worth picking up at all, so that is the order the grid reads
 // in. A kind we hold no plain price for sorts last rather than at either
 // extreme: it is unknown, not free and not priceless.
+//
+// In exalted, because these prices are not all in one currency. On the raw
+// amount a two-divine tablet read as cheaper than a forty-exalted one.
 const byBlankPrice = (a, b) => {
-  const price = (type) => cellOf(type, 'normal')?.floor
+  const price = (type) => {
+    const cell = cellOf(type, 'normal')
+    return cell ? inExalted(cell.floor, cell.currency, state.eco.exchange) : null
+  }
   return (price(b) ?? -Infinity) - (price(a) ?? -Infinity)
 }
 
@@ -253,6 +266,10 @@ function render () {
     // is how a two-seller asking price gets mistaken for a market.
     const why = []
     if (m.affixRatio !== null) why.push(`${m.affixRatio.toFixed(2)}x a blank tablet`)
+    if (m.assumedRate) {
+      why.push(`compared at ${rateLine()}, an approximate rate that drifts — ` +
+        'the price itself is exactly what the market said')
+    }
     if (m.fewSamples) {
       why.push(`only ${m.listings} listings from ${m.sellers} sellers — ` +
         `under ${state.eco.walk.minListings}/${state.eco.walk.minSellers}, so the price is thinly evidenced`)

@@ -2,8 +2,8 @@
  "league": "Forbidden Rites",
  "syncedAt": "2026-09-09T00:25:41.497Z",
  "walk": {
-  "minListings": 12,
-  "minSellers": 5,
+  "minListings": 8,
+  "minSellers": 2,
   "minAdds": 10,
   "midVsBlank": 1.5,
   "highVsBlank": 2.1
@@ -285,7 +285,7 @@
    "listings": 10,
    "sellers": 10,
    "affixRatio": 2.3076923076923075,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
@@ -299,7 +299,7 @@
    "listings": 8,
    "sellers": 8,
    "affixRatio": 2.3076923076923075,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area contains an additional Strongbox"
   },
@@ -1209,7 +1209,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 2.142857142857143,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area contains an additional Essence"
   },
@@ -1223,7 +1223,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 2.142857142857143,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area contains a Summoning Circle"
   },
@@ -1489,7 +1489,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 1.1428571428571428,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
@@ -1503,7 +1503,7 @@
    "listings": 10,
    "sellers": 10,
    "affixRatio": 1.1428571428571428,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Strongboxes"
   },
@@ -2105,7 +2105,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 1.4444444444444444,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
@@ -2945,7 +2945,7 @@
    "listings": 8,
    "sellers": 8,
    "affixRatio": 15,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Rogue Exiles"
   },
@@ -2959,7 +2959,7 @@
    "listings": 9,
    "sellers": 9,
    "affixRatio": 10,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Unique Monsters have 1 additional Rare Modifier"
   },
@@ -2987,7 +2987,7 @@
    "listings": 9,
    "sellers": 9,
    "affixRatio": 2.5,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area is inhabited by 1 additional Rogue Exile"
   },
@@ -3043,7 +3043,7 @@
    "listings": 9,
    "sellers": 9,
    "affixRatio": 2,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area contains an additional Strongbox"
   },
@@ -4625,7 +4625,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 4.285714285714286,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": true,
    "label": "Area has 70-100% increased chance to contain Essences"
   },
@@ -4737,7 +4737,7 @@
    "listings": 11,
    "sellers": 11,
    "affixRatio": 1.4285714285714286,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area has 70-100% increased chance to contain Azmeri Spirits"
   },
@@ -6319,7 +6319,7 @@
    "listings": 9,
    "sellers": 9,
    "affixRatio": 3.4482758620689653,
-   "fewSamples": true,
+   "fewSamples": false,
    "assumedRate": false,
    "label": "Area contains an additional Essence"
   },

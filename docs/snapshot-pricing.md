@@ -94,9 +94,16 @@ has nothing to decide.
 
 ## What it costs
 
-A snapshot is `perCell` rows deep, currently 20. `docs/HANDOFF.md` already pairs
-this change with raising `perCell` to 100, and this is why: depth stops coming
-free from merging.
+A snapshot is `perCell` rows deep, currently 10. Depth stops coming free from
+merging, so an early note here argued for raising it to 100. The rate limit
+settled it the other way on 2026-09-08: the collector fetches ten ids at a time,
+GGG allows an IP 1000 fetches in six hours, and a full pass at 20 needed 1019 and
+stalled for six hours waiting the window out. At 10 it costs about 517.
+
+Giving up that depth cost less than it looks. Across the 517 snapshots of that
+pass, the cheapest ten rows still held a median of nine distinct sellers, and only
+0.2% held fewer than the three `nth-cheapest-seller` reads. The floor rests on
+sellers, not on rows, and the sellers are at the cheap end.
 
 `adds` still cannot be computed across currencies. If a baseline snapshot's floor
 lands on an exalted listing and a modifier snapshot's lands on a divine one, the

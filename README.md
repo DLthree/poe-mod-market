@@ -106,7 +106,11 @@ point is that neither one is allowed to speak for the other.
 
 `affixRatio` is what it is **worth**: its floor over the floor of a blank tablet of the
 same type and rarity. `fewSamples` is how much **evidence** stands behind that price:
-true below 12 listings or 5 distinct sellers.
+true below 8 listings or 2 distinct sellers.
+
+Both thresholds sit below `perCell`, the 10 listings one search keeps, so the flag means
+the market held few listings and not that we only looked at a few. They were 12 and 5 when
+a search kept 20; a threshold above the cap would flag every row in the file.
 
 Bands come from `affixRatio` alone, in `lib/bands.mjs`, which the page imports and
 applies itself:

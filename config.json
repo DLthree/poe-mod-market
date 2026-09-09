@@ -2,16 +2,18 @@
   "league": "Forbidden Rites",
   "tradeWindow": "3days",
   "lookbackHours": 72,
-  "perCell": 20,
+  "_perCell": "How many listings one search keeps. The collector fetches them ten ids at a time, so this is the fetch bill: 11 or more costs two fetches per search, 10 or fewer costs one. GGG allows an IP 1000 fetches in six hours, and at 20 a full pass needed 1019 and stalled for six hours waiting out the window. At 10 the same pass costs about 517. Depth is cheap to give up here because it is not where the sellers are: across 517 snapshots the cheapest ten rows still held a median of nine distinct sellers, and only 0.2% held fewer than the three the floor rule reads.",
+  "perCell": 10,
   "_floor": "Which rule decides a pool's floor price. Swap `strategy` freely; see lib/floor.mjs for the list. Nothing else in the code changes.",
   "floor": {
     "strategy": "nth-cheapest-seller",
     "n": 3,
     "windowHours": 24
   },
+  "_thin": "minListings and minSellers set fewSamples and nothing else; they never change a price or a band. Both are below perCell on purpose, so the flag means the MARKET held few listings rather than that we only looked at a few. They moved from 12 and 5 when perCell dropped from 20 to 10, because a threshold above the cap would flag every row in the file.",
   "walk": {
-    "minListings": 12,
-    "minSellers": 5,
+    "minListings": 8,
+    "minSellers": 2,
     "minLift": 1.3,
     "minAdds": 10,
     "midVsBlank": 1.5,

@@ -40,7 +40,21 @@ if (full && !has('i-mean-it')) {
 }
 
 const testSet = config.testSet
-const types = full ? TABLET_TYPES : testSet.types
+
+// `--types "Temple Tablet"` narrows a pass to one tablet kind, the same lever as
+// --rarities and for the same reason. A pass that stops partway leaves one cell
+// short, and re-running the whole thing to collect it spends 500 searches to
+// buy 30.
+const askedTypes = flag('types', null)
+const types = askedTypes
+  ? askedTypes.split(',').map(t => t.trim()).filter(Boolean)
+  : (full ? TABLET_TYPES : testSet.types)
+const unknownTypes = types.filter(t => !TABLET_TYPES.includes(t))
+if (unknownTypes.length) {
+  console.error(`Unknown tablet type ${unknownTypes.map(t => JSON.stringify(t)).join(', ')}. ` +
+    `Known: ${TABLET_TYPES.join(', ')}. Nothing has run.`)
+  process.exit(2)
+}
 
 // A quick pass re-asks only the modifiers the LAST pass measured at this ratio
 // or better. It refreshes; it cannot discover. See lib/refresh.mjs.

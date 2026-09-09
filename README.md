@@ -49,11 +49,21 @@ searches and under a minute:
 node steps/collect.mjs                                        the test set
 node steps/collect.mjs --full --i-mean-it                     every cell
 node steps/collect.mjs --full --i-mean-it --rarities magic    one rarity  (181 searches)
+node steps/collect.mjs --full --i-mean-it --types "Temple Tablet"    one tablet kind
 ```
 
-Use `--rarities` when only part of the data is stale: re-asking about rares that are a few
-hours old spends 200 searches to learn what you already know. After collecting this way,
+Use `--rarities` or `--types` when only part of the data is stale: re-asking about rares
+that are a few hours old spends 200 searches to learn what you already know, and a pass
+that stops one cell short should not cost 500 searches to finish. Both take a comma
+separated list and refuse a name the game cannot supply. After collecting this way,
 rebuild the derived table with `node steps/build-mod-table.mjs`.
+
+**GGG counts searches and fetches separately, and both caps matter.** An IP may make 600
+searches and 1000 fetches in any six hours. A full pass is about 520 searches, and at
+`perCell` 10 about 520 fetches, so searches are the binding limit and two full passes
+inside one six-hour window will not fit. A pass that runs into the cap does not fail: the
+limiter parks until the window rolls, which on 2026-09-08 meant a six-hour pause in the
+middle of a run.
 
 ### The quick pass
 

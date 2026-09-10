@@ -5,7 +5,7 @@
 // stops rather than leaving half-updated data behind.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -185,4 +185,37 @@ test('a dry run writes nothing and makes no request', () => {
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }
+})
+
+// NEVER import steps/collect.mjs to check it loads: it runs on import and
+// starts a real collection. These spawn it with arguments it must refuse, so
+// the process exits before it ever constructs a client.
+const collect = (args) => spawnSync('node',
+  [join(process.cwd(), 'steps', 'collect.mjs'), ...args], { encoding: 'utf8' })
+
+test('an unknown kind is refused before anything is searched', () => {
+  const r = collect(['--kind', 'tablets'])
+  assert.equal(r.status, 2)
+  assert.match(r.stderr, /Unknown item kind "tablets"/)
+  assert.match(r.stderr, /tablet, jewel/)
+  assert.match(r.stderr, /Nothing has run/)
+})
+
+// The type list is the KIND's, so a tablet name under --kind jewel is a mistake
+// worth catching before it spends a search on a market that cannot answer.
+test('a type belonging to another kind is refused', () => {
+  const r = collect(['--kind', 'jewel', '--full', '--i-mean-it', '--types', 'Breach Tablet'])
+  assert.equal(r.status, 2)
+  assert.match(r.stderr, /Unknown jewel type "Breach Tablet"/)
+  assert.match(r.stderr, /Emerald, Ruby, Sapphire/)
+})
+
+// A kind with no test set cannot run the cheap default. Falling through to a
+// full pass would spend most of a day's allowance on a flag nobody typed.
+test('a kind with no test set refuses the cheap run and says why', () => {
+  const r = collect(['--kind', 'jewel'])
+  assert.equal(r.status, 2)
+  assert.match(r.stderr, /no test set for jewel/)
+  assert.match(r.stderr, /config\.json/)
+  assert.match(r.stderr, /Nothing has run/)
 })

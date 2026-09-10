@@ -1,16 +1,18 @@
 #!/usr/bin/env node
-// Phase 1. Collects tablet listings into the SQLite archive.
+// Phase 1. Collects listings of ONE ITEM KIND into the SQLite archive.
 //
-// The default is the TEST SET: one tablet type and ten modifiers. A full pass
-// costs about an hour and most of a day's rate allowance, so it needs --full
-// AND --i-mean-it. Nothing here runs a full pass by accident.
+// `--kind` picks the kind and defaults to tablet, so every command line in
+// README.md means what it always meant. The default scope is the TEST SET for
+// that kind: one type and ten modifiers. A full pass costs about an hour and
+// most of a day's rate allowance, so it needs --full AND --i-mean-it. Nothing
+// here runs a full pass by accident.
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dbPath, cacheDir } from '../lib/paths.mjs'
 import { createProgress } from '../lib/progress.mjs'
 import { TradeClient } from '../lib/trade-client.mjs'
 import { API_BASE, REALM, RARITIES, MODIFIED_RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
-import { TABLET_TYPES, ITEM_KINDS } from '../lib/item-kinds.mjs'
+import { kindByKey } from '../lib/item-kinds.mjs'
 import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
@@ -40,20 +42,41 @@ if (full && !has('i-mean-it')) {
   process.exit(1)
 }
 
-const testSet = config.testSet
+// Which ITEM KIND this pass collects. The default keeps every command line in
+// README.md meaning exactly what it meant before there were two kinds.
+const kindKey = flag('kind', 'tablet')
+let kind
+try {
+  kind = kindByKey(kindKey)
+} catch (err) {
+  console.error(`${err.message} Nothing has run.`)
+  process.exit(2)
+}
 
-// `--types "Temple Tablet"` narrows a pass to one tablet kind, the same lever as
-// --rarities and for the same reason. A pass that stops partway leaves one cell
-// short, and re-running the whole thing to collect it spends 500 searches to
-// buy 30.
+// The test set is per kind. A kind with none cannot run the cheap default, and
+// falling through to a full pass would spend most of a day's allowance on a
+// flag the caller never typed.
+const testSet = config.testSet?.[kindKey] ?? null
+if (!full && !testSet) {
+  console.error(
+    `config.json holds no test set for ${kindKey}, so there is no cheap run for it. ` +
+    `Add testSet.${kindKey}, or ask for a full pass with --full --i-mean-it. ` +
+    'Nothing has run.')
+  process.exit(2)
+}
+
+// `--types "Temple Tablet"` narrows a pass to one type of the kind, the same
+// lever as --rarities and for the same reason. A pass that stops partway leaves
+// one cell short, and re-running the whole thing to collect it spends 500
+// searches to buy 30.
 const askedTypes = flag('types', null)
 const types = askedTypes
   ? askedTypes.split(',').map(t => t.trim()).filter(Boolean)
-  : (full ? TABLET_TYPES : testSet.types)
-const unknownTypes = types.filter(t => !TABLET_TYPES.includes(t))
+  : (full ? kind.types : testSet.types)
+const unknownTypes = types.filter(t => !kind.types.includes(t))
 if (unknownTypes.length) {
-  console.error(`Unknown tablet type ${unknownTypes.map(t => JSON.stringify(t)).join(', ')}. ` +
-    `Known: ${TABLET_TYPES.join(', ')}. Nothing has run.`)
+  console.error(`Unknown ${kindKey} type ${unknownTypes.map(t => JSON.stringify(t)).join(', ')}. ` +
+    `Known: ${kind.types.join(', ')}. Nothing has run.`)
   process.exit(2)
 }
 
@@ -88,9 +111,9 @@ if (unknown.length) {
 
 console.log(full
   ? (minRatio === null
-      ? `FULL PASS: ${types.length} types x ${rarities.join('/')}`
+      ? `FULL PASS: ${kindKey} — ${types.length} types x ${rarities.join('/')}`
       : `QUICK PASS: every baseline, plus the modifiers last measured at ${minRatio}x or better`)
-  : `test set: ${types.join(', ')} x ${rarities.join('/')}, ` +
+  : `test set: ${kindKey} — ${types.join(', ')} x ${rarities.join('/')}, ` +
     `${testSet.affixes.length} modifiers`)
 
 const secrets = JSON.parse(readFileSync(here('../secrets.json'), 'utf8'))
@@ -161,7 +184,7 @@ if (only !== 'affixes') {
   activeBar = useBar
     ? createProgress({ label: 'collecting', total: types.length * rarities.length })
     : null
-  add(await sweepPools({ client, db, index, kind: ITEM_KINDS.tablet, league, types, rarities, perCell,
+  add(await sweepPools({ client, db, index, kind, league, types, rarities, perCell,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }
@@ -190,7 +213,7 @@ if (only !== 'pools') {
     }
   }
   activeBar = useBar ? createProgress({ label: 'collecting', total: affixTotal }) : null
-  add(await sweepAffixes({ client, db, index, kind: ITEM_KINDS.tablet, league, types, rarities, perCell, chooseAffixes,
+  add(await sweepAffixes({ client, db, index, kind, league, types, rarities, perCell, chooseAffixes,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }

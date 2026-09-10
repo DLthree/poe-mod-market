@@ -167,8 +167,16 @@ function makeHandleEconomy ({ leagues, config, text }) {
 // carrying its own copy of the join. Both files are plain constants and pure
 // functions with no node-only import, so a browser can load them as they are.
 // A whitelist, not a directory: nothing else under lib/ is reachable.
+//
+// tests/web.test.mjs holds this equal to what web/app.js actually imports, and
+// equal to the list steps/build-site.mjs copies into site/lib/. Two hand-kept
+// lists drift, and these two did: this one named three modules while the page
+// imported five, so the served page 404ed on bands.mjs and exchange.mjs and
+// could not boot at all. The published page worked, because the build copied
+// all five — the exact inversion of the rule this file exists to keep.
 const BROWSER_MODULES = new Set([
-  '/lib/regex-keys.mjs', '/lib/poe2.mjs', '/lib/trade-url.mjs'
+  '/lib/regex-keys.mjs', '/lib/poe2.mjs', '/lib/trade-url.mjs',
+  '/lib/bands.mjs', '/lib/exchange.mjs'
 ])
 
 // THE STATIC SURFACE. Exactly the files `steps/build-site.mjs` writes, at

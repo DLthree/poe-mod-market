@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { openDb } from '../lib/db.mjs'
 import { cacheDir } from '../lib/paths.mjs'
-import { slug, PATHS, leaguesFile } from '../lib/site.mjs'
+import { slug, PATHS, leaguesFile, renderKindPage, renderIndex } from '../lib/site.mjs'
+import { ITEM_KINDS, KIND_KEYS } from '../lib/item-kinds.mjs'
 import { bandOf } from '../lib/bands.mjs'
 import { buildSite } from '../steps/build-site.mjs'
 import { seedCell } from './helpers.mjs'
@@ -98,14 +99,78 @@ const withBuild = async (t, fn) => {
   }
 }
 
+// ONE PAGE, ONE TEMPLATE. web/index.html and web/jewels.html were two 59-line
+// files differing in five lines, every one of them derivable from the kind. A
+// third kind meant a third copy, and a fix to one page silently missed the other.
+test('every kind renders its own page from the one template', () => {
+  for (const kind of Object.values(ITEM_KINDS)) {
+    const html = renderKindPage(kind)
+    assert.match(html, new RegExp(`<body[^>]*data-kind="${kind.key}"`), kind.key)
+    assert.match(html, new RegExp(`<title>${kind.title}</title>`), kind.key)
+    assert.match(html, /<script type="module" src="\.\/app\.js">/, kind.key)
+    assert.match(html, /href="\.\/style\.css"/, kind.key)
+  }
+})
+
+// Each page has to be reachable from the others, or a kind is published and
+// never found. With two kinds that is one link each; the template does not care
+// how many there are.
+test('a kind page links to every other kind and not to itself', () => {
+  for (const kind of Object.values(ITEM_KINDS)) {
+    const html = renderKindPage(kind)
+    assert.doesNotMatch(html, new RegExp(`href="\\./${kind.page}"`),
+      `${kind.key} links to itself`)
+    for (const other of Object.values(ITEM_KINDS)) {
+      if (other.key === kind.key) continue
+      assert.match(html, new RegExp(`href="\\./${other.page}"`),
+        `${kind.key} does not link to ${other.key}`)
+    }
+  }
+})
+
+// No kind's page may name another kind ANYWHERE except its sibling link. That was
+// the whole failure mode of two hand-kept copies: "pick a tablet type below" sat
+// on the jewel page for as long as somebody forgot to change it.
+test('a kind page names no other kind outside its sibling link', () => {
+  for (const kind of Object.values(ITEM_KINDS)) {
+    const body = renderKindPage(kind).replace(/<a class="sibling"[\s\S]*?<\/a>/g, '')
+    for (const other of Object.values(ITEM_KINDS)) {
+      if (other.key === kind.key) continue
+      assert.doesNotMatch(body, new RegExp(other.label, 'i'),
+        `the ${kind.key} page says "${other.label}"`)
+      assert.doesNotMatch(body, new RegExp(other.page.replace('.', '\\.')),
+        `the ${kind.key} page links to ${other.page}`)
+    }
+  }
+})
+
+// The root has to keep working: it is the published URL. It sends the reader to
+// the first kind in the registry rather than being a third copy of a page.
+test('the root points at the first kind and nowhere else', () => {
+  const html = renderIndex()
+  const first = ITEM_KINDS[KIND_KEYS[0]]
+  assert.match(html, new RegExp(`\\./${first.page}`))
+  assert.match(html, /http-equiv="refresh"/, 'a reader with no JavaScript must still arrive')
+})
+
 // THE RULE THIS FILE EXISTS FOR. GitHub Pages serves files, so every path the
 // page asks for has to be one. If a name here drifts from web/app.js, the
 // published page 404s while the local server still works.
 test('the build writes every file the page asks for', (t) => withBuild(t, ({ out }) => {
-  for (const f of ['index.html', 'app.js', 'style.css', '.nojekyll',
+  const pages = Object.values(ITEM_KINDS).map(k => k.page)
+  for (const f of ['index.html', ...pages, 'app.js', 'style.css', '.nojekyll',
                    'lib/regex-keys.mjs', 'lib/poe2.mjs', 'lib/trade-url.mjs', 'lib/bands.mjs',
                    PATHS.leagues, PATHS.economy('L', 'tablet'), PATHS.fragments('L', 'tablet')]) {
     assert.ok(existsSync(join(out, f)), `missing ${f}`)
+  }
+}))
+
+// The template is an input to the build, not an output. Publishing it would put
+// an unrendered page with {{tokens}} in it on the site.
+test('the template itself is not published', (t) => withBuild(t, ({ out }) => {
+  assert.equal(existsSync(join(out, 'page.html')), false)
+  for (const page of Object.values(ITEM_KINDS).map(k => k.page)) {
+    assert.doesNotMatch(readFileSync(join(out, page), 'utf8'), /\{\{/, `${page} has an unfilled token`)
   }
 }))
 

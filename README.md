@@ -67,7 +67,9 @@ Use `--rarities` or `--types` when only part of the data is stale: re-asking abo
 that are a few hours old spends 200 searches to learn what you already know, and a pass
 that stops one cell short should not cost 500 searches to finish. Both take a comma
 separated list and refuse a name the game cannot supply. After collecting this way,
-rebuild the derived table with `node steps/build-mod-table.mjs`.
+rebuild the derived table with `node steps/build-mod-table.mjs --kind <key>`. That table is
+per league AND kind, like everything else: it walks only that kind's types and writes
+`mod-table-<league>-<kind>.json`.
 
 ### Two item kinds
 
@@ -127,9 +129,11 @@ economy file and one regex fragment per modifier. Pick a type, and the modifiers
 money are already ticked; the box at the top is the stash search, under the game's
 250-character limit.
 
-There is one page per item kind — `index.html` for tablets, `jewels.html` for jewels — and
-they load the same script. A page names its kind on its own `<body>`, and the grid, the
-headings and the trade link all come from that.
+There is one page per item kind — `tablets.html` and `jewels.html` — and both are
+GENERATED from one template, `web/page.html`, by `lib/site.mjs`. The kinds are siblings:
+neither has a hand-written page of its own, and a third kind needs no new HTML. A page
+names its kind on its own `<body>`, and the grid, the headings and the trade link all come
+from that. `index.html` is the root and sends you to the first kind in the registry.
 
 The trade link asks for **any one** of the ticked modifiers, not all of them. An item
 carrying every modifier you ticked usually does not exist, and it is not what any price
@@ -202,16 +206,20 @@ The pages are static. They fetch JSON files and no API at all, so they can be
 served from anywhere that serves files:
 
 ```
-index.html                            tablet prices
+index.html                            the root, sends you to the first kind
+tablets.html                          tablet prices
 jewels.html                           jewel prices
 data/leagues.json                     which leagues exist, and which kinds each holds
 data/eco-<league>-<kind>.json         every cell and every modifier, summarised
 data/fragments-<league>-<kind>.json   one regex fragment per modifier
 ```
 
-Both pages load one `app.js` and differ in a `data-kind` attribute on `<body>`. A page
-whose kind has no collected league says so rather than fetching a file that was never
-written, which is why `leagues.json` lists the leagues per kind.
+Every kind page is rendered from `web/page.html`, loads one `app.js`, and differs only in
+a `data-kind` attribute on `<body>`. The template is an INPUT: the build does not publish
+it and the dev server refuses to serve it, so a page with unfilled tokens cannot exist
+locally and be missing from the published site. A page whose kind has no collected league
+says so rather than fetching a file that was never written, which is why `leagues.json`
+lists the leagues per kind.
 
 `node cli.mjs build` writes those, the pages, and the modules they import, into
 `site/`. Every path in a page is relative, so the same files work at a domain

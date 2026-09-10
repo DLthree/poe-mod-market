@@ -85,9 +85,11 @@ function parseUpdateFlags (argv) {
 // second implementation that can drift from the one it copies.
 function planUpdateSteps (opts) {
   const steps = []
+  // Every step of an update is about ONE kind, so the kind is decided once here
+  // and threaded through all of them. The default matches steps/collect.mjs.
+  const kind = opts.kind ?? 'tablet'
   if (!opts.offline) {
     const quick = opts.quick ? ['--min-ratio', String(config.quick.minRatio)] : []
-    const kind = opts.kind ?? 'tablet'
     steps.push({
       name: opts['pools-only']
         ? `collect the ${kind} baselines`
@@ -101,7 +103,10 @@ function planUpdateSteps (opts) {
   if (opts.offline || opts.replay) {
     steps.push({ name: 'replay the archive', script: 'steps/rederive.mjs', args: [] })
   }
-  steps.push({ name: 'rebuild the modifier table', script: 'steps/build-mod-table.mjs', args: [] })
+  // The table is per kind, like the collection above it. Without the kind this
+  // step walked every listing in the league and overwrote the other kind's table.
+  steps.push({ name: `rebuild the ${kind} modifier table`,
+    script: 'steps/build-mod-table.mjs', args: ['--kind', kind] })
   return steps
 }
 

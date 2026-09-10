@@ -21,7 +21,7 @@ const USAGE = `Check stored rows against what GGG itself sent. No network call.
   --data <dir>      override the data directory`
 
 /**
- * Audits the tablet database: every check compares a derived column against
+ * Audits the price database: every check compares a derived column against
  * something GGG itself sent, so a disagreement is our bug, not a market fact.
  * @param {string[]} argv - Flags following the `audit` subcommand.
  */

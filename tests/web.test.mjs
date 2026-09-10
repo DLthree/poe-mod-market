@@ -26,13 +26,12 @@ test('the stylesheet makes [hidden] win over any display rule', () => {
     'without !important an author display rule keeps a hidden element on screen')
 })
 
-// Two pages, one script. The kind is the only thing that differs, and it
-// arrives as a data attribute rather than as a second copy of the logic.
-test('every page names its kind, and the script reads it from the page', () => {
-  for (const [file, key] of [['index.html', 'tablet'], ['jewels.html', 'jewel']]) {
-    assert.match(read(file), new RegExp(`<body[^>]*data-kind="${key}"`), file)
-    assert.match(read(file), /<script type="module" src="\.\/app\.js">/, file)
-  }
+// ONE TEMPLATE, ONE SCRIPT. The kind arrives as a data attribute rather than as a
+// second copy of the logic, and the pages themselves are generated — the tests
+// for that live in tests/site.test.mjs, beside the renderer.
+test('the template carries the kind, and the script reads it from the page', () => {
+  assert.match(read('page.html'), /<body[^>]*data-kind="\{\{kind\}\}"/)
+  assert.match(read('page.html'), /<script type="module" src="\.\/app\.js">/)
   assert.match(read('app.js'), /document\.body\.dataset\.kind/)
 })
 
@@ -44,11 +43,12 @@ test('the page holds no tablet literal', () => {
   assert.doesNotMatch(code, /' Tablet'/)
 })
 
-// Each page has to be reachable from the other, or the second one is published
-// and never found.
-test('each page links to its sibling', () => {
-  assert.match(read('index.html'), /href="\.\/jewels\.html"/)
-  assert.match(read('jewels.html'), /href="\.\/index\.html"/)
+// The template must not name a kind at all. Every kind-specific word in it is a
+// token, so a third kind needs no new HTML and no page can be forgotten.
+test('the template names no kind of its own', () => {
+  const html = read('page.html').replace(/<!--[\s\S]*?-->/g, '')
+  assert.doesNotMatch(html, /tablet/i)
+  assert.doesNotMatch(html, /jewel/i)
 })
 
 // THE PAGE MUST BE THE SAME PAGE, served or published. The dev server

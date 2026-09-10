@@ -1,7 +1,8 @@
-// A local, read-only web view of the tablet database.
+// A local, read-only web view of the price database, for every item kind.
 //
 // THIS SERVER NEVER CALLS GGG. It opens the SQLite file, answers from it, and
-// serves four static files. steps/collect.mjs holds the session and runs separately.
+// serves the generated pages and the static assets beside them.
+// steps/collect.mjs holds the session and runs separately.
 // That is what keeps the POESESSID out of the browser and means a future
 // visitor cannot spend the rate-limit allowance.
 //
@@ -20,9 +21,11 @@ import { listLeagues } from '../lib/leagues.mjs'
 import { meta, mods, price } from '../lib/api.mjs'
 import { buildFragments } from '../lib/regex-keys.mjs'
 import { economyFile, economyPath } from '../lib/economy.mjs'
-import { PATHS, leaguesFile, leagueFiles } from '../lib/site.mjs'
+import {
+  PATHS, leaguesFile, leagueFiles, renderKindPage, renderIndex, NOT_PUBLISHED
+} from '../lib/site.mjs'
 import { validateTradeWindow } from '../lib/poe2.mjs'
-import { KIND_KEYS, kindByKey, ITEM_KINDS } from '../lib/item-kinds.mjs'
+import { KIND_KEYS, kindByKey } from '../lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
@@ -58,6 +61,7 @@ const send = (res, status, body, type = 'application/json; charset=utf-8') => {
 }
 
 const json = (res, obj) => send(res, 200, JSON.stringify(obj, null, 1))
+const html = (res, body) => send(res, 200, body, 'text/html; charset=utf-8')
 
 // A league is a file name. `?league=` therefore decides which file this server
 // opens, so it is answered from a list of leagues we found ourselves and never
@@ -116,8 +120,22 @@ function makeHandleApi ({ leagues, config, defaultLeague, text }) {
     // One fragment per modifier, each unique against all the others, generated
     // from GGG's own wordings. Sent once and joined in the browser, because a
     // round trip per tick would make the page feel dead.
+    // The kind is REQUIRED, for the same reason type and rarity are below: this
+    // used to answer with the tablet fragments whatever was asked, so a caller
+    // after jewels got tablet wordings and no error.
     if (url.pathname === '/api/fragments') {
-      const eco = economyFile(db, { league, kind: ITEM_KINDS.tablet, lookbackHours, config, textFor: text })
+      const key = q.get('kind')
+      if (!key) {
+        return send(res, 400, JSON.stringify(
+          { error: `kind is required, one of ${KIND_KEYS.join(', ')}` }))
+      }
+      let kind
+      try {
+        kind = kindByKey(key)
+      } catch (e) {
+        return send(res, 404, JSON.stringify({ error: e.message }))
+      }
+      const eco = economyFile(db, { league, kind, lookbackHours, config, textFor: text })
       const texts = {}
       for (const m of eco.mods) texts[m.statId] = text(m.statId)
       return json(res, buildFragments(texts))
@@ -156,12 +174,21 @@ function makeHandleEconomy ({ leagues, config, text }) {
     // Any league we hold, not only the one this server was started with: the
     // dropdown asks for the file by name. A league we do not hold falls through
     // to the static 404, which is what a request for another market deserves.
-    const league = leagues.known().find(l => path.slice(1) === economyPath(l, ITEM_KINDS.tablet))
-    if (league === undefined) return false
-    const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
-    json(res, economyFile(leagues.db(league),
-      { league, kind: ITEM_KINDS.tablet, lookbackHours, config, textFor: text }))
-    return true
+    //
+    // EVERY KIND, not only tablets. The path names the kind, so answering only
+    // the tablet name meant a jewel path 404ed here while the same file was
+    // published by the build.
+    for (const name of leagues.known()) {
+      for (const key of KIND_KEYS) {
+        const kind = kindByKey(key)
+        if (path.slice(1) !== economyPath(name, kind)) continue
+        const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
+        json(res, economyFile(leagues.db(name),
+          { league: name, kind, lookbackHours, config, textFor: text }))
+        return true
+      }
+    }
+    return false
   }
 }
 
@@ -195,6 +222,19 @@ function makeHandleSite ({ leagues, config, defaultLeague, text }) {
       json(res, leaguesFile(leagues.held(), defaultLeague))
       return true
     }
+    // THE PAGES ARE GENERATED, here and in the build, from web/page.html. They
+    // are not files under web/ any more, so handleStatic can no longer find
+    // them, and the local page is the published page by construction rather
+    // than by two copies happening to agree.
+    if (path === '' || path === 'index.html') {
+      html(res, renderIndex())
+      return true
+    }
+    for (const key of KIND_KEYS) {
+      if (path !== kindByKey(key).page) continue
+      html(res, renderKindPage(kindByKey(key)))
+      return true
+    }
     // One pair of files per league AND kind. A kind a league does not hold
     // falls through to the static 404, which is what the page's own empty
     // state exists to avoid asking for in the first place.
@@ -220,7 +260,14 @@ function handleModule (url, res) {
 }
 
 function handleStatic (url, res) {
-  const name = url.pathname === '/' ? '/index.html' : url.pathname
+  // The pages are generated by handleSite, which runs first. Anything reaching
+  // here is a real asset: the stylesheet, the script, an image.
+  const name = url.pathname
+  // An input, not part of the site. The build skips these; serving one here
+  // would put a page full of {{tokens}} on the local site only.
+  if (NOT_PUBLISHED.has(name.replace(/^\//, ''))) {
+    return send(res, 404, 'not found', 'text/plain; charset=utf-8')
+  }
   // normalize() collapses "..", so a request cannot climb out of web/.
   const path = join(here('.'), normalize(name))
   if (!path.startsWith(here('.')) || !existsSync(path)) {
@@ -278,7 +325,7 @@ export function runServe (argv) {
     }
   }).listen(port, host, function () {
     const bound = this.address().port
-    console.log(`tablet-price web  http://localhost:${bound}`)
+    console.log(`poe-mod-market web  http://localhost:${bound}`)
     if (host !== '127.0.0.1') {
       for (const a of lanAddresses()) console.log(`                  http://${a}:${bound}`)
       console.log(`bound to ${host}: anyone on this network can read this database.`)

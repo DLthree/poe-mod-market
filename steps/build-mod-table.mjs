@@ -10,6 +10,7 @@ import { readListings } from '../lib/pools.mjs'
 import { walk } from '../lib/walk.mjs'
 import { buildIndex, textFor, vendoredEe2 } from '../lib/stat-index.mjs'
 import { renderTable } from '../lib/report.mjs'
+import { kindByKey } from '../lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 const config = JSON.parse(readFileSync(here('../config.json'), 'utf8'))
@@ -30,21 +31,37 @@ const walkConfig = {
   floor: { ...config.floor, strategy, n }
 }
 
+// ONE KIND PER TABLE. This read every listing in the league and wrote one file,
+// so a jewel run overwrote the tablet table with a walk over both kinds at once.
+// The default matches steps/collect.mjs so an old command line means what it
+// always meant.
+let kind
+try {
+  kind = kindByKey(flag('kind', 'tablet'))
+} catch (err) {
+  console.error(`${err.message} Nothing has run.`)
+  process.exit(2)
+}
+
 const db = openDb(dbPath(league, dataOverride))
+const types = new Set(kind.types)
 const rows = readListings(db, { sinceMs: hours * 3600 * 1000 })
-console.log(`${rows.length} listings in the last ${hours}h, floor rule: ${strategy} (n=${n}), min lift ${minLift}x`)
+  .filter(r => types.has(r.type))
+console.log(`${rows.length} ${kind.key} listings in the last ${hours}h, ` +
+  `floor rule: ${strategy} (n=${n}), min lift ${minLift}x`)
 
 const table = walk(rows, walkConfig)
 const out = {
   league,
+  kind: kind.key,
   generatedAt: new Date().toISOString(),
   lookbackHours: hours,
   floor: walkConfig.floor,
   ...table
 }
-writeFileSync(modTablePath(league, dataOverride), JSON.stringify(out, null, 1))
+writeFileSync(modTablePath(league, kind.key, dataOverride), JSON.stringify(out, null, 1))
 
 const index = buildIndex(JSON.parse(readFileSync(join(cacheDir(dataOverride), 'stats-poe2.json'))), vendoredEe2())
 console.log(renderTable(table, (h) => textFor(index, h)))
-console.log(`\nwritten to data/mod-table-${league}.json`)
+console.log(`\nwritten to data/mod-table-${league}-${kind.key}.json`)
 db.close()

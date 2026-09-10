@@ -196,6 +196,13 @@ of the link to its sibling. Both load the same `app.js`.
 `steps/build-site.mjs` copies every file in `web/` except the server, so the new
 page needs no entry anywhere.
 
+> **Superseded 2026-09-10.** Two hand-written pages became two hand-maintained
+> copies of one 59-line file, and every difference between them followed from the
+> kind. There is now ONE template, `web/page.html`, and `lib/site.mjs` renders one
+> page per kind: `tablets.html` and `jewels.html`, with `index.html` as a root that
+> points at the first kind in the registry. `README.md` describes what is there
+> now.
+
 When `leagues.json` lists no league for a kind, the page says so and renders an
 empty grid. That is what `jewels.html` shows until step 3.
 

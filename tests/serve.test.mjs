@@ -137,6 +137,23 @@ test('the server answers the static paths the build writes', async (t) => {
     // A league we do not hold has no file, and inventing one would publish a
     // page about a market we never collected.
     assert.equal((await get(PATHS.economy('Other', 'tablet'))).status, 404)
+
+    // One page per kind, generated here exactly as the build generates it, plus
+    // a root that keeps working.
+    for (const kind of Object.values(ITEM_KINDS)) {
+      const page = await get(kind.page)
+      assert.equal(page.status, 200, kind.page)
+      const body = await page.text()
+      assert.match(body, new RegExp(`data-kind="${kind.key}"`), kind.page)
+      assert.doesNotMatch(body, /\{\{/, `${kind.page} served with an unfilled token`)
+    }
+    assert.equal((await get('')).status, 200, 'the root')
+    assert.equal((await get('index.html')).status, 200, 'index.html')
+
+    // THE TEMPLATE IS NOT PART OF THE SITE. The build does not write it, so the
+    // server must not answer it either, or the local site holds a page with
+    // {{tokens}} in it that the published one does not.
+    assert.equal((await get('page.html')).status, 404, 'page.html')
   } finally {
     await stopServer(child)
     rmSync(dir, { recursive: true, force: true })

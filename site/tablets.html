@@ -3,15 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jewel prices</title>
+<title>Tablet prices</title>
 <link rel="stylesheet" href="./style.css">
 </head>
-<body data-kind="jewel">
+<!-- ONE TEMPLATE, ONE PAGE PER KIND. This file is an input to the build, not an
+     output: lib/site.mjs fills the tokens and steps/build-site.mjs writes one
+     page per kind in lib/item-kinds.mjs. It replaced two 59-line copies that
+     differed in five lines, every one of them derivable from the kind.
+
+     The kind reaches app.js as a data attribute, so there is one script for
+     every page rather than one copy of the logic per kind. -->
+<body data-kind="tablet">
 
 <header class="bar">
-  <h1>Jewel prices</h1>
+  <h1>Tablet prices</h1>
   <select id="league" class="league" aria-label="League"></select>
-  <a class="sibling" href="./index.html"><span aria-hidden="true" class="ext">←</span> Tablets</a>
+  <a class="sibling" href="./jewels.html">Jewels <span aria-hidden="true" class="ext">→</span></a>
   <p class="sub" id="meta">loading…</p>
 </header>
 
@@ -19,7 +26,7 @@
      and you should always be able to see what you are about to copy. -->
 <section class="result" aria-label="Stash search">
   <div class="result-row">
-    <output id="regex" class="regex placeholder" aria-live="polite">pick a jewel below</output>
+    <output id="regex" class="regex placeholder" aria-live="polite">pick a tablet below</output>
     <div class="result-side">
       <span id="count" class="count">0 / 250</span>
       <button id="copy" type="button">Copy</button>

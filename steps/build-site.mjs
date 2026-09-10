@@ -15,9 +15,11 @@ import { openDb } from '../lib/db.mjs'
 import { dbPath, cacheDir } from '../lib/paths.mjs'
 import { listLeagues } from '../lib/leagues.mjs'
 import { buildIndex, textFor, vendoredEe2 } from '../lib/stat-index.mjs'
-import { PATHS, leaguesFile, leagueFiles } from '../lib/site.mjs'
+import {
+  PATHS, leaguesFile, leagueFiles, renderKindPage, renderIndex, NOT_PUBLISHED
+} from '../lib/site.mjs'
 import { validateTradeWindow } from '../lib/poe2.mjs'
-import { kindByKey } from '../lib/item-kinds.mjs'
+import { kindByKey, KIND_KEYS } from '../lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
@@ -65,13 +67,21 @@ export function buildSite ({ outDir, config, dataOverride = null, leagues = null
   const text = (hash) => textFor(index, hash)
   const written = []
 
-  // The page itself, then the three modules it imports, both copied verbatim.
-  // Nothing is bundled or minified: the file the tests exercise is the file the
-  // browser runs, and a build that rewrites it would break that.
+  // Everything in web/ verbatim, except the two inputs that are not part of the
+  // site: the server, and the page TEMPLATE. Nothing is bundled or minified: the
+  // file the tests exercise is the file the browser runs.
   for (const f of readdirSync(here('../web'))) {
-    if (f === 'serve.mjs') continue // the server is not part of the static site
+    if (NOT_PUBLISHED.has(f)) continue
     written.push(write(outDir, f, readFileSync(here(`../web/${f}`))))
   }
+
+  // One page per kind, from the one template, plus a root that points at the
+  // first kind. The root is the published URL and has to keep working.
+  for (const key of KIND_KEYS) {
+    const kind = kindByKey(key)
+    written.push(write(outDir, kind.page, renderKindPage(kind)))
+  }
+  written.push(write(outDir, 'index.html', renderIndex()))
   for (const m of BROWSER_MODULES) {
     written.push(write(outDir, `lib/${m}`, readFileSync(here(`../lib/${m}`))))
   }

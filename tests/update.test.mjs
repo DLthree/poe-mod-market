@@ -43,14 +43,14 @@ const run = (dir, args) => execFileSync('node',
 test('offline refresh replays the archive and rebuilds the table, with no network', () => {
   const dir = seeded()
   try {
-    assert.equal(existsSync(modTablePath(LEAGUE, dir)), false, 'no table before')
+    assert.equal(existsSync(modTablePath(LEAGUE, 'tablet', dir)), false, 'no table before')
     const out = run(dir, ['--offline'])
-    assert.equal(existsSync(modTablePath(LEAGUE, dir)), true, 'table written')
+    assert.equal(existsSync(modTablePath(LEAGUE, 'tablet', dir)), true, 'table written')
     const db = openDb(dbPath(LEAGUE, dir))
     assert.equal(db.prepare('SELECT count(*) n FROM listing').get().n, 20)
     db.close()
     assert.match(out, /replay the archive/)
-    assert.match(out, /rebuild the modifier table/)
+    assert.match(out, /rebuild the tablet modifier table/)
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }
@@ -86,7 +86,7 @@ test('a failing step stops the run and exits non-zero', () => {
     let failed = false
     try { run(dir, ['--offline']) } catch { failed = true }
     assert.equal(failed, true, 'refresh should exit non-zero')
-    assert.equal(existsSync(modTablePath(LEAGUE, dir)), false,
+    assert.equal(existsSync(modTablePath(LEAGUE, 'tablet', dir)), false,
       'the table must not be rebuilt after a failed step')
   } finally {
     rmSync(dir, { recursive: true, force: true })
@@ -211,7 +211,7 @@ test('a dry run writes nothing and makes no request', () => {
       return n
     })()
     run(dir, ['--dry-run'])
-    assert.equal(existsSync(modTablePath(LEAGUE, dir)), false, 'no table written')
+    assert.equal(existsSync(modTablePath(LEAGUE, 'tablet', dir)), false, 'no table written')
     const db = openDb(dbPath(LEAGUE, dir))
     assert.equal(db.prepare('SELECT count(*) n FROM request').get().n, before)
     db.close()

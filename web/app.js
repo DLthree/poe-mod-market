@@ -12,7 +12,7 @@
 // the same relative paths, so the local page is the published page.
 import { tabletRegex } from './lib/regex-keys.mjs'
 import { RARITIES } from './lib/poe2.mjs'
-import { TABLET_TYPES } from './lib/item-kinds.mjs'
+import { TABLET_TYPES, ITEM_KINDS } from './lib/item-kinds.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
 import { inExalted } from './lib/exchange.mjs'
@@ -334,6 +334,7 @@ function renderResult () {
   // because the trade site takes its query as a URL parameter.
   const link = tradeUrl({
     league: state.league,
+    kind: ITEM_KINDS.tablet,
     type: state.type,
     rarity: state.rarity,
     mods: [...state.ticked],

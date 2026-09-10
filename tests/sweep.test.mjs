@@ -3,10 +3,13 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { buildIndex } from '../lib/stat-index.mjs'
 import { poolQuery, affixQuery, sweepPools, sweepAffixes, affixesFor } from '../lib/sweep.mjs'
-import { TABLET_TYPES, USES_IMPLICIT } from '../lib/item-kinds.mjs'
+import { TABLET_TYPES, USES_IMPLICIT, ITEM_KINDS } from '../lib/item-kinds.mjs'
 import { checkAge, medianAgeHours } from '../lib/agecheck.mjs'
 import { recordRequest } from '../lib/archive.mjs'
 import { withDb, sampleListing } from './helpers.mjs'
+
+const TABLET = ITEM_KINDS.tablet
+const JEWEL = ITEM_KINDS.jewel
 
 const stats = JSON.parse(readFileSync(new URL('./fixtures/stats-subset.json', import.meta.url)))
 const index = buildIndex(stats)
@@ -46,7 +49,7 @@ function archivingClient (db, itemFor) {
 }
 
 test('the pool query asks for securable and pins nothing else', () => {
-  const q = poolQuery('Breach Tablet', 'rare')
+  const q = poolQuery(TABLET, 'Breach Tablet', 'rare')
   assert.equal(q.status.option, 'securable')
   assert.equal(q.filters.type_filters.filters.rarity.option, 'rare')
   assert.deepEqual(q.stats[0].filters, [])
@@ -57,17 +60,17 @@ test('the pool query asks for securable and pins nothing else', () => {
 // `exalted_divine` keeps the cheap end and lets the SERVER rank the two
 // currencies, which is why this skill holds no exchange rate.
 test('the pool query asks for exalted_divine, not a single currency', () => {
-  const q = poolQuery('Breach Tablet', 'rare')
+  const q = poolQuery(TABLET, 'Breach Tablet', 'rare')
   assert.equal(q.filters.trade_filters.filters.price.option, 'exalted_divine')
 })
 
 test('the pool query does not collapse, so the archive keeps every listing', () => {
-  const q = poolQuery('Breach Tablet', 'rare')
+  const q = poolQuery(TABLET, 'Breach Tablet', 'rare')
   assert.equal(q.filters.trade_filters?.filters?.collapse, undefined)
 })
 
 test('the affix query pins the modifier at any roll', () => {
-  const q = affixQuery('Breach Tablet', 'explicit.stat_3793155082', '3days', 'rare')
+  const q = affixQuery(TABLET, 'Breach Tablet', 'explicit.stat_3793155082', '3days', 'rare')
   assert.deepEqual(q.stats[0].filters, [{ id: 'explicit.stat_3793155082' }])
   assert.equal(q.filters.type_filters.filters.rarity.option, 'rare')
 })
@@ -79,9 +82,9 @@ test('the affix query pins the modifier at any roll', () => {
 test('every query asks for a full tablet', () => {
   for (const type of TABLET_TYPES) {
     const expected = [{ id: USES_IMPLICIT[type], value: { min: 10 }, disabled: false }]
-    assert.deepEqual(poolQuery(type, 'rare').stats[1].filters, expected, type)
-    assert.deepEqual(poolQuery(type, 'normal').stats[1].filters, expected, type)
-    assert.deepEqual(affixQuery(type, 'explicit.stat_1', '3days', 'rare').stats[1].filters, expected, type)
+    assert.deepEqual(poolQuery(TABLET, type, 'rare').stats[1].filters, expected, type)
+    assert.deepEqual(poolQuery(TABLET, type, 'normal').stats[1].filters, expected, type)
+    assert.deepEqual(affixQuery(TABLET, type, 'explicit.stat_1', '3days', 'rare').stats[1].filters, expected, type)
   }
 })
 
@@ -89,7 +92,7 @@ test('every query asks for a full tablet', () => {
 // affixQuery would overwrite it and quietly collect part-used tablets under a
 // question that says it excluded them.
 test('the uses filter does not take the slot the modifier search uses', () => {
-  const q = affixQuery('Breach Tablet', 'explicit.stat_3793155082', '3days', 'rare')
+  const q = affixQuery(TABLET, 'Breach Tablet', 'explicit.stat_3793155082', '3days', 'rare')
   assert.deepEqual(q.stats[0].filters, [{ id: 'explicit.stat_3793155082' }])
   assert.equal(q.stats[1].filters[0].id, USES_IMPLICIT['Breach Tablet'])
   assert.equal(q.stats.length, 2)
@@ -101,21 +104,21 @@ test('the uses filter does not take the slot the modifier search uses', () => {
 test('a tablet type with no known uses implicit fails loudly', () => {
   const unknown = 'Nonexistent Tablet'
   assert.equal(USES_IMPLICIT[unknown], undefined, 'the fixture must stay unknown')
-  assert.throws(() => poolQuery(unknown, 'rare'),
+  assert.throws(() => poolQuery(TABLET, unknown, 'rare'),
     /No uses implicit known for "Nonexistent Tablet"/)
 })
 
 test('every search sorts cheapest first, because the statistic is a floor',
   async () => withDb(async db => {
     const client = archivingClient(db)
-    await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+    await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
       rarities: ['rare'], perCell: 3 })
     assert.deepEqual(client.sorts[0], { price: 'asc' })
   }))
 
 test('one search runs per type and rarity', async () => withDb(async db => {
   const client = archivingClient(db)
-  const out = await sweepPools({ client, db, index, league: 'L',
+  const out = await sweepPools({ client, db, index, kind: TABLET, league: 'L',
     types: ['Breach Tablet', 'Ritual Tablet'], rarities: ['magic', 'rare'], perCell: 3 })
   assert.equal(client.queries.length, 4)
   assert.equal(out.searches, 4)
@@ -127,14 +130,14 @@ test('one search runs per type and rarity', async () => withDb(async db => {
 test('the search body carries the trade window, from config not a literal',
   async () => withDb(async db => {
     const client = archivingClient(db)
-    await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+    await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
       rarities: ['rare'], perCell: 3, tradeWindow: '1week' })
     assert.equal(client.queries[0].filters.trade_filters.filters.indexed.option, '1week')
   }))
 
 test('the sweep archives and derives in one pass', async () => withDb(async db => {
   const client = archivingClient(db)
-  const out = await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  const out = await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['rare'], perCell: 3 })
   assert.equal(out.listings, 3)
   assert.equal(db.prepare('SELECT count(*) n FROM listing').get().n, 3)
@@ -143,7 +146,7 @@ test('the sweep archives and derives in one pass', async () => withDb(async db =
 test('the cell label is reported before each search', async () => withDb(async db => {
   const client = archivingClient(db)
   const seen = []
-  await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['magic', 'rare'], perCell: 3, onCell: (c) => seen.push(c) })
   assert.deepEqual(seen, ['Breach Tablet|magic', 'Breach Tablet|rare'])
 }))
@@ -151,7 +154,7 @@ test('the cell label is reported before each search', async () => withDb(async d
 test('the affix vocabulary comes out of what has already been collected',
   async () => withDb(async db => {
     const client = archivingClient(db)
-    await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+    await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
       rarities: ['rare'], perCell: 3 })
     assert.deepEqual(affixesFor(db, 'Breach Tablet', 'rare').sort(),
       ['explicit.stat_3762913035', 'explicit.stat_3793155082'])
@@ -160,7 +163,7 @@ test('the affix vocabulary comes out of what has already been collected',
 test('an explicit affix list overrides what was collected', async () => withDb(async db => {
   const client = archivingClient(db)
   const seen = []
-  await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'], perCell: 3,
+  await sweepAffixes({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'], perCell: 3,
     rarities: ['rare'], chooseAffixes: () => ['explicit.stat_9'],
     onCell: (c) => seen.push(c) })
   assert.deepEqual(seen, ['Breach Tablet|rare|explicit.stat_9'])
@@ -172,7 +175,7 @@ test('a sweep with no chooser refuses to guess how much to spend',
   async () => withDb(async db => {
     const client = archivingClient(db)
     await assert.rejects(
-      () => sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'],
+      () => sweepAffixes({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
         rarities: ['rare'], perCell: 3 }),
       /chooseAffixes/)
   }))
@@ -213,7 +216,7 @@ const seedByRarity = async (db) => {
   const client = archivingClient(db, itemFor)
   const pool = async (r) => {
     rarity = r === 'magic' ? 'Magic' : 'Rare'
-    await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+    await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
       rarities: [r], perCell: 3 })
   }
   await pool('rare')
@@ -233,7 +236,7 @@ test('the modifier vocabulary comes from the rarity being asked about',
   }))
 
 test('the affix query asks about the rarity it was given', () => {
-  const q = affixQuery('Breach Tablet', 'explicit.stat_1', '3days', 'magic')
+  const q = affixQuery(TABLET, 'Breach Tablet', 'explicit.stat_1', '3days', 'magic')
   assert.equal(q.filters.type_filters.filters.rarity.option, 'magic')
   assert.deepEqual(q.stats[0].filters, [{ id: 'explicit.stat_1' }])
   assert.equal(q.stats[1].filters[0].id, USES_IMPLICIT['Breach Tablet'],
@@ -246,7 +249,7 @@ test('the affix query asks about the rarity it was given', () => {
 test('a magic affix sweep records magic snapshots', async () => withDb(async db => {
   const client = await seedByRarity(db)
   const seen = []
-  await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'], perCell: 3,
+  await sweepAffixes({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'], perCell: 3,
     rarities: ['magic', 'rare'], chooseAffixes: (t, r) => affixesFor(db, t, r),
     onCell: (c) => seen.push(c) })
 
@@ -270,12 +273,12 @@ test('a magic affix sweep records magic snapshots', async () => withDb(async db 
 test('a normal tablet costs no searches, even with an explicit affix list',
   async () => withDb(async db => {
     const client = await seedByRarity(db)
-    const fromVocabulary = await sweepAffixes({ client, db, index, league: 'L',
+    const fromVocabulary = await sweepAffixes({ client, db, index, kind: TABLET, league: 'L',
       types: ['Breach Tablet'], perCell: 3, rarities: ['normal'],
       chooseAffixes: (t, r) => affixesFor(db, t, r) })
     assert.equal(fromVocabulary.searches, 0)
 
-    const explicit = await sweepAffixes({ client, db, index, league: 'L',
+    const explicit = await sweepAffixes({ client, db, index, kind: TABLET, league: 'L',
       types: ['Breach Tablet'], perCell: 3, rarities: ['normal'],
       chooseAffixes: () => ['explicit.stat_1', 'explicit.stat_2'] })
     assert.equal(explicit.searches, 0)
@@ -322,7 +325,7 @@ const snapshots = (db) => db.prepare('SELECT * FROM snapshot ORDER BY id').all()
 
 test('a pool sweep opens one snapshot per cell', async () => withDb(async db => {
   const client = archivingClient(db)
-  await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['magic', 'rare'], perCell: 3 })
   const rows = snapshots(db)
   assert.equal(rows.length, 2)
@@ -332,14 +335,14 @@ test('a pool sweep opens one snapshot per cell', async () => withDb(async db => 
 
 test('a baseline snapshot asks about no modifier', async () => withDb(async db => {
   const client = archivingClient(db)
-  await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['rare'], perCell: 3 })
   assert.equal(snapshots(db)[0].stat_id, null)
 }))
 
 test('an affix snapshot records the modifier it asked about', async () => withDb(async db => {
   const client = archivingClient(db)
-  await sweepAffixes({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepAffixes({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['rare'], perCell: 3, chooseAffixes: () => ['explicit.stat_9'] })
   const [row] = snapshots(db)
   assert.equal(row.stat_id, 'explicit.stat_9')
@@ -351,7 +354,7 @@ test('an affix snapshot records the modifier it asked about', async () => withDb
 // option is lower case and GGG writes an item in title case. GGG wins.
 test('a snapshot records rarity as the listing rows spell it', async () => withDb(async db => {
   const client = archivingClient(db)
-  await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['rare'], perCell: 3 })
   const snap = snapshots(db)[0]
   const listed = db.prepare('SELECT DISTINCT rarity r FROM listing').all().map(x => x.r)
@@ -361,7 +364,7 @@ test('a snapshot records rarity as the listing rows spell it', async () => withD
 test('every listing a sweep writes is stamped with its snapshot',
   async () => withDb(async db => {
     const client = archivingClient(db)
-    await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+    await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
       rarities: ['rare'], perCell: 3 })
     const id = snapshots(db)[0].id
     const rows = db.prepare('SELECT snapshot_id s FROM listing').all()
@@ -374,7 +377,7 @@ test('every listing a sweep writes is stamped with its snapshot',
 test('a search that fails opens no snapshot', async () => withDb(async db => {
   const client = archivingClient(db)
   client.search = async () => { throw new Error('429') }
-  await assert.rejects(() => sweepPools({ client, db, index, league: 'L',
+  await assert.rejects(() => sweepPools({ client, db, index, kind: TABLET, league: 'L',
     types: ['Breach Tablet'], rarities: ['rare'], perCell: 3 }))
   assert.equal(snapshots(db).length, 0)
 }))
@@ -394,7 +397,7 @@ test('a cell that fails part way through leaves no snapshot',
       if (++calls > 1) throw new Error('Non-JSON 503 from GGG: maintenance')
       return ok(ids, qid)
     }
-    await assert.rejects(() => sweepPools({ client, db, index, league: 'L',
+    await assert.rejects(() => sweepPools({ client, db, index, kind: TABLET, league: 'L',
       types: ['Breach Tablet'], rarities: ['rare'], perCell: 15 }))
     assert.equal(snapshots(db).length, 0)
   }))
@@ -414,7 +417,7 @@ test('rows collected before a failure stay, with their stamp removed',
       if (++calls > 1) throw new Error('Non-JSON 503 from GGG: maintenance')
       return ok(ids, qid)
     }
-    await assert.rejects(() => sweepPools({ client, db, index, league: 'L',
+    await assert.rejects(() => sweepPools({ client, db, index, kind: TABLET, league: 'L',
       types: ['Breach Tablet'], rarities: ['rare'], perCell: 15 }))
     const rows = db.prepare('SELECT snapshot_id s FROM listing').all()
     assert.equal(rows.length, 10, 'the first page was collected')
@@ -426,8 +429,58 @@ test('rows collected before a failure stay, with their stamp removed',
 test('a search that finds nothing still leaves a snapshot', async () => withDb(async db => {
   const client = archivingClient(db)
   client.search = async () => ({ queryId: 'q', ids: [], total: 0, url: 'u' })
-  await sweepPools({ client, db, index, league: 'L', types: ['Breach Tablet'],
+  await sweepPools({ client, db, index, kind: TABLET, league: 'L', types: ['Breach Tablet'],
     rarities: ['rare'], perCell: 3 })
   assert.equal(snapshots(db).length, 1)
   assert.equal(db.prepare('SELECT count(*) n FROM listing').get().n, 0)
 }))
+
+// THE GOLDEN QUERY. Every other test here checks one field of the search body.
+// This one checks the whole body, because the thing that must not change during
+// a refactor is the QUESTION GGG is asked — and a search cannot be bought back
+// to find out afterwards what it really asked. If this fails, the refactor
+// changed the market being priced.
+test('the tablet pool query is byte-for-byte what it has always been', () => {
+  assert.deepEqual(poolQuery(TABLET, 'Breach Tablet', 'rare', '3days'), {
+    status: { option: 'securable' },
+    type: 'Breach Tablet',
+    filters: {
+      type_filters: { filters: { rarity: { option: 'rare' } } },
+      trade_filters: {
+        filters: {
+          price: { option: 'exalted_divine' },
+          indexed: { option: '3days' }
+        }
+      }
+    },
+    stats: [
+      { type: 'and', filters: [] },
+      {
+        type: 'and',
+        filters: [{ id: 'implicit.stat_2219129443', value: { min: 10 }, disabled: false }]
+      }
+    ]
+  })
+})
+
+test('the tablet affix query is byte-for-byte what it has always been', () => {
+  const q = affixQuery(TABLET, 'Breach Tablet', 'explicit.stat_1', '3days', 'rare')
+  assert.deepEqual(q.stats, [
+    { type: 'and', filters: [{ id: 'explicit.stat_1' }] },
+    {
+      type: 'and',
+      filters: [{ id: 'implicit.stat_2219129443', value: { min: 10 }, disabled: false }]
+    }
+  ])
+})
+
+// A jewel has no implicit to pin, so its query carries the modifier group and
+// nothing else. A stray empty group here would be a filter GGG reads as a
+// constraint nothing satisfies.
+test('a jewel query carries the modifier group and no implicit filter', () => {
+  const pool = poolQuery(JEWEL, 'Emerald', 'rare', '3days')
+  assert.equal(pool.type, 'Emerald')
+  assert.deepEqual(pool.stats, [{ type: 'and', filters: [] }])
+  const affix = affixQuery(JEWEL, 'Emerald', 'explicit.stat_1', '3days', 'rare')
+  assert.deepEqual(affix.stats, [{ type: 'and', filters: [{ id: 'explicit.stat_1' }] }])
+})

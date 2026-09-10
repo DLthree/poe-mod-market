@@ -4,7 +4,7 @@ import { meta, mods, price } from '../lib/api.mjs'
 import { tradeUrl } from '../lib/trade-url.mjs'
 import { bandOf } from '../lib/bands.mjs'
 import { affixQuery } from '../lib/sweep.mjs'
-import { USES_IMPLICIT, MIN_USES } from '../lib/item-kinds.mjs'
+import { USES_IMPLICIT, MIN_USES, ITEM_KINDS } from '../lib/item-kinds.mjs'
 import { withDb, seedCell, seedQuestion } from './helpers.mjs'
 
 // The band is derived, not stored. `delta` is what the published file calls
@@ -236,7 +236,7 @@ test('every payload states that its counts are a sample', () => withDb(db => {
 
 test('the trade link carries the market, currency and modifiers', () => {
   const { url, exact } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a', 'b']
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare', mods: ['a', 'b']
   })
   assert.equal(exact, true)
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
@@ -253,7 +253,7 @@ test('the trade link carries the market, currency and modifiers', () => {
 // listing a person saw was not the listing the floor came from.
 test('the trade link pins uses remaining, as the sweep does', () => {
   const { url, exact } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a']
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare', mods: ['a']
   })
   assert.equal(exact, true)
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
@@ -271,11 +271,11 @@ test('the trade link pins uses remaining, as the sweep does', () => {
 // modifier group is excluded on purpose and has its own test below.
 test('the link asks for the same item the sweep priced', () => {
   const { url } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
     tradeWindow: '3days'
   })
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
-  const swept = affixQuery('Breach Tablet', 'a', '3days', 'Rare')
+  const swept = affixQuery(ITEM_KINDS.tablet, 'Breach Tablet', 'a', '3days', 'Rare')
   assert.deepEqual(q.query.stats.slice(1), swept.stats.slice(1))
   assert.equal(q.query.status.option, swept.status.option)
   assert.equal(q.query.type, swept.type)
@@ -290,7 +290,7 @@ test('the link asks for the same item the sweep priced', () => {
 // single-modifier search, so the link is their union.
 test('several ticked modifiers make a 1-of search, not an all-of one', () => {
   const { url } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a', 'b', 'c']
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare', mods: ['a', 'b', 'c']
   })
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
   assert.deepEqual(q.query.stats[0], {
@@ -303,7 +303,7 @@ test('several ticked modifiers make a 1-of search, not an all-of one', () => {
 // A group with no filters and a minimum of one asks for a modifier that is not
 // there. The link with nothing ticked has to stay the whole cell.
 test('nothing ticked leaves the modifier group empty and unconstrained', () => {
-  const { url } = tradeUrl({ league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare' })
+  const { url } = tradeUrl({ league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare' })
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
   assert.deepEqual(q.query.stats[0], { type: 'and', filters: [] })
 })
@@ -312,7 +312,7 @@ test('nothing ticked leaves the modifier group empty and unconstrained', () => {
 // but it must not claim to be the search the prices came from.
 test('a type with no known uses implicit gives a link that admits it is not exact', () => {
   const { url, exact, reason } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Nonexistent Tablet', rarity: 'Rare', mods: ['a']
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Nonexistent Tablet', rarity: 'Rare', mods: ['a']
   })
   assert.equal(USES_IMPLICIT['Nonexistent Tablet'], undefined, 'the fixture must stay unknown')
   assert.ok(url, 'a search at the wrong depth still beats no search')
@@ -324,7 +324,7 @@ test('a type with no known uses implicit gives a link that admits it is not exac
 
 // A link to the wrong league is worse than no link; the merc tool says so too.
 test('no league means no link', () => {
-  assert.equal(tradeUrl({ league: null, type: 'Breach Tablet', rarity: 'Rare' }).url, null)
+  assert.equal(tradeUrl({ league: null, kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare' }).url, null)
 })
 
 // Window A, the trade window. The link must show the same slice of the market
@@ -332,7 +332,7 @@ test('no league means no link', () => {
 // (1week) catches a literal '3days' left in the query.
 test('the trade link carries the trade window, from config not a literal', () => {
   const { url } = tradeUrl({
-    league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
+    league: 'Runes of Aldur', kind: ITEM_KINDS.tablet, type: 'Breach Tablet', rarity: 'Rare', mods: ['a'],
     tradeWindow: '1week'
   })
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
@@ -473,3 +473,35 @@ test('a band of exactly one is not worth appending', () => withDb(db => {
   assert.equal(out.mods.find(m => m.hash === 'GOOD').label,
     'Area contains an additional Rare Chest')
 }))
+
+// A jewel pins nothing, carries nothing, and is therefore exact. Before this
+// rule `exact` meant "carries a uses implicit", which would have reported every
+// jewel link as defective for lacking a filter a jewel does not have.
+test('a jewel link is exact, because it carries everything the sweep pinned', () => {
+  const { url, exact } = tradeUrl({
+    league: 'Runes of Aldur', kind: ITEM_KINDS.jewel, type: 'Emerald',
+    rarity: 'Rare', mods: ['a'], tradeWindow: '3days'
+  })
+  assert.equal(exact, true)
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  assert.equal(q.query.stats.length, 1, 'the modifier group and nothing else')
+})
+
+test('the jewel link asks for the same item the jewel sweep would price', () => {
+  const { url } = tradeUrl({
+    league: 'Runes of Aldur', kind: ITEM_KINDS.jewel, type: 'Emerald',
+    rarity: 'Rare', mods: ['a'], tradeWindow: '3days'
+  })
+  const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
+  const swept = affixQuery(ITEM_KINDS.jewel, 'Emerald', 'a', '3days', 'Rare')
+  assert.deepEqual(q.query.stats.slice(1), swept.stats.slice(1))
+  assert.equal(q.query.type, swept.type)
+})
+
+// The kind decides which filters a link must carry, so a link built without one
+// cannot know what it is meant to pin. Better no link than a link that opens a
+// wider market than the price measured.
+test('no kind means no link', () => {
+  assert.equal(
+    tradeUrl({ league: 'Runes of Aldur', type: 'Breach Tablet', rarity: 'Rare' }).url, null)
+})

@@ -1,6 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { ITEM_KINDS, KIND_KEYS, kindByKey, kindOfType, TABLET_TYPES } from '../lib/item-kinds.mjs'
+import {
+  ITEM_KINDS, KIND_KEYS, kindByKey, kindOfType, TABLET_TYPES, USES_IMPLICIT, MIN_USES
+} from '../lib/item-kinds.mjs'
 
 test('every kind names itself with the key it is filed under', () => {
   for (const [key, kind] of Object.entries(ITEM_KINDS)) assert.equal(kind.key, key)
@@ -55,4 +57,33 @@ test('the jewel kind holds the three bases and no measured affix caps', () => {
 test('each kind shortens its own type names for the grid', () => {
   assert.equal(ITEM_KINDS.tablet.short('Breach Tablet'), 'Breach')
   assert.equal(ITEM_KINDS.jewel.short('Emerald'), 'Emerald')
+})
+
+// The filter the trade site itself uses for uses remaining. A `min` on it is
+// how a search says "not part-used", and it cannot be recovered afterwards: a
+// fetched item reports magnitude 10 whatever it has left.
+test('a tablet pins its uses implicit and reports nothing missing', () => {
+  for (const type of ITEM_KINDS.tablet.types) {
+    const { groups, missing } = ITEM_KINDS.tablet.pinned(type)
+    assert.deepEqual(missing, [], type)
+    assert.deepEqual(groups, [{
+      type: 'and',
+      filters: [{ id: USES_IMPLICIT[type], value: { min: MIN_USES }, disabled: false }]
+    }], type)
+  }
+})
+
+// A jewel has no uses to filter on. That is not a shortfall, and the trade link
+// must not report itself inexact for lacking a filter jewels do not have.
+test('a jewel pins nothing and reports nothing missing', () => {
+  for (const type of ITEM_KINDS.jewel.types) {
+    assert.deepEqual(ITEM_KINDS.jewel.pinned(type), { groups: [], missing: [] }, type)
+  }
+})
+
+test('a tablet type with no known uses implicit pins nothing and says why', () => {
+  const { groups, missing } = ITEM_KINDS.tablet.pinned('Nonexistent Tablet')
+  assert.deepEqual(groups, [], 'no half-built group carrying an undefined id')
+  assert.equal(missing.length, 1)
+  assert.match(missing[0], /part-used/)
 })

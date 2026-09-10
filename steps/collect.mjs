@@ -10,7 +10,7 @@ import { dbPath, cacheDir } from '../lib/paths.mjs'
 import { createProgress } from '../lib/progress.mjs'
 import { TradeClient } from '../lib/trade-client.mjs'
 import { API_BASE, REALM, RARITIES, MODIFIED_RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
-import { TABLET_TYPES } from '../lib/item-kinds.mjs'
+import { TABLET_TYPES, ITEM_KINDS } from '../lib/item-kinds.mjs'
 import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
@@ -161,7 +161,7 @@ if (only !== 'affixes') {
   activeBar = useBar
     ? createProgress({ label: 'collecting', total: types.length * rarities.length })
     : null
-  add(await sweepPools({ client, db, index, league, types, rarities, perCell,
+  add(await sweepPools({ client, db, index, kind: ITEM_KINDS.tablet, league, types, rarities, perCell,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }
@@ -190,7 +190,7 @@ if (only !== 'pools') {
     }
   }
   activeBar = useBar ? createProgress({ label: 'collecting', total: affixTotal }) : null
-  add(await sweepAffixes({ client, db, index, league, types, rarities, perCell, chooseAffixes,
+  add(await sweepAffixes({ client, db, index, kind: ITEM_KINDS.tablet, league, types, rarities, perCell, chooseAffixes,
     tradeWindow: config.tradeWindow, log: useBar ? () => {} : (m) => console.log(m), onCell }))
   activeBar = null
 }

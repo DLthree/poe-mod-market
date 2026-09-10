@@ -1,3 +1,5 @@
+import { RARITIES } from './poe2.mjs'
+
 // PHASE 2 by tests/contract.test.mjs, and that is deliberate. This file holds
 // pure data and pure functions: it names no table and constructs no client, so
 // BOTH phases may import it and a new item kind needs no EXEMPT entry.
@@ -86,6 +88,11 @@ export const ITEM_KINDS = {
     plural: 'Tablets',
     title: 'Tablet prices',
     types: TABLET_TYPES,
+    // PLAINEST FIRST. `rarities[0]` is the blank form of this kind: the one the
+    // grid sorts on and the one a reader compares everything else against.
+    // A kind only lists a rarity its market actually trades, because every one
+    // listed costs a search per type on every pass.
+    rarities: RARITIES,
     // The grid puts the kind in its own heading, so repeating " Tablet" down
     // every row of the column says nothing.
     short: (type) => type.replace(' Tablet', ''),
@@ -125,17 +132,34 @@ export const ITEM_KINDS = {
     // 4%. So each base needs its own vocabulary and its own searches, and they
     // cannot be folded into one type carrying a base attribute.
     //
-    // THESE NAMES ARE NOT YET VERIFIED against the strings the trade API
-    // accepts as a `type`. If GGG spells them differently, every jewel search
-    // returns nothing while looking like it worked. One search settles it, and
-    // it must happen before any full pass.
+    // VERIFIED against the trade API on 2026-09-10: all three names are
+    // accepted as a `type`, and each reported 10000 for sale at magic and at
+    // rare, which is the API's own ceiling rather than a real count.
     types: ['Emerald', 'Ruby', 'Sapphire'],
+    // NO JEWEL TRADES AT NORMAL. Measured 2026-09-10, one search per base:
+    // Emerald, Ruby and Sapphire each returned 0 for sale, against 10000 at
+    // both other rarities. Listing normal here would spend three searches a
+    // pass on a market that does not exist and publish a column of dashes.
+    //
+    // Magic is therefore this kind's blank form, and it is what the grid sorts
+    // on. Every cell measured floors at 1 exalted, so the ratio against a blank
+    // jewel is trivially cleared and `walk.minAdds` is what actually separates
+    // these rows. That is the cheap-baseline effect the README documents.
+    rarities: ['magic', 'rare'],
     // A jewel base name is already the whole name.
     short: (type) => type,
-    // UNMEASURED. Null is not a placeholder: lib/derive.mjs reads it as "we do
-    // not know how many affix slots this kind has", stores null open-affix
-    // counts, and lib/walk.mjs already reads a null count as unknown rather
-    // than as an open affix. A guess here would publish a fact nobody measured.
+    // STILL UNMEASURED, deliberately. 30 rare and 28 magic jewels from the
+    // cheap end showed at most 2 prefixes and 2 suffixes on one item, but that
+    // is a floor from a thin and biased sample, not a cap: the tablet numbers
+    // took 3540 items to settle. A cap set too low clamps a real open slot to
+    // zero, and lib/derive.mjs applies it at COLLECTION time, so a wrong value
+    // is baked into every row a pass writes.
+    //
+    // Null is not a placeholder. lib/derive.mjs reads it as "we do not know how
+    // many affix slots this kind has" and stores null open-affix counts, which
+    // lib/walk.mjs already reads as unknown rather than as an open affix.
+    // Nothing the page publishes uses these counts; only the mod-table
+    // diagnostic does.
     maxAffix: null,
     // A jewel carries no implicit with a charge on it, so there is nothing to
     // pin and nothing missing. `exact` on a jewel trade link is therefore true:

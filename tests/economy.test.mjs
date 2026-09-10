@@ -50,6 +50,33 @@ test('the file covers every type of its kind and no other', () => withDb(db => {
   assert.deepEqual(out.mods, [], 'nothing has been collected for jewels')
 }))
 
+// ONE LEAGUE IS ONE DATABASE, so a jewel pass and a tablet pass write into the
+// same file. Taking the newest row of the whole database made the tablet page
+// report "collected 20 minutes ago" twenty minutes after a JEWEL sweep, while
+// the tablet prices it was showing were a day old. `syncedAt` is the one line
+// on the page whose whole job is to say how much to trust the numbers, so it
+// has to mean "this kind", not "this file".
+test('how stale a file is, is measured against its own kind only', () => withDb(db => {
+  seedCell(db, { type: 'Breach Tablet', rarity: 'Rare',
+    takenAt: '2026-09-09T12:00:00Z', rows: [{ amount: 5, account: 'a', mods: ['A'] }] })
+  seedCell(db, { type: 'Emerald', rarity: 'Rare',
+    takenAt: '2026-09-10T08:00:00Z', idFor: (i) => `j${i}`,
+    rows: [{ amount: 1, account: 'b', mods: ['B'] }] })
+
+  assert.equal(economyFile(db, { ...opts }).syncedAt, '2026-09-09T12:00:00Z',
+    'the tablet file must not be freshened by a jewel sweep')
+  assert.equal(economyFile(db, { ...opts, kind: ITEM_KINDS.jewel }).syncedAt,
+    '2026-09-10T08:00:00Z')
+}))
+
+// A kind nothing has been collected for has no staleness to report, and null
+// says that. A borrowed timestamp from the other kind would read as fresh data.
+test('a kind with nothing collected reports no sync time at all', () => withDb(db => {
+  seedCell(db, { type: 'Breach Tablet', rarity: 'Rare',
+    takenAt: '2026-09-09T12:00:00Z', rows: [{ amount: 5, account: 'a', mods: ['A'] }] })
+  assert.equal(economyFile(db, { ...opts, kind: ITEM_KINDS.jewel }).syncedAt, null)
+}))
+
 // A rarity a kind's market does not trade costs a search per type on every
 // pass and publishes a column of dashes. No jewel trades at normal, measured
 // 2026-09-10: 0 for sale on all three bases against 10000 at both others.

@@ -32,7 +32,8 @@ test('nothing the site publishes is gitignored', (t) => {
   const league = 'Runes of Aldur'
   for (const path of [
     'site/index.html', 'site/app.js', 'site/style.css', 'site/.nojekyll',
-    'site/lib/regex-keys.mjs', 'site/lib/poe2.mjs', 'site/lib/trade-url.mjs',
+    'site/lib/regex-keys.mjs', 'site/lib/poe2.mjs', 'site/lib/item-kinds.mjs',
+    'site/lib/trade-url.mjs',
     `site/${PATHS.leagues}`, `site/${PATHS.economy(league)}`, `site/${PATHS.fragments(league)}`
   ]) {
     assert.equal(ignored(path), false, `${path} is gitignored and would never be published`)

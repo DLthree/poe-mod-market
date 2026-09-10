@@ -4,7 +4,7 @@ import { meta, mods, price } from '../lib/api.mjs'
 import { tradeUrl } from '../lib/trade-url.mjs'
 import { bandOf } from '../lib/bands.mjs'
 import { affixQuery } from '../lib/sweep.mjs'
-import { USES_IMPLICIT, MIN_USES } from '../lib/poe2.mjs'
+import { USES_IMPLICIT, MIN_USES } from '../lib/item-kinds.mjs'
 import { withDb, seedCell, seedQuestion } from './helpers.mjs'
 
 // The band is derived, not stored. `delta` is what the published file calls

@@ -1,7 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { economyFile, economyPath } from '../lib/economy.mjs'
-import { TABLET_TYPES, RARITIES } from '../lib/poe2.mjs'
+import { RARITIES } from '../lib/poe2.mjs'
+import { TABLET_TYPES } from '../lib/item-kinds.mjs'
 import { bandOf } from '../lib/bands.mjs'
 import { withDb, seedCell } from './helpers.mjs'
 

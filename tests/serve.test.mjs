@@ -8,7 +8,8 @@ import { join } from 'node:path'
 import { cacheDir } from '../lib/paths.mjs'
 import { openDb } from '../lib/db.mjs'
 import { PATHS } from '../lib/site.mjs'
-import { TABLET_TYPES, RARITIES } from '../lib/poe2.mjs'
+import { RARITIES } from '../lib/poe2.mjs'
+import { TABLET_TYPES } from '../lib/item-kinds.mjs'
 
 const cli = fileURLToPath(new URL('../cli.mjs', import.meta.url))
 

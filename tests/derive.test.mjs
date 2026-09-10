@@ -5,7 +5,7 @@ import { recordRequest } from '../lib/archive.mjs'
 import { deriveRequest, deriveAll } from '../lib/derive.mjs'
 import { buildIndex } from '../lib/stat-index.mjs'
 import { withDb, sampleListing } from './helpers.mjs'
-import { MAX_AFFIX } from '../lib/poe2.mjs'
+import { MAX_AFFIX } from '../lib/item-kinds.mjs'
 
 const stats = JSON.parse(readFileSync(new URL('./fixtures/stats-subset.json', import.meta.url)))
 const index = buildIndex(stats)

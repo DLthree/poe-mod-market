@@ -11,7 +11,8 @@
 // "/lib/..." would reach for the wrong host directory. The dev server answers
 // the same relative paths, so the local page is the published page.
 import { tabletRegex } from './lib/regex-keys.mjs'
-import { TABLET_TYPES, RARITIES } from './lib/poe2.mjs'
+import { RARITIES } from './lib/poe2.mjs'
+import { TABLET_TYPES } from './lib/item-kinds.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
 import { inExalted } from './lib/exchange.mjs'

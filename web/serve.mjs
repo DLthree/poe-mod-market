@@ -175,7 +175,7 @@ function makeHandleEconomy ({ leagues, config, text }) {
 // could not boot at all. The published page worked, because the build copied
 // all five — the exact inversion of the rule this file exists to keep.
 const BROWSER_MODULES = new Set([
-  '/lib/regex-keys.mjs', '/lib/poe2.mjs', '/lib/trade-url.mjs',
+  '/lib/regex-keys.mjs', '/lib/poe2.mjs', '/lib/item-kinds.mjs', '/lib/trade-url.mjs',
   '/lib/bands.mjs', '/lib/exchange.mjs'
 ])
 

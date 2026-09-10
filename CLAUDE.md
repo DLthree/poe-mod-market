@@ -113,6 +113,16 @@ in CI can reach GGG and no secret belongs there.
 and silently kept the published JSON out of the first commit; `tests/gitignore.test.mjs`
 asks git directly so that cannot recur.
 
+## Handoffs
+
+**They go in `docs/handoffs/`, not the OS temp directory.** Two were written to
+`%TEMP%` before that rule existed and were one cleanup away from being lost.
+`docs/handoffs/README.md` has the naming and what belongs in one.
+
+A handoff says what the next session is FOR. Anything durable belongs in a
+document of its own and is referenced by path, because a fact that lives only in
+a handoff gets read once and never again.
+
 ## Conventions
 
 - **Write replies in ASD-STE100 (Simplified Technical English).** Short sentences, active

@@ -73,6 +73,45 @@ then reads that instead of bootstrapping from what it happened to see.
 option: poe2db.tw, poe.ninja's PoE2 endpoints, and Exiled Exchange 2's published
 releases, whose shipped data may include what its source checkout does not.
 
+## Price a modifier ALONE, on a magic jewel
+
+**This may be the best measurement available, and it addresses the objection
+that sank the first jewel conclusion.**
+
+A rare jewel's price is a conjunction: it is worth buying when several good
+modifiers land together, so a single-modifier search on a rare asks a question
+nobody prices. A magic jewel holds at most one prefix and one suffix. So a
+**magic jewel carrying exactly one modifier and nothing else** is the purest
+possible reading of what that modifier is worth on that base, with nothing else
+contributing to the price.
+
+The search shape wanted is "has modifier X, and empty modifiers: 1" — the
+modifier plus one empty affix slot.
+
+What is already in place:
+
+- `lib/derive.mjs` already stores `open_prefix` and `open_suffix` per listing, so
+  the count can be read back off collected rows without any new request.
+- `lib/walk.mjs` already treats open affixes as candidates and reads a null count
+  as unknown rather than as an open slot.
+- Magic is the plainest rarity jewels trade, so it is already the kind's blank
+  form and the baseline the grid sorts on.
+
+What has to be checked first:
+
+1. **Whether the trade API can filter on empty affix count at all.** If it can,
+   this is a query change and nothing more. If it cannot, the filter has to
+   happen on our side, which means collecting more listings per cell and keeping
+   only the single-modifier ones — a different and dearer shape.
+2. **The magic affix cap for jewels**, which is currently `null` on purpose. 28
+   magic jewels showed at most 1 prefix and 1 suffix, but that is a thin sample
+   from the cheap end. "Exactly one modifier" is only well defined once the cap
+   is known.
+
+Do not conflate this with the vocabulary problem above. This makes each
+measurement cleaner; it does not help discover WHICH modifiers to measure. Both
+are needed.
+
 ## Store `total` on the snapshot
 
 Free, and nothing above can be analysed without it. `runCell` in `lib/sweep.mjs`

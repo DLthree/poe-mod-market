@@ -12,12 +12,42 @@ that makes it dear. `docs/jewel-vocabulary-bias.md` has the measurement:
 maximum Energy Shield is worth 1 to 60 divine on Emerald rare and the full pass
 said nothing about it.
 
-What has been ruled out, so nobody repeats it:
+### The lead, found 2026-09-10
+
+**The game's own modifier table is on this machine.** Exiled Exchange 2's data
+parser reads the `Mods` and `Tags` tables straight out of a PoE2 install, and
+names the columns `SpawnWeight_Tags` and `SpawnWeight_Values` — per-modifier
+spawn weights keyed by item tag, which is exactly the shape wanted.
+
+- Parser: `C:\Users\loffr\dev\exiled-exchange-2\dataParser`, run as
+  `python ./src/main.py` from that folder. Its `data/vendor/tables/` is empty,
+  so it extracts rather than ships the tables.
+- Game data: `C:\Program Files (x86)\Grinding Gear Games\Path of Exile 2\Content.ggpk`,
+  153 GB. The parser's config defaults to a Steam path; the Steam directory here
+  holds only logs, so it must be pointed at the GGG one.
+- **Untested: whether the parser runs here at all.** That is the first thing to
+  find out and it costs no rate allowance.
+
+**Half the answer is already extracted.** EE2's
+`renderer/public/data/en/items.ndjson` tags the three bases: Emerald is
+`dexjewel`, Ruby is `strjewel`, Sapphire is `intjewel`. That alone explains the
+Energy Shield measurement — Energy Shield is an intelligence stat, so it is
+native and cheap on Sapphire and off-attribute, rare and dear on Emerald. **The
+attribute tag is what predicts price.**
+
+If this route works, the pool comes from a local file: free, offline, repeatable
+after each patch, and carrying rarity weights the trade API cannot report.
+
+### What has been ruled out, so nobody repeats it
 
 - **The sibling projects are PoE1.** `poe.re/poe/src/generated/GeneratedJewel.ts`,
   `tab-triage/out/jewels.mjs` and `claude-poe-stash-helper/attic/jewels.mjs` all
   describe Abyss jewels, Cluster jewels, Corrupted Blood and Critical Strike
   Multiplier. Checked 2026-09-10.
+- **The RePoE checkout at `C:\Users\loffr\dev\repoe\` is PoE1.** Its `mods.json`
+  holds 808 occurrences of "Critical Strike Chance" against 1 of "Critical Hit
+  Chance", and its jewel spawn tags are `abyss_jewel`, `affliction_jewel` and
+  `expansion_jewel_*`. No Emerald, Ruby or Sapphire.
 - **GGG's `/data/stats` has no item association.** It is already cached, and it
   holds 3042 explicit stats covering every item class in the game. Nothing in it
   says which ones a jewel can roll.
@@ -39,8 +69,9 @@ ONE-TIME pass whose result is durable until a patch changes the pool:
 Store the result as a checked-in per-kind modifier pool, and the normal sweep
 then reads that instead of bootstrapping from what it happened to see.
 
-Not yet checked: whether poe.ninja or poe2db publishes a PoE2 jewel mod pool
-that would make the discovery pass unnecessary.
+**Only do that if the local route above fails.** Still unchecked as a middle
+option: poe2db.tw, poe.ninja's PoE2 endpoints, and Exiled Exchange 2's published
+releases, whose shipped data may include what its source checkout does not.
 
 ## Store `total` on the snapshot
 

@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dbPath } from './lib/paths.mjs'
 import { openDb } from './lib/db.mjs'
+import { kindOfType } from './lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
@@ -109,6 +110,22 @@ export function runAudit (argv) {
 
   head('collection window')
   table(q('SELECT min(at) first, max(at) last FROM request'))
+
+  // The open-affix counts are read against the caps of the item's own KIND, so
+  // a base type no kind claims stores them as null. That is the honest answer
+  // and it is also silent, one row at a time with nothing on screen. This is
+  // where it becomes visible.
+  head('base types no item kind claims')
+  const unclaimed = q('SELECT DISTINCT type FROM listing')
+    .map(r => r.type).filter(t => !kindOfType(t))
+  if (!unclaimed.length) {
+    console.log('   none: every stored base type belongs to a registered kind')
+  } else {
+    console.log(`   ${unclaimed.length}: ${unclaimed.join(', ')}`)
+    console.log('   Their open-affix counts are stored as unknown. Add them to ' +
+      'ITEM_KINDS in')
+    console.log('   lib/item-kinds.mjs, or leave them as history.')
+  }
 
   db.close()
 }

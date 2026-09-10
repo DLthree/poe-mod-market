@@ -10,12 +10,13 @@
 //     cannot express a support exclusion, so their link returns listings the
 //     page excluded, and they say so rather than pretending.
 //
-// Ours is exact when it carries the uses filter as well as the modifiers. Every
-// modifier filter is a plain "has this modifier", which the trade API expresses
-// directly, but a price here is the price of a FULL tablet: lib/sweep.mjs pins
-// the uses implicit at MIN_USES on every search it sends, so a link without
-// that filter opens a search whose cheap end is part-used tablets the prices
-// above it excluded. It shipped that way until 2026-09-07.
+// OURS IS EXACT WHEN IT CARRIES EVERY GROUP THE SWEEP PINNED. That is the rule,
+// and it is not "carries a uses filter": a jewel has no uses to filter on and
+// its link is exact anyway. The kind decides what is pinned, in
+// lib/item-kinds.mjs, and lib/sweep.mjs asks the same function — because a
+// price here is the price of a FULL tablet, and a link without that filter
+// opens a search whose cheap end is part-used tablets the prices above it
+// excluded. It shipped that way until 2026-09-07.
 //
 // The modifier group is the one place this link deliberately differs from the
 // collection query: "1 of" rather than "all of". See modGroup below.
@@ -28,17 +29,8 @@
 // and silently ignores it — a filter that reads as working while returning the
 // opposite of what was asked.
 
-import { USES_IMPLICIT, MIN_USES } from './poe2.mjs'
-
 const SITE = 'https://www.pathofexile.com/trade2/search'
 const REALM = 'poe2'
-
-// The same shape lib/sweep.mjs sends, as its own stat group so the modifier
-// group and the uses filter never contend for one slot.
-const usesGroup = (type) => ({
-  type: 'and',
-  filters: [{ id: USES_IMPLICIT[type], value: { min: MIN_USES }, disabled: false }]
-})
 
 // "1 of", not "all of". Ticking three modifiers does not mean "find me one
 // tablet carrying all three" — that tablet usually does not exist, and the link
@@ -54,13 +46,18 @@ const modGroup = (mods) => mods.length
   ? { type: 'count', filters: mods.map(hash => ({ id: hash })), value: { min: MIN_MATCHING_MODS } }
   : { type: 'and', filters: [] }
 
-export function tradeUrl ({ league, type, rarity, mods = [], tradeWindow }) {
-  if (!league || !type) return { url: null, exact: false, reason: 'no league or type' }
+export function tradeUrl ({ league, kind, type, rarity, mods = [], tradeWindow }) {
+  // The kind decides which filters this link must carry, so a call without one
+  // cannot know what it is meant to pin. Better no link than a link that opens
+  // a wider market than the price measured.
+  if (!league || !kind || !type) {
+    return { url: null, exact: false, reason: 'no league, kind or type' }
+  }
 
-  // A type we hold no uses implicit for still gets a link, because a search of
-  // the right item at the wrong depth beats no search. It does not get to call
-  // itself exact: its cheap end is part-used tablets.
-  const uses = USES_IMPLICIT[type] ? [usesGroup(type)] : []
+  // A type the kind holds no pinned filter for still gets a link, because a
+  // search of the right item at the wrong depth beats no search. It does not
+  // get to call itself exact.
+  const { groups, missing } = kind.pinned(type)
 
   const query = {
     query: {
@@ -75,7 +72,7 @@ export function tradeUrl ({ league, type, rarity, mods = [], tradeWindow }) {
           }
         }
       },
-      stats: [modGroup(mods), ...uses]
+      stats: [modGroup(mods), ...groups]
     },
     sort: { price: 'asc' }
   }
@@ -83,13 +80,6 @@ export function tradeUrl ({ league, type, rarity, mods = [], tradeWindow }) {
   const url = `${SITE}/${REALM}/${encodeURIComponent(league)}` +
     `?q=${encodeURIComponent(JSON.stringify(query))}`
 
-  if (!uses.length) {
-    return {
-      url,
-      exact: false,
-      query,
-      reason: `no uses implicit known for ${type}; the link includes part-used tablets`
-    }
-  }
+  if (missing.length) return { url, exact: false, query, reason: missing.join('; ') }
   return { url, exact: true, query }
 }

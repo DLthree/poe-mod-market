@@ -1,6 +1,14 @@
 {
  "leagues": [
-  "Forbidden Rites"
+  "Forbidden Rites",
+  "Runes of Aldur"
  ],
- "default": "Forbidden Rites"
+ "default": "Forbidden Rites",
+ "kinds": {
+  "tablet": [
+   "Forbidden Rites",
+   "Runes of Aldur"
+  ],
+  "jewel": []
+ }
 }

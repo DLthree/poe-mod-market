@@ -49,7 +49,8 @@ searches and under a minute:
 node steps/collect.mjs                                        the test set
 node steps/collect.mjs --full --i-mean-it                     every cell
 node steps/collect.mjs --full --i-mean-it --rarities magic    one rarity  (181 searches)
-node steps/collect.mjs --full --i-mean-it --types "Temple Tablet"    one tablet kind
+node steps/collect.mjs --full --i-mean-it --types "Temple Tablet"    one type
+node steps/collect.mjs --full --i-mean-it --kind jewel        the other item kind
 ```
 
 Use `--rarities` or `--types` when only part of the data is stale: re-asking about rares
@@ -57,6 +58,17 @@ that are a few hours old spends 200 searches to learn what you already know, and
 that stops one cell short should not cost 500 searches to finish. Both take a comma
 separated list and refuse a name the game cannot supply. After collecting this way,
 rebuild the derived table with `node steps/build-mod-table.mjs`.
+
+### Two item kinds
+
+`--kind` picks what a pass collects and defaults to `tablet`, so every command above means
+what it always meant. `lib/item-kinds.mjs` is the whole of what one kind knows: its base
+types, the filters its searches pin, its affix caps and its page labels. Everything else
+takes a type and a rarity as parameters.
+
+Each kind is its own market with its own page and its own published files. **A jewel pass
+and a tablet pass do not fit in one six-hour window**, because an IP may make 600 searches
+in six hours and either pass is most of that.
 
 **GGG counts searches and fetches separately, and both caps matter.** An IP may make 600
 searches and 1000 fetches in any six hours. A full pass is about 520 searches, and at
@@ -168,18 +180,24 @@ of it lands a modifier in `low`, because that is a measurement, not an absence o
 
 ## Publishing it
 
-The page is static. It fetches three JSON files and no API at all, so it can be
+The pages are static. They fetch JSON files and no API at all, so they can be
 served from anywhere that serves files:
 
 ```
-data/leagues.json              which leagues exist, and which to open
-data/eco-<league>.json         every cell and every modifier, summarised
-data/fragments-<league>.json   one regex fragment per modifier
+index.html                            tablet prices
+jewels.html                           jewel prices
+data/leagues.json                     which leagues exist, and which kinds each holds
+data/eco-<league>-<kind>.json         every cell and every modifier, summarised
+data/fragments-<league>-<kind>.json   one regex fragment per modifier
 ```
 
-`node cli.mjs build` writes those, the page, and the three modules the page
-imports, into `site/`. Every path in the page is relative, so the same files work
-at a domain root and under `/poe-mod-market/`.
+Both pages load one `app.js` and differ in a `data-kind` attribute on `<body>`. A page
+whose kind has no collected league says so rather than fetching a file that was never
+written, which is why `leagues.json` lists the leagues per kind.
+
+`node cli.mjs build` writes those, the pages, and the modules they import, into
+`site/`. Every path in a page is relative, so the same files work at a domain
+root and under `/poe-mod-market/`.
 
 Live at **https://dlthree.github.io/poe-mod-market/**. The whole deploy loop:
 

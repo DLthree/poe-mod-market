@@ -49,6 +49,22 @@ That directory also holds small leftovers from testing. **Never treat every `*.d
 league**: `lib/leagues.mjs` lists a league only if it holds a snapshot under its own
 name.
 
+## Item kinds
+
+**Everything particular to an item kind lives in `lib/item-kinds.mjs`.** Base types, the
+filters a search pins, the affix caps, the page labels. `lib/poe2.mjs` keeps only what the
+trade API is and what a rarity is. A second kind should need no change outside the registry
+and the places that name a kind by key.
+
+**`kind.pinned(type)` is the seam, and both phases call it.** The sweep throws when a filter
+is missing, because a search that drops one spends allowance on a question other than the
+one it records. The trade link degrades and says why. `exact` on a link means it carries
+every group the sweep pinned, so a jewel link is exact rather than defective.
+
+`--kind` on `steps/collect.mjs` defaults to tablet, so every command line here means what it
+always meant. `config.json` keys `testSet` by kind, and a kind with no test set refuses the
+cheap run rather than falling through to a full pass.
+
 ## The phase boundary
 
 Phase 1 collects and archives; phase 2 reads the derived tables and makes no network
@@ -67,7 +83,7 @@ search, so a merge stacks every rank-0 row at the front in no price order.
 
 ## Verifying
 
-`node --test "tests/*.test.mjs"` — 278 pass. Then, for anything that changes what is
+`node --test "tests/*.test.mjs"` — 344 pass. Then, for anything that changes what is
 published:
 
 - `node cli.mjs audit` after a sweep.

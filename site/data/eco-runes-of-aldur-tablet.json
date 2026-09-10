@@ -1,0 +1,237 @@
+{
+ "league": "Runes of Aldur",
+ "kind": "tablet",
+ "syncedAt": "2026-09-01T16:09:03.677Z",
+ "walk": {
+  "minListings": 8,
+  "minSellers": 2,
+  "minAdds": 10,
+  "midVsBlank": 1.5,
+  "highVsBlank": 2.1
+ },
+ "exchange": {
+  "exalted": 1,
+  "divine": 200,
+  "chaos": 15
+ },
+ "tradeWindow": "3days",
+ "cells": [
+  {
+   "type": "Abyss Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Abyss Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Breach Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Delirium Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Expedition Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Irradiated Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Overseer Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Ritual Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "normal",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "magic",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  },
+  {
+   "type": "Temple Tablet",
+   "rarity": "rare",
+   "floor": null,
+   "currency": null,
+   "typical": null,
+   "listings": 0,
+   "sellers": 0
+  }
+ ],
+ "mods": []
+}

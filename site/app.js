@@ -1,6 +1,6 @@
 // The page. It fetches two things and never calls GGG.
 //
-//   the economy file   what every tablet and modifier floors at
+//   the economy file   what every item of this kind and every modifier floors at
 //   /api/fragments     one short regex fragment per modifier
 //
 // The regex is joined by lib/regex-keys.mjs, the same module the tests
@@ -10,11 +10,17 @@
 // serves this page from /poe-mod-market/, not from the root, so an absolute
 // "/lib/..." would reach for the wrong host directory. The dev server answers
 // the same relative paths, so the local page is the published page.
-import { tabletRegex } from './lib/regex-keys.mjs'
-import { TABLET_TYPES, RARITIES } from './lib/poe2.mjs'
+import { stashRegex } from './lib/regex-keys.mjs'
+import { RARITIES } from './lib/poe2.mjs'
+import { kindByKey } from './lib/item-kinds.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
 import { inExalted } from './lib/exchange.mjs'
+
+// TWO PAGES LOAD THIS FILE, and which one is saying so on its own <body>. The
+// alternative is a second copy of everything below, which is the thing this
+// page was generalised to avoid.
+const kind = kindByKey(document.body.dataset.kind)
 
 // The colour rule, applied here rather than baked into the file, so the same
 // module decides it for the page and for the tests. `null` back from bandOf
@@ -63,8 +69,8 @@ const slug = (league) =>
   String(league).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 const PATHS = {
   leagues: 'data/leagues.json',
-  economy: (league) => `data/eco-${slug(league)}.json`,
-  fragments: (league) => `data/fragments-${slug(league)}.json`
+  economy: (league) => `data/eco-${slug(league)}-${kind.key}.json`,
+  fragments: (league) => `data/fragments-${slug(league)}-${kind.key}.json`
 }
 
 const getJson = async (path) => {
@@ -76,7 +82,17 @@ const getJson = async (path) => {
 async function boot () {
   // The league is not a constant: a new one arrives every few months and the
   // page must not need a rebuild of anything but its data to show it.
-  const { leagues, default: started } = await getJson(PATHS.leagues)
+  const index = await getJson(PATHS.leagues)
+  // Only the leagues that hold THIS kind. A league collected for tablets alone
+  // has no jewel file to fetch, and offering it would 404 where the honest
+  // answer is that nothing has been collected yet.
+  const leagues = index.kinds?.[kind.key] ?? []
+  const started = leagues.includes(index.default) ? index.default : leagues[0]
+  if (!leagues.length) {
+    $('#meta').textContent = `no ${kind.plural.toLowerCase()} collected yet`
+    $('#league').hidden = true
+    return
+  }
   const picker = $('#league')
   picker.replaceChildren()
   for (const name of leagues) {
@@ -96,11 +112,16 @@ async function loadLeague (league) {
     getJson(PATHS.economy(league)),
     getJson(PATHS.fragments(league))
   ])
+  // A file for the wrong kind would render a grid of dashes and read as a
+  // collection fault. Say what actually happened instead.
+  if (eco.kind !== kind.key) {
+    throw new Error(`${PATHS.economy(league)} describes ${eco.kind}, not ${kind.key}`)
+  }
   state.eco = eco
   state.league = eco.league
   state.tradeWindow = eco.tradeWindow
   state.fragments = fragments
-  // Another league is another market. The tablet you had chosen may not be
+  // Another league is another market. The item you had chosen may not be
   // priced there at all, and a tick carried over would be a tick on a price
   // nobody quoted.
   state.type = null
@@ -136,13 +157,13 @@ function renderMeta () {
   $('#meta').title = at ? at.slice(0, 19).replace('T', ' ') + ' UTC' : ''
 }
 
-// Dearest first, by what a blank one costs. A tablet kind whose plain form is
-// dear is the kind worth picking up at all, so that is the order the grid reads
-// in. A kind we hold no plain price for sorts last rather than at either
+// Dearest first, by what a blank one costs. A type whose plain form is
+// dear is the one worth picking up at all, so that is the order the grid reads
+// in. A type we hold no plain price for sorts last rather than at either
 // extreme: it is unknown, not free and not priceless.
 //
 // In exalted, because these prices are not all in one currency. On the raw
-// amount a two-divine tablet read as cheaper than a forty-exalted one.
+// amount a two-divine item read as cheaper than a forty-exalted one.
 const byBlankPrice = (a, b) => {
   const price = (type) => {
     const cell = cellOf(type, 'normal')
@@ -151,12 +172,12 @@ const byBlankPrice = (a, b) => {
   return (price(b) ?? -Infinity) - (price(a) ?? -Infinity)
 }
 
-// Rare first, because that is the market. Normal last: a blank tablet is the
+// Rare first, because that is the market. Normal last: a blank item is the
 // number the bands are measured against, not the thing anyone is shopping for.
 const COLUMNS = [...RARITIES].reverse()
 
-// One square per tablet type and rarity. The floor is the price of a blank one,
-// so it says what the kind is worth before any modifier is considered.
+// One square per type and rarity. The floor is the price of a blank one,
+// so it says what the type is worth before any modifier is considered.
 function renderGrid () {
   const grid = $('#grid')
   grid.replaceChildren()
@@ -165,9 +186,9 @@ function renderGrid () {
   for (const r of COLUMNS) head.append(el('span', 'grid-head', r))
   grid.append(head)
 
-  for (const type of [...TABLET_TYPES].sort(byBlankPrice)) {
+  for (const type of [...kind.types].sort(byBlankPrice)) {
     const row = el('div', 'grid-row')
-    row.append(el('span', 'grid-label', type.replace(' Tablet', '')))
+    row.append(el('span', 'grid-label', kind.short(type)))
     for (const rarity of COLUMNS) {
       const cell = cellOf(type, rarity)
       const thin = cell && cell.listings > 0 && cell.listings < state.eco.walk.minListings
@@ -216,9 +237,9 @@ function select (type, rarity) {
 function render () {
   const card = $('#mods-card')
   if (!state.type) { card.hidden = true; renderResult(); return }
-  // A normal tablet carries no modifier, so the card would be an empty list
+  // A normal item carries no modifier, so the card would be an empty list
   // under a filter box and a bar nothing can clear. The test is the row count,
-  // not the rarity, so a magic tablet we have collected nothing for behaves the
+  // not the rarity, so a magic item we have collected nothing for behaves the
   // same way.
   const all = modsOf(state.type, state.rarity)
   if (!all.length) { card.hidden = true; renderResult(); return }
@@ -265,7 +286,7 @@ function render () {
     // very little evidence, and reading the price without the sample behind it
     // is how a two-seller asking price gets mistaken for a market.
     const why = []
-    if (m.affixRatio !== null) why.push(`${m.affixRatio.toFixed(2)}x a blank tablet`)
+    if (m.affixRatio !== null) why.push(`${m.affixRatio.toFixed(2)}x a blank ${kind.label.toLowerCase()}`)
     if (m.assumedRate) {
       why.push(`compared at ${rateLine()}, an approximate rate that drifts — ` +
         'the price itself is exactly what the market said')
@@ -294,12 +315,12 @@ function renderResult () {
     out.classList.add('placeholder')
   }
   if (!state.type) {
-    placeholder('pick a tablet type below')
+    placeholder(`pick a ${kind.label.toLowerCase()} below`)
     $('#count').textContent = '0 / 250'
     warn.hidden = true
     return
   }
-  const { regex, unkeyed } = tabletRegex({
+  const { regex, unkeyed } = stashRegex({
     statIds: [...state.ticked],
     fragments: state.fragments,
     mode: state.mode
@@ -333,6 +354,7 @@ function renderResult () {
   // because the trade site takes its query as a URL parameter.
   const link = tradeUrl({
     league: state.league,
+    kind,
     type: state.type,
     rarity: state.rarity,
     mods: [...state.ticked],
@@ -395,7 +417,7 @@ $('#copy').addEventListener('click', async () => {
 })
 
 // Clear empties the ticks and the filter. It does NOT put the default ticks
-// back: choosing a tablet type already does that, and a button that returns you
+// back: choosing a type already does that, and a button that returns you
 // to where you started is a second way to do nothing. It is called Clear rather
 // than Reset because emptying is all it does.
 $('#clear').addEventListener('click', () => {

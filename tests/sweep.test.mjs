@@ -510,18 +510,13 @@ test('the tablet affix query is byte-for-byte what it has always been', () => {
 // the abyss crafting market that rides on the same stat ids.
 // See docs/jewel-vocabulary-bias.md.
 test('a jewel query carries the modifier group and excludes desecrated items', () => {
-  const noDesecrated = {
-    type: 'not',
-    filters: [{
-      id: 'pseudo.pseudo_number_of_desecrated_mods',
-      value: { min: 1 },
-      disabled: false
-    }]
-  }
   const pool = poolQuery(JEWEL, 'Emerald', 'rare', '3days')
   assert.equal(pool.type, 'Emerald')
-  assert.deepEqual(pool.stats, [{ type: 'and', filters: [] }, noDesecrated])
+  assert.deepEqual(pool.stats, [{ type: 'and', filters: [] }],
+    'a jewel pins no stat group; the exclusions are misc filters')
+  assert.deepEqual(pool.filters.misc_filters.filters.desecrated, { option: 'false' })
+
   const affix = affixQuery(JEWEL, 'Emerald', 'explicit.stat_1', '3days', 'rare')
-  assert.deepEqual(affix.stats,
-    [{ type: 'and', filters: [{ id: 'explicit.stat_1' }] }, noDesecrated])
+  assert.deepEqual(affix.stats, [{ type: 'and', filters: [{ id: 'explicit.stat_1' }] }])
+  assert.deepEqual(affix.filters.misc_filters.filters.desecrated, { option: 'false' })
 })

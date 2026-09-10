@@ -82,14 +82,37 @@ test('a tablet pins its uses implicit and reports nothing missing', () => {
 // The rule is lib/poe2.mjs pricesIncludeCorrupted, shared with lib/summary.mjs so
 // the search and the summary cannot disagree about what a cell prices.
 test('a magic or normal cell excludes corrupted items, a rare cell does not', () => {
-  const excluded = { misc_filters: { filters: { corrupted: { option: 'false' } } } }
   for (const kind of Object.values(ITEM_KINDS)) {
     for (const rarity of kind.rarities) {
       const { filters } = kind.pinned(kind.types[0], rarity)
+      const corrupted = filters.misc_filters?.filters?.corrupted
       const where = `${kind.key} ${rarity}`
-      if (rarity === 'rare') assert.deepEqual(filters, {}, where)
-      else assert.deepEqual(filters, excluded, where)
+      if (rarity === 'rare') assert.equal(corrupted, undefined, where)
+      else assert.deepEqual(corrupted, { option: 'false' }, where)
     }
+  }
+})
+
+// Both exclusions live in ONE misc_filters object. They must not each build their
+// own, because the second would overwrite the first.
+test('a magic jewel carries both exclusions in one misc_filters group', () => {
+  const { filters } = ITEM_KINDS.jewel.pinned('Emerald', 'magic')
+  assert.deepEqual(filters, {
+    misc_filters: {
+      filters: {
+        corrupted: { option: 'false' },
+        desecrated: { option: 'false' }
+      }
+    }
+  })
+})
+
+// A tablet is not desecrated, and a filter nothing asks for is a filter nobody
+// has measured. Adding it here would be speculative.
+test('a tablet pins no desecrated filter', () => {
+  for (const rarity of ITEM_KINDS.tablet.rarities) {
+    const { filters } = ITEM_KINDS.tablet.pinned('Breach Tablet', rarity)
+    assert.equal(filters.misc_filters?.filters?.desecrated, undefined, rarity)
   }
 })
 
@@ -108,26 +131,20 @@ test('pinned refuses to guess the rarity', () => {
 // price. Measured 2026-09-10: all 19 Emerald rares carrying "increased maximum
 // Energy Shield" were desecrated, on a base that cannot roll it at all.
 //
-// Pinning the count at zero makes a jewel price mean one thing. The trade link
-// calls the same function, so it opens the same market, and nothing is missing.
-// THE GROUP TYPE IS `not`, AND IT WAS MEASURED. An `and` group holding the same
-// count at max 0 matched NOTHING: a blank Emerald rare reported 0 for sale,
-// because an item with no desecrated modifier carries no such pseudo stat for a
-// comparison to succeed against. A `not` group holding it at min 1 reports 10000
-// for a blank, and 0 for the Energy Shield search that reported 22 without it.
-// Probed 2026-09-10, five searches.
-test('a jewel excludes desecrated modifiers and reports nothing missing', () => {
+// Excluding them makes a jewel price mean one thing. The trade link calls the
+// same function, so it opens the same market, and nothing is missing.
+//
+// IT IS A MISC FILTER, NOT A STAT GROUP. The trade site offers Desecrated as
+// Any/Yes/No beside Corrupted, and GGG's own /data/filters lists it. Probed
+// 2026-09-10 on Emerald rare with increased maximum Energy Shield: Any 24, No 0,
+// Yes 24. No and Yes partition the Any result, so the filter is applied and not
+// merely accepted, and the 24 are all desecrated on a base that cannot roll it.
+test('a jewel excludes desecrated items and pins no stat group of its own', () => {
   for (const type of ITEM_KINDS.jewel.types) {
-    const { groups, missing } = ITEM_KINDS.jewel.pinned(type, 'rare')
+    const { groups, filters, missing } = ITEM_KINDS.jewel.pinned(type, 'rare')
     assert.deepEqual(missing, [], type)
-    assert.deepEqual(groups, [{
-      type: 'not',
-      filters: [{
-        id: 'pseudo.pseudo_number_of_desecrated_mods',
-        value: { min: 1 },
-        disabled: false
-      }]
-    }], type)
+    assert.deepEqual(groups, [], type)
+    assert.deepEqual(filters.misc_filters.filters.desecrated, { option: 'false' }, type)
   }
 })
 

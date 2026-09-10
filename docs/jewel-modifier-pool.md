@@ -129,28 +129,55 @@ jewel is not a weapon. The other three carry a wording only one trade stat has.
 Each entry in the pool file records which of the two settled it, in
 `tradeIdSource`. Reapply this table after a re-extraction.
 
-## The desecrated exclusion, and the trap in it
+## The desecrated exclusion
 
-Every jewel search now carries one extra stat group, from `kind.pinned` in
-`lib/item-kinds.mjs`. It excludes items carrying a desecrated modifier, so a
-jewel price means one thing.
+Every jewel search excludes items carrying a desecrated modifier, so a jewel
+price means one thing. It comes from `kind.pinned` in `lib/item-kinds.mjs`, and
+the trade link calls the same function.
 
-**The group type must be `not`.** The obvious shape is an `and` group holding
-`pseudo.pseudo_number_of_desecrated_mods` at a maximum of zero. That matches
-NOTHING. An item with no desecrated modifier carries no such pseudo stat, so the
-comparison fails for every ordinary jewel. A full pass built that way would
-report an empty market and would look exactly like a working sweep.
+**It is a misc filter, not a stat group.** The trade site shows it as
+"Desecrated: No", beside "Corrupted: No", and GGG's own `/data/filters` lists
+`desecrated` in `misc_filters` with Any, Yes and No. That is the whole mechanism.
 
-Probed 2026-09-10, five searches against Forbidden Rites:
+Accepting a filter is not applying one, so it was checked three ways. Probed
+2026-09-10 on Emerald rare asking for increased maximum Energy Shield:
 
-| search | without exclusion | with `not` group |
-|---|---|---|
-| blank Emerald rare | 10000 | 10000 |
-| Emerald rare, increased Attack Speed | — | 10000 |
-| Emerald rare, increased maximum Energy Shield | 22 | 0 |
+| Desecrated | for sale |
+|---|---|
+| Any | 24 |
+| No | 0 |
+| Yes | 24 |
 
-The last row is the pool proving itself. Emerald cannot roll that modifier, and
-once the desecrated items are gone there is nothing left.
+No and Yes partition the Any result, so the filter is applied. All 24 are
+desecrated, on a base the pool says cannot roll that modifier, which is the pool
+proving itself. A pool modifier is unaffected: increased Attack Speed on Emerald
+rare still reports 10000 with the filter on.
+
+### The trap that cost the most
+
+An earlier attempt expressed this as a stat group. **An `and` group holding
+`pseudo.pseudo_number_of_desecrated_mods` at a maximum of zero matches NOTHING.**
+A blank Emerald rare reported 0 for sale, because an item with no desecrated
+modifier carries no such pseudo stat for the comparison to succeed against. A
+full pass built that way would report an empty market and look exactly like a
+working sweep.
+
+A `not` group over the same count does work, and was measured working. The misc
+filter is simpler and symmetric with corrupted, so that is what ships.
+
+## The corrupted exclusion
+
+`lib/summary.mjs` has always dropped corrupted listings from every cell except
+rare, and until 2026-09-10 neither the search nor the trade link asked for that.
+So a magic cell spent allowance on listings it discarded, and the button opened a
+market whose cheap end the published price had excluded, while calling itself
+exact. On Sapphire magic the blank cell published 4 exalted with a 2-exalted
+corrupted listing at the top of the link.
+
+The rule now lives once, in `lib/poe2.mjs`, and the search and the summary both
+read it. `tests/query-parity.test.mjs` compares the two queries field by field
+across all 30 cells and fails on anything a future `pinned` adds that only one
+caller merges.
 
 The archive holds no desecrated rows at all, from any earlier pass. Those items
 are dear, and every pass keeps only the ten cheapest of a cell, so none ever

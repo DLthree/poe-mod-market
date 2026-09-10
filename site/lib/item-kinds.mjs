@@ -1,4 +1,4 @@
-import { RARITIES } from './poe2.mjs'
+import { RARITIES, pricesIncludeCorrupted } from './poe2.mjs'
 
 // PHASE 2 by tests/contract.test.mjs, and that is deliberate. This file holds
 // pure data and pure functions: it names no table and constructs no client, so
@@ -79,6 +79,76 @@ const usesGroup = (statId) => ({
   filters: [{ id: statId, value: { min: MIN_USES }, disabled: false }]
 })
 
+// A DESECRATED modifier is not an affix the base rolled. It comes from the abyss
+// crafting mechanic and it can be anything, including a modifier the base cannot
+// roll at all. GGG returns those items for a search on the EXPLICIT stat id, so
+// without this a jewel cell measures two markets at once.
+//
+// Measured 2026-09-10. All 19 Emerald rares carrying "increased maximum Energy
+// Shield" were desecrated, priced 1 to 60 divine, on a base whose pool does not
+// hold that modifier. See docs/jewel-vocabulary-bias.md.
+//
+// Excluding them is a choice, not a discovery: the desecrated market is real and
+// dear, and this repo does not measure it yet.
+//
+// THE GROUP TYPE IS `not`, AND THAT WAS MEASURED THE HARD WAY. The obvious shape
+// is an `and` group holding the same count at max 0. It matches NOTHING: a blank
+// Emerald rare reported 0 for sale, because an item with no desecrated modifier
+// carries no such pseudo stat for the comparison to succeed against. A full pass
+// built that way would report an empty market and look like a working sweep.
+//
+// Probed 2026-09-10, five searches. With this shape a blank Emerald rare reports
+// 10000, increased Attack Speed reports 10000, and increased maximum Energy
+// Shield — 22 for sale without the exclusion — reports 0, which is what the pool
+// says it must be.
+// NOT STAT GROUPS. These are the trade site's own Any/Yes/No switches, and they
+// live in query.filters.misc_filters. So `pinned` returns them apart from
+// `groups`, and both callers merge the object into the query's own filters.
+//
+// ONE misc_filters OBJECT, however many switches. Two of them building their own
+// would mean the second overwrote the first.
+const miscFilters = (filters) =>
+  Object.keys(filters).length ? { misc_filters: { filters } } : {}
+
+// WHICH cells exclude corrupted items is lib/poe2.mjs pricesIncludeCorrupted,
+// shared with lib/summary.mjs. That sharing is the point: until 2026-09-10 only
+// the summary knew the rule, so a magic search collected corrupted listings, the
+// summary discarded them, and the trade link opened a market whose cheap end the
+// published price had excluded — while calling itself exact. On Sapphire magic the
+// blank cell published 4 exalted with a 2-exalted corrupted listing at the top of
+// the link.
+const notCorrupted = (rarity) => pricesIncludeCorrupted(rarity)
+  ? {}
+  : { corrupted: { option: 'false' } }
+
+// The site shows this as "Desecrated: No", and GGG's own /data/filters lists it
+// beside Corrupted. Probed 2026-09-10 on Emerald rare with increased maximum
+// Energy Shield: Any 24, No 0, Yes 24. No and Yes partition the Any result, so it
+// is applied and not merely accepted — which had to be checked, because a
+// `not: true` inside a stat group returns 200 and a plausible count and does
+// nothing at all.
+//
+// An earlier attempt used a `not` stat group over
+// `pseudo.pseudo_number_of_desecrated_mods`. It worked, and this is simpler and
+// symmetric with corrupted. What did NOT work, and is the trap worth keeping: an
+// `and` group holding that count at max 0 matched NOTHING, because an item with
+// no desecrated modifier carries no such pseudo stat to compare against.
+const notDesecrated = () => ({ desecrated: { option: 'false' } })
+
+// A caller that forgets the rarity would price a magic cell by a rare cell's
+// rules and spend allowance on listings the summary then throws away. There is no
+// safe default, so there is no default.
+const needRarity = (kind, rarity) => {
+  if (!rarity) {
+    throw new Error(
+      `${kind}.pinned needs a rarity, got ${JSON.stringify(rarity)}. It decides ` +
+      'whether the search excludes corrupted listings, and lib/summary.mjs drops ' +
+      'them from every cell except rare. Without it the search and the summary ' +
+      'would price different markets.')
+  }
+  return rarity
+}
+
 export const ITEM_KINDS = {
   tablet: {
     key: 'tablet',
@@ -110,16 +180,31 @@ export const ITEM_KINDS = {
     // that cannot be bought back on a question other than the one it recorded.
     // The link DEGRADES and says so, because a search of the right item at the
     // wrong depth beats no search.
-    pinned (type) {
+    pinned (type, rarity) {
+      // No desecrated switch: a tablet is not desecrated, and a filter nothing
+      // asks for is a filter nobody has measured.
+      const filters = miscFilters(notCorrupted(needRarity('tablet', rarity)))
       const id = USES_IMPLICIT[type]
       if (!id) {
         return {
           groups: [],
+          filters,
           missing: [`no uses implicit known for ${type}; the search includes part-used tablets`]
         }
       }
-      return { groups: [usesGroup(id)], missing: [] }
-    }
+      return { groups: [usesGroup(id)], filters, missing: [] }
+    },
+    // THE SECOND SEAM. Where loop 2 gets the modifiers it asks about.
+    //
+    // A tablet reads what it has already seen, and that is sound for this kind:
+    // tablet supply is thin enough that the cheapest listings of a cell still
+    // carry its premium modifiers.
+    //
+    // BOTH SOURCES ARE HANDED IN, and that is not ceremony. web/app.js imports
+    // this file, so it must pull in neither the database nor lib/mod-pool.mjs,
+    // which reads a file with node:fs and cannot load in a browser. Importing it
+    // here broke the page build, and tests/web.test.mjs caught it.
+    vocabulary: (type, rarity, { observed }) => observed(type, rarity)
   },
   jewel: {
     key: 'jewel',
@@ -161,10 +246,29 @@ export const ITEM_KINDS = {
     // Nothing the page publishes uses these counts; only the mod-table
     // diagnostic does.
     maxAffix: null,
-    // A jewel carries no implicit with a charge on it, so there is nothing to
-    // pin and nothing missing. `exact` on a jewel trade link is therefore true:
-    // the link carries everything the sweep carried.
-    pinned: () => ({ groups: [], missing: [] })
+    // A jewel carries no implicit with a charge on it. What it does carry is a
+    // second market inside its own: see NO_DESECRATED above. Nothing is missing,
+    // so `exact` on a jewel trade link stays true, and the link opens the same
+    // market the price was read from.
+    pinned: (type, rarity) => ({
+      groups: [],
+      filters: miscFilters({
+        ...notCorrupted(needRarity('jewel', rarity)),
+        ...notDesecrated()
+      }),
+      missing: []
+    }),
+    // A jewel CANNOT read its vocabulary from what it has seen. Loop 1 keeps the
+    // cheapest listings, and a modifier that is scarce on a base — which is what
+    // makes it dear there — never reaches the cheap end. A full pass measured 187
+    // cells and said nothing about a modifier worth divines.
+    // See docs/jewel-vocabulary-bias.md.
+    //
+    // So it asks the game instead. `observed` is ignored on purpose: the pool is
+    // what the base CAN roll, which is the question the archive cannot answer.
+    // The rarity is ignored for the same reason — a base rolls one pool, and the
+    // rarity only limits how many modifiers land on one item.
+    vocabulary: (type, rarity, { pool }) => pool(type)
   }
 }
 

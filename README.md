@@ -1,11 +1,15 @@
 # poe-mod-market
 
-Prices Path of Exile 2 Precursor Tablets against the official trade API, and turns the
-result into a stash search you can paste into the game.
+Prices Path of Exile 2 Precursor Tablets and jewels against the official trade API, and
+turns the result into a stash search you can paste into the game.
 
-The question it answers is "which modifiers on which tablets are worth money, and how do I
+The question it answers is "which modifiers on which items are worth money, and how do I
 find them in my stash". It collects live listings into a SQLite archive, one search per
-question, then reports what every tablet type and every modifier floors at.
+question, then reports what every type and every modifier floors at.
+
+Two item kinds, each with its own page and its own published files: **tablets**, the eight
+Precursor Tablet types, and **jewels**, the Emerald, Ruby and Sapphire bases.
+`lib/item-kinds.mjs` is the whole of what a kind knows.
 
 No dependencies. Node 24 or newer, for `node:sqlite`.
 
@@ -113,11 +117,15 @@ fresh. Nothing in phase 2 or in the web view reads it, and the server never hold
 ## The web view
 
 `node cli.mjs serve` opens a page that reads two things and calls GGG for neither: the
-economy file and one regex fragment per modifier. Pick a tablet type, and the modifiers
-worth money are already ticked; the box at the top is the stash search, under the game's
+economy file and one regex fragment per modifier. Pick a type, and the modifiers worth
+money are already ticked; the box at the top is the stash search, under the game's
 250-character limit.
 
-The trade link asks for **any one** of the ticked modifiers, not all of them. A tablet
+There is one page per item kind — `index.html` for tablets, `jewels.html` for jewels — and
+they load the same script. A page names its kind on its own `<body>`, and the grid, the
+headings and the trade link all come from that.
+
+The trade link asks for **any one** of the ticked modifiers, not all of them. An item
 carrying every modifier you ticked usually does not exist, and it is not what any price
 here measured: each price is a single-modifier search, so the link is their union.
 
@@ -174,6 +182,10 @@ exalted, and a modifier "worth twice the tablet" is worth about nothing. It only
 where the blank is cheap — it took Irradiated rare from 6 high modifiers to 0 and Overseer
 magic from 24 to 10, and changed nothing on Abyss, Breach, Ritual or Temple. Falling short
 of it lands a modifier in `low`, because that is a measurement, not an absence of one.
+
+**On jewels it does all of the work.** Every jewel cell measured on 2026-09-10 floors at 1
+exalted, so the ratio alone would band nearly everything high. Read `typical` beside each
+jewel cell: it says what the rest of that list costs, which is what a band cannot.
 
 2.1 rather than a round 2.0 because prices cluster on round multiples of the blank floor:
 34 modifiers floored at exactly 2.00x, two dozen of them on one cell.
@@ -234,10 +246,16 @@ Each setting cost a measurement:
   below one divine, and thousands of tablets sit at exactly one divine.
 - **A full tablet only.** Every tablet carries an implicit — "Adds Abysses to a Map" —
   with its uses remaining underneath. The stat id is per tablet type (`USES_IMPLICIT` in
-  `lib/poe2.mjs`) and every search pins it at `min: 10` — as does the trade link the page
-  hands you, so it opens the same market the price came from. It has to be asked of GGG: a
-  fetched item reports `magnitudes: {min: 10, max: 10}` whatever it has left, and the real
-  count is only in the printed line.
+  `lib/item-kinds.mjs`) and every search pins it at `min: 10` — as does the trade link the
+  page hands you, so it opens the same market the price came from. It has to be asked of
+  GGG: a fetched item reports `magnitudes: {min: 10, max: 10}` whatever it has left, and
+  the real count is only in the printed line.
+
+  This is what a kind's `pinned(type)` returns, and both the sweep and the trade link call
+  it, so the collection query and the published link cannot drift apart. A jewel pins
+  nothing: it carries no implicit with a charge on it. A link is **exact** when it carries
+  every group the sweep pinned, which is why a jewel link is exact rather than defective
+  for lacking a filter jewels do not have.
 - **No `collapse`.** It folds a seller's duplicate listings server-side, discarding data
   the archive exists to keep.
 - **`indexed`, the trade window.** How old a listing may be on the market before GGG will

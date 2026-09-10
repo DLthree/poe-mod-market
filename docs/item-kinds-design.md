@@ -281,6 +281,30 @@ full pass.
 Step 1.5 also measures `maxAffix` for each jewel base, from listings it has
 already fetched, and writes `config.testSet.jewel`.
 
+### What step 1.5 actually found
+
+Added 2026-09-10, after nine searches. This section is the outcome; everything above it is
+the design as agreed.
+
+- **The three base type names are right.** `Emerald`, `Ruby` and `Sapphire` are all
+  accepted as a `type`, and each reported 10000 for sale at magic and at rare, which is the
+  API's own ceiling rather than a count. The risk this section was written to flag did not
+  materialise.
+- **No jewel trades at normal.** Zero for sale on all three bases. That was not anticipated
+  anywhere above, and it made the rarity list a property of the kind rather than a
+  constant: a kind lists only the rarities its market trades, ordered plainest first, and
+  `rarities[0]` is the blank form the grid sorts on. For a jewel that is magic.
+- **The affix caps stay null.** Thirty rare and 28 magic jewels showed at most two prefixes
+  and two suffixes, but that is a floor from a thin sample at the cheap end, not a cap. The
+  tablet numbers took 3540 items to settle, and `lib/derive.mjs` applies a cap at
+  COLLECTION time, so a wrong one is baked into every row a pass writes. Nothing the page
+  publishes reads these counts; only the mod-table diagnostic does.
+- **A full jewel pass is far cheaper than estimated.** This document repeated the handoff's
+  346-search hard floor, taken from a Chao1 bound on the true vocabulary. The real cost of
+  the first pass is 193 searches, because loop 2 can only ask about modifiers loop 1 has
+  already seen, and a ten-deep pool sample of six cells yields 187. The Chao1 number is
+  what a *converged* sweep would cost across repeated passes, not what the first one does.
+
 The rate-editing panel declined on 2026-09-09 stays declined. Its shared
 derivation idea overlaps with this work only in that both put one rule in one
 place, and this document already does that.

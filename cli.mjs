@@ -12,13 +12,14 @@ import { readFileSync } from 'node:fs'
 import { runServe } from './web/serve.mjs'
 import { runAudit } from './audit-db.mjs'
 import { runBuild } from './steps/build-site.mjs'
+import { KIND_KEYS, kindByKey } from './lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 const config = JSON.parse(readFileSync(here('./config.json'), 'utf8'))
 
-const OVERALL_USAGE = `Tablet price CLI for PoE2 Precursor Tablets.
+const OVERALL_USAGE = `Price CLI for PoE2 Precursor Tablets and jewels.
 
-  node cli.mjs update [flags]   collect and rebuild the price data
+  node cli.mjs update [flags]   collect and rebuild the price data, one kind
   node cli.mjs serve  [flags]   the read-only web view and economy file
   node cli.mjs audit  [flags]   check stored rows against what GGG sent
   node cli.mjs build  [flags]   write the static site into site/
@@ -26,7 +27,7 @@ const OVERALL_USAGE = `Tablet price CLI for PoE2 Precursor Tablets.
 Run \`node cli.mjs <command> --help\` for a command's own flags.`
 
 const UPDATE_BOOLEAN = ['help', 'offline', 'pools-only', 'dry-run', 'replay', 'quick']
-const UPDATE_VALUED = ['league', 'data']
+const UPDATE_VALUED = ['league', 'data', 'kind']
 
 const UPDATE_USAGE = `Refresh everything for one league.
 
@@ -39,7 +40,12 @@ const UPDATE_USAGE = `Refresh everything for one league.
   node cli.mjs update --replay       also replay the archive first
 
   --league <name>   default ${config.league}
+  --kind <key>      which item kind to collect: ${KIND_KEYS.join(', ')}. Default tablet.
   --data <dir>      override the data directory
+
+ONE KIND PER RUN, and that is a rate limit, not a preference. An IP may make 600
+searches in six hours, and a full tablet pass is about 520 of them, so a tablet
+pass and a jewel pass do not fit in one window. Run them apart.
 
 --quick REFRESHES, it does not discover. It re-asks the modifiers the last pass
 already measured at ${config.quick?.minRatio ?? '?'}x the blank tablet or better, so a modifier that has
@@ -81,13 +87,14 @@ function planUpdateSteps (opts) {
   const steps = []
   if (!opts.offline) {
     const quick = opts.quick ? ['--min-ratio', String(config.quick.minRatio)] : []
+    const kind = opts.kind ?? 'tablet'
     steps.push({
       name: opts['pools-only']
-        ? 'collect the baselines'
-        : (opts.quick ? 'collect the baselines and the modifiers worth watching'
-                      : 'collect every cell'),
+        ? `collect the ${kind} baselines`
+        : (opts.quick ? `collect the ${kind} baselines and the modifiers worth watching`
+                      : `collect every ${kind} cell`),
       script: 'steps/collect.mjs',
-      args: ['--full', '--i-mean-it',
+      args: ['--kind', kind, '--full', '--i-mean-it',
         ...(opts['pools-only'] ? ['--only', 'pools'] : quick)]
     })
   }
@@ -137,6 +144,16 @@ function cmdUpdate (argv) {
     console.error('config.json needs `quick.minRatio` as a positive number for --quick. ' +
       'Nothing has run.')
     process.exit(2)
+  }
+  // Checked here as well as in the step, so an unknown kind is refused before a
+  // plan is printed saying it will collect one.
+  if (opts.kind !== undefined) {
+    try {
+      kindByKey(opts.kind)
+    } catch (err) {
+      console.error(`${err.message} Nothing has run.`)
+      process.exit(2)
+    }
   }
   const league = opts.league ?? config.league
   const common = ['--league', league, ...(opts.data ? ['--data', opts.data] : [])]

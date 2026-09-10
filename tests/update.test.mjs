@@ -160,6 +160,38 @@ test('a quick refresh refuses to combine with pools-only or offline', () => {
   }
 })
 
+// The front door has to reach both markets or it is the front door to one of
+// them. Every assertion here runs through --dry-run, so nothing collects.
+test('update collects the kind it is asked for, and tablet when it is not', () => {
+  const dir = seeded()
+  try {
+    assert.match(run(dir, ['--dry-run']), /--kind tablet/,
+      'the default has to be explicit in the plan, not implied by its absence')
+    assert.match(run(dir, ['--dry-run', '--kind', 'jewel']), /--kind jewel/)
+    assert.match(run(dir, ['--dry-run', '--kind', 'jewel']), /every jewel cell/)
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
+// Refused before a plan is printed, so nothing ever reads "collect every
+// tablets cell" and then does something else.
+test('update refuses an unknown kind and names the ones that exist', () => {
+  const dir = seeded()
+  try {
+    let out = ''
+    assert.throws(() => run(dir, ['--dry-run', '--kind', 'tablets']), (e) => {
+      out = String(e.stderr || '') + String(e.stdout || '')
+      return true
+    })
+    assert.match(out, /Unknown item kind "tablets"/)
+    assert.match(out, /tablet, jewel/)
+    assert.doesNotMatch(out, /collect every/, 'no plan may be printed for a kind that failed')
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
+
 test('replaying is available on purpose, for after a parser change', () => {
   const dir = seeded()
   try {

@@ -11,6 +11,12 @@ Two item kinds, each with its own page and its own published files: **tablets**,
 Precursor Tablet types, and **jewels**, the Emerald, Ruby and Sapphire bases.
 `lib/item-kinds.mjs` is the whole of what a kind knows.
 
+> **The jewel numbers are not trustworthy yet and must not be published.** The sweep
+> discovers modifiers by looking at the cheapest listings, and a jewel modifier is dear
+> precisely when it is rare on that base, so the valuable ones are never asked about.
+> `docs/jewel-vocabulary-bias.md` has the measurement. Tablets are unaffected.
+> `docs/TODO.md` has what would fix it.
+
 No dependencies. Node 24 or newer, for `node:sqlite`.
 
 ## Two phases, with a database between them

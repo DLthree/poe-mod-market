@@ -71,7 +71,22 @@ cell. Six such modifiers were asked of Emerald rare:
 Four are modifiers Emerald rare cannot roll at all, and two are common and
 genuinely cheap. Cross-seeding would spend most of its searches on those.
 
-## What the three probes together suggest
+## Sorting the other way does not fix it either
+
+Every search here sorts price ascending, because the statistic is a floor. The
+obvious repair is to sample the dear end instead. One search, Emerald rare,
+`price: desc`:
+
+The ten dearest cost 1000 to 4030 divine. The 4030-divine one carries "13%
+increased Damage with Bows, 15% increased Elemental Damage, 6% reduced Slowing
+Potency, 11% increased Life Flask Charges gained". **It contributed zero new
+modifiers to the vocabulary.** Every one was already known from the cheap end.
+
+Those are ask-price listings, not value. So the cheap end is junk, the dear end
+is noise, and the valuable middle — Energy Shield at 19 listings and 1 to 60
+divine — is invisible from both. Only naming the modifier finds it.
+
+## What the probes together suggest
 
 Untested as a rule, but it is what the numbers point at, and it is cheap to
 check.

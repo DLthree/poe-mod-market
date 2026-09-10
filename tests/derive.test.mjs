@@ -5,7 +5,7 @@ import { recordRequest } from '../lib/archive.mjs'
 import { deriveRequest, deriveAll } from '../lib/derive.mjs'
 import { buildIndex } from '../lib/stat-index.mjs'
 import { withDb, sampleListing } from './helpers.mjs'
-import { MAX_AFFIX } from '../lib/item-kinds.mjs'
+import { MAX_AFFIX, ITEM_KINDS, kindOfType } from '../lib/item-kinds.mjs'
 
 const stats = JSON.parse(readFileSync(new URL('./fixtures/stats-subset.json', import.meta.url)))
 const index = buildIndex(stats)
@@ -68,6 +68,38 @@ test('open affixes are counted against the measured rare capacity', () => withDb
   // The sample carries one prefix and one suffix, against MAX_AFFIX.Rare.
   assert.equal(row.p, MAX_AFFIX.Rare.prefix - 1)
   assert.equal(row.s, MAX_AFFIX.Rare.suffix - 1)
+}))
+
+// The same sample, relabelled. It keeps its tier codes, so `typed` is true and
+// the cap lookup is demonstrably the thing deciding the answer below.
+const ofType = (baseType) => {
+  const l = sampleListing()
+  l.item.baseType = baseType
+  return l
+}
+
+// A kind whose affix caps nobody has measured must say unknown, not guess.
+// lib/walk.mjs already reads a null open-affix count as unknown rather than as
+// an open affix, so null is honest and safe downstream. Jewels are in this
+// state until their caps are measured.
+test('an item of a kind with no measured affix caps stores unknown open affixes',
+  () => withDb(db => {
+    assert.equal(ITEM_KINDS.jewel.maxAffix, null, 'the fixture depends on this')
+    deriveRequest(db, archive(db, [ofType('Emerald')]), index)
+    const row = db.prepare('SELECT open_prefix p, open_suffix s FROM listing').get()
+    assert.equal(row.p, null)
+    assert.equal(row.s, null)
+  }))
+
+// A base type no kind claims is the same answer for the same reason. It also
+// says the registry is the authority: an item we cannot place is not quietly
+// given the tablet caps because it happened to be rare.
+test('a base type no kind claims stores unknown open affixes', () => withDb(db => {
+  assert.equal(kindOfType('Wandering Trinket'), null, 'the fixture must stay unclaimed')
+  deriveRequest(db, archive(db, [ofType('Wandering Trinket')]), index)
+  const row = db.prepare('SELECT open_prefix p, open_suffix s FROM listing').get()
+  assert.equal(row.p, null)
+  assert.equal(row.s, null)
 }))
 
 test('no tier codes means open affixes are unknown, not zero', () => withDb(db => {

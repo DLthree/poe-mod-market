@@ -93,6 +93,14 @@ Whether jewels can be priced at all by some other question. Ideas, none tested:
 The archive keeps every listing this pass collected, so any statistic that does
 not need a new question can be recomputed from it without spending anything.
 
+## Both pages were looked at
+
+In a browser, on 2026-09-10, which is the first time any page in this repo has
+been. The tablet page renders as it always did. The jewel page renders three
+bases against two rarity columns — there is no normal column, because no jewel
+trades at normal — and the grid is almost entirely "1.0 ex". The finding above
+is visible at a glance.
+
 ## What was done about it
 
 Nothing yet, deliberately. The collector, the registry and both pages work and

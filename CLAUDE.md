@@ -92,11 +92,15 @@ published:
   memory; static files are re-read per request, so HTML, CSS and `app.js` do not need it.
   A stale server serving pre-change logic over new rows has cost real time here.
 
-**There is no browser automation installed, so no agent has seen this page render.**
-Every check is a data-level replay. That is exactly how a CSS fault shipped once: the
+**A CSS fault shipped here once** because every check was a data-level replay: the
 modifier card never hid, because `.card` sets `display:flex` and an author rule beats the
-browser's own `[hidden]` rule. If a change is visual, say plainly that it has not been
-looked at.
+browser's own `[hidden]` rule. Nothing in node can see that.
+
+`agent-browser` is installed now and both pages were screenshotted on 2026-09-10. Use it
+for any visual change: start `node cli.mjs serve`, confirm the URL answers, then open and
+screenshot. **The first `open` after a fresh install takes hours and looks exactly like a
+hang — leave it alone rather than retrying, because each retry strands another browser.**
+If a change is visual and you did not look at it, say so plainly.
 
 ## Publishing
 

@@ -45,8 +45,19 @@ test('the file covers every type of its kind and no other', () => withDb(db => {
   const out = economyFile(db, { ...opts, kind: ITEM_KINDS.jewel })
   assert.deepEqual([...new Set(out.cells.map(c => c.type))].sort(),
     ['Emerald', 'Ruby', 'Sapphire'])
-  assert.equal(out.cells.length, ITEM_KINDS.jewel.types.length * RARITIES.length)
+  assert.equal(out.cells.length,
+    ITEM_KINDS.jewel.types.length * ITEM_KINDS.jewel.rarities.length)
   assert.deepEqual(out.mods, [], 'nothing has been collected for jewels')
+}))
+
+// A rarity a kind's market does not trade costs a search per type on every
+// pass and publishes a column of dashes. No jewel trades at normal, measured
+// 2026-09-10: 0 for sale on all three bases against 10000 at both others.
+test('the file carries only the rarities its kind actually trades', () => withDb(db => {
+  const jewel = economyFile(db, { ...opts, kind: ITEM_KINDS.jewel })
+  assert.deepEqual([...new Set(jewel.cells.map(c => c.rarity))], ['magic', 'rare'])
+  const tablet = economyFile(db, { ...opts })
+  assert.deepEqual([...new Set(tablet.cells.map(c => c.rarity))], RARITIES)
 }))
 
 test('economyPath matches what shared/economy.ts asks for', () => {

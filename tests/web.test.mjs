@@ -58,10 +58,25 @@ test('each page links to its sibling', () => {
 // /lib/exchange.mjs 404ed and the local page could not boot at all. The
 // published page worked, which is the exact inversion of the rule.
 //
-// Neither list is the authority. The page's own import statements are.
+// Neither list is the authority. The page's own import statements are — and
+// TRANSITIVELY, which is the half a first version of this test got wrong. The
+// page imports item-kinds.mjs, which imports poe2.mjs, so poe2.mjs has to be
+// served even though no line of app.js names it. A whitelist built from direct
+// imports alone drops it, and the page 404s on a module it never mentions.
+const importsOf = (src) =>
+  [...src.matchAll(/from\s+'\.[/\w-]*\/([\w-]+\.mjs)'/g)].map(m => m[1])
+
 const importedModules = () => {
-  const src = readFileSync(new URL('../web/app.js', import.meta.url), 'utf8')
-  return new Set([...src.matchAll(/from\s+'\.\/lib\/([\w-]+\.mjs)'/g)].map(m => m[1]))
+  const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8')
+  const found = new Set()
+  const queue = importsOf(read('../web/app.js'))
+  while (queue.length) {
+    const name = queue.shift()
+    if (found.has(name)) continue
+    found.add(name)
+    queue.push(...importsOf(read(`../lib/${name}`)))
+  }
+  return found
 }
 
 test('the dev server serves every lib module the page imports', () => {

@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url'
 import { dbPath, cacheDir } from '../lib/paths.mjs'
 import { createProgress } from '../lib/progress.mjs'
 import { TradeClient } from '../lib/trade-client.mjs'
-import { API_BASE, REALM, RARITIES, MODIFIED_RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
+import { API_BASE, REALM, MODIFIED_RARITIES, validateTradeWindow } from '../lib/poe2.mjs'
 import { kindByKey } from '../lib/item-kinds.mjs'
 import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
@@ -101,11 +101,11 @@ if (minRatio !== null && !(Number(minRatio) > 0)) {
 // searches to learn what we already know.
 const asked = flag('rarities', null)
 const rarities = asked ? asked.split(',').map(r => r.trim()).filter(Boolean)
-  : (full ? RARITIES : testSet.rarities)
-const unknown = rarities.filter(r => !RARITIES.includes(r))
+  : (full ? kind.rarities : testSet.rarities)
+const unknown = rarities.filter(r => !kind.rarities.includes(r))
 if (unknown.length) {
-  console.error(`Unknown rarity ${unknown.map(r => JSON.stringify(r)).join(', ')}. ` +
-    `Known: ${RARITIES.join(', ')}. Nothing has run.`)
+  console.error(`Unknown ${kindKey} rarity ${unknown.map(r => JSON.stringify(r)).join(', ')}. ` +
+    `Known for ${kindKey}: ${kind.rarities.join(', ')}. Nothing has run.`)
   process.exit(2)
 }
 

@@ -11,7 +11,7 @@
 // "/lib/..." would reach for the wrong host directory. The dev server answers
 // the same relative paths, so the local page is the published page.
 import { stashRegex } from './lib/regex-keys.mjs'
-import { RARITIES } from './lib/poe2.mjs'
+
 import { kindByKey } from './lib/item-kinds.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
@@ -157,6 +157,11 @@ function renderMeta () {
   $('#meta').title = at ? at.slice(0, 19).replace('T', ' ') + ' UTC' : ''
 }
 
+// The plainest form this kind trades, and the kind names it: `rarities` is
+// ordered plainest first. A tablet sells blank. No jewel trades at normal at
+// all, so a magic jewel is the plainest jewel there is.
+const BLANK = kind.rarities[0]
+
 // Dearest first, by what a blank one costs. A type whose plain form is
 // dear is the one worth picking up at all, so that is the order the grid reads
 // in. A type we hold no plain price for sorts last rather than at either
@@ -166,15 +171,16 @@ function renderMeta () {
 // amount a two-divine item read as cheaper than a forty-exalted one.
 const byBlankPrice = (a, b) => {
   const price = (type) => {
-    const cell = cellOf(type, 'normal')
+    const cell = cellOf(type, BLANK)
     return cell ? inExalted(cell.floor, cell.currency, state.eco.exchange) : null
   }
   return (price(b) ?? -Infinity) - (price(a) ?? -Infinity)
 }
 
-// Rare first, because that is the market. Normal last: a blank item is the
-// number the bands are measured against, not the thing anyone is shopping for.
-const COLUMNS = [...RARITIES].reverse()
+// Dearest rarity first, because that is the market. The blank one last: it is
+// the number the bands are measured against, not the thing anyone is shopping
+// for.
+const COLUMNS = [...kind.rarities].reverse()
 
 // One square per type and rarity. The floor is the price of a blank one,
 // so it says what the type is worth before any modifier is considered.

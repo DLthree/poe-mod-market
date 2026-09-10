@@ -85,6 +85,56 @@
           "note": "increased Experience gain — expected filler"
         }
       ]
+    },
+    "jewel": {
+      "types": [
+        "Emerald"
+      ],
+      "rarities": [
+        "rare"
+      ],
+      "affixes": [
+        {
+          "hash": "explicit.stat_818778753",
+          "note": "Damage Penetrates #% Lightning Resistance — penetration is the premium line on a jewel"
+        },
+        {
+          "hash": "explicit.stat_2231156303",
+          "note": "increased Lightning Damage — a plain damage multiplier"
+        },
+        {
+          "hash": "explicit.stat_681332047",
+          "note": "increased Attack Speed — wanted by every attack build"
+        },
+        {
+          "hash": "explicit.stat_2456523742",
+          "note": "increased Critical Damage Bonus with Spears — narrow but crit"
+        },
+        {
+          "hash": "explicit.stat_4188894176",
+          "note": "increased Damage with Bows — weapon-specific damage"
+        },
+        {
+          "hash": "explicit.stat_2487305362",
+          "note": "increased Magnitude of Poison you inflict — ailment scaling"
+        },
+        {
+          "hash": "explicit.stat_624954515",
+          "note": "increased Accuracy Rating — expected mid"
+        },
+        {
+          "hash": "explicit.stat_3759663284",
+          "note": "increased Projectile Speed — expected mid"
+        },
+        {
+          "hash": "explicit.stat_1389754388",
+          "note": "increased Charm Effect Duration — expected filler"
+        },
+        {
+          "hash": "explicit.stat_1836676211",
+          "note": "increased Flask Charges gained — expected filler"
+        }
+      ]
     }
   },
   "_walk": "minLift is a ratio against the blank-tablet floor. Note the baseline is the cheapest tablet of ANY kind, while each modifier cell is sampled at the cheapest tablet CARRYING that modifier — constraining a search at all raises its floor, so a low threshold admits modifiers that are not really worth anything."

@@ -13,6 +13,7 @@ import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
 import { dbPath, cacheDir, modTablePath } from '../lib/paths.mjs'
 import { sampleListing } from './helpers.mjs'
+import { ITEM_KINDS } from '../lib/item-kinds.mjs'
 
 const LEAGUE = 'RefreshTest'
 const stats = JSON.parse(readFileSync(new URL('./fixtures/stats-subset.json', import.meta.url)))
@@ -210,12 +211,23 @@ test('a type belonging to another kind is refused', () => {
   assert.match(r.stderr, /Emerald, Ruby, Sapphire/)
 })
 
-// A kind with no test set cannot run the cheap default. Falling through to a
-// full pass would spend most of a day's allowance on a flag nobody typed.
-test('a kind with no test set refuses the cheap run and says why', () => {
-  const r = collect(['--kind', 'jewel'])
-  assert.equal(r.status, 2)
-  assert.match(r.stderr, /no test set for jewel/)
-  assert.match(r.stderr, /config\.json/)
-  assert.match(r.stderr, /Nothing has run/)
+// A kind with no test set cannot run the cheap default, and steps/collect.mjs
+// refuses rather than falling through to a full pass. That refusal cannot be
+// provoked from the real config any more, because every kind now has a set —
+// which is the property actually worth holding, and it is checkable without
+// spawning anything or spending a search.
+test('every registered kind has a usable test set', () => {
+  const config = JSON.parse(readFileSync(new URL('../config.json', import.meta.url), 'utf8'))
+  for (const [key, kind] of Object.entries(ITEM_KINDS)) {
+    const set = config.testSet?.[key]
+    assert.ok(set, `config.json has no testSet.${key}, so that kind has no cheap run`)
+    assert.ok(set.affixes?.length, `testSet.${key} names no modifier`)
+    for (const t of set.types) {
+      assert.ok(kind.types.includes(t), `testSet.${key} names ${t}, which is not a ${key}`)
+    }
+    for (const r of set.rarities) {
+      assert.ok(kind.rarities.includes(r),
+        `testSet.${key} names rarity ${r}, which ${key} does not trade`)
+    }
+  }
 })

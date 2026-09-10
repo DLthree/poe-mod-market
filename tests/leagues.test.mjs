@@ -33,8 +33,30 @@ test('a league is listed with its snapshot count and its newest snapshot', () =>
       ['Runes of Aldur', '2026-08-31T23:59:18Z']
     ])
     assert.deepEqual(listLeagues(dir), [
-      { league: 'Runes of Aldur', snapshots: 2, newestSnapshot: '2026-08-31T23:59:18Z' }
+      {
+        league: 'Runes of Aldur',
+        snapshots: 2,
+        newestSnapshot: '2026-08-31T23:59:18Z',
+        kinds: ['tablet']
+      }
     ])
+  }))
+
+// A league is not one market any more. The jewel page must not offer a league
+// that holds only tablets: it would fetch a file that does not exist and 404
+// where it should say nothing has been collected.
+test('a league reports which kinds it actually holds', () =>
+  withDir((dir) => {
+    const db = openDb(join(dir, 'Mixed.db'))
+    const add = (type) => db.prepare(
+      'INSERT INTO snapshot (league,type,rarity,stat_id,taken_at) VALUES (?,?,?,?,?)')
+      .run('Mixed', type, 'Rare', null, '2026-09-10T00:00:00Z')
+    add('Breach Tablet')
+    add('Emerald')
+    // A snapshot of a type no kind claims must not invent a kind for it.
+    add('Wandering Trinket')
+    db.close()
+    assert.deepEqual(listLeagues(dir)[0].kinds, ['jewel', 'tablet'])
   }))
 
 // Runes.db and ServeTest4.db sit beside the real database and are 4 KB each.

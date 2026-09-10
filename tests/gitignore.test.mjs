@@ -34,7 +34,7 @@ test('nothing the site publishes is gitignored', (t) => {
     'site/index.html', 'site/app.js', 'site/style.css', 'site/.nojekyll',
     'site/lib/regex-keys.mjs', 'site/lib/poe2.mjs', 'site/lib/item-kinds.mjs',
     'site/lib/trade-url.mjs',
-    `site/${PATHS.leagues}`, `site/${PATHS.economy(league)}`, `site/${PATHS.fragments(league)}`
+    `site/${PATHS.leagues}`, `site/${PATHS.economy(league, 'tablet')}`, `site/${PATHS.fragments(league, 'tablet')}`
   ]) {
     assert.equal(ignored(path), false, `${path} is gitignored and would never be published`)
   }

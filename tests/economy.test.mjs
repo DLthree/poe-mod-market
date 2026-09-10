@@ -2,14 +2,14 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { economyFile, economyPath } from '../lib/economy.mjs'
 import { RARITIES } from '../lib/poe2.mjs'
-import { TABLET_TYPES } from '../lib/item-kinds.mjs'
+import { ITEM_KINDS } from '../lib/item-kinds.mjs'
 import { bandOf } from '../lib/bands.mjs'
 import { withDb, seedCell } from './helpers.mjs'
 
 // Derived, never a literal: the claim is "one line per type per rarity", which
 // is a relationship. Writing the product as a number made this test fail for
 // the right reason but the wrong cause the day Expedition Tablet came back.
-const EVERY_CELL = TABLET_TYPES.length * RARITIES.length
+const EVERY_CELL = ITEM_KINDS.tablet.types.length * RARITIES.length
 
 const NOW = Date.parse('2026-08-29T13:00:00Z')
 const config = {
@@ -17,7 +17,7 @@ const config = {
   walk: { minListings: 3, minSellers: 2, minLift: 2, minAdds: 0, midVsBlank: 1.5, highVsBlank: 2 },
   exchange: { exalted: 1, divine: 100, chaos: 5 }
 }
-const opts = { league: 'L', lookbackHours: 48, config, now: NOW }
+const opts = { league: 'L', kind: ITEM_KINDS.tablet, lookbackHours: 48, config, now: NOW }
 
 const seed = (db, rows, at = '2026-08-29T12:00:00Z') =>
   seedCell(db, { rows, takenAt: at, idFor: (i) => `${at}-l${i}` })
@@ -32,8 +32,28 @@ const SAMPLE = [
   { amount: 60, account: 'i', mods: ['GOOD'] }
 ]
 
+// A page that loaded the wrong file would render an empty grid and read as a
+// collection fault. Naming the kind in the file lets it refuse instead.
+test('the economy file names the kind it describes', () => withDb(db => {
+  assert.equal(economyFile(db, { ...opts }).kind, 'tablet')
+}))
+
+// A kind is a closed list of types, and the file covers all of them whether or
+// not anything was collected for them. A missing line would read as a page
+// fault rather than as a gap.
+test('the file covers every type of its kind and no other', () => withDb(db => {
+  const out = economyFile(db, { ...opts, kind: ITEM_KINDS.jewel })
+  assert.deepEqual([...new Set(out.cells.map(c => c.type))].sort(),
+    ['Emerald', 'Ruby', 'Sapphire'])
+  assert.equal(out.cells.length, ITEM_KINDS.jewel.types.length * RARITIES.length)
+  assert.deepEqual(out.mods, [], 'nothing has been collected for jewels')
+}))
+
 test('economyPath matches what shared/economy.ts asks for', () => {
-  assert.equal(economyPath('Runes of Aldur'), 'tablet/eco_Runes of Aldur_Tablet.json')
+  assert.equal(economyPath('Runes of Aldur', ITEM_KINDS.tablet),
+    'tablet/eco_Runes of Aldur_Tablet.json')
+  assert.equal(economyPath('Runes of Aldur', ITEM_KINDS.jewel),
+    'jewel/eco_Runes of Aldur_Jewel.json')
 })
 
 test('a populated cell carries its floor and both counts', () => withDb(db => {

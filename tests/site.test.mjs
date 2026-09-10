@@ -26,13 +26,33 @@ test('a league name becomes a safe file name', () => {
 })
 
 test('the league index names a default the list actually holds', () => {
-  const held = [{ league: 'New' }, { league: 'Old' }]
-  assert.deepEqual(leaguesFile(held, 'New'), { leagues: ['New', 'Old'], default: 'New' })
+  const held = [{ league: 'New', kinds: ['tablet'] }, { league: 'Old', kinds: [] }]
+  assert.deepEqual(leaguesFile(held, 'New'), {
+    leagues: ['New', 'Old'],
+    default: 'New',
+    // One file boots every page, so each page needs to know which leagues have
+    // anything for IT. A page whose list is empty says so rather than fetching
+    // a file that was never written.
+    kinds: { tablet: ['New'], jewel: [] }
+  })
   // The league a server was started with, before its first sweep, is still
-  // offerable and still the default.
-  assert.deepEqual(leaguesFile(held, 'Fresh'),
-    { leagues: ['Fresh', 'New', 'Old'], default: 'Fresh' })
-  assert.deepEqual(leaguesFile([], null), { leagues: [], default: null })
+  // offerable and still the default. It holds nothing for any kind yet.
+  assert.deepEqual(leaguesFile(held, 'Fresh'), {
+    leagues: ['Fresh', 'New', 'Old'],
+    default: 'Fresh',
+    kinds: { tablet: ['New'], jewel: [] }
+  })
+  assert.deepEqual(leaguesFile([], null),
+    { leagues: [], default: null, kinds: { tablet: [], jewel: [] } })
+})
+
+// Both kinds take the suffix. A special case for tablets would be one more
+// rule to remember, and nothing is gained: the page, its modules and its data
+// are rebuilt and committed together.
+test('the built site names the kind in every per-league data file', () => {
+  assert.equal(PATHS.economy('Runes of Aldur', 'tablet'), 'data/eco-runes-of-aldur-tablet.json')
+  assert.equal(PATHS.fragments('Runes of Aldur', 'jewel'),
+    'data/fragments-runes-of-aldur-jewel.json')
 })
 
 // buildSite reads the stats cache the same way the server does, so a tmp data
@@ -84,7 +104,7 @@ const withBuild = async (t, fn) => {
 test('the build writes every file the page asks for', (t) => withBuild(t, ({ out }) => {
   for (const f of ['index.html', 'app.js', 'style.css', '.nojekyll',
                    'lib/regex-keys.mjs', 'lib/poe2.mjs', 'lib/trade-url.mjs', 'lib/bands.mjs',
-                   PATHS.leagues, PATHS.economy('L'), PATHS.fragments('L')]) {
+                   PATHS.leagues, PATHS.economy('L', 'tablet'), PATHS.fragments('L', 'tablet')]) {
     assert.ok(existsSync(join(out, f)), `missing ${f}`)
   }
 }))
@@ -117,11 +137,11 @@ test('the server is not part of the static site', (t) => withBuild(t, ({ out }) 
 
 test('the built economy file carries the bands the page paints', (t) =>
   withBuild(t, ({ out }) => {
-    const eco = JSON.parse(readFileSync(join(out, PATHS.economy('L')), 'utf8'))
+    const eco = JSON.parse(readFileSync(join(out, PATHS.economy('L', 'tablet')), 'utf8'))
     assert.equal(eco.league, 'L')
     const good = eco.mods.find(m => m.statId === 'GOOD')
     assert.equal(bandOf(good, eco.walk), 'high', '50 against a blank tablet at 5')
-    const frags = JSON.parse(readFileSync(join(out, PATHS.fragments('L')), 'utf8'))
+    const frags = JSON.parse(readFileSync(join(out, PATHS.fragments('L', 'tablet')), 'utf8'))
     assert.ok(Object.keys(frags).length > 0, 'a fragment per modifier')
   }))
 

@@ -17,6 +17,7 @@ import { listLeagues } from '../lib/leagues.mjs'
 import { buildIndex, textFor, vendoredEe2 } from '../lib/stat-index.mjs'
 import { PATHS, leaguesFile, leagueFiles } from '../lib/site.mjs'
 import { validateTradeWindow } from '../lib/poe2.mjs'
+import { kindByKey } from '../lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
@@ -81,10 +82,17 @@ export function buildSite ({ outDir, config, dataOverride = null, leagues = null
   for (const league of names) {
     const db = openDb(dbPath(league, dataOverride))
     try {
-      const built = leagueFiles(db,
-        { league, lookbackHours: config.lookbackHours, config, textFor: text, now })
-      written.push(write(outDir, PATHS.economy(league), JSON.stringify(built.economy, null, 1)))
-      written.push(write(outDir, PATHS.fragments(league), JSON.stringify(built.fragments, null, 1)))
+      // Only the kinds this league actually holds. Writing an empty file for a
+      // kind nothing was collected for would publish a page's worth of dashes
+      // as though it were a measurement.
+      for (const key of held.find(l => l.league === league)?.kinds ?? []) {
+        const built = leagueFiles(db, { league, kind: kindByKey(key),
+          lookbackHours: config.lookbackHours, config, textFor: text, now })
+        written.push(write(outDir, PATHS.economy(league, key),
+          JSON.stringify(built.economy, null, 1)))
+        written.push(write(outDir, PATHS.fragments(league, key),
+          JSON.stringify(built.fragments, null, 1)))
+      }
     } finally {
       db.close()
     }

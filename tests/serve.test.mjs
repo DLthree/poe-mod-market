@@ -9,7 +9,7 @@ import { cacheDir } from '../lib/paths.mjs'
 import { openDb } from '../lib/db.mjs'
 import { PATHS } from '../lib/site.mjs'
 import { RARITIES } from '../lib/poe2.mjs'
-import { TABLET_TYPES } from '../lib/item-kinds.mjs'
+import { ITEM_KINDS } from '../lib/item-kinds.mjs'
 
 const cli = fileURLToPath(new URL('../cli.mjs', import.meta.url))
 
@@ -75,7 +75,7 @@ test('the economy file is served at the path poe.re asks for', async (t) => {
     assert.equal(res.headers.get('access-control-allow-origin'), '*')
     const body = await res.json()
     assert.equal(body.league, 'L')
-    assert.equal(body.cells.length, TABLET_TYPES.length * RARITIES.length)
+    assert.equal(body.cells.length, ITEM_KINDS.tablet.types.length * RARITIES.length)
     assert.ok(Array.isArray(body.mods))
   } finally {
     await stopServer(child)
@@ -126,17 +126,17 @@ test('the server answers the static paths the build writes', async (t) => {
     assert.equal(index.status, 200)
     assert.deepEqual([...(await index.json()).leagues].sort(), ['L', 'M'])
 
-    const eco = await get(PATHS.economy('M'))
-    assert.equal(eco.status, 200, PATHS.economy('M'))
+    const eco = await get(PATHS.economy('M', 'tablet'))
+    assert.equal(eco.status, 200, PATHS.economy('M', 'tablet'))
     assert.equal((await eco.json()).league, 'M')
 
-    const frags = await get(PATHS.fragments('M'))
-    assert.equal(frags.status, 200, PATHS.fragments('M'))
+    const frags = await get(PATHS.fragments('M', 'tablet'))
+    assert.equal(frags.status, 200, PATHS.fragments('M', 'tablet'))
     assert.equal(typeof await frags.json(), 'object')
 
     // A league we do not hold has no file, and inventing one would publish a
     // page about a market we never collected.
-    assert.equal((await get(PATHS.economy('Other'))).status, 404)
+    assert.equal((await get(PATHS.economy('Other', 'tablet'))).status, 404)
   } finally {
     await stopServer(child)
     rmSync(dir, { recursive: true, force: true })

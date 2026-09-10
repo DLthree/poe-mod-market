@@ -22,6 +22,7 @@ import { buildFragments } from '../lib/regex-keys.mjs'
 import { economyFile, economyPath } from '../lib/economy.mjs'
 import { PATHS, leaguesFile, leagueFiles } from '../lib/site.mjs'
 import { validateTradeWindow } from '../lib/poe2.mjs'
+import { KIND_KEYS, kindByKey, ITEM_KINDS } from '../lib/item-kinds.mjs'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
@@ -116,7 +117,7 @@ function makeHandleApi ({ leagues, config, defaultLeague, text }) {
     // from GGG's own wordings. Sent once and joined in the browser, because a
     // round trip per tick would make the page feel dead.
     if (url.pathname === '/api/fragments') {
-      const eco = economyFile(db, { league, lookbackHours, config, textFor: text })
+      const eco = economyFile(db, { league, kind: ITEM_KINDS.tablet, lookbackHours, config, textFor: text })
       const texts = {}
       for (const m of eco.mods) texts[m.statId] = text(m.statId)
       return json(res, buildFragments(texts))
@@ -155,10 +156,11 @@ function makeHandleEconomy ({ leagues, config, text }) {
     // Any league we hold, not only the one this server was started with: the
     // dropdown asks for the file by name. A league we do not hold falls through
     // to the static 404, which is what a request for another market deserves.
-    const league = leagues.known().find(l => path.slice(1) === economyPath(l))
+    const league = leagues.known().find(l => path.slice(1) === economyPath(l, ITEM_KINDS.tablet))
     if (league === undefined) return false
     const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
-    json(res, economyFile(leagues.db(league), { league, lookbackHours, config, textFor: text }))
+    json(res, economyFile(leagues.db(league),
+      { league, kind: ITEM_KINDS.tablet, lookbackHours, config, textFor: text }))
     return true
   }
 }
@@ -193,14 +195,19 @@ function makeHandleSite ({ leagues, config, defaultLeague, text }) {
       json(res, leaguesFile(leagues.held(), defaultLeague))
       return true
     }
+    // One pair of files per league AND kind. A kind a league does not hold
+    // falls through to the static 404, which is what the page's own empty
+    // state exists to avoid asking for in the first place.
     for (const league of known) {
-      const wantsEconomy = path === PATHS.economy(league)
-      if (!wantsEconomy && path !== PATHS.fragments(league)) continue
-      const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
-      const built = leagueFiles(leagues.db(league),
-        { league, lookbackHours, config, textFor: text })
-      json(res, wantsEconomy ? built.economy : built.fragments)
-      return true
+      for (const key of KIND_KEYS) {
+        const wantsEconomy = path === PATHS.economy(league, key)
+        if (!wantsEconomy && path !== PATHS.fragments(league, key)) continue
+        const lookbackHours = Number(url.searchParams.get('lookback') || config.lookbackHours)
+        const built = leagueFiles(leagues.db(league),
+          { league, kind: kindByKey(key), lookbackHours, config, textFor: text })
+        json(res, wantsEconomy ? built.economy : built.fragments)
+        return true
+      }
     }
     return false
   }

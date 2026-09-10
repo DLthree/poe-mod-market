@@ -37,7 +37,7 @@ question from those rows alone. Merging pools priced things wrongly in both dire
 ## Running it
 
 ```
-node cli.mjs update                EVERY cell, then rebuild  (~2 hours, ~460 searches)
+node cli.mjs update                EVERY cell, then rebuild  (~2 hours, ~520 searches)
 node cli.mjs update --quick        baselines + the modifiers already worth 1.5x
                                                              (~35 min, ~135 searches)
 node cli.mjs update --pools-only   only the type x rarity baselines        (~2 min)
@@ -49,7 +49,7 @@ node --test "tests/*.test.mjs"
 
 **`node cli.mjs update` is the full pass.** It passes `--full --i-mean-it` to the collect
 step for you, so there is no confirmation to type and no cheap default hiding behind it:
-it spends about an hour and most of a day's rate allowance. `update` takes no `--full`
+it spends most of one six-hour rate allowance. `update` takes no `--full`
 flag and exits 2 if given one.
 
 The cheap run is the collect step directly — one tablet type and ten modifiers, about 13
@@ -290,6 +290,15 @@ so a test run never reserves a real slot.
 **Every call to GGG is archived, and `TradeClient` will not construct without an `archive`
 function.** A request spends allowance that cannot be bought back, so the response it paid
 for has to survive — including 429s and non-JSON error bodies.
+
+**Back up the archive after every sweep.** `backup-data.ps1` copies the data directory to
+`%USERPROFILE%\Backups\poe2-tablet-price\<timestamp>` and verifies every file by SHA256.
+Stop node first: the script refuses to copy while node holds the databases open, because a
+copy taken mid-write restores to a corrupt archive.
+
+**Disable sleep before a long unattended pass.** Windows suspends the machine and the pass
+stops with no error, which looks like a hang. `powercfg /change standby-timeout-ac 0` and
+the `-dc` equivalent turn it off; restore the timeouts afterwards.
 
 ## Credits
 

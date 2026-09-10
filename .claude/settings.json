@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_agentBrowser": "agent-browser is BLOCKED here until someone works out why it is so slow to start. Measured 2026-09-10: the first `open` after a fresh install produced no output, no error and no log for over two hours, which is indistinguishable from a hang. Retrying made it worse - each retry stranded another daemon and another set of chrome.exe processes, 24 in all. Once one call finally went through, later calls returned in seconds, so the fault is in cold start rather than in the tool as a whole. Untested hypothesis: this repo lives on the \\\\wsl.localhost\\ SMB share and the daemon may be doing something expensive with the working directory. Remove these deny rules once that is understood and fixed. Until then, if a visual check is needed, run `node cli.mjs serve` and ask a human to look.",
+  "permissions": {
+    "deny": [
+      "Bash(agent-browser:*)",
+      "PowerShell(agent-browser:*)",
+      "Bash(npx agent-browser:*)",
+      "PowerShell(npx agent-browser:*)"
+    ]
+  }
+}

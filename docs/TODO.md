@@ -62,6 +62,21 @@ scarcity signal available.
   Emerald rares cost 1000 to 4030 divine, carry the same junk as the 1-exalted
   ones, and contributed zero new vocabulary.
 
+## Re-collect the tablet magic and normal cells
+
+Every magic and normal search now excludes corrupted listings, because
+`lib/summary.mjs` has always dropped them from those cells and the search did
+not. `tests/query-parity.test.mjs` holds the rule now.
+
+**Snapshots taken before 2026-09-10 asked a different question.** They hold
+corrupted rows, and the summary filters them out on the way to the page, so the
+published number is right either way. What changed is the SAMPLE: a corrupted row
+took one of the ten kept slots and was then discarded, so those cells priced from
+eight or nine listings. A pass fixes that; nothing is wrong until then.
+
+Jewels get this for free on their next full pass. Tablets need a pass of their
+own, about 520 searches.
+
 ## Price a modifier ALONE, on a magic jewel
 
 **This may be the best measurement available, and it addresses the objection

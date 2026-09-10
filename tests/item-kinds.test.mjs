@@ -66,12 +66,39 @@ test('each kind shortens its own type names for the grid', () => {
 // fetched item reports magnitude 10 whatever it has left.
 test('a tablet pins its uses implicit and reports nothing missing', () => {
   for (const type of ITEM_KINDS.tablet.types) {
-    const { groups, missing } = ITEM_KINDS.tablet.pinned(type)
+    const { groups, missing } = ITEM_KINDS.tablet.pinned(type, 'rare')
     assert.deepEqual(missing, [], type)
     assert.deepEqual(groups, [{
       type: 'and',
       filters: [{ id: USES_IMPLICIT[type], value: { min: MIN_USES }, disabled: false }]
     }], type)
+  }
+})
+
+// A corrupted filter is NOT a stat group. It lives in query.filters.misc_filters,
+// so `pinned` has to return it separately from `groups`, and both callers merge it
+// into the query's own filters.
+//
+// The rule is lib/poe2.mjs pricesIncludeCorrupted, shared with lib/summary.mjs so
+// the search and the summary cannot disagree about what a cell prices.
+test('a magic or normal cell excludes corrupted items, a rare cell does not', () => {
+  const excluded = { misc_filters: { filters: { corrupted: { option: 'false' } } } }
+  for (const kind of Object.values(ITEM_KINDS)) {
+    for (const rarity of kind.rarities) {
+      const { filters } = kind.pinned(kind.types[0], rarity)
+      const where = `${kind.key} ${rarity}`
+      if (rarity === 'rare') assert.deepEqual(filters, {}, where)
+      else assert.deepEqual(filters, excluded, where)
+    }
+  }
+})
+
+// The rarity is not optional. A caller that forgets it would silently price a
+// magic cell with a rare cell's rules, and the search would spend allowance on
+// listings the summary then discards.
+test('pinned refuses to guess the rarity', () => {
+  for (const kind of Object.values(ITEM_KINDS)) {
+    assert.throws(() => kind.pinned(kind.types[0]), /rarity/, kind.key)
   }
 })
 
@@ -91,7 +118,7 @@ test('a tablet pins its uses implicit and reports nothing missing', () => {
 // Probed 2026-09-10, five searches.
 test('a jewel excludes desecrated modifiers and reports nothing missing', () => {
   for (const type of ITEM_KINDS.jewel.types) {
-    const { groups, missing } = ITEM_KINDS.jewel.pinned(type)
+    const { groups, missing } = ITEM_KINDS.jewel.pinned(type, 'rare')
     assert.deepEqual(missing, [], type)
     assert.deepEqual(groups, [{
       type: 'not',
@@ -158,7 +185,7 @@ test('each jewel base gets its own vocabulary', () => {
 })
 
 test('a tablet type with no known uses implicit pins nothing and says why', () => {
-  const { groups, missing } = ITEM_KINDS.tablet.pinned('Nonexistent Tablet')
+  const { groups, missing } = ITEM_KINDS.tablet.pinned('Nonexistent Tablet', 'rare')
   assert.deepEqual(groups, [], 'no half-built group carrying an undefined id')
   assert.equal(missing.length, 1)
   assert.match(missing[0], /part-used/)

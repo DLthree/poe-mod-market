@@ -3,40 +3,44 @@
 Wanted, not built. Each entry says what it is for and what is already known
 about the cost, so nobody re-derives that.
 
-## Pull the modifier list, on request
+## Use the extracted jewel modifier pool
 
-**The blocker for jewels.** `lib/sweep.mjs` builds loop 2's vocabulary from the
-modifiers loop 1 already saw, and loop 1 keeps the CHEAPEST listings, so a
-modifier that is rare on a base is never asked about — which is the very thing
-that makes it dear. `docs/jewel-vocabulary-bias.md` has the measurement:
-maximum Energy Shield is worth 1 to 60 divine on Emerald rare and the full pass
-said nothing about it.
+**The blocker is gone.** `vendor/poe2-jewel-mods.json` holds the modifiers each
+tradeable jewel base can roll: Ruby 50, Emerald 74, Sapphire 58. It came from the
+game's own tables and cost no rate allowance. `docs/jewel-modifier-pool.md` has
+the method.
 
-### The lead, found 2026-09-10
+What is left is to make the sweep read it.
 
-**The game's own modifier table is on this machine.** Exiled Exchange 2's data
-parser reads the `Mods` and `Tags` tables straight out of a PoE2 install, and
-names the columns `SpawnWeight_Tags` and `SpawnWeight_Values` — per-modifier
-spawn weights keyed by item tag, which is exactly the shape wanted.
+`affixesFor(db, type, rarity)` in `lib/sweep.mjs` builds loop 2's vocabulary from
+the modifiers loop 1 already saw, and loop 1 keeps the CHEAPEST listings. So a
+modifier that is scarce on a base is never asked about.
+`docs/jewel-vocabulary-bias.md` has the measurement.
 
-- Parser: `C:\Users\loffr\dev\exiled-exchange-2\dataParser`, run as
-  `python ./src/main.py` from that folder. Its `data/vendor/tables/` is empty,
-  so it extracts rather than ships the tables.
-- Game data: `C:\Program Files (x86)\Grinding Gear Games\Path of Exile 2\Content.ggpk`,
-  153 GB. The parser's config defaults to a Steam path; the Steam directory here
-  holds only logs, so it must be pointed at the GGG one.
-- **Untested: whether the parser runs here at all.** That is the first thing to
-  find out and it costs no rate allowance.
+For jewels the vocabulary should come from the pool file instead. That is 182
+searches per rarity, against about 520 for a full tablet pass, so the complete
+question is affordable.
 
-**Half the answer is already extracted.** EE2's
-`renderer/public/data/en/items.ndjson` tags the three bases: Emerald is
-`dexjewel`, Ruby is `strjewel`, Sapphire is `intjewel`. That alone explains the
-Energy Shield measurement — Energy Shield is an intelligence stat, so it is
-native and cheap on Sapphire and off-attribute, rare and dear on Emerald. **The
-attribute tag is what predicts price.**
+**Do not run the one-time discovery pass this file used to describe.** It was
+costed at seven six-hour windows. The game data answers the same question for
+nothing.
 
-If this route works, the pool comes from a local file: free, offline, repeatable
-after each patch, and carrying rarity weights the trade API cannot report.
+### Two things the pool changes about the plan
+
+- **Every enabled jewel modifier carries spawn weight 1.** The game reports no
+  rarity gradient inside a base. A modifier either rolls on a base or it does
+  not. So spawn weight cannot rank candidates, and `total` for sale is still the
+  only scarcity signal available.
+- **An `explicit.stat_X` search also returns desecrated modifiers.** The archived
+  probe proves it. A jewel cell therefore measures two markets at once unless the
+  query separates them. Decide that before publishing any jewel number.
+
+### The join has a small hole
+
+173 of the 182 pairs resolve to a trade stat id through `ee2-stats.ndjson`. The
+nine that do not are common stats such as attack speed and evasion rating, so the
+gap is in the join and not in the pool. Close it with a text match against the
+stat cache and `lib/stat-index.mjs`.
 
 ### What has been ruled out, so nobody repeats it
 
@@ -44,34 +48,17 @@ after each patch, and carrying rarity weights the trade API cannot report.
   `tab-triage/out/jewels.mjs` and `claude-poe-stash-helper/attic/jewels.mjs` all
   describe Abyss jewels, Cluster jewels, Corrupted Blood and Critical Strike
   Multiplier. Checked 2026-09-10.
-- **The RePoE checkout at `C:\Users\loffr\dev\repoe\` is PoE1.** Its `mods.json`
-  holds 808 occurrences of "Critical Strike Chance" against 1 of "Critical Hit
-  Chance", and its jewel spawn tags are `abyss_jewel`, `affliction_jewel` and
-  `expansion_jewel_*`. No Emerald, Ruby or Sapphire.
-- **GGG's `/data/stats` has no item association.** It is already cached, and it
-  holds 3042 explicit stats covering every item class in the game. Nothing in it
-  says which ones a jewel can roll.
-- **Sorting the pool query price-descending does not help.** One search per cell,
-  tested 2026-09-10: the ten dearest Emerald rares cost 1000 to 4030 divine and
-  carry exactly the same junk modifiers as the 1-exalted ones, contributing ZERO
-  new vocabulary. The dear end is ask-price listings, not value. The valuable
-  middle is invisible from both ends of the sort.
-
-What is left. **A search returns `total` for free, and 0 for sale is a definitive
-answer that a base cannot roll a modifier.** So discovery is affordable as a
-ONE-TIME pass whose result is durable until a patch changes the pool:
-
-| step | cost |
-|---|---|
-| ask all 3042 explicit stats of ONE cell | 3042 searches, about 5 six-hour windows |
-| ask the survivors (a few hundred) of the other five cells | roughly 1000 searches |
-
-Store the result as a checked-in per-kind modifier pool, and the normal sweep
-then reads that instead of bootstrapping from what it happened to see.
-
-**Only do that if the local route above fails.** Still unchecked as a middle
-option: poe2db.tw, poe.ninja's PoE2 endpoints, and Exiled Exchange 2's published
-releases, whose shipped data may include what its source checkout does not.
+- **The RePoE checkout at `C:\Users\loffr\dev\repoe\` is PoE1.** Its jewel spawn
+  tags are `abyss_jewel`, `affliction_jewel` and `expansion_jewel_*`. No Emerald,
+  Ruby or Sapphire.
+- **GGG's `/data/stats` has no item association.** 3042 explicit stats covering
+  every item class, and nothing that says which a jewel can roll.
+- **Exiled Exchange 2's own data does not carry spawn weights.** Its parser asks
+  the `Mods` table for ids, stats and generation type only. `SpawnWeight_Tags`
+  appears once in its config, under the `Words` table.
+- **Sorting the pool query price-descending does not help.** The ten dearest
+  Emerald rares cost 1000 to 4030 divine, carry the same junk as the 1-exalted
+  ones, and contributed zero new vocabulary.
 
 ## Price a modifier ALONE, on a magic jewel
 

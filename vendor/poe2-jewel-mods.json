@@ -1,0 +1,2219 @@
+{
+  "source": {
+    "game": "Path of Exile 2",
+    "patch": "4.5.5.1.6",
+    "extractedFrom": "GGG patch CDN, via pathofexile-dat 15.2.0 and dat-schema version 7",
+    "tables": [
+      "Mods",
+      "Tags",
+      "BaseItemTypes",
+      "ItemClasses",
+      "Stats"
+    ],
+    "modDomain": 11,
+    "tradeIdsFrom": "vendor/ee2-stats.ndjson, joined on the game stat id",
+    "extractedAt": "2026-09-10",
+    "note": "See docs/jewel-modifier-pool.md for the method and its limits."
+  },
+  "bases": {
+    "Ruby": {
+      "tags": [
+        "jewel",
+        "strjewel"
+      ],
+      "prefixes": 29,
+      "suffixes": 21,
+      "unresolved": 3,
+      "mods": [
+        {
+          "mod": "JewelAreaofEffect",
+          "affix": "Blasting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_skill_area_of_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_280731498"
+          ]
+        },
+        {
+          "mod": "JewelArmour",
+          "affix": "Armoured",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "physical_damage_reduction_rating_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelArmourBreak",
+          "affix": "Shattering",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "armour_break_amount_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1776411443"
+          ]
+        },
+        {
+          "mod": "JewelArmourBreakDuration",
+          "affix": "Resonating",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "armour_break_and_sundered_armour_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2637470878"
+          ]
+        },
+        {
+          "mod": "JewelAttackDamage",
+          "affix": "Combat",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "attack_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2843214518"
+          ]
+        },
+        {
+          "mod": "JewelBannerArea",
+          "affix": "Rallying",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "banner_area_of_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_429143663"
+          ]
+        },
+        {
+          "mod": "JewelBannerDuration",
+          "affix": "of Inspiring",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "banner_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2720982137"
+          ]
+        },
+        {
+          "mod": "JewelBannerValourGained",
+          "affix": "of Valour",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "glory_generation_+%_for_banners"
+          ],
+          "tradeIds": [
+            "explicit.stat_1869147066"
+          ]
+        },
+        {
+          "mod": "JewelBleedingChance",
+          "affix": "Bleeding",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_chance_to_inflict_bleeding_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2174054121"
+          ]
+        },
+        {
+          "mod": "JewelBleedingDuration",
+          "affix": "of Haemophilia",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_bleed_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1459321413"
+          ]
+        },
+        {
+          "mod": "JewelBleedingEffect",
+          "affix": "Haemorrhaging",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_bleeding_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3166958180"
+          ]
+        },
+        {
+          "mod": "JewelBlock",
+          "affix": "Protecting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "block_chance_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelDamagevsArmourBrokenEnemies",
+          "affix": "Exploiting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_against_enemies_with_fully_broken_armour"
+          ],
+          "tradeIds": [
+            "explicit.stat_2301718443"
+          ]
+        },
+        {
+          "mod": "JewelElementalDamage",
+          "affix": "Prismatic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "elemental_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3141070085"
+          ]
+        },
+        {
+          "mod": "JewelEmpoweredAttackDamage",
+          "affix": "Empowering",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "empowered_attack_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1569101201"
+          ]
+        },
+        {
+          "mod": "JewelFireDamage",
+          "affix": "Flaming",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "fire_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3962278098"
+          ]
+        },
+        {
+          "mod": "JewelFirePenetration",
+          "affix": "Searing",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_reduce_enemy_fire_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2653955271"
+          ]
+        },
+        {
+          "mod": "JewelIgniteChance",
+          "affix": "of Ignition",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ignite_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2968503605"
+          ]
+        },
+        {
+          "mod": "JewelIgniteEffect",
+          "affix": "Burning",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_ignite_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3791899485"
+          ]
+        },
+        {
+          "mod": "JewelIncisionChance",
+          "affix": "Incise",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "chance_to_inflict_incision_on_attack_hit_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_300723956"
+          ]
+        },
+        {
+          "mod": "JewelIncreasedDuration",
+          "affix": "of Lengthening",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "skill_effect_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3377888098"
+          ]
+        },
+        {
+          "mod": "JewelKnockback",
+          "affix": "of Fending",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "knockback_distance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_565784293"
+          ]
+        },
+        {
+          "mod": "JewelLifeCost",
+          "affix": "of Sacrifice",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_skill_cost_life_instead_of_mana_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2480498143"
+          ]
+        },
+        {
+          "mod": "JewelLifeLeech",
+          "affix": "of Frenzy",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_life_leech_amount_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2112395885"
+          ]
+        },
+        {
+          "mod": "JewelLifeRegeneration",
+          "affix": "of Regeneration",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "life_regeneration_rate_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_44972811"
+          ]
+        },
+        {
+          "mod": "JewelMaceDamage",
+          "affix": "Beating",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "mace_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1181419800"
+          ]
+        },
+        {
+          "mod": "JewelMaceStun",
+          "affix": "of Thumping",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "mace_hit_damage_stun_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_872504239"
+          ]
+        },
+        {
+          "mod": "JewelMaximumFireResistance",
+          "affix": "of the Phoenix",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_maximum_fire_damage_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4095671657"
+          ]
+        },
+        {
+          "mod": "JewelMaximumRage",
+          "affix": "Angry",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "maximum_rage"
+          ],
+          "tradeIds": [
+            "explicit.stat_1181501418"
+          ]
+        },
+        {
+          "mod": "JewelMeleeDamage",
+          "affix": "Clashing",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "melee_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1002362373"
+          ]
+        },
+        {
+          "mod": "JewelMinionArea",
+          "affix": "Companion",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_skill_area_of_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3811191316"
+          ]
+        },
+        {
+          "mod": "JewelMinionLife",
+          "affix": "Fortuitous",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_maximum_life_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_770672621"
+          ]
+        },
+        {
+          "mod": "JewelMinionPhysicalDamageReduction",
+          "affix": "of Confidence",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_additional_physical_damage_reduction_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3119612865"
+          ]
+        },
+        {
+          "mod": "JewelPhysicalDamage",
+          "affix": "Sharpened",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "physical_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1310194496"
+          ]
+        },
+        {
+          "mod": "JewelPlantDamage",
+          "affix": "Overgrown",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "plant_skill_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2518900926"
+          ]
+        },
+        {
+          "mod": "JewelPresenceRadius",
+          "affix": "Iconic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "presence_area_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_101878827"
+          ]
+        },
+        {
+          "mod": "JewelRageonHit",
+          "affix": "of Raging",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "gain_x_rage_on_melee_hit"
+          ],
+          "tradeIds": [
+            "explicit.stat_2709367754"
+          ]
+        },
+        {
+          "mod": "JewelRagewhenHit",
+          "affix": "of Retribution",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "gain_x_rage_when_hit"
+          ],
+          "tradeIds": [
+            "explicit.stat_3292710273"
+          ]
+        },
+        {
+          "mod": "JewelShapeshiftDamage",
+          "affix": "Bestial",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_while_shapeshifted"
+          ],
+          "tradeIds": [
+            "explicit.stat_2440073079"
+          ]
+        },
+        {
+          "mod": "JewelShapeshiftSpeed",
+          "affix": "of the Wild",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "skill_speed_+%_while_shapeshifted"
+          ],
+          "tradeIds": [
+            "explicit.stat_918325986"
+          ]
+        },
+        {
+          "mod": "JewelShieldDefences",
+          "affix": "Shielding",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "shield_armour_evasion_energy_shield_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelStunBuildup",
+          "affix": "of Stunning",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "hit_damage_stun_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_239367161"
+          ]
+        },
+        {
+          "mod": "JewelStunThreshold",
+          "affix": "of Withstanding",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "stun_threshold_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_680068163"
+          ]
+        },
+        {
+          "mod": "JewelThorns",
+          "affix": "Retaliating",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "thorns_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1315743832"
+          ]
+        },
+        {
+          "mod": "JewelTotemDamage",
+          "affix": "Shaman's",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "totem_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3851254963"
+          ]
+        },
+        {
+          "mod": "JewelTotemLife",
+          "affix": "Carved",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "totem_life_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_686254215"
+          ]
+        },
+        {
+          "mod": "JewelTotemPlacementSpeed",
+          "affix": "of Ancestry",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "summon_totem_cast_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3374165039"
+          ]
+        },
+        {
+          "mod": "JewelWarcryCooldown",
+          "affix": "of Rallying",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "warcry_cooldown_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4159248054"
+          ]
+        },
+        {
+          "mod": "JewelWarcryDamage",
+          "affix": "Yelling",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "warcry_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1594812856"
+          ]
+        },
+        {
+          "mod": "JewelWarcrySpeed",
+          "affix": "of Lungs",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "warcry_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1316278494"
+          ]
+        }
+      ]
+    },
+    "Emerald": {
+      "tags": [
+        "jewel",
+        "dexjewel"
+      ],
+      "prefixes": 30,
+      "suffixes": 44,
+      "unresolved": 4,
+      "mods": [
+        {
+          "mod": "JewelAccuracy",
+          "affix": "Accurate",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "accuracy_rating_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_624954515"
+          ]
+        },
+        {
+          "mod": "JewelAilmentChance",
+          "affix": "of Ailing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1772247089"
+          ]
+        },
+        {
+          "mod": "JewelAilmentEffect",
+          "affix": "Acrimonious",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1303248024"
+          ]
+        },
+        {
+          "mod": "JewelAilmentThreshold",
+          "affix": "of Enduring",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_threshold_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3544800472"
+          ]
+        },
+        {
+          "mod": "JewelAttackCriticalChance",
+          "affix": "of Deadliness",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "attack_critical_strike_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2194114101"
+          ]
+        },
+        {
+          "mod": "JewelAttackCriticalDamage",
+          "affix": "of Demolishing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "attack_critical_strike_multiplier_+"
+          ],
+          "tradeIds": [
+            "explicit.stat_3714003708"
+          ]
+        },
+        {
+          "mod": "JewelAttackDamage",
+          "affix": "Combat",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "attack_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2843214518"
+          ]
+        },
+        {
+          "mod": "JewelAttackSpeed",
+          "affix": "of Alacrity",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "attack_speed_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelBlindEffect",
+          "affix": "Stifling",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "blind_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1585769763"
+          ]
+        },
+        {
+          "mod": "JewelBlindonHit",
+          "affix": "of Blinding",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "attacks_chance_to_blind_on_hit_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_318953428"
+          ]
+        },
+        {
+          "mod": "JewelBowAccuracyRating",
+          "affix": "Precise",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "bow_accuracy_rating_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_169946467"
+          ]
+        },
+        {
+          "mod": "JewelBowDamage",
+          "affix": "Perforating",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "bow_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4188894176"
+          ]
+        },
+        {
+          "mod": "JewelBowSpeed",
+          "affix": "of Nocking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "bow_attack_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3759735052"
+          ]
+        },
+        {
+          "mod": "JewelChainFromTerrain",
+          "affix": "of Chaining",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "projectile_chance_to_chain_1_extra_time_from_terrain_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4081947835"
+          ]
+        },
+        {
+          "mod": "JewelCharmChargesGained",
+          "affix": "of the Thicker",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "charm_charges_gained_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3585532255"
+          ]
+        },
+        {
+          "mod": "JewelCharmDamageWhileUsing",
+          "affix": "Verdant",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_while_using_charm"
+          ],
+          "tradeIds": [
+            "explicit.stat_627767961"
+          ]
+        },
+        {
+          "mod": "JewelCharmDuration",
+          "affix": "of the Woodland",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "charm_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1389754388"
+          ]
+        },
+        {
+          "mod": "JewelCompanionDamage",
+          "affix": "Kinship",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "companion_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_234296660"
+          ]
+        },
+        {
+          "mod": "JewelCompanionLife",
+          "affix": "Kindred",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "companion_maximum_life_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1805182458"
+          ]
+        },
+        {
+          "mod": "JewelCooldownSpeed",
+          "affix": "of Chronomancy",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_cooldown_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1004011302"
+          ]
+        },
+        {
+          "mod": "JewelCriticalAilmentEffect",
+          "affix": "Rancorous",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "critical_hit_damaging_ailment_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_440490623"
+          ]
+        },
+        {
+          "mod": "JewelCrossbowDamage",
+          "affix": "Bolting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "crossbow_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_427684353"
+          ]
+        },
+        {
+          "mod": "JewelCrossbowReloadSpeed",
+          "affix": "of Reloading",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "reload_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3192728503"
+          ]
+        },
+        {
+          "mod": "JewelCrossbowSpeed",
+          "affix": "of Rapidity",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "crossbow_attack_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1135928777"
+          ]
+        },
+        {
+          "mod": "JewelDamageVsRareOrUnique",
+          "affix": "Slaying",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_to_rare_and_unique_enemies"
+          ],
+          "tradeIds": [
+            "explicit.stat_1852872083"
+          ]
+        },
+        {
+          "mod": "JewelDamagingAilmentDuration",
+          "affix": "of Suffusion",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "damaging_ailment_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1829102168"
+          ]
+        },
+        {
+          "mod": "JewelDazeBuildup",
+          "affix": "of Dazing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_chance_to_daze_%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelDebuffExpiry",
+          "affix": "of Diminishing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "debuff_time_passed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1238227257"
+          ]
+        },
+        {
+          "mod": "JewelElementalAilmentDuration",
+          "affix": "of Suffering",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ignite_shock_chill_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1062710370"
+          ]
+        },
+        {
+          "mod": "JewelElementalDamage",
+          "affix": "Prismatic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "elemental_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3141070085"
+          ]
+        },
+        {
+          "mod": "JewelEvasion",
+          "affix": "Evasive",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "evasion_rating_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelFasterAilments",
+          "affix": "of Decrepifying",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "damaging_ailments_deal_damage_+%_faster"
+          ],
+          "tradeIds": [
+            "explicit.stat_538241406"
+          ]
+        },
+        {
+          "mod": "JewelFlaskChargesGained",
+          "affix": "of Gathering",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "flask_charges_gained_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1836676211"
+          ]
+        },
+        {
+          "mod": "JewelFlaskDuration",
+          "affix": "of Prolonging",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "flask_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3741323227"
+          ]
+        },
+        {
+          "mod": "JewelForkingProjectiles",
+          "affix": "of Forking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "chance_to_fork_extra_projectile_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3003542304"
+          ]
+        },
+        {
+          "mod": "JewelHazardDamage",
+          "affix": "Hazardous",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "hazard_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1697951953"
+          ]
+        },
+        {
+          "mod": "JewelHeraldDamage",
+          "affix": "Heralding",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_with_herald_skills"
+          ],
+          "tradeIds": [
+            "explicit.stat_21071013"
+          ]
+        },
+        {
+          "mod": "JewelLifeFlaskChargeGen",
+          "affix": "of Pathfinding",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "life_flask_charges_gained_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4009879772"
+          ]
+        },
+        {
+          "mod": "JewelLifeFlaskRecovery",
+          "affix": "of Recovery",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "flask_life_to_recover_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_821241191"
+          ]
+        },
+        {
+          "mod": "JewelLightningDamage",
+          "affix": "Humming",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "lightning_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2231156303"
+          ]
+        },
+        {
+          "mod": "JewelLightningPenetration",
+          "affix": "Surging",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_reduce_enemy_lightning_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_818778753"
+          ]
+        },
+        {
+          "mod": "JewelManaFlaskChargeGen",
+          "affix": "of Fountains",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "mana_flask_charges_gained_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3590792340"
+          ]
+        },
+        {
+          "mod": "JewelManaFlaskRecovery",
+          "affix": "of Quenching",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "flask_mana_to_recover_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2222186378"
+          ]
+        },
+        {
+          "mod": "JewelManaLeech",
+          "affix": "of Thirsting",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_mana_leech_amount_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2839066308"
+          ]
+        },
+        {
+          "mod": "JewelMarkCastSpeed",
+          "affix": "of Targeting",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "mark_use_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1714971114"
+          ]
+        },
+        {
+          "mod": "JewelMarkDuration",
+          "affix": "of Tracking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "mark_skill_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2594634307"
+          ]
+        },
+        {
+          "mod": "JewelMarkEffect",
+          "affix": "Marking",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "mark_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_712554801"
+          ]
+        },
+        {
+          "mod": "JewelMaximumLightningResistance",
+          "affix": "of the Leviathan",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_maximum_lightning_damage_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1011760251"
+          ]
+        },
+        {
+          "mod": "JewelMeleeDamageIfProjectileHitRecently",
+          "affix": "Engaging",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "melee_damage_+%_if_youve_dealt_projectile_attack_hit_recently"
+          ],
+          "tradeIds": [
+            "explicit.stat_3028809864"
+          ]
+        },
+        {
+          "mod": "JewelMovementSpeed",
+          "affix": "of Speed",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_movement_velocity_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelParriedDebuffDuration",
+          "affix": "of Unsettling",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "parry_skill_effect_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3401186585"
+          ]
+        },
+        {
+          "mod": "JewelParryDamage",
+          "affix": "Parrying",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "parry_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1569159338"
+          ]
+        },
+        {
+          "mod": "JewelPiercingProjectiles",
+          "affix": "of Piercing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_chance_to_pierce_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2321178454"
+          ]
+        },
+        {
+          "mod": "JewelPinBuildup",
+          "affix": "of Pinning",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "hit_damage_pin_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3473929743"
+          ]
+        },
+        {
+          "mod": "JewelPlantDamage",
+          "affix": "Overgrown",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "plant_skill_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2518900926"
+          ]
+        },
+        {
+          "mod": "JewelPoisonChance",
+          "affix": "of Poisoning",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_chance_to_poison_on_hit_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_795138349"
+          ]
+        },
+        {
+          "mod": "JewelPoisonDamage",
+          "affix": "Venomous",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_poison_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2487305362"
+          ]
+        },
+        {
+          "mod": "JewelPoisonDuration",
+          "affix": "of Infection",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_poison_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2011656677"
+          ]
+        },
+        {
+          "mod": "JewelProjectileDamage",
+          "affix": "Archer's",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "projectile_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1839076647"
+          ]
+        },
+        {
+          "mod": "JewelProjectileDamageIfMeleeHitRecently",
+          "affix": "Retreating",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "projectile_damage_+%_if_youve_dealt_melee_hit_recently"
+          ],
+          "tradeIds": [
+            "explicit.stat_3596695232"
+          ]
+        },
+        {
+          "mod": "JewelProjectileSpeed",
+          "affix": "Soaring",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_projectile_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3759663284"
+          ]
+        },
+        {
+          "mod": "JewelQuarterstaffDamage",
+          "affix": "Monk's",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "quarterstaff_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4045894391"
+          ]
+        },
+        {
+          "mod": "JewelQuarterstaffFreezeBuildup",
+          "affix": "of Glaciers",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "quarterstaff_hit_damage_freeze_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1697447343"
+          ]
+        },
+        {
+          "mod": "JewelQuarterstaffSpeed",
+          "affix": "of Sequencing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "quarterstaff_attack_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3283482523"
+          ]
+        },
+        {
+          "mod": "JewelQuiverEffect",
+          "affix": "Fletching",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "quiver_mod_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1200678966"
+          ]
+        },
+        {
+          "mod": "JewelShockChance",
+          "affix": "of Shocking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_293638271"
+          ]
+        },
+        {
+          "mod": "JewelShockDuration",
+          "affix": "of Paralyzing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3668351662"
+          ]
+        },
+        {
+          "mod": "JewelShockEffect",
+          "affix": "Jolting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2527686725"
+          ]
+        },
+        {
+          "mod": "JewelSlowEffectOnSelf",
+          "affix": "of Hastening",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_slow_potency_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_924253255"
+          ]
+        },
+        {
+          "mod": "JewelSpearAttackSpeed",
+          "affix": "of Spearing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "spear_attack_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1165163804"
+          ]
+        },
+        {
+          "mod": "JewelSpearCriticalDamage",
+          "affix": "of Hunting",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "spear_critical_strike_multiplier_+"
+          ],
+          "tradeIds": [
+            "explicit.stat_2456523742"
+          ]
+        },
+        {
+          "mod": "JewelSpearDamage",
+          "affix": "Spearheaded",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "spear_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2696027455"
+          ]
+        },
+        {
+          "mod": "JewelStunThresholdDuringParry",
+          "affix": "of Biding",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "parry_stun_threshold_+%_during_parry"
+          ],
+          "tradeIds": [
+            "explicit.stat_1911237468"
+          ]
+        },
+        {
+          "mod": "JewelStunThresholdIfNotStunnedRecently",
+          "affix": "of Stoutness",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "stun_threshold_+%_when_not_stunned_recently"
+          ],
+          "tradeIds": [
+            "explicit.stat_1405298142"
+          ]
+        }
+      ]
+    },
+    "Sapphire": {
+      "tags": [
+        "jewel",
+        "intjewel"
+      ],
+      "prefixes": 23,
+      "suffixes": 35,
+      "unresolved": 2,
+      "mods": [
+        {
+          "mod": "JewelAilmentChance",
+          "affix": "of Ailing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1772247089"
+          ]
+        },
+        {
+          "mod": "JewelAilmentEffect",
+          "affix": "Acrimonious",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1303248024"
+          ]
+        },
+        {
+          "mod": "JewelAilmentThresholdfromEnergyShield",
+          "affix": "of Inuring",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ailment_threshold_+_from_%_maximum_energy_shield"
+          ],
+          "tradeIds": [
+            "explicit.stat_3398301358"
+          ]
+        },
+        {
+          "mod": "JewelAreaofEffect",
+          "affix": "Blasting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_skill_area_of_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_280731498"
+          ]
+        },
+        {
+          "mod": "JewelCastSpeed",
+          "affix": "of Enchanting",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_cast_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2891184298"
+          ]
+        },
+        {
+          "mod": "JewelChaosDamage",
+          "affix": "Chaotic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "chaos_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_736967255"
+          ]
+        },
+        {
+          "mod": "JewelChillDuration",
+          "affix": "of Frost",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "chill_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3485067555"
+          ]
+        },
+        {
+          "mod": "JewelColdDamage",
+          "affix": "Chilling",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "cold_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3291658075"
+          ]
+        },
+        {
+          "mod": "JewelColdPenetration",
+          "affix": "Numbing",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_reduce_enemy_cold_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3417711605"
+          ]
+        },
+        {
+          "mod": "JewelCorpses",
+          "affix": "Necromantic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_if_you_have_consumed_a_corpse_recently"
+          ],
+          "tradeIds": [
+            "explicit.stat_2118708619"
+          ]
+        },
+        {
+          "mod": "JewelCriticalAilmentEffect",
+          "affix": "Rancorous",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "critical_hit_damaging_ailment_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_440490623"
+          ]
+        },
+        {
+          "mod": "JewelCriticalChance",
+          "affix": "of Annihilation",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "critical_strike_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_587431675"
+          ]
+        },
+        {
+          "mod": "JewelCriticalDamage",
+          "affix": "of Potency",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_critical_strike_multiplier_+"
+          ],
+          "tradeIds": [
+            "explicit.stat_3556824919"
+          ]
+        },
+        {
+          "mod": "JewelCurseArea",
+          "affix": "Expanding",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "curse_area_of_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_153777645"
+          ]
+        },
+        {
+          "mod": "JewelCurseDelay",
+          "affix": "of Chanting",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "curse_delay_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1104825894"
+          ]
+        },
+        {
+          "mod": "JewelCurseDuration",
+          "affix": "of Continuation",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_curse_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3824372849"
+          ]
+        },
+        {
+          "mod": "JewelCurseEffect",
+          "affix": "Hexing",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "curse_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2353576063"
+          ]
+        },
+        {
+          "mod": "JewelDamagefromMana",
+          "affix": "of Mind",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_damage_removed_from_mana_before_life_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_458438597"
+          ]
+        },
+        {
+          "mod": "JewelDamagingAilmentDuration",
+          "affix": "of Suffusion",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "damaging_ailment_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1829102168"
+          ]
+        },
+        {
+          "mod": "JewelDebuffExpiry",
+          "affix": "of Diminishing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "debuff_time_passed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1238227257"
+          ]
+        },
+        {
+          "mod": "JewelElementalDamage",
+          "affix": "Prismatic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "elemental_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3141070085"
+          ]
+        },
+        {
+          "mod": "JewelEnergy",
+          "affix": "of Generation",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "energy_generated_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_4236566306"
+          ]
+        },
+        {
+          "mod": "JewelEnergyShield",
+          "affix": "Shimmering",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "maximum_energy_shield_+%"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelEnergyShieldDelay",
+          "affix": "Serene",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "energy_shield_delay_-%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1782086450"
+          ]
+        },
+        {
+          "mod": "JewelFasterAilments",
+          "affix": "of Decrepifying",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "damaging_ailments_deal_damage_+%_faster"
+          ],
+          "tradeIds": [
+            "explicit.stat_538241406"
+          ]
+        },
+        {
+          "mod": "JewelFocusEnergyShield",
+          "affix": "Focusing",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "energy_shield_from_focus_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3174700878"
+          ]
+        },
+        {
+          "mod": "JewelFreezeAmount",
+          "affix": "of Freezing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "hit_damage_freeze_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_473429811"
+          ]
+        },
+        {
+          "mod": "JewelFreezeThreshold",
+          "affix": "of Snowbreathing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "freeze_threshold_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3780644166"
+          ]
+        },
+        {
+          "mod": "JewelIgniteChance",
+          "affix": "of Ignition",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "ignite_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2968503605"
+          ]
+        },
+        {
+          "mod": "JewelIgniteEffect",
+          "affix": "Burning",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_ignite_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3791899485"
+          ]
+        },
+        {
+          "mod": "JewelIncreasedDuration",
+          "affix": "of Lengthening",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "skill_effect_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3377888098"
+          ]
+        },
+        {
+          "mod": "JewelLifeonKill",
+          "affix": "of Success",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "recover_%_maximum_life_on_kill"
+          ],
+          "tradeIds": [
+            "explicit.stat_2023107756"
+          ]
+        },
+        {
+          "mod": "JewelLifeRecoup",
+          "affix": "of Infusion",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_taken_goes_to_life_over_4_seconds_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1444556985"
+          ]
+        },
+        {
+          "mod": "JewelManaonKill",
+          "affix": "of Osmosis",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "maximum_mana_%_gained_on_kill"
+          ],
+          "tradeIds": []
+        },
+        {
+          "mod": "JewelManaRegeneration",
+          "affix": "of Energy",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "mana_regeneration_rate_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_789117908"
+          ]
+        },
+        {
+          "mod": "JewelMaximumColdResistance",
+          "affix": "of the Kraken",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_maximum_cold_damage_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3676141501"
+          ]
+        },
+        {
+          "mod": "JewelMinionAttackandCastSpeed",
+          "affix": "of Orchestration",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_attack_and_cast_speed_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3091578504"
+          ]
+        },
+        {
+          "mod": "JewelMinionChaosResistance",
+          "affix": "of Righteousness",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_chaos_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3837707023"
+          ]
+        },
+        {
+          "mod": "JewelMinionCriticalChance",
+          "affix": "of Marshalling",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_critical_strike_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_491450213"
+          ]
+        },
+        {
+          "mod": "JewelMinionCriticalMultiplier",
+          "affix": "of Gripping",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_critical_strike_multiplier_+"
+          ],
+          "tradeIds": [
+            "explicit.stat_1854213750"
+          ]
+        },
+        {
+          "mod": "JewelMinionDamage",
+          "affix": "Authoritative",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1589917703"
+          ]
+        },
+        {
+          "mod": "JewelMinionResistances",
+          "affix": "of Acclimatisation",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "minion_elemental_resistance_%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1423639565"
+          ]
+        },
+        {
+          "mod": "JewelOfferingDuration",
+          "affix": "of Offering",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "offering_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2957407601"
+          ]
+        },
+        {
+          "mod": "JewelOfferingLife",
+          "affix": "Sacrificial",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "offering_life_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3787460122"
+          ]
+        },
+        {
+          "mod": "JewelPlantDamage",
+          "affix": "Overgrown",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "plant_skill_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2518900926"
+          ]
+        },
+        {
+          "mod": "JewelPresenceRadius",
+          "affix": "Iconic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "presence_area_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_101878827"
+          ]
+        },
+        {
+          "mod": "JewelQuarterstaffFreezeBuildup",
+          "affix": "of Glaciers",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "quarterstaff_hit_damage_freeze_multiplier_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_1697447343"
+          ]
+        },
+        {
+          "mod": "JewelShapeshiftDamage",
+          "affix": "Bestial",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "damage_+%_while_shapeshifted"
+          ],
+          "tradeIds": [
+            "explicit.stat_2440073079"
+          ]
+        },
+        {
+          "mod": "JewelShapeshiftSpeed",
+          "affix": "of the Wild",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "skill_speed_+%_while_shapeshifted"
+          ],
+          "tradeIds": [
+            "explicit.stat_918325986"
+          ]
+        },
+        {
+          "mod": "JewelShockChance",
+          "affix": "of Shocking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_293638271"
+          ]
+        },
+        {
+          "mod": "JewelShockDuration",
+          "affix": "of Paralyzing",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_duration_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3668351662"
+          ]
+        },
+        {
+          "mod": "JewelShockEffect",
+          "affix": "Jolting",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "shock_effect_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2527686725"
+          ]
+        },
+        {
+          "mod": "JewelSpellCriticalChance",
+          "affix": "of Annihilating",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "spell_critical_strike_chance_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_737908626"
+          ]
+        },
+        {
+          "mod": "JewelSpellCriticalDamage",
+          "affix": "of Unmaking",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "base_spell_critical_strike_multiplier_+"
+          ],
+          "tradeIds": [
+            "explicit.stat_274716455"
+          ]
+        },
+        {
+          "mod": "JewelSpellDamage",
+          "affix": "Mystic",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "spell_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_2974417149"
+          ]
+        },
+        {
+          "mod": "JewelStunThresholdfromEnergyShield",
+          "affix": "of Barriers",
+          "generation": "suffix",
+          "minItemLevel": 1,
+          "stats": [
+            "stun_threshold_+_from_%_maximum_energy_shield"
+          ],
+          "tradeIds": [
+            "explicit.stat_416040624"
+          ]
+        },
+        {
+          "mod": "JewelTriggeredSpellDamage",
+          "affix": "Triggered",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "triggered_spell_spell_damage_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3067892458"
+          ]
+        },
+        {
+          "mod": "JewelWitheredEffect",
+          "affix": "Withering",
+          "generation": "prefix",
+          "minItemLevel": 1,
+          "stats": [
+            "withered_magnitude_+%"
+          ],
+          "tradeIds": [
+            "explicit.stat_3973629633"
+          ]
+        }
+      ]
+    }
+  }
+}

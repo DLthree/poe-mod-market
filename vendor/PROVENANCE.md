@@ -7,6 +7,19 @@ so the data may be used and redistributed with attribution. It is an **overlay**
 on GGG's own `/api/trade2/data/stats`: each holds wordings and ids the other
 lacks, so both are loaded. See `lib/stat-index.mjs`.
 
+## `poe2-jewel-mods.json` — extracted from the game, patch 4.5.5.1.6
+
+The modifiers each tradeable jewel base can roll: Ruby 50, Emerald 74, Sapphire
+58. Extracted from GGG's own `Mods`, `Tags` and `BaseItemTypes` tables on
+2026-09-10 with `pathofexile-dat`, which is the same tool Exiled Exchange 2 uses.
+Trade stat ids are joined on from `ee2-stats.ndjson` above.
+
+`docs/jewel-modifier-pool.md` gives the method, the exact commands and the two
+traps: jewel affixes live in mod domain 11, and `HASH32` is not the trade stat id.
+
+It is derived game data, which is what RePoE, poe2db and Exiled Exchange 2 all
+publish. Re-extract it after a patch. Nothing here is hand-edited.
+
 ## Nothing from poe.re, and why
 
 `github.com/veiset/poe.re` ships a table of 81 short regex fragments for tablet

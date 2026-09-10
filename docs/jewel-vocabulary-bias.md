@@ -3,6 +3,11 @@
 Measured 2026-09-10 on Forbidden Rites. **Do not publish the jewel page. The
 numbers in `eco-<league>-jewel.json` understate the market, badly.**
 
+> **Correction, later on 2026-09-10.** The measurements below are correct. The
+> explanation of the counter-example was wrong, and the fix is different from
+> what this document proposed. See "The counter-example was desecrated" below and
+> `docs/jewel-modifier-pool.md`.
+
 ## What happened
 
 A full jewel pass ran: 193 searches, 1930 listings, 42 minutes. It measured 187
@@ -43,16 +48,47 @@ on Ruby rare — the two cells where it is worth divines.
 ten cheapest jewels of this cell happen to carry".
 
 Energy Shield is native to Sapphire. On Sapphire it is everywhere, so it is cheap
-there and it does turn up in the cheap sample. On Emerald and Ruby it is rare —
-which is exactly what makes it expensive — so it never appears among the ten
-cheapest, and is therefore never asked about.
+there and it does turn up in the cheap sample. On Emerald and Ruby it does not
+appear among the ten cheapest, so it is never asked about.
 
-**Scarcity is what makes a jewel modifier valuable, and scarcity is what keeps it
-out of a sample taken from the cheap end.** The bias selects against precisely
-the rows worth finding.
+**A modifier that is scarce on a base stays out of a sample taken from the cheap
+end.** The bias selects against the rows worth finding.
 
 This does not bite tablets in the same way. Tablet supply is thin enough that the
 cheapest listings of a cell still carry its premium modifiers.
+
+## The counter-example was desecrated
+
+Checked against the game's own modifier table on 2026-09-10. See
+`docs/jewel-modifier-pool.md`.
+
+**Emerald and Ruby cannot roll increased maximum Energy Shield at all.** The
+modifier `JewelEnergyShield` carries a spawn weight on `intjewel` only. Emerald
+is `dexjewel` and Ruby is `strjewel`.
+
+The 19 Emerald listings are real, and the archive says what they are. Every one
+carries the modifier in the **desecrated** domain, not the explicit domain. The
+archived item at 1 divine reads:
+
+```
+"description": "7% increased maximum [EnergyShield|Energy Shield]",
+"flags": { "desecrated": true },
+"domain": "desecrated",
+"hash": "stat.desecrated.stat_2482852589"
+```
+
+So the earlier reading was wrong twice over. The modifier is not "off-attribute
+and therefore rare on Emerald". It cannot roll on Emerald. The price comes from a
+different crafting mechanic.
+
+**A search for `explicit.stat_X` also returns items carrying that stat as a
+desecrated modifier.** The probe asked for the explicit id and got desecrated
+items back. So an explicit search on jewels measures two markets at once. That is
+worth knowing before any jewel number is published.
+
+**The attribute tag does not predict price.** It decides whether the base can
+roll the modifier at all. Every enabled jewel modifier carries spawn weight 1, so
+the game data reports no rarity gradient inside a base.
 
 ## Cross-seeding is not the fix
 
@@ -116,6 +152,15 @@ nothing persists it to a column.
    candidate modifier to find out, which is the expensive part.
 3. **Sample something other than the cheap end** for the vocabulary, since the
    floor still needs the cheap end but discovery does not.
+
+## The general rule
+
+**If a sweep reports that a whole market is worthless, suspect the sampling.** Every
+measurement here was correct and the machinery all worked. The answer was
+still false, because the sweep never asked about the modifiers that carry the
+value. A result that says "nothing here is worth anything" is first evidence
+about the questions, not about the market. Name a few modifiers by hand and ask
+them directly before you believe it.
 
 ## Status
 

@@ -2,14 +2,42 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { buildIndex } from '../lib/stat-index.mjs'
-import { poolQuery, affixQuery, sweepPools, sweepAffixes, affixesFor } from '../lib/sweep.mjs'
+import {
+  poolQuery, affixQuery, sweepPools, sweepAffixes, affixesFor, vocabularyFor
+} from '../lib/sweep.mjs'
+import { poolFor } from '../lib/mod-pool.mjs'
 import { TABLET_TYPES, USES_IMPLICIT, ITEM_KINDS } from '../lib/item-kinds.mjs'
 import { checkAge, medianAgeHours } from '../lib/agecheck.mjs'
 import { recordRequest } from '../lib/archive.mjs'
-import { withDb, sampleListing } from './helpers.mjs'
+import { withDb, sampleListing, seedQuestion } from './helpers.mjs'
 
 const TABLET = ITEM_KINDS.tablet
 const JEWEL = ITEM_KINDS.jewel
+
+// The kind decides where its vocabulary comes from; this is what hands it the
+// two sources. It exists so that steps/collect.mjs holds no switch on the kind,
+// and so the choice can be tested at all — collect.mjs runs a real collection on
+// import and can never be loaded by a test.
+test('a tablet vocabulary reads the archive', async () => withDb(async db => {
+  seedQuestion(db, {
+    type: 'Breach Tablet',
+    rows: [{ amount: 1, account: 'Someone#1', mods: ['explicit.stat_seen'] }]
+  })
+  assert.deepEqual(vocabularyFor(TABLET, db)('Breach Tablet', 'rare'), ['explicit.stat_seen'])
+}))
+
+// A jewel must not fall back to the archive even when the archive holds rows for
+// that cell. The archive is the biased source this whole change exists to leave,
+// and a silent fallback would look exactly like a working sweep.
+test('a jewel vocabulary reads the pool and never the archive', async () => withDb(async db => {
+  seedQuestion(db, {
+    type: 'Emerald',
+    rows: [{ amount: 1, account: 'Someone#1', mods: ['explicit.stat_seen'] }]
+  })
+  const hashes = vocabularyFor(JEWEL, db)('Emerald', 'rare')
+  assert.deepEqual(hashes, poolFor('Emerald'))
+  assert.ok(!hashes.includes('explicit.stat_seen'), 'the archive must not leak in')
+}))
 
 const stats = JSON.parse(readFileSync(new URL('./fixtures/stats-subset.json', import.meta.url)))
 const index = buildIndex(stats)
@@ -477,10 +505,23 @@ test('the tablet affix query is byte-for-byte what it has always been', () => {
 // A jewel has no implicit to pin, so its query carries the modifier group and
 // nothing else. A stray empty group here would be a filter GGG reads as a
 // constraint nothing satisfies.
-test('a jewel query carries the modifier group and no implicit filter', () => {
+// A jewel pins no implicit, because it has none. It does pin the desecrated
+// count at zero, so that a cell measures the modifiers the base rolled and not
+// the abyss crafting market that rides on the same stat ids.
+// See docs/jewel-vocabulary-bias.md.
+test('a jewel query carries the modifier group and excludes desecrated items', () => {
+  const noDesecrated = {
+    type: 'not',
+    filters: [{
+      id: 'pseudo.pseudo_number_of_desecrated_mods',
+      value: { min: 1 },
+      disabled: false
+    }]
+  }
   const pool = poolQuery(JEWEL, 'Emerald', 'rare', '3days')
   assert.equal(pool.type, 'Emerald')
-  assert.deepEqual(pool.stats, [{ type: 'and', filters: [] }])
+  assert.deepEqual(pool.stats, [{ type: 'and', filters: [] }, noDesecrated])
   const affix = affixQuery(JEWEL, 'Emerald', 'explicit.stat_1', '3days', 'rare')
-  assert.deepEqual(affix.stats, [{ type: 'and', filters: [{ id: 'explicit.stat_1' }] }])
+  assert.deepEqual(affix.stats,
+    [{ type: 'and', filters: [{ id: 'explicit.stat_1' }] }, noDesecrated])
 })

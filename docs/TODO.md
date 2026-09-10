@@ -3,44 +3,46 @@
 Wanted, not built. Each entry says what it is for and what is already known
 about the cost, so nobody re-derives that.
 
-## Use the extracted jewel modifier pool
+## Run a full jewel pass on the pool
 
-**The blocker is gone.** `vendor/poe2-jewel-mods.json` holds the modifiers each
-tradeable jewel base can roll: Ruby 50, Emerald 74, Sapphire 58. It came from the
-game's own tables and cost no rate allowance. `docs/jewel-modifier-pool.md` has
-the method.
+**Built, tested, and not yet run.** The jewel sweep now takes loop 2's vocabulary
+from `vendor/poe2-jewel-mods.json` rather than from what it has already seen, and
+every jewel search excludes desecrated items. `docs/jewel-modifier-pool.md` has
+the method and the two traps.
 
-What is left is to make the sweep read it.
+What is left is to spend the allowance and look at the result.
 
-`affixesFor(db, type, rarity)` in `lib/sweep.mjs` builds loop 2's vocabulary from
-the modifiers loop 1 already saw, and loop 1 keeps the CHEAPEST listings. So a
-modifier that is scarce on a base is never asked about.
-`docs/jewel-vocabulary-bias.md` has the measurement.
+| | |
+|---|---|
+| Emerald, Ruby and Sapphire at rare | 182 searches |
+| the same at magic | 182 searches |
+| loop 1 pools | 6 searches |
+| **a full jewel pass** | **about 370 searches** |
 
-For jewels the vocabulary should come from the pool file instead. That is 182
-searches per rarity, against about 520 for a full tablet pass, so the complete
-question is affordable.
+That fits one six-hour window of 600. It does NOT fit beside a full tablet pass,
+which is about 520.
 
 **Do not run the one-time discovery pass this file used to describe.** It was
 costed at seven six-hour windows. The game data answers the same question for
 nothing.
 
-### Two things the pool changes about the plan
+### What to look at when it lands
 
-- **Every enabled jewel modifier carries spawn weight 1.** The game reports no
-  rarity gradient inside a base. A modifier either rolls on a base or it does
-  not. So spawn weight cannot rank candidates, and `total` for sale is still the
-  only scarcity signal available.
-- **An `explicit.stat_X` search also returns desecrated modifiers.** The archived
-  probe proves it. A jewel cell therefore measures two markets at once unless the
-  query separates them. Decide that before publishing any jewel number.
+- **The four modifiers the archive has never seen on an Emerald**:
+  increased Magnitude of Ailments you inflict, increased Daze Buildup, Damaging
+  Ailments deal damage faster, increased Movement Speed. Only 4 of Emerald's 74
+  were missing from the old vocabulary, so the bias was narrower than it looked.
+  If these four price like the rest, the pool bought less than expected.
+- **Whether the floor still separates rows.** Every jewel cell measured before
+  floored at 1 exalted. The pool adds questions; it does not by itself make the
+  answers differ.
 
-### The join has a small hole
+### One thing the pool settles
 
-173 of the 182 pairs resolve to a trade stat id through `ee2-stats.ndjson`. The
-nine that do not are common stats such as attack speed and evasion rating, so the
-gap is in the join and not in the pool. Close it with a text match against the
-stat cache and `lib/stat-index.mjs`.
+**Every enabled jewel modifier carries spawn weight 1.** The game reports no
+rarity gradient inside a base. A modifier either rolls on a base or it does not.
+So spawn weight cannot rank candidates, and `total` for sale is still the only
+scarcity signal available.
 
 ### What has been ruled out, so nobody repeats it
 

@@ -23,7 +23,7 @@
       ],
       "prefixes": 29,
       "suffixes": 21,
-      "unresolved": 3,
+      "unresolved": 0,
       "mods": [
         {
           "mod": "JewelAreaofEffect",
@@ -35,7 +35,8 @@
           ],
           "tradeIds": [
             "explicit.stat_280731498"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelArmour",
@@ -45,7 +46,10 @@
           "stats": [
             "physical_damage_reduction_rating_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_2866361420"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelArmourBreak",
@@ -57,7 +61,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1776411443"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelArmourBreakDuration",
@@ -69,7 +74,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2637470878"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAttackDamage",
@@ -81,7 +87,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2843214518"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBannerArea",
@@ -93,7 +100,8 @@
           ],
           "tradeIds": [
             "explicit.stat_429143663"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBannerDuration",
@@ -105,7 +113,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2720982137"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBannerValourGained",
@@ -117,7 +126,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1869147066"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBleedingChance",
@@ -129,7 +139,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2174054121"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBleedingDuration",
@@ -141,7 +152,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1459321413"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBleedingEffect",
@@ -153,7 +165,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3166958180"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBlock",
@@ -163,7 +176,10 @@
           "stats": [
             "block_chance_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_4147897060"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelDamagevsArmourBrokenEnemies",
@@ -175,7 +191,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2301718443"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelElementalDamage",
@@ -187,7 +204,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3141070085"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelEmpoweredAttackDamage",
@@ -199,7 +217,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1569101201"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFireDamage",
@@ -211,7 +230,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3962278098"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFirePenetration",
@@ -223,7 +243,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2653955271"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIgniteChance",
@@ -235,7 +256,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2968503605"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIgniteEffect",
@@ -247,7 +269,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3791899485"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIncisionChance",
@@ -259,7 +282,8 @@
           ],
           "tradeIds": [
             "explicit.stat_300723956"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIncreasedDuration",
@@ -271,7 +295,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3377888098"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelKnockback",
@@ -283,7 +308,8 @@
           ],
           "tradeIds": [
             "explicit.stat_565784293"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeCost",
@@ -295,7 +321,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2480498143"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeLeech",
@@ -307,7 +334,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2112395885"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeRegeneration",
@@ -319,7 +347,8 @@
           ],
           "tradeIds": [
             "explicit.stat_44972811"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaceDamage",
@@ -331,7 +360,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1181419800"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaceStun",
@@ -343,7 +373,8 @@
           ],
           "tradeIds": [
             "explicit.stat_872504239"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaximumFireResistance",
@@ -355,7 +386,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4095671657"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaximumRage",
@@ -367,7 +399,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1181501418"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMeleeDamage",
@@ -379,7 +412,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1002362373"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionArea",
@@ -391,7 +425,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3811191316"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionLife",
@@ -403,7 +438,8 @@
           ],
           "tradeIds": [
             "explicit.stat_770672621"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionPhysicalDamageReduction",
@@ -415,7 +451,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3119612865"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPhysicalDamage",
@@ -427,7 +464,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1310194496"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPlantDamage",
@@ -439,7 +477,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2518900926"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPresenceRadius",
@@ -451,7 +490,8 @@
           ],
           "tradeIds": [
             "explicit.stat_101878827"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelRageonHit",
@@ -463,7 +503,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2709367754"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelRagewhenHit",
@@ -475,7 +516,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3292710273"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShapeshiftDamage",
@@ -487,7 +529,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2440073079"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShapeshiftSpeed",
@@ -499,7 +542,8 @@
           ],
           "tradeIds": [
             "explicit.stat_918325986"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShieldDefences",
@@ -509,7 +553,10 @@
           "stats": [
             "shield_armour_evasion_energy_shield_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_2523933828"
+          ],
+          "tradeIdSource": "text"
         },
         {
           "mod": "JewelStunBuildup",
@@ -521,7 +568,8 @@
           ],
           "tradeIds": [
             "explicit.stat_239367161"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelStunThreshold",
@@ -533,7 +581,8 @@
           ],
           "tradeIds": [
             "explicit.stat_680068163"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelThorns",
@@ -545,7 +594,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1315743832"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelTotemDamage",
@@ -557,7 +607,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3851254963"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelTotemLife",
@@ -569,7 +620,8 @@
           ],
           "tradeIds": [
             "explicit.stat_686254215"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelTotemPlacementSpeed",
@@ -581,7 +633,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3374165039"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelWarcryCooldown",
@@ -593,7 +646,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4159248054"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelWarcryDamage",
@@ -605,7 +659,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1594812856"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelWarcrySpeed",
@@ -617,7 +672,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1316278494"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         }
       ]
     },
@@ -628,7 +684,7 @@
       ],
       "prefixes": 30,
       "suffixes": 44,
-      "unresolved": 4,
+      "unresolved": 0,
       "mods": [
         {
           "mod": "JewelAccuracy",
@@ -640,7 +696,8 @@
           ],
           "tradeIds": [
             "explicit.stat_624954515"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAilmentChance",
@@ -652,7 +709,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1772247089"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAilmentEffect",
@@ -664,7 +722,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1303248024"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAilmentThreshold",
@@ -676,7 +735,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3544800472"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAttackCriticalChance",
@@ -688,7 +748,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2194114101"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAttackCriticalDamage",
@@ -700,7 +761,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3714003708"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAttackDamage",
@@ -712,7 +774,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2843214518"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAttackSpeed",
@@ -722,7 +785,10 @@
           "stats": [
             "attack_speed_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_681332047"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelBlindEffect",
@@ -734,7 +800,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1585769763"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBlindonHit",
@@ -746,7 +813,8 @@
           ],
           "tradeIds": [
             "explicit.stat_318953428"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBowAccuracyRating",
@@ -758,7 +826,8 @@
           ],
           "tradeIds": [
             "explicit.stat_169946467"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBowDamage",
@@ -770,7 +839,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4188894176"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelBowSpeed",
@@ -782,7 +852,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3759735052"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelChainFromTerrain",
@@ -794,7 +865,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4081947835"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCharmChargesGained",
@@ -806,7 +878,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3585532255"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCharmDamageWhileUsing",
@@ -818,7 +891,8 @@
           ],
           "tradeIds": [
             "explicit.stat_627767961"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCharmDuration",
@@ -830,7 +904,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1389754388"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCompanionDamage",
@@ -842,7 +917,8 @@
           ],
           "tradeIds": [
             "explicit.stat_234296660"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCompanionLife",
@@ -854,7 +930,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1805182458"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCooldownSpeed",
@@ -866,7 +943,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1004011302"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCriticalAilmentEffect",
@@ -878,7 +956,8 @@
           ],
           "tradeIds": [
             "explicit.stat_440490623"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCrossbowDamage",
@@ -890,7 +969,8 @@
           ],
           "tradeIds": [
             "explicit.stat_427684353"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCrossbowReloadSpeed",
@@ -902,7 +982,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3192728503"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCrossbowSpeed",
@@ -914,7 +995,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1135928777"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDamageVsRareOrUnique",
@@ -926,7 +1008,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1852872083"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDamagingAilmentDuration",
@@ -938,7 +1021,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1829102168"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDazeBuildup",
@@ -948,7 +1032,10 @@
           "stats": [
             "base_chance_to_daze_%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_1949833742"
+          ],
+          "tradeIdSource": "text"
         },
         {
           "mod": "JewelDebuffExpiry",
@@ -960,7 +1047,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1238227257"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelElementalAilmentDuration",
@@ -972,7 +1060,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1062710370"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelElementalDamage",
@@ -984,7 +1073,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3141070085"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelEvasion",
@@ -994,7 +1084,10 @@
           "stats": [
             "evasion_rating_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_2106365538"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelFasterAilments",
@@ -1006,7 +1099,8 @@
           ],
           "tradeIds": [
             "explicit.stat_538241406"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFlaskChargesGained",
@@ -1018,7 +1112,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1836676211"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFlaskDuration",
@@ -1030,7 +1125,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3741323227"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelForkingProjectiles",
@@ -1042,7 +1138,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3003542304"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelHazardDamage",
@@ -1054,7 +1151,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1697951953"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelHeraldDamage",
@@ -1066,7 +1164,8 @@
           ],
           "tradeIds": [
             "explicit.stat_21071013"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeFlaskChargeGen",
@@ -1078,7 +1177,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4009879772"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeFlaskRecovery",
@@ -1090,7 +1190,8 @@
           ],
           "tradeIds": [
             "explicit.stat_821241191"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLightningDamage",
@@ -1102,7 +1203,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2231156303"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLightningPenetration",
@@ -1114,7 +1216,8 @@
           ],
           "tradeIds": [
             "explicit.stat_818778753"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelManaFlaskChargeGen",
@@ -1126,7 +1229,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3590792340"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelManaFlaskRecovery",
@@ -1138,7 +1242,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2222186378"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelManaLeech",
@@ -1150,7 +1255,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2839066308"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMarkCastSpeed",
@@ -1162,7 +1268,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1714971114"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMarkDuration",
@@ -1174,7 +1281,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2594634307"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMarkEffect",
@@ -1186,7 +1294,8 @@
           ],
           "tradeIds": [
             "explicit.stat_712554801"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaximumLightningResistance",
@@ -1198,7 +1307,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1011760251"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMeleeDamageIfProjectileHitRecently",
@@ -1210,7 +1320,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3028809864"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMovementSpeed",
@@ -1220,7 +1331,10 @@
           "stats": [
             "base_movement_velocity_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_2250533757"
+          ],
+          "tradeIdSource": "text"
         },
         {
           "mod": "JewelParriedDebuffDuration",
@@ -1232,7 +1346,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3401186585"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelParryDamage",
@@ -1244,7 +1359,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1569159338"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPiercingProjectiles",
@@ -1256,7 +1372,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2321178454"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPinBuildup",
@@ -1268,7 +1385,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3473929743"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPlantDamage",
@@ -1280,7 +1398,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2518900926"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPoisonChance",
@@ -1292,7 +1411,8 @@
           ],
           "tradeIds": [
             "explicit.stat_795138349"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPoisonDamage",
@@ -1304,7 +1424,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2487305362"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPoisonDuration",
@@ -1316,7 +1437,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2011656677"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelProjectileDamage",
@@ -1328,7 +1450,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1839076647"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelProjectileDamageIfMeleeHitRecently",
@@ -1340,7 +1463,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3596695232"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelProjectileSpeed",
@@ -1352,7 +1476,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3759663284"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelQuarterstaffDamage",
@@ -1364,7 +1489,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4045894391"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelQuarterstaffFreezeBuildup",
@@ -1376,7 +1502,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1697447343"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelQuarterstaffSpeed",
@@ -1388,7 +1515,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3283482523"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelQuiverEffect",
@@ -1400,7 +1528,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1200678966"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockChance",
@@ -1412,7 +1541,8 @@
           ],
           "tradeIds": [
             "explicit.stat_293638271"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockDuration",
@@ -1424,7 +1554,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3668351662"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockEffect",
@@ -1436,7 +1567,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2527686725"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSlowEffectOnSelf",
@@ -1448,7 +1580,8 @@
           ],
           "tradeIds": [
             "explicit.stat_924253255"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpearAttackSpeed",
@@ -1460,7 +1593,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1165163804"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpearCriticalDamage",
@@ -1472,7 +1606,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2456523742"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpearDamage",
@@ -1484,7 +1619,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2696027455"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelStunThresholdDuringParry",
@@ -1496,7 +1632,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1911237468"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelStunThresholdIfNotStunnedRecently",
@@ -1508,7 +1645,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1405298142"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         }
       ]
     },
@@ -1519,7 +1657,7 @@
       ],
       "prefixes": 23,
       "suffixes": 35,
-      "unresolved": 2,
+      "unresolved": 0,
       "mods": [
         {
           "mod": "JewelAilmentChance",
@@ -1531,7 +1669,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1772247089"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAilmentEffect",
@@ -1543,7 +1682,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1303248024"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAilmentThresholdfromEnergyShield",
@@ -1555,7 +1695,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3398301358"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelAreaofEffect",
@@ -1567,7 +1708,8 @@
           ],
           "tradeIds": [
             "explicit.stat_280731498"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCastSpeed",
@@ -1579,7 +1721,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2891184298"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelChaosDamage",
@@ -1591,7 +1734,8 @@
           ],
           "tradeIds": [
             "explicit.stat_736967255"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelChillDuration",
@@ -1603,7 +1747,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3485067555"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelColdDamage",
@@ -1615,7 +1760,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3291658075"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelColdPenetration",
@@ -1627,7 +1773,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3417711605"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCorpses",
@@ -1639,7 +1786,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2118708619"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCriticalAilmentEffect",
@@ -1651,7 +1799,8 @@
           ],
           "tradeIds": [
             "explicit.stat_440490623"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCriticalChance",
@@ -1663,7 +1812,8 @@
           ],
           "tradeIds": [
             "explicit.stat_587431675"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCriticalDamage",
@@ -1675,7 +1825,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3556824919"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCurseArea",
@@ -1687,7 +1838,8 @@
           ],
           "tradeIds": [
             "explicit.stat_153777645"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCurseDelay",
@@ -1699,7 +1851,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1104825894"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCurseDuration",
@@ -1711,7 +1864,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3824372849"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelCurseEffect",
@@ -1723,7 +1877,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2353576063"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDamagefromMana",
@@ -1735,7 +1890,8 @@
           ],
           "tradeIds": [
             "explicit.stat_458438597"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDamagingAilmentDuration",
@@ -1747,7 +1903,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1829102168"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelDebuffExpiry",
@@ -1759,7 +1916,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1238227257"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelElementalDamage",
@@ -1771,7 +1929,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3141070085"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelEnergy",
@@ -1783,7 +1942,8 @@
           ],
           "tradeIds": [
             "explicit.stat_4236566306"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelEnergyShield",
@@ -1793,7 +1953,10 @@
           "stats": [
             "maximum_energy_shield_+%"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_2482852589"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelEnergyShieldDelay",
@@ -1805,7 +1968,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1782086450"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFasterAilments",
@@ -1817,7 +1981,8 @@
           ],
           "tradeIds": [
             "explicit.stat_538241406"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFocusEnergyShield",
@@ -1829,7 +1994,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3174700878"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFreezeAmount",
@@ -1841,7 +2007,8 @@
           ],
           "tradeIds": [
             "explicit.stat_473429811"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelFreezeThreshold",
@@ -1853,7 +2020,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3780644166"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIgniteChance",
@@ -1865,7 +2033,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2968503605"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIgniteEffect",
@@ -1877,7 +2046,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3791899485"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelIncreasedDuration",
@@ -1889,7 +2059,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3377888098"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeonKill",
@@ -1901,7 +2072,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2023107756"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelLifeRecoup",
@@ -1913,7 +2085,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1444556985"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelManaonKill",
@@ -1923,7 +2096,10 @@
           "stats": [
             "maximum_mana_%_gained_on_kill"
           ],
-          "tradeIds": []
+          "tradeIds": [
+            "explicit.stat_1604736568"
+          ],
+          "tradeIdSource": "archive"
         },
         {
           "mod": "JewelManaRegeneration",
@@ -1935,7 +2111,8 @@
           ],
           "tradeIds": [
             "explicit.stat_789117908"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMaximumColdResistance",
@@ -1947,7 +2124,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3676141501"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionAttackandCastSpeed",
@@ -1959,7 +2137,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3091578504"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionChaosResistance",
@@ -1971,7 +2150,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3837707023"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionCriticalChance",
@@ -1983,7 +2163,8 @@
           ],
           "tradeIds": [
             "explicit.stat_491450213"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionCriticalMultiplier",
@@ -1995,7 +2176,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1854213750"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionDamage",
@@ -2007,7 +2189,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1589917703"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelMinionResistances",
@@ -2019,7 +2202,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1423639565"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelOfferingDuration",
@@ -2031,7 +2215,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2957407601"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelOfferingLife",
@@ -2043,7 +2228,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3787460122"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPlantDamage",
@@ -2055,7 +2241,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2518900926"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelPresenceRadius",
@@ -2067,7 +2254,8 @@
           ],
           "tradeIds": [
             "explicit.stat_101878827"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelQuarterstaffFreezeBuildup",
@@ -2079,7 +2267,8 @@
           ],
           "tradeIds": [
             "explicit.stat_1697447343"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShapeshiftDamage",
@@ -2091,7 +2280,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2440073079"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShapeshiftSpeed",
@@ -2103,7 +2293,8 @@
           ],
           "tradeIds": [
             "explicit.stat_918325986"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockChance",
@@ -2115,7 +2306,8 @@
           ],
           "tradeIds": [
             "explicit.stat_293638271"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockDuration",
@@ -2127,7 +2319,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3668351662"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelShockEffect",
@@ -2139,7 +2332,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2527686725"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpellCriticalChance",
@@ -2151,7 +2345,8 @@
           ],
           "tradeIds": [
             "explicit.stat_737908626"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpellCriticalDamage",
@@ -2163,7 +2358,8 @@
           ],
           "tradeIds": [
             "explicit.stat_274716455"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelSpellDamage",
@@ -2175,7 +2371,8 @@
           ],
           "tradeIds": [
             "explicit.stat_2974417149"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelStunThresholdfromEnergyShield",
@@ -2187,7 +2384,8 @@
           ],
           "tradeIds": [
             "explicit.stat_416040624"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelTriggeredSpellDamage",
@@ -2199,7 +2397,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3067892458"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         },
         {
           "mod": "JewelWitheredEffect",
@@ -2211,7 +2410,8 @@
           ],
           "tradeIds": [
             "explicit.stat_3973629633"
-          ]
+          ],
+          "tradeIdSource": "ee2"
         }
       ]
     }

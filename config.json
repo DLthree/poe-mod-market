@@ -32,7 +32,7 @@
   "quick": {
     "minRatio": 1.5
   },
-  "_testSet": "One type and ten modifiers PER KIND, so the walk can be iterated without spending a day of rate allowance. Run with the default (no --full) and pick the kind with --kind. High-value, mid and filler modifiers are all present on purpose: a walk that cannot separate them is not working. There is no jewel set yet: the jewel base type names have not been confirmed against the strings the trade API accepts, and one search settles that before anything else.",
+  "_testSet": "One type and ten modifiers PER KIND, so the walk can be iterated without spending a day of rate allowance. Run with the default (no --full) and pick the kind with --kind. High-value, mid and filler modifiers are all present on purpose: a walk that cannot separate them is not working. The jewel set exists and asks Emerald at rare. NOTE what it does NOT do: a run without --full uses these hashes and never calls the kind's vocabulary, so this set cannot check that a jewel now reads vendor/poe2-jewel-mods.json. Only a --full run does that. tests/sweep.test.mjs checks the choice instead.",
   "testSet": {
     "tablet": {
       "types": [

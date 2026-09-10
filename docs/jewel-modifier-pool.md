@@ -102,9 +102,66 @@ trade id derives from the stat text, not from the stat row.
 
 `vendor/ee2-stats.ndjson` carries both: its `id` field is the game stat id, and
 `trade.ids` holds the trade ids by domain. Joining on the game stat id resolves
-**173 of the 182 pairs**. The nine that do not resolve are common stats such as
-attack speed and evasion rating, so the gap is in the join and not in the pool.
-Close it with a text match against the stat cache and `lib/stat-index.mjs`.
+**173 of the 182 pairs**.
+
+The nine that do not resolve all share a wording with another game stat. Exiled
+Exchange 2 keeps one record per wording and files it under the OTHER stat's id,
+so the join misses them. Its record for "#% increased Attack Speed" is filed
+under `local_attack_speed_+%`, the weapon stat, while a jewel rolls the global
+`attack_speed_+%`.
+
+Six were settled by evidence. Our own archive holds 1930 collected jewel
+listings, and a hash that appears on a jewel is the global variant, because a
+jewel is not a weapon. The other three carry a wording only one trade stat has.
+
+| game stat | trade stat id | settled by |
+|---|---|---|
+| `physical_damage_reduction_rating_+%` | `explicit.stat_2866361420` | archive, 8 jewels |
+| `attack_speed_+%` | `explicit.stat_681332047` | archive, 51 jewels |
+| `evasion_rating_+%` | `explicit.stat_2106365538` | archive, 82 jewels |
+| `block_chance_+%` | `explicit.stat_4147897060` | archive, 62 jewels |
+| `maximum_energy_shield_+%` | `explicit.stat_2482852589` | archive, 21 jewels |
+| `maximum_mana_%_gained_on_kill` | `explicit.stat_1604736568` | archive, 2 jewels |
+| `base_movement_velocity_+%` | `explicit.stat_2250533757` | only wording |
+| `base_chance_to_daze_%` | `explicit.stat_1949833742` | only wording |
+| `shield_armour_evasion_energy_shield_+%` | `explicit.stat_2523933828` | only wording |
+
+Each entry in the pool file records which of the two settled it, in
+`tradeIdSource`. Reapply this table after a re-extraction.
+
+## The desecrated exclusion, and the trap in it
+
+Every jewel search now carries one extra stat group, from `kind.pinned` in
+`lib/item-kinds.mjs`. It excludes items carrying a desecrated modifier, so a
+jewel price means one thing.
+
+**The group type must be `not`.** The obvious shape is an `and` group holding
+`pseudo.pseudo_number_of_desecrated_mods` at a maximum of zero. That matches
+NOTHING. An item with no desecrated modifier carries no such pseudo stat, so the
+comparison fails for every ordinary jewel. A full pass built that way would
+report an empty market and would look exactly like a working sweep.
+
+Probed 2026-09-10, five searches against Forbidden Rites:
+
+| search | without exclusion | with `not` group |
+|---|---|---|
+| blank Emerald rare | 10000 | 10000 |
+| Emerald rare, increased Attack Speed | — | 10000 |
+| Emerald rare, increased maximum Energy Shield | 22 | 0 |
+
+The last row is the pool proving itself. Emerald cannot roll that modifier, and
+once the desecrated items are gone there is nothing left.
+
+The archive holds no desecrated rows at all, from any earlier pass. Those items
+are dear, and every pass keeps only the ten cheapest of a cell, so none ever
+reached the sample. Nothing collected before today is contaminated.
+
+## What the cheap run does and does not check
+
+`node steps/collect.mjs --kind jewel` runs the test set in `config.json`. It uses
+the hashes listed there and **never calls the kind's vocabulary**, so it cannot
+show that a jewel now reads this pool. Only a `--full` run does that.
+`tests/sweep.test.mjs` checks the choice instead.
 
 ## What must be redone after a patch
 

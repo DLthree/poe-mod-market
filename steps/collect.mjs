@@ -16,7 +16,7 @@ import { kindByKey } from '../lib/item-kinds.mjs'
 import { loadIndex, textFor } from '../lib/stat-index.mjs'
 import { openDb } from '../lib/db.mjs'
 import { recordRequest } from '../lib/archive.mjs'
-import { sweepPools, sweepAffixes, affixesFor } from '../lib/sweep.mjs'
+import { sweepPools, sweepAffixes, vocabularyFor } from '../lib/sweep.mjs'
 import { quickAffixes } from '../lib/refresh.mjs'
 import { checkAge, medianAgeHours } from '../lib/agecheck.mjs'
 import { readListings } from '../lib/pools.mjs'
@@ -198,9 +198,15 @@ if (only !== 'pools') {
 
   // One decision, made once. The plan below is printed, counted for the bar and
   // then swept, so what the run promises and what it spends cannot disagree.
+  // WHERE THE VOCABULARY COMES FROM is the kind's own business, in
+  // lib/item-kinds.mjs. A tablet reads what it has already collected; a jewel
+  // reads the pool the game data says the base can roll, because the cheap end
+  // of a jewel cell never carries its dear modifiers.
+  // See docs/jewel-vocabulary-bias.md and docs/jewel-modifier-pool.md.
   const testSetHashes = full ? null : testSet.affixes.map(a => a.hash)
+  const vocabulary = vocabularyFor(kind, db)
   const chooseAffixes = (type, rarity) =>
-    quickPlan?.get(`${type}|${rarity}`) ?? testSetHashes ?? affixesFor(db, type, rarity)
+    quickPlan?.get(`${type}|${rarity}`) ?? testSetHashes ?? vocabulary(type, rarity)
 
   let affixTotal = 0
   for (const type of types) {

@@ -1,8 +1,10 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import {
   ITEM_KINDS, KIND_KEYS, kindByKey, kindOfType, TABLET_TYPES, USES_IMPLICIT, MIN_USES
 } from '../lib/item-kinds.mjs'
+import { poolFor } from '../lib/mod-pool.mjs'
 
 test('every kind names itself with the key it is filed under', () => {
   for (const [key, kind] of Object.entries(ITEM_KINDS)) assert.equal(kind.key, key)
@@ -73,12 +75,86 @@ test('a tablet pins its uses implicit and reports nothing missing', () => {
   }
 })
 
-// A jewel has no uses to filter on. That is not a shortfall, and the trade link
-// must not report itself inexact for lacking a filter jewels do not have.
-test('a jewel pins nothing and reports nothing missing', () => {
+// A jewel has no uses to filter on, but it does have a market inside its market.
+// A search for an explicit stat id also returns items carrying that stat as a
+// DESECRATED modifier, which is a different crafting mechanic at a different
+// price. Measured 2026-09-10: all 19 Emerald rares carrying "increased maximum
+// Energy Shield" were desecrated, on a base that cannot roll it at all.
+//
+// Pinning the count at zero makes a jewel price mean one thing. The trade link
+// calls the same function, so it opens the same market, and nothing is missing.
+// THE GROUP TYPE IS `not`, AND IT WAS MEASURED. An `and` group holding the same
+// count at max 0 matched NOTHING: a blank Emerald rare reported 0 for sale,
+// because an item with no desecrated modifier carries no such pseudo stat for a
+// comparison to succeed against. A `not` group holding it at min 1 reports 10000
+// for a blank, and 0 for the Energy Shield search that reported 22 without it.
+// Probed 2026-09-10, five searches.
+test('a jewel excludes desecrated modifiers and reports nothing missing', () => {
   for (const type of ITEM_KINDS.jewel.types) {
-    assert.deepEqual(ITEM_KINDS.jewel.pinned(type), { groups: [], missing: [] }, type)
+    const { groups, missing } = ITEM_KINDS.jewel.pinned(type)
+    assert.deepEqual(missing, [], type)
+    assert.deepEqual(groups, [{
+      type: 'not',
+      filters: [{
+        id: 'pseudo.pseudo_number_of_desecrated_mods',
+        value: { min: 1 },
+        disabled: false
+      }]
+    }], type)
   }
+})
+
+// THE SECOND SEAM. Where a kind's loop-2 vocabulary comes from. A tablet reads
+// what it has seen, because its cheap end carries its premium modifiers. A jewel
+// cannot: see docs/jewel-vocabulary-bias.md.
+//
+// BOTH sources are passed IN rather than reached for. THE BROWSER IMPORTS THIS
+// FILE, so it must not pull in lib/mod-pool.mjs, which reads a file with node:fs
+// and cannot run there. tests/web.test.mjs is what caught that.
+test('every kind declares where its vocabulary comes from', () => {
+  for (const kind of Object.values(ITEM_KINDS)) {
+    assert.equal(typeof kind.vocabulary, 'function', kind.key)
+  }
+})
+
+test('this file stays safe for the browser to import', () => {
+  // Comments are stripped, as tests/contract.test.mjs does, because the comments
+  // here name the very imports they warn against.
+  const code = readFileSync(new URL('../lib/item-kinds.mjs', import.meta.url), 'utf8')
+    .replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '')
+  assert.doesNotMatch(code, /from ['"]node:/, 'a node-only import would break web/app.js')
+  assert.doesNotMatch(code, /mod-pool/, 'the pool reads a file and cannot load in a browser')
+})
+
+test('a tablet takes its vocabulary from what it has already seen', () => {
+  const asked = []
+  const observed = (type, rarity) => { asked.push([type, rarity]); return ['explicit.stat_1'] }
+  const pool = () => { throw new Error('a tablet must not read the pool') }
+  const got = ITEM_KINDS.tablet.vocabulary('Breach Tablet', 'rare', { observed, pool })
+  assert.deepEqual(asked, [['Breach Tablet', 'rare']])
+  assert.deepEqual(got, ['explicit.stat_1'])
+})
+
+// A base rolls one pool. The rarity limits how many modifiers land on one item,
+// not which ones exist, so asking rare and magic the same questions is correct
+// and is the whole point of reading the pool instead of the archive.
+test('a jewel takes its vocabulary from the pool, whatever the rarity', () => {
+  const observed = () => { throw new Error('a jewel must not read the archive for its vocabulary') }
+  const sources = { observed, pool: poolFor }
+  for (const type of ITEM_KINDS.jewel.types) {
+    const magic = ITEM_KINDS.jewel.vocabulary(type, 'magic', sources)
+    const rare = ITEM_KINDS.jewel.vocabulary(type, 'rare', sources)
+    assert.deepEqual(magic, poolFor(type), type)
+    assert.deepEqual(magic, rare, type)
+  }
+})
+
+// The pools differ per base, so a jewel vocabulary must not ignore the type.
+test('each jewel base gets its own vocabulary', () => {
+  const sources = { observed: () => { throw new Error('unused') }, pool: poolFor }
+  assert.notDeepEqual(
+    ITEM_KINDS.jewel.vocabulary('Emerald', 'rare', sources),
+    ITEM_KINDS.jewel.vocabulary('Ruby', 'rare', sources))
 })
 
 test('a tablet type with no known uses implicit pins nothing and says why', () => {

@@ -484,7 +484,13 @@ test('a jewel link is exact, because it carries everything the sweep pinned', ()
   })
   assert.equal(exact, true)
   const q = JSON.parse(decodeURIComponent(url.split('?q=')[1]))
-  assert.equal(q.query.stats.length, 1, 'the modifier group and nothing else')
+  assert.equal(q.query.stats.length, 2, 'the modifier group and the desecrated exclusion')
+  // The link has to open the market the price was read from. The sweep excludes
+  // desecrated items, so a link that included them would show a cheap end the
+  // price never saw.
+  assert.equal(q.query.stats[1].type, 'not')
+  assert.deepEqual(q.query.stats[1].filters,
+    [{ id: 'pseudo.pseudo_number_of_desecrated_mods', value: { min: 1 }, disabled: false }])
 })
 
 test('the jewel link asks for the same item the jewel sweep would price', () => {

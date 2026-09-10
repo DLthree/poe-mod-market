@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { buildFragments, fragmentFor, tabletRegex } from '../lib/regex-keys.mjs'
+import { buildFragments, fragmentFor, stashRegex } from '../lib/regex-keys.mjs'
 
 // The 70 modifiers we have ever priced, in GGG's own wording. A fragment is
 // only worth anything if it separates one of these from all the others, so this
@@ -110,40 +110,40 @@ test('a text with nothing to separate it returns null rather than a guess', () =
 // alternation, with no group around it — the quotes already bound the term.
 test('match any is one term, match all is one term each', () => {
   const fragments = { A: 'go', B: 'wh' }
-  assert.equal(tabletRegex({ statIds: ['A', 'B'], fragments, mode: 'any' }).regex,
+  assert.equal(stashRegex({ statIds: ['A', 'B'], fragments, mode: 'any' }).regex,
     '"go|wh"')
-  assert.equal(tabletRegex({ statIds: ['A', 'B'], fragments, mode: 'all' }).regex,
+  assert.equal(stashRegex({ statIds: ['A', 'B'], fragments, mode: 'all' }).regex,
     '"go" "wh"')
 })
 
 test('one modifier is one plain term in either mode', () => {
   const fragments = { A: 'go' }
-  assert.equal(tabletRegex({ statIds: ['A'], fragments, mode: 'any' }).regex, '"go"')
-  assert.equal(tabletRegex({ statIds: ['A'], fragments, mode: 'all' }).regex, '"go"')
+  assert.equal(stashRegex({ statIds: ['A'], fragments, mode: 'any' }).regex, '"go"')
+  assert.equal(stashRegex({ statIds: ['A'], fragments, mode: 'all' }).regex, '"go"')
 })
 
 // The search says nothing about the tablet type or its rarity. You are looking
 // at one type's modifier list and its fragments are already particular to it.
 test('nothing but the modifiers reaches the search', () => {
-  const out = tabletRegex({ statIds: ['A'], fragments: { A: 'go' } })
+  const out = stashRegex({ statIds: ['A'], fragments: { A: 'go' } })
   assert.equal(out.regex, '"go"')
 })
 
 test('no modifier chosen is an empty search', () => {
-  assert.equal(tabletRegex({ statIds: [], fragments: { A: 'go' } }).regex, '')
-  assert.equal(tabletRegex({}).regex, '')
+  assert.equal(stashRegex({ statIds: [], fragments: { A: 'go' } }).regex, '')
+  assert.equal(stashRegex({}).regex, '')
 })
 
 // A modifier we cannot express is a fact the reader needs. A search that
 // quietly means less than it looks like is the worst outcome on this page.
 test('a modifier with no fragment is reported, never silently dropped', () => {
-  const out = tabletRegex({ statIds: ['A', 'B'], fragments: { A: 'go' } })
+  const out = stashRegex({ statIds: ['A', 'B'], fragments: { A: 'go' } })
   assert.deepEqual(out.unkeyed, ['B'])
   assert.equal(out.regex, '"go"')
 })
 
 test('every modifier unkeyed leaves an empty search and says so', () => {
-  const out = tabletRegex({ statIds: ['A', 'B'], fragments: {} })
+  const out = stashRegex({ statIds: ['A', 'B'], fragments: {} })
   assert.equal(out.regex, '')
   assert.deepEqual(out.unkeyed, ['A', 'B'])
 })
@@ -152,6 +152,6 @@ test('every modifier unkeyed leaves an empty search and says so', () => {
 // characters, median 3, which is why this page needs no optimiser and no slider
 // to claw space back.
 test('thirty modifiers at once still fit the 250-character stash limit', () => {
-  const { regex } = tabletRegex({ statIds: ids.slice(0, 30), fragments: FRAGMENTS, mode: 'any' })
+  const { regex } = stashRegex({ statIds: ids.slice(0, 30), fragments: FRAGMENTS, mode: 'any' })
   assert.ok(regex.length <= 250, `${regex.length} characters: ${regex}`)
 })

@@ -26,6 +26,31 @@ test('the stylesheet makes [hidden] win over any display rule', () => {
     'without !important an author display rule keeps a hidden element on screen')
 })
 
+// Two pages, one script. The kind is the only thing that differs, and it
+// arrives as a data attribute rather than as a second copy of the logic.
+test('every page names its kind, and the script reads it from the page', () => {
+  for (const [file, key] of [['index.html', 'tablet'], ['jewels.html', 'jewel']]) {
+    assert.match(read(file), new RegExp(`<body[^>]*data-kind="${key}"`), file)
+    assert.match(read(file), /<script type="module" src="\.\/app\.js">/, file)
+  }
+  assert.match(read('app.js'), /document\.body\.dataset\.kind/)
+})
+
+// The grid, the headings and the trade link must all come from the kind. A
+// literal here is a tablet assumption a jewel page would render in silence.
+test('the page holds no tablet literal', () => {
+  const code = read('app.js').replace(/\/\/.*$/gm, '')
+  assert.doesNotMatch(code, /TABLET_TYPES/)
+  assert.doesNotMatch(code, /' Tablet'/)
+})
+
+// Each page has to be reachable from the other, or the second one is published
+// and never found.
+test('each page links to its sibling', () => {
+  assert.match(read('index.html'), /href="\.\/jewels\.html"/)
+  assert.match(read('jewels.html'), /href="\.\/index\.html"/)
+})
+
 // THE PAGE MUST BE THE SAME PAGE, served or published. The dev server
 // whitelists the modules a browser may load from lib/, and steps/build-site.mjs
 // copies its own list into site/lib/. Two hand-kept lists drift, and they had:

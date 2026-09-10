@@ -11,7 +11,6 @@
 // "/lib/..." would reach for the wrong host directory. The dev server answers
 // the same relative paths, so the local page is the published page.
 import { stashRegex } from './lib/regex-keys.mjs'
-
 import { kindByKey } from './lib/item-kinds.mjs'
 import { tradeUrl } from './lib/trade-url.mjs'
 import { bandOf } from './lib/bands.mjs'
@@ -62,9 +61,10 @@ const cellOf = (type, rarity) =>
 const modsOf = (type, rarity) =>
   state.eco.mods.filter(m => m.type === type && m.rarity === rarity)
 
-// One index file naming every league, then two files per league. All three are
-// plain JSON on disk when published, and computed at the same paths by the dev
-// server. lib/site.mjs owns the names; this has to agree with it.
+// One index file naming every league and which kinds each holds, then two files
+// per league AND kind. All of them are plain JSON on disk when published, and
+// computed at the same paths by the dev server. lib/site.mjs owns the names;
+// this has to agree with it, and tests/site.test.mjs fails if it does not.
 const slug = (league) =>
   String(league).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 const PATHS = {

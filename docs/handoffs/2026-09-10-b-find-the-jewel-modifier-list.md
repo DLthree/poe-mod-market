@@ -61,7 +61,7 @@ Each cost real time or real searches this session.
 Investigated 2026-09-10. Every claim below was verified by looking, except the
 last one, which is explicitly untested.
 
-**1. The RePoE checkout exists but is PoE1.** `C:\Users\loffr\dev\repoe\` holds
+**1. The RePoE checkout exists but is PoE1.** `%USERPROFILE%\dev\repoe\` holds
 `mods.json` (34 MB) and `stat_translations.json` (12 MB). It is PoE1: 808
 occurrences of "Critical Strike Chance" against 1 of "Critical Hit Chance", and
 its jewel spawn tags are `abyss_jewel`, `affliction_jewel` and
@@ -70,7 +70,7 @@ No Emerald, Ruby or Sapphire. `augmented.json`, which `tab-triage` reads, is not
 there any more. **Dead end, do not revisit.**
 
 **2. There is an Exiled Exchange 2 checkout, and it is PoE2.**
-`C:\Users\loffr\dev\exiled-exchange-2\`. Its
+`%USERPROFILE%\dev\exiled-exchange-2\`. Its
 `renderer/public/data/en/items.ndjson` already answers half the question:
 
 | base | tags |
@@ -178,7 +178,7 @@ https://dlthree.github.io/poe-mod-market/ . That decision is the user's.
   long unattended pass: `powercfg /change standby-timeout-ac 0` and the DC
   equivalent.
 - Archive backed up and SHA256-verified to
-  `C:\Users\loffr\Backups\poe2-tablet-price\2026-09-10T085432Z` (17 files,
+  `%USERPROFILE%\Backups\poe2-tablet-price\2026-09-10T085432Z` (17 files,
   127 MB). Re-run `backup-data.ps1` from the session scratchpad after any sweep.
 
 ## The other strong idea, from the user

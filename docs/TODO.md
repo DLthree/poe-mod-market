@@ -50,7 +50,7 @@ scarcity signal available.
   `tab-triage/out/jewels.mjs` and `claude-poe-stash-helper/attic/jewels.mjs` all
   describe Abyss jewels, Cluster jewels, Corrupted Blood and Critical Strike
   Multiplier. Checked 2026-09-10.
-- **The RePoE checkout at `C:\Users\loffr\dev\repoe\` is PoE1.** Its jewel spawn
+- **The RePoE checkout at `%USERPROFILE%\dev\repoe\` is PoE1.** Its jewel spawn
   tags are `abyss_jewel`, `affliction_jewel` and `expansion_jewel_*`. No Emerald,
   Ruby or Sapphire.
 - **GGG's `/data/stats` has no item association.** 3042 explicit stats covering

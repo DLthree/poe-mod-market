@@ -10,4 +10,10 @@ secrets.json
 # commit of site/. tests/gitignore.test.mjs now guards it.
 /data/
 
+# The rate-limit ledger. It is live local state, not source: it holds the exact
+# time of every request this machine made to GGG, and this repository is public.
+# It was committed after each sweep until 2026-09-12. lib/rate-limiter.mjs still
+# reads and writes it in place, so untracking it changes no behaviour.
+/.claude/skills/price-check/data/.cache/ratelimit.json
+
 node_modules/

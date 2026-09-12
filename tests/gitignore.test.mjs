@@ -46,7 +46,8 @@ test('the session cookie and the archive stay out of the repository', (t) => {
     t.skip('git is not available here')
     return
   }
-  for (const path of ['secrets.json', 'data/Runes of Aldur.db', 'data/cache/stats-poe2.json']) {
+  for (const path of ['secrets.json', 'data/Runes of Aldur.db', 'data/cache/stats-poe2.json',
+    '.claude/skills/price-check/data/.cache/ratelimit.json']) {
     assert.equal(ignored(path), true, `${path} must be ignored`)
   }
 })
